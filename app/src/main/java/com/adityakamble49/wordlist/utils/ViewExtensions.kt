@@ -11,7 +11,7 @@ import android.view.View.*
 import android.view.ViewGroup
 
 /**
- * @author kamble_ad
+ * @author Aditya Kamble
  * @since 4/4/2018
  */
 
@@ -35,7 +35,7 @@ fun View.selected() {
     this.isSelected = true
 }
 
-fun View.notSelected() {
+fun View.deselect() {
     this.isSelected = false
 }
 

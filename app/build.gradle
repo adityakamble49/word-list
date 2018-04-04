@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion buildConfig.compileSdk
@@ -58,6 +59,15 @@ dependencies {
     implementation deps.android.support.design
     implementation deps.timber.core
     implementation deps.gson.core
+    implementation deps.dagger.runtime
+    implementation deps.dagger.support
+    kapt deps.dagger.processor
+    kapt deps.dagger.compiler
+    implementation deps.android.arch.archRuntime
+    implementation deps.android.arch.archExtensions
+    implementation deps.android.arch.roomRuntime
+    kapt deps.android.arch.archCompiler
+    kapt deps.android.arch.roomCompiler
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.supportRunner
