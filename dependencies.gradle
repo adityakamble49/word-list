@@ -1,0 +1,129 @@
+buildscript {
+
+    ext.buildConfig = [
+            'compileSdk': 27,
+            'minSdk'    : 19,
+            'targetSdk' : 27,
+
+            'version'   : [
+                    'major': 0,
+                    'minor': 1
+            ],
+    ]
+
+    ext.buildConfig.version['name'] = "${buildConfig.version.major}.${buildConfig.version.minor}"
+    ext.buildConfig.version['code'] = 1
+
+    ext.versions = [
+            // Basic
+            'supportLibrary'      : '27.0.2',
+            'constraintLayout'    : '1.0.2',
+            'kotlin'              : '1.2.30',
+            'arch'                : '1.0.0',
+            'javaxInject'         : '1',
+            'javaxAnnotation'     : '1.0',
+            'rxKotlin'            : '2.1.0',
+            'rxAndroid'           : '2.0.1',
+            'gson'                : '2.8.2',
+            'retrofit'            : '2.3.0',
+            'okhttp'              : '3.8.1',
+            'dagger'              : '2.12',
+            'timber'              : '4.6.0',
+            'exoplayer'           : '2.7.1',
+            'materialDialogs'     : '0.9.6.0',
+
+            // Viewers
+            'pdfViewer'           : '2.8.2',
+
+            // Debug
+            'debugDb'             : '1.0.1',
+
+            // Testing
+            'junit'               : '4.12',
+            'expresso'            : '3.0.1',
+            'androidSupportRunner': '1.0.1',
+    ]
+
+    ext.deps = [
+            'kotlin'         : [
+                    'stdlib': [
+                            'jre': "org.jetbrains.kotlin:kotlin-stdlib-jre7:${versions.kotlin}",
+                    ]
+            ],
+            'android'        : [
+                    'arch'   : [
+                            'archRuntime'   : "android.arch.lifecycle:runtime:${versions.arch}",
+                            'archExtensions': "android.arch.lifecycle:extensions:${versions.arch}",
+                            'archCompiler'  : "android.arch.lifecycle:compiler:${versions.arch}",
+                            'roomRuntime'   : "android.arch.persistence.room:runtime:${versions.arch}",
+                            'roomCompiler'  : "android.arch.persistence.room:compiler:${versions.arch}",
+                    ],
+                    'support': [
+                            'supportV4'       : "com.android.support:support-v4:${versions.supportLibrary}",
+                            'appcompatV7'     : "com.android.support:appcompat-v7:${versions.supportLibrary}",
+                            'recyclerView'    : "com.android.support:recyclerview-v7:${versions.supportLibrary}",
+                            'annotations'     : "com.android.support:support-annotations:${versions.supportLibrary}",
+                            'vector'          : "com.android.support:support-vector-drawable:${versions.supportLibrary}",
+                            'design'          : "com.android.support:design:${versions.supportLibrary}",
+                            'constraintLayout': "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
+                    ],
+                    'video'  : [
+                            'exoplayer': "com.google.android.exoplayer:exoplayer:${versions.exoplayer}"
+                    ]
+            ],
+            'dagger'         : [
+                    'runtime'  : "com.google.dagger:dagger:${versions.dagger}",
+                    'compiler' : "com.google.dagger:dagger-compiler:${versions.dagger}",
+                    'support'  : "com.google.dagger:dagger-android-support:${versions.dagger}",
+                    'processor': "com.google.dagger:dagger-android-processor:${versions.dagger}",
+            ],
+            'timber'         : [
+                    'core': "com.jakewharton.timber:timber:${versions.timber}",
+            ],
+            'gson'           : [
+                    'core': "com.google.code.gson:gson:${versions.gson}",
+            ],
+            'retrofit'       : [
+                    'core'         : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                    'converterGson': "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+            ],
+            'okhttp'         : [
+                    'core'              : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
+                    'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
+            ],
+            'rx'             : [
+                    'rxAndroid': "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}",
+                    'rxKotlin' : "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}",
+            ],
+            'materialDialogs': [
+                    'core': "com.afollestad.material-dialogs:core:${versions.materialDialogs}"
+            ],
+            'debugDb'        : [
+                    'core': "com.amitshekhar.android:debug-db:${versions.debugDb}"
+            ],
+            'test'           : [
+                    'junit'        : "junit:junit:${versions.junit}",
+                    'supportRunner': "com.android.support.test:runner:${versions.androidSupportRunner}",
+                    'expressoCore' : "com.android.support.test.espresso:espresso-core:${versions.expresso}",
+            ]
+    ]
+
+    allprojects {
+        repositories {
+            jcenter()
+            google()
+            maven { url 'https://jitpack.io' }
+        }
+
+        // Force all of the primary support libraries to use the same version.
+        configurations.all {
+            resolutionStrategy {
+                eachDependency { details ->
+                    if (details.requested.group == 'com.android.support') {
+                        details.useVersion versions.supportLibrary
+                    }
+                }
+            }
+        }
+    }
+}
