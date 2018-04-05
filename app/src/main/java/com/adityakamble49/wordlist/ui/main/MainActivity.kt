@@ -72,7 +72,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View {
                 }.build().show()
     }
 
-    override fun updateListType(wordListType: Int) {
+    override fun alertListTypeUpdate(wordListType: Int) {
         val selectedWordType = resources.getStringArray(R.array.items_list_types)[wordListType]
         showToast(resources.getString(R.string.alert_list_change, selectedWordType))
     }

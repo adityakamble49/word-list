@@ -14,6 +14,6 @@ class MainPresenter constructor(private val view: MainContract.View,
 
     override fun onListTypeSelected(wordListType: Int) {
         viewModel.changeCurrentListType(wordListType)
-        view.updateListType(wordListType)
+        view.alertListTypeUpdate(wordListType)
     }
 }

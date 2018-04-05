@@ -9,8 +9,8 @@ import android.arch.lifecycle.LifecycleOwner
 interface MainContract {
 
     interface View : LifecycleOwner {
-        fun updateListType(wordListType: Int)
         fun showChangeListTypeDialog(selectedWordListType: Int)
+        fun alertListTypeUpdate(wordListType: Int)
     }
 
     interface Presenter {
