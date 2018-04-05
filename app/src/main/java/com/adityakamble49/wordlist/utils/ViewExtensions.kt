@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.Toast
 
 /**
  * @author Aditya Kamble
@@ -49,4 +50,12 @@ fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
     supportFragmentManager.inTransaction { replace(frameId, fragment, fragment.tag) }
+}
+
+fun AppCompatActivity.showToast(toastString: String) {
+    Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.showToast(toastString: String) {
+    Toast.makeText(context, toastString, Toast.LENGTH_SHORT).show()
 }

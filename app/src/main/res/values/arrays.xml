@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="items_list_types">
+        <item>Manhattan Essential</item>
+        <item>Manhattan Advanced</item>
+    </string-array>
+</resources>

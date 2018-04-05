@@ -1,6 +1,5 @@
 package com.adityakamble49.wordlist.ui.list
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.adityakamble49.wordlist.model.Word

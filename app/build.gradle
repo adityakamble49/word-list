@@ -57,6 +57,7 @@ dependencies {
     implementation deps.android.support.recyclerView
     implementation deps.android.support.constraintLayout
     implementation deps.android.support.design
+    implementation deps.materialDialogs.core
     implementation deps.timber.core
     implementation deps.gson.core
     implementation deps.dagger.runtime

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_load_list"
+        android:title="@string/label_action_load_list"/>
+
+    <item
+        android:id="@+id/action_save_list"
+        android:title="@string/label_action_save_list"/>
+
+    <item
+        android:id="@+id/action_change_list_type"
+        android:title="@string/label_action_change_list_type"/>
+
+</menu>
