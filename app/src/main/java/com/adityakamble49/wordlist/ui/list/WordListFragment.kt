@@ -1,26 +1,28 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.AdapterView
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
-import com.adityakamble49.wordlist.ui.common.BaseFragment
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
+import com.adityakamble49.wordlist.ui.words.WordViewPagerActivity
 import com.adityakamble49.wordlist.utils.DataProcessor
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.fragment_wordlist.*
 import kotlinx.android.synthetic.main.fragment_wordlist.view.*
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
  * @author Aditya Kamble
  * @since 4/4/2018
  */
-class WordListFragment : BaseInjectableFragment(), WordListContract.View {
+class WordListFragment : BaseInjectableFragment(), WordListContract.View,
+        AdapterView.OnItemClickListener {
 
     // Dagger Injected Fields
     @Inject lateinit var wordListViewModelFactory: WordListViewModelFactory
@@ -31,6 +33,10 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View {
 
     // Other Fields
     private lateinit var presenter: WordListPresenter
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        startActivity(Intent(activity, WordViewPagerActivity::class.java))
+    }
 
     /*
      * Helper Functions
@@ -47,6 +53,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View {
 
             // Setup Word List
             wordListAdapter = WordListAdapter()
+            wordListAdapter.onItemClickListener = this@WordListFragment
             val linearLayoutManager = LinearLayoutManager(context)
             val decorator = DividerItemDecoration(context, linearLayoutManager.orientation)
             recyclerview_word_list.adapter = wordListAdapter

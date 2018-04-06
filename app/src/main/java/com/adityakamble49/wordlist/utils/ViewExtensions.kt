@@ -52,6 +52,14 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
     supportFragmentManager.inTransaction { replace(frameId, fragment, fragment.tag) }
 }
 
+fun Fragment.addFragment(fragment: Fragment, frameId: Int) {
+    childFragmentManager.inTransaction { add(frameId, fragment) }
+}
+
+fun Fragment.replaceFragment(fragment: Fragment, frameId: Int) {
+    childFragmentManager.inTransaction { replace(frameId, fragment, fragment.tag) }
+}
+
 fun AppCompatActivity.showToast(toastString: String) {
     Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show()
 }

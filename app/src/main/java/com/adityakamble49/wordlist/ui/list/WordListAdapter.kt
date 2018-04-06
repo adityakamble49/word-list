@@ -17,15 +17,17 @@ class WordListAdapter : SimpleListAdapter<Word>() {
     override fun createCustomViewHolder(
             view: View): SimpleListAdapter.ViewHolder<Word> = ViewHolder(view)
 
-    class ViewHolder constructor(itemView: View) : SimpleListAdapter.ViewHolder<Word>(itemView) {
+    inner class ViewHolder constructor(itemView: View) :
+            SimpleListAdapter.ViewHolder<Word>(itemView) {
 
         override fun updateBind(position: Int, item: Word) {
             with(itemView) {
-                item_title.text = item.strippedName
+                item_title.text = item.name
             }
         }
 
         override fun onClick(v: View?) {
+            onItemClickListener.onItemClick(null, v, adapterPosition, 0)
         }
 
     }
