@@ -46,8 +46,20 @@ class WordPresenter @Inject constructor(
 
     private fun getWordById(wordId: Int): Word {
         for (word in wordViewModel.wordList) {
-            if (word.id == wordId) return word
+            if (word.id == wordId) {
+                wordViewModel.currentWord = word
+                return wordViewModel.currentWord
+            }
         }
-        return wordViewModel.wordList[0]
+        wordViewModel.currentWord = wordViewModel.wordList[0]
+        return wordViewModel.currentWord
+    }
+
+    override fun onClickWordInformation() {
+        view.updateWordInformation(wordViewModel.currentWord.information)
+    }
+
+    override fun onClickWordMnemonic() {
+        view.updateWordMnemonic(wordViewModel.currentWord.mnemonic)
     }
 }

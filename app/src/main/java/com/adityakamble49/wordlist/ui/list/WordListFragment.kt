@@ -39,6 +39,8 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         val wordId = wordListAdapter.itemList[position].id
         val wordIntent = Intent(activity, WordActivity::class.java)
         wordIntent.putExtra(WordActivity.IE_KEY_WORD_ID, wordId)
+        wordIntent.putExtra(WordActivity.IE_KEY_WORD_ACTIVITY_MODE,
+                WordActivity.Companion.WordActivityMode.NORMAL.ordinal)
         startActivity(wordIntent)
     }
 

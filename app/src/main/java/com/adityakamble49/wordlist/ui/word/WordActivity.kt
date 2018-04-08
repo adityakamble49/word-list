@@ -1,10 +1,10 @@
 package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.ViewModelProviders
+import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
-import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_word_info.*
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 6/4/2018
  */
-class WordActivity : BaseInjectableActivity(), WordContract.View {
+class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickListener {
 
     // Dagger Injected Fields
     @Inject lateinit var wordViewModelFactory: WordViewModelFactory
@@ -33,9 +33,29 @@ class WordActivity : BaseInjectableActivity(), WordContract.View {
         }
     }
 
+    /*
+     * Listener Functions
+     */
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.word_information -> presenter.onClickWordInformation()
+            R.id.word_mnemonic -> presenter.onClickWordMnemonic()
+        }
+    }
+
+
+    /*
+     * Helper Functions
+     */
+
     override fun getLayoutId() = R.layout.activity_word_info
 
     override fun bindView() {
+
+        // Setup word info
+        word_information.setOnClickListener(this)
+        word_mnemonic.setOnClickListener(this)
     }
 
     override fun initializePresenter() {
@@ -58,8 +78,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View {
             word_information.visible()
             word_mnemonic.visible()
         } else {
-            word_information.gone()
-            word_mnemonic.gone()
+            word_information.text = "Tap to View"
+            word_mnemonic.text = "Tap to View"
         }
     }
 
@@ -74,5 +94,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View {
         word_pronunciation.text = word.pronunciation
         word_information.text = word.information
         word_mnemonic.text = word.mnemonic
+    }
+
+    override fun updateWordInformation(information: String) {
+        word_information.text = information
+    }
+
+    override fun updateWordMnemonic(mnemonic: String) {
+        word_mnemonic.text = mnemonic
     }
 }
