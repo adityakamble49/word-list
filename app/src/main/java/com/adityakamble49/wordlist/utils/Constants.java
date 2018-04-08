@@ -12,4 +12,9 @@ public class Constants {
         public static final String DB_NAME = "word_list.db";
         public static final String TABLE_WORD_NAME = "words";
     }
+
+    public static class WordViewPager {
+        public static final String IE_KEY_WORD_ID = "word_id";
+        public static final int IE_DEFAULT_WORD_ID = 0;
+    }
 }

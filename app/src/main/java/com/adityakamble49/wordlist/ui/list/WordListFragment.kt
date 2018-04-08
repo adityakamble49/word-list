@@ -11,7 +11,8 @@ import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModelFactory
-import com.adityakamble49.wordlist.ui.words.WordViewPagerActivity
+import com.adityakamble49.wordlist.ui.word.WordActivity
+import com.adityakamble49.wordlist.utils.Constants.WordViewPager
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.fragment_wordlist.*
@@ -36,7 +37,10 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     // Other Fields
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        startActivity(Intent(activity, WordViewPagerActivity::class.java))
+        val wordId = wordListAdapter.itemList[position].id
+        val wordIntent = Intent(activity, WordActivity::class.java)
+        wordIntent.putExtra(WordViewPager.IE_KEY_WORD_ID, wordId)
+        startActivity(wordIntent)
     }
 
     /*

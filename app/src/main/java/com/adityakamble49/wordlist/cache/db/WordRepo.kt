@@ -22,4 +22,6 @@ class WordRepo @Inject constructor(private var wordDao: WordDao) {
     fun getWordList() = wordDao.getWordList()
 
     fun getWordList(listType: Int) = wordDao.getWordList(listType)
+
+    fun getWordById(id: Int) = wordDao.getWordById(id)
 }
