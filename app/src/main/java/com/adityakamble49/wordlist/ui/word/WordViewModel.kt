@@ -14,6 +14,7 @@ import javax.inject.Inject
 class WordViewModel @Inject constructor(
         private val wordRepo: WordRepo) : ViewModel() {
 
+    var currentWordPosition: Int = 0
     lateinit var currentWord: Word
     lateinit var wordList: List<Word>
 }

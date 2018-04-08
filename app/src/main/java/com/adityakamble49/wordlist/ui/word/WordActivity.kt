@@ -5,6 +5,7 @@ import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
+import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_word_info.*
 import javax.inject.Inject
@@ -52,6 +53,17 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     override fun getLayoutId() = R.layout.activity_word_info
 
     override fun bindView() {
+
+        // Listen Swipe
+        layout_word_info.setOnTouchListener(object : OnSwipeTouchListener(this) {
+            override fun onSwipeLeft() {
+                presenter.onSwipe(OnSwipeTouchListener.SwipeDirection.LEFT)
+            }
+
+            override fun onSwipeRight() {
+                presenter.onSwipe(OnSwipeTouchListener.SwipeDirection.RIGHT)
+            }
+        })
 
         // Setup word info
         word_information.setOnClickListener(this)

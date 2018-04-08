@@ -3,6 +3,7 @@ package com.adityakamble49.wordlist.ui.word
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.interactor.GetWordListUseCase
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -45,9 +46,10 @@ class WordPresenter @Inject constructor(
     }
 
     private fun getWordById(wordId: Int): Word {
-        for (word in wordViewModel.wordList) {
+        wordViewModel.wordList.forEachIndexed { index, word ->
             if (word.id == wordId) {
                 wordViewModel.currentWord = word
+                wordViewModel.currentWordPosition = index
                 return wordViewModel.currentWord
             }
         }
@@ -61,5 +63,16 @@ class WordPresenter @Inject constructor(
 
     override fun onClickWordMnemonic() {
         view.updateWordMnemonic(wordViewModel.currentWord.mnemonic)
+    }
+
+    override fun onSwipe(swipeDirection: OnSwipeTouchListener.SwipeDirection) {
+        if (swipeDirection == OnSwipeTouchListener.SwipeDirection.LEFT &&
+                wordViewModel.currentWordPosition < wordViewModel.wordList.size) {
+            wordViewModel.currentWordPosition++
+        } else if (swipeDirection == OnSwipeTouchListener.SwipeDirection.RIGHT && wordViewModel.currentWordPosition > 0) {
+            wordViewModel.currentWordPosition--
+        }
+        wordViewModel.currentWord = wordViewModel.wordList[wordViewModel.currentWordPosition]
+        view.updateWord(wordViewModel.currentWord)
     }
 }
