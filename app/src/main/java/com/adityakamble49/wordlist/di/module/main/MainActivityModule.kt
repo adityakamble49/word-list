@@ -1,4 +1,4 @@
-package com.adityakamble49.wordlist.di.module
+package com.adityakamble49.wordlist.di.module.main
 
 import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModelFactory

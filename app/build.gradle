@@ -17,6 +17,11 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -60,6 +65,8 @@ dependencies {
     implementation deps.materialDialogs.core
     implementation deps.timber.core
     implementation deps.gson.core
+    implementation deps.rx.rxAndroid
+    implementation deps.rx.rxKotlin
     implementation deps.dagger.runtime
     implementation deps.dagger.support
     kapt deps.dagger.processor
@@ -69,6 +76,8 @@ dependencies {
     implementation deps.android.arch.roomRuntime
     kapt deps.android.arch.archCompiler
     kapt deps.android.arch.roomCompiler
+
+    debugImplementation deps.debugDb.core
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.supportRunner

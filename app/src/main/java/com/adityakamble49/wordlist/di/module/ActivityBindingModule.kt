@@ -1,5 +1,8 @@
 package com.adityakamble49.wordlist.di.module
 
+import com.adityakamble49.wordlist.di.module.main.MainActivityModule
+import com.adityakamble49.wordlist.di.module.main.MainActivityViewModule
+import com.adityakamble49.wordlist.di.module.main.MainFragmentsModule
 import com.adityakamble49.wordlist.di.scope.PerActivity
 import com.adityakamble49.wordlist.ui.main.MainActivity
 import dagger.Module
@@ -16,6 +19,6 @@ abstract class ActivityBindingModule {
 
     @PerActivity
     @ContributesAndroidInjector(
-            modules = [(MainActivityModule::class), (MainFragmentsModule::class)])
+            modules = [(MainActivityViewModule::class), (MainActivityModule::class), (MainFragmentsModule::class)])
     abstract fun contributeMainActivity(): MainActivity
 }

@@ -66,7 +66,6 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         val viewModel = ViewModelProviders.of(this, wordListViewModelFactory)
                 .get(WordListViewModel::class.java)
         presenter = WordListPresenter(this, viewModel)
-        viewModel.getWordList().postValue(dataProcessor.parseWordList())
     }
 
     override fun showLoading(toShow: Boolean) {

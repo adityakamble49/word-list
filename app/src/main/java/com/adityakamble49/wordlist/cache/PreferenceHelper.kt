@@ -18,6 +18,8 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
         private const val PREF_WORDLIST_PACKAGE_NAME = BuildConfig.APPLICATION_ID
         private const val PREF_KEY_CURRENT_LIST_TYPE = "current_list_type"
         const val DEFAULT_CURRENT_LIST_TYPE = 0
+        private const val PREF_KEY_WORDS_IMPORTED = "words_imported"
+        const val DEFAULT_KEY_WORDS_IMPORTED = false
     }
 
     private val wordListPref: SharedPreferences
@@ -31,4 +33,9 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
         get() = wordListPref.getInt(PREF_KEY_CURRENT_LIST_TYPE, DEFAULT_CURRENT_LIST_TYPE)
         set(currentListType) = wordListPref.edit().putInt(PREF_KEY_CURRENT_LIST_TYPE,
                 currentListType).apply()
+
+    var areWordsImported: Boolean
+        get() = wordListPref.getBoolean(PREF_KEY_WORDS_IMPORTED, DEFAULT_KEY_WORDS_IMPORTED)
+        set(areWordsImported) = wordListPref.edit().putBoolean(PREF_KEY_WORDS_IMPORTED,
+                areWordsImported).apply()
 }

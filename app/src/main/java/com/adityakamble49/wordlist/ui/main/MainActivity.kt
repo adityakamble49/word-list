@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.ui.main
 
+import android.app.ProgressDialog
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.Menu
@@ -16,11 +17,12 @@ class MainActivity : BaseInjectableActivity(), MainContract.View {
 
     // Dagger Injected Fields
     @Inject lateinit var viewModelFactory: MainActivityViewModelFactory
+    @Inject lateinit var presenter: MainPresenter
 
     // View Fields
+    private var loadingDialog: ProgressDialog? = null
 
     // Other Fields
-    private lateinit var presenter: MainPresenter
 
 
     /*
@@ -55,11 +57,31 @@ class MainActivity : BaseInjectableActivity(), MainContract.View {
     override fun initializePresenter() {
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(
                 MainActivityViewModel::class.java)
-        presenter = MainPresenter(this, viewModel)
+        presenter.setViewModel(viewModel)
+        presenter.initialize()
     }
 
     private fun loadDefaultFragment() {
         addFragment(WordListFragment.newInstance(), R.id.main_container)
+    }
+
+    override fun showLoadingDialog(toShow: Boolean, title: String, content: String) {
+        if (toShow) {
+            buildLoadingDialog(title, content)?.show()
+        } else {
+            loadingDialog?.dismiss()
+        }
+    }
+
+    private fun buildLoadingDialog(title: String, content: String): ProgressDialog? {
+        if (loadingDialog == null) {
+            loadingDialog = ProgressDialog(this)
+        }
+        loadingDialog?.let {
+            it.setTitle(title)
+            it.setMessage(content)
+        }
+        return loadingDialog
     }
 
     override fun showChangeListTypeDialog(selectedWordListType: Int) {

@@ -5,14 +5,14 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.di.qualifier.ApplicationContext
 import com.adityakamble49.wordlist.di.scope.PerApplication
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.model.WordListType
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import javax.inject.Inject
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.io.Reader
+import javax.inject.Inject
 
 
 /**
@@ -22,20 +22,46 @@ import java.io.Reader
 @PerApplication
 class DataProcessor @Inject constructor(@ApplicationContext var context: Context) {
 
-    private lateinit var gsonParser: Gson
+    private var gsonParser: Gson
 
     init {
         gsonParser = getGson()
     }
 
     fun parseWordList(): List<Word> {
-        val wordFileInputStream = context.resources.openRawResource(
-                R.raw.manhattan_essential_with_mnemonic)
+        val essentialWordList = parseSingleWordList(WordListType.MANHATTAN_ESSENTIAL)
+        val advancedWordList = parseSingleWordList(WordListType.MANHATTAN_ADVANCED)
+        val totalList = mutableListOf<Word>()
+        totalList.addAll(essentialWordList)
+        totalList.addAll(advancedWordList)
+        return totalList
+    }
+
+    private fun parseSingleWordList(wordListType: WordListType): List<Word> {
+
+        // Get required file from raw
+        val wordFileInputStream = context.resources.openRawResource(when (wordListType) {
+            WordListType.MANHATTAN_ESSENTIAL -> R.raw.manhattan_essential_with_mnemonic
+            else -> R.raw.manhattan_essential_with_mnemonic
+        })
+
+        // Read and append content to list
         val bufferedReader = BufferedReader(InputStreamReader(wordFileInputStream))
         val stringBuilder = StringBuilder()
         bufferedReader.lineSequence().forEach { stringBuilder.append(it) }
         val listType = object : TypeToken<List<Word>>() {}.type
-        return gsonParser.fromJson(stringBuilder.toString(), listType)
+        val wordList: List<Word> = gsonParser.fromJson(stringBuilder.toString(), listType)
+
+        // Append word list type
+        when (wordListType) {
+            WordListType.MANHATTAN_ESSENTIAL -> wordList.forEach {
+                it.listType = WordListType.MANHATTAN_ESSENTIAL.ordinal
+            }
+            WordListType.MANHATTAN_ADVANCED -> wordList.forEach {
+                it.listType = WordListType.MANHATTAN_ADVANCED.ordinal
+            }
+        }
+        return wordList
     }
 
     private fun getGson(): Gson = GsonBuilder()

@@ -24,7 +24,7 @@ class WordFragment : BaseFragment(), WordContract.View, TextToSpeech.OnInitListe
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.word_text_to_speech -> presenter.onClickedTextToSpeech(
-                    Word("abstain", "", "", "", ""))
+                    Word(1, 1, "", "", "", "", ""))
         }
     }
 

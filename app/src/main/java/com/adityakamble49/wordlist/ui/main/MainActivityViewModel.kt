@@ -11,11 +11,4 @@ import javax.inject.Inject
  * @since 4/4/2018
  */
 class MainActivityViewModel @Inject constructor(private val preferenceHelper: PreferenceHelper) :
-        ViewModel() {
-
-    fun changeCurrentListType(currentListType: Int) {
-        preferenceHelper.currentListType = currentListType
-    }
-
-    fun getCurrentListType() = preferenceHelper.currentListType
-}
+        ViewModel()

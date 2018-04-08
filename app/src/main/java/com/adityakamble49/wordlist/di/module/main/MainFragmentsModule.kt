@@ -1,5 +1,6 @@
-package com.adityakamble49.wordlist.di.module
+package com.adityakamble49.wordlist.di.module.main
 
+import com.adityakamble49.wordlist.di.module.WordListFragmentModule
 import com.adityakamble49.wordlist.ui.list.WordListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

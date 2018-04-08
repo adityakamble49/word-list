@@ -9,11 +9,15 @@ import android.arch.lifecycle.LifecycleOwner
 interface MainContract {
 
     interface View : LifecycleOwner {
+        fun showLoadingDialog(toShow: Boolean, title: String = "Working",
+                              content: String = "Working on something")
+
         fun showChangeListTypeDialog(selectedWordListType: Int)
         fun alertListTypeUpdate(wordListType: Int)
     }
 
     interface Presenter {
+        fun initialize()
         fun onClickedChangeListType()
         fun onListTypeSelected(wordListType: Int)
     }

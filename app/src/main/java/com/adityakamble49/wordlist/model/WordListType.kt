@@ -6,9 +6,6 @@ package com.adityakamble49.wordlist.model
  * @author Aditya Kamble
  * @since 5/4/2018
  */
-class WordListType {
-    companion object {
-        const val MANHATTAN_ESSENTIAL = 0
-        const val MANHATTAN_ADVANCED = 1
-    }
+enum class WordListType {
+    MANHATTAN_ESSENTIAL, MANHATTAN_ADVANCED
 }
