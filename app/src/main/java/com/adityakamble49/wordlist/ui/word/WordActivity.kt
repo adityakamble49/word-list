@@ -22,6 +22,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     @Inject lateinit var wordViewModelFactory: WordViewModelFactory
     @Inject lateinit var presenter: WordPresenter
 
+    // Other Fields
+    private var currentActivityMode: Int = WordActivityMode.NORMAL.ordinal
+
     // Constants
     companion object {
         const val IE_KEY_WORD_ID = "word_id"
@@ -78,7 +81,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     override fun initializeActivityMode() {
         presenter.loadWord(getWordId())
-        when (getWordActivityMode()) {
+        currentActivityMode = getWordActivityMode()
+        when (currentActivityMode) {
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
         }
@@ -104,8 +108,10 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         word_name.text = word.name
         word_type.text = word.type
         word_pronunciation.text = word.pronunciation
-        word_information.text = word.information
-        word_mnemonic.text = word.mnemonic
+        if (currentActivityMode != WordActivityMode.PRACTICE.ordinal) {
+            word_information.text = word.information
+            word_mnemonic.text = word.mnemonic
+        }
     }
 
     override fun updateWordInformation(information: String) {
