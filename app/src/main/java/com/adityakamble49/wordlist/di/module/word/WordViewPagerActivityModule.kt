@@ -1,4 +1,4 @@
-package com.adityakamble49.wordlist.di.module.wordviewpager
+package com.adityakamble49.wordlist.di.module.word
 
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.ui.word.WordViewModelFactory

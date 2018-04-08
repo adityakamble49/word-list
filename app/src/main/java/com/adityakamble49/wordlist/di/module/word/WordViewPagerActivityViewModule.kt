@@ -1,4 +1,4 @@
-package com.adityakamble49.wordlist.di.module.wordviewpager
+package com.adityakamble49.wordlist.di.module.word
 
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.ui.word.WordContract
