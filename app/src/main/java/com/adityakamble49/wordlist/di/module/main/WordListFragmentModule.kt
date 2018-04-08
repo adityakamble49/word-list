@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.di.module.main
 
+import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.ui.list.WordListViewModelFactory
 import dagger.Module
@@ -13,6 +14,7 @@ import dagger.Provides
 class WordListFragmentModule {
 
     @Provides
-    fun provideWordListViewModelFactory(wordRepo: WordRepo) = WordListViewModelFactory(wordRepo)
+    fun provideWordListViewModelFactory(preferenceHelper: PreferenceHelper, wordRepo: WordRepo) =
+            WordListViewModelFactory(preferenceHelper, wordRepo)
 
 }

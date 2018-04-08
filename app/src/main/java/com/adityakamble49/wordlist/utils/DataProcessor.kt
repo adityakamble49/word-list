@@ -42,7 +42,7 @@ class DataProcessor @Inject constructor(@ApplicationContext var context: Context
         // Get required file from raw
         val wordFileInputStream = context.resources.openRawResource(when (wordListType) {
             WordListType.MANHATTAN_ESSENTIAL -> R.raw.manhattan_essential_with_mnemonic
-            else -> R.raw.manhattan_essential_with_mnemonic
+            WordListType.MANHATTAN_ADVANCED -> R.raw.manhattan_advanced_with_mnemonic
         })
 
         // Read and append content to list

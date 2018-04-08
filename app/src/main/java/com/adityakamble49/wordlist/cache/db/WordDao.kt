@@ -23,4 +23,7 @@ interface WordDao {
 
     @Query("SELECT * FROM words")
     fun getWordList(): LiveData<List<Word>>
+
+    @Query("SELECT * FROM words WHERE listType= :listType")
+    fun getWordList(listType: Int): LiveData<List<Word>>
 }
