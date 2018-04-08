@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.ui.main
 
 import android.arch.lifecycle.LifecycleOwner
+import com.adityakamble49.wordlist.ui.common.BaseContract
 
 /**
  * @author Aditya Kamble
@@ -8,7 +9,7 @@ import android.arch.lifecycle.LifecycleOwner
  */
 interface MainContract {
 
-    interface View : LifecycleOwner {
+    interface View : BaseContract.View, LifecycleOwner {
         fun showLoadingDialog(toShow: Boolean, title: String = "Working",
                               content: String = "Working on something")
 
@@ -16,8 +17,7 @@ interface MainContract {
         fun alertListTypeUpdate(wordListType: Int)
     }
 
-    interface Presenter {
-        fun initialize()
+    interface Presenter : BaseContract.Presenter {
         fun onClickedChangeListType()
         fun onListTypeSelected(wordListType: Int)
     }

@@ -11,5 +11,7 @@ import android.arch.lifecycle.LifecycleOwner
 interface BaseContract {
 
     interface View : LifecycleOwner
-    interface Presenter
+    interface Presenter {
+        fun initialize()
+    }
 }

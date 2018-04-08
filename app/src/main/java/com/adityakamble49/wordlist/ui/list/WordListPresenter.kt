@@ -28,7 +28,7 @@ class WordListPresenter @Inject constructor(
         this.wordListViewModel = wordListViewModel
     }
 
-    fun initialize() {
+    override fun initialize() {
         observeWordList()
         observeCurrentWordListType()
     }
