@@ -1,8 +1,7 @@
 package com.adityakamble49.wordlist.ui.list
 
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.cache.db.WordRepo
 import javax.inject.Inject
 
 /**
@@ -11,9 +10,8 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 4/4/2018
  */
-class WordListViewModel @Inject constructor() : ViewModel() {
+class WordListViewModel @Inject constructor(
+        private val wordRepo: WordRepo) : ViewModel() {
 
-    private var wordList: MutableLiveData<List<Word>> = MutableLiveData()
-
-    fun getWordList() = wordList
+    fun getWordList() = wordRepo.getWordList()
 }

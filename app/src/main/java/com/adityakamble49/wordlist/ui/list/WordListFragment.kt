@@ -10,7 +10,6 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.words.WordViewPagerActivity
-import com.adityakamble49.wordlist.utils.DataProcessor
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.fragment_wordlist.*
@@ -26,13 +25,12 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     // Dagger Injected Fields
     @Inject lateinit var wordListViewModelFactory: WordListViewModelFactory
-    @Inject lateinit var dataProcessor: DataProcessor
+    @Inject lateinit var presenter: WordListPresenter
 
     // View Fields
     private lateinit var wordListAdapter: WordListAdapter
 
     // Other Fields
-    private lateinit var presenter: WordListPresenter
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         startActivity(Intent(activity, WordViewPagerActivity::class.java))
@@ -65,7 +63,8 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     override fun initializePresenter() {
         val viewModel = ViewModelProviders.of(this, wordListViewModelFactory)
                 .get(WordListViewModel::class.java)
-        presenter = WordListPresenter(this, viewModel)
+        presenter.setViewModel(viewModel)
+        presenter.initialize()
     }
 
     override fun showLoading(toShow: Boolean) {

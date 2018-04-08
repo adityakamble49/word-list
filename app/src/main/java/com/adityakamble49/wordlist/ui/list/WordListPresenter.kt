@@ -1,7 +1,9 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
+import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.model.Word
+import javax.inject.Inject
 
 /**
  * Word List Presenter
@@ -9,11 +11,18 @@ import com.adityakamble49.wordlist.model.Word
  * @author Aditya Kamble
  * @since 4/4/2018
  */
-class WordListPresenter constructor(private val view: WordListContract.View,
-                                    private val viewModel: WordListViewModel) :
+class WordListPresenter @Inject constructor(
+        private val view: WordListContract.View,
+        private val preferenceHelper: PreferenceHelper) :
         WordListContract.Presenter {
 
-    init {
+    private lateinit var viewModel: WordListViewModel
+
+    fun setViewModel(viewModel: WordListViewModel) {
+        this.viewModel = viewModel
+    }
+
+    fun initialize() {
         observeWordList()
     }
 
