@@ -31,6 +31,7 @@ buildscript {
             'timber'              : '4.6.0',
             'exoplayer'           : '2.7.1',
             'materialDialogs'     : '0.9.6.0',
+            'getbaseFAB'          : '1.10.1',
 
             // Viewers
             'pdfViewer'           : '2.8.2',
@@ -97,6 +98,9 @@ buildscript {
             ],
             'materialDialogs': [
                     'core': "com.afollestad.material-dialogs:core:${versions.materialDialogs}"
+            ],
+            'getbaseFAB'     : [
+                    'core': "com.getbase:floatingactionbutton:${versions.getbaseFAB}"
             ],
             'debugDb'        : [
                     'core': "com.amitshekhar.android:debug-db:${versions.debugDb}"

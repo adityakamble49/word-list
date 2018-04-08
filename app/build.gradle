@@ -63,6 +63,7 @@ dependencies {
     implementation deps.android.support.constraintLayout
     implementation deps.android.support.design
     implementation deps.materialDialogs.core
+    implementation deps.getbaseFAB.core
     implementation deps.timber.core
     implementation deps.gson.core
     implementation deps.rx.rxAndroid
