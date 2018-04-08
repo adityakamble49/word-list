@@ -3,6 +3,7 @@ package com.adityakamble49.wordlist.ui.list
 import android.arch.lifecycle.Observer
 import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
 import javax.inject.Inject
 
 /**
@@ -16,21 +17,35 @@ class WordListPresenter @Inject constructor(
         private val preferenceHelper: PreferenceHelper) :
         WordListContract.Presenter {
 
-    private lateinit var viewModel: WordListViewModel
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+    private lateinit var wordListViewModel: WordListViewModel
 
-    fun setViewModel(viewModel: WordListViewModel) {
-        this.viewModel = viewModel
+    fun setMainViewModel(mainActivityViewModel: MainActivityViewModel) {
+        this.mainActivityViewModel = mainActivityViewModel
+    }
+
+    fun setWordListViewModel(wordListViewModel: WordListViewModel) {
+        this.wordListViewModel = wordListViewModel
     }
 
     fun initialize() {
         observeWordList()
+        observeCurrentWordListType()
     }
 
     private fun observeWordList() {
-        viewModel.getWordList().observe(view, Observer<List<Word>> { it ->
+        wordListViewModel.getWordList().observe(view, Observer<List<Word>> { it ->
             it?.let {
                 view.showLoading(false)
                 view.updateWordList(it)
+            }
+        })
+    }
+
+    private fun observeCurrentWordListType() {
+        mainActivityViewModel.currentListType.observe(view, Observer<Int> { t ->
+            t?.let {
+                wordListViewModel.updateCurrentWordListType(t)
             }
         })
     }

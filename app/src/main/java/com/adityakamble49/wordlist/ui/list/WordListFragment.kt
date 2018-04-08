@@ -9,6 +9,8 @@ import android.widget.AdapterView
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
+import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
+import com.adityakamble49.wordlist.ui.main.MainActivityViewModelFactory
 import com.adityakamble49.wordlist.ui.words.WordViewPagerActivity
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
@@ -25,6 +27,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     // Dagger Injected Fields
     @Inject lateinit var wordListViewModelFactory: WordListViewModelFactory
+    @Inject lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
     @Inject lateinit var presenter: WordListPresenter
 
     // View Fields
@@ -61,9 +64,15 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     }
 
     override fun initializePresenter() {
-        val viewModel = ViewModelProviders.of(this, wordListViewModelFactory)
+        lateinit var mainActivityViewModel: MainActivityViewModel
+        activity?.let {
+            mainActivityViewModel = ViewModelProviders.of(it, mainActivityViewModelFactory)
+                    .get(MainActivityViewModel::class.java)
+        }
+        val wordListViewModel = ViewModelProviders.of(this, wordListViewModelFactory)
                 .get(WordListViewModel::class.java)
-        presenter.setViewModel(viewModel)
+        presenter.setMainViewModel(mainActivityViewModel)
+        presenter.setWordListViewModel(wordListViewModel)
         presenter.initialize()
     }
 

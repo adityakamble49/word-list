@@ -31,7 +31,7 @@ class WordListViewModel @Inject constructor(
 
     fun getWordList() = wordList
 
-    fun updatePreferredLocation() {
-        wordListType.value = preferenceHelper.currentListType
+    fun updateCurrentWordListType(wordListType: Int) {
+        this.wordListType.value = wordListType
     }
 }

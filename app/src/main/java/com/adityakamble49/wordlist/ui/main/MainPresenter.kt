@@ -42,7 +42,7 @@ class MainPresenter @Inject constructor(
     }
 
     override fun onListTypeSelected(wordListType: Int) {
-        preferenceHelper.currentListType = wordListType
+        viewModel.updateCurrentListType(wordListType)
         view.alertListTypeUpdate(wordListType)
     }
 
