@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.ui.main
 
 import android.arch.lifecycle.LifecycleOwner
 import com.adityakamble49.wordlist.ui.common.BaseContract
+import com.adityakamble49.wordlist.ui.word.WordActivity
 
 /**
  * @author Aditya Kamble
@@ -15,10 +16,13 @@ interface MainContract {
 
         fun showChangeListTypeDialog(selectedWordListType: Int)
         fun alertListTypeUpdate(wordListType: Int)
+        fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode)
     }
 
     interface Presenter : BaseContract.Presenter {
         fun onClickedChangeListType()
         fun onListTypeSelected(wordListType: Int)
+        fun onClickLearnWords()
+        fun onClickPracticeWords()
     }
 }

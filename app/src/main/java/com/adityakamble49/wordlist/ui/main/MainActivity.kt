@@ -2,18 +2,21 @@ package com.adityakamble49.wordlist.ui.main
 
 import android.app.ProgressDialog
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Bundle
+import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
+import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.addFragment
 import com.adityakamble49.wordlist.utils.showToast
 import com.afollestad.materialdialogs.MaterialDialog
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseInjectableActivity(), MainContract.View {
+class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickListener {
 
     // Dagger Injected Fields
     @Inject lateinit var viewModelFactory: MainActivityViewModelFactory
@@ -29,14 +32,20 @@ class MainActivity : BaseInjectableActivity(), MainContract.View {
      * Lifecycle Functions
      */
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    /*
+     * Listener Functions
+     */
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.fab_learn_words -> presenter.onClickLearnWords()
+            R.id.fab_practice_words -> presenter.onClickPracticeWords()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -50,8 +59,14 @@ class MainActivity : BaseInjectableActivity(), MainContract.View {
      * Helper Functions
      */
 
+    override fun getLayoutId() = R.layout.activity_main
+
     override fun bindView() {
         loadDefaultFragment()
+
+        // Setup Task FAB
+        fab_learn_words.setOnClickListener(this)
+        fab_practice_words.setOnClickListener(this)
     }
 
     override fun initializePresenter() {
@@ -97,5 +112,13 @@ class MainActivity : BaseInjectableActivity(), MainContract.View {
     override fun alertListTypeUpdate(wordListType: Int) {
         val selectedWordType = resources.getStringArray(R.array.items_list_types)[wordListType]
         showToast(resources.getString(R.string.alert_list_change, selectedWordType))
+    }
+
+    override fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode) {
+        val wordActivityIntent = Intent(this, WordActivity::class.java)
+        wordActivityIntent.putExtra(WordActivity.IE_KEY_WORD_ACTIVITY_MODE,
+                wordActivityMode.ordinal)
+        startActivity(wordActivityIntent)
+        fab_new_task.collapse()
     }
 }

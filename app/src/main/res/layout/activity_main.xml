@@ -12,7 +12,7 @@
         android:layout_height="match_parent" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/key_manager_fab"
+        android:id="@+id/fab_new_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -23,26 +23,26 @@
         fab:fab_labelStyle="@style/menu_labels_style"
         fab:fab_labelsPosition="left">
 
+
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/generate_key_fab"
+            android:id="@+id/fab_practice_words"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="#D32F2F"
-            fab:fab_colorPressed="#B71C1C"
+            fab:fab_colorNormal="#1976D2"
+            fab:fab_colorPressed="#0D47A1"
             fab:fab_icon="@drawable/ic_practice"
             fab:fab_size="mini"
             fab:fab_title="Practice" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/import_key_fab"
+            android:id="@+id/fab_learn_words"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="#1976D2"
-            fab:fab_colorPressed="#0D47A1"
+            fab:fab_colorNormal="#D32F2F"
+            fab:fab_colorPressed="#B71C1C"
             fab:fab_icon="@drawable/ic_learn"
             fab:fab_size="mini"
             fab:fab_title="Learn" />
-
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

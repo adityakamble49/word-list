@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.ui.main
 
 import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.interactor.ImportWordListToDatabaseUseCase
+import com.adityakamble49.wordlist.ui.word.WordActivity
 import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -26,24 +27,15 @@ class MainPresenter @Inject constructor(
         this.viewModel = viewModel
     }
 
-    private fun checkIfWordsImported() {
-        if (!preferenceHelper.areWordsImported) {
-            startWordImportProcedure()
-        }
-    }
-
     private fun startWordImportProcedure() {
         view.showLoadingDialog(true)
         importWordListToDatabaseUseCase.execute().subscribe(ImportWordListToDatabaseSubscriber())
     }
 
-    override fun onClickedChangeListType() {
-        view.showChangeListTypeDialog(preferenceHelper.currentListType)
-    }
-
-    override fun onListTypeSelected(wordListType: Int) {
-        viewModel.updateCurrentListType(wordListType)
-        view.alertListTypeUpdate(wordListType)
+    private fun checkIfWordsImported() {
+        if (!preferenceHelper.areWordsImported) {
+            startWordImportProcedure()
+        }
     }
 
     private inner class ImportWordListToDatabaseSubscriber : CompletableObserver {
@@ -55,5 +47,22 @@ class MainPresenter @Inject constructor(
         override fun onSubscribe(d: Disposable) {}
 
         override fun onError(e: Throwable) {}
+    }
+
+    override fun onClickedChangeListType() {
+        view.showChangeListTypeDialog(preferenceHelper.currentListType)
+    }
+
+    override fun onListTypeSelected(wordListType: Int) {
+        viewModel.updateCurrentListType(wordListType)
+        view.alertListTypeUpdate(wordListType)
+    }
+
+    override fun onClickLearnWords() {
+        view.startWordActivity(WordActivity.Companion.WordActivityMode.LEARN)
+    }
+
+    override fun onClickPracticeWords() {
+        view.startWordActivity(WordActivity.Companion.WordActivityMode.PRACTICE)
     }
 }
