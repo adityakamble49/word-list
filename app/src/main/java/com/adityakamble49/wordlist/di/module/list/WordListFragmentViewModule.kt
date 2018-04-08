@@ -1,4 +1,4 @@
-package com.adityakamble49.wordlist.di.module.main
+package com.adityakamble49.wordlist.di.module.list
 
 import com.adityakamble49.wordlist.ui.list.WordListContract
 import com.adityakamble49.wordlist.ui.list.WordListFragment

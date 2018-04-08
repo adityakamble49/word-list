@@ -1,4 +1,4 @@
-package com.adityakamble49.wordlist.di.module.main
+package com.adityakamble49.wordlist.di.module.list
 
 import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.cache.db.WordRepo
