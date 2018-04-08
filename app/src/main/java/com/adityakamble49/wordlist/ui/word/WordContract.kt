@@ -13,9 +13,12 @@ import com.adityakamble49.wordlist.ui.common.BaseContract
 interface WordContract {
 
     interface View : BaseContract.View, LifecycleOwner {
+        fun initializeActivityMode()
         fun updateWord(word: Word)
     }
 
     interface Presenter : BaseContract.Presenter {
+        fun loadWords()
+        fun loadWord(wordId: Int)
     }
 }

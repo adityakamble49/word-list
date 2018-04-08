@@ -26,26 +26,32 @@ class WordActivity : BaseInjectableActivity(), WordContract.View {
         const val IE_KEY_WORD_ID = "word_id"
         const val IE_DEFAULT_WORD_ID = 0
         const val IE_KEY_WORD_ACTIVITY_MODE = "word_activity_mode"
-        var IE_DEFAULT_WORD_ACTIVITY_MODE = WordActivityMode.PRACTICE.ordinal
+        var IE_DEFAULT_WORD_ACTIVITY_MODE = WordActivityMode.NORMAL.ordinal
 
         enum class WordActivityMode {
-            LEARN, PRACTICE
+            NORMAL, LEARN, PRACTICE
         }
     }
 
     override fun getLayoutId() = R.layout.activity_word_info
 
     override fun bindView() {
-        handleWordActivityMode()
     }
 
-    private fun handleWordActivityMode() {
+    override fun initializePresenter() {
+        presenter.wordViewModel = ViewModelProviders.of(this, wordViewModelFactory)
+                .get(WordViewModel::class.java)
+        presenter.initialize()
+    }
+
+    override fun initializeActivityMode() {
+        presenter.loadWord(getWordId())
         when (getWordActivityMode()) {
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
-            else -> toggleWordInfo(true)
         }
     }
+
 
     private fun toggleWordInfo(toShow: Boolean) {
         if (toShow) {
@@ -55,14 +61,6 @@ class WordActivity : BaseInjectableActivity(), WordContract.View {
             word_information.gone()
             word_mnemonic.gone()
         }
-    }
-
-
-    override fun initializePresenter() {
-        presenter.wordViewModel = ViewModelProviders.of(this, wordViewModelFactory)
-                .get(WordViewModel::class.java)
-        presenter.updateWordId(getWordId())
-        presenter.initialize()
     }
 
     private fun getWordId() = intent.getIntExtra(IE_KEY_WORD_ID, IE_DEFAULT_WORD_ID)

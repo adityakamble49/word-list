@@ -1,11 +1,9 @@
 package com.adityakamble49.wordlist.ui.word
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations
 import com.adityakamble49.wordlist.cache.db.WordRepo
+import com.adityakamble49.wordlist.interactor.GetWordListUseCase
 import com.adityakamble49.wordlist.model.Word
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
@@ -16,29 +14,40 @@ import javax.inject.Inject
  */
 class WordPresenter @Inject constructor(
         private val view: WordContract.View,
-        private val wordRepo: WordRepo) :
+        private val wordRepo: WordRepo,
+        private val getWordListUseCase: GetWordListUseCase) :
         WordContract.Presenter {
+
     lateinit var wordViewModel: WordViewModel
 
-    private var wordId = MutableLiveData<Int>()
-    private lateinit var word: LiveData<Word>
-
     override fun initialize() {
-        word = Transformations.switchMap(
-                wordId) { input -> wordRepo.getWordById(input) }
-        observeWord()
+        loadWords()
     }
 
-    fun updateWordId(id: Int) {
-        wordId.postValue(id)
+    override fun loadWord(wordId: Int) {
+        view.updateWord(getWordById(wordId))
     }
 
-    private fun observeWord() {
-        word.observe(view, Observer<Word> { t ->
-            t?.let {
-                view.updateWord(it)
-            }
-        })
+    override fun loadWords() {
+        getWordListUseCase.execute().subscribe(GetWordListSubscriber())
     }
 
+    private inner class GetWordListSubscriber : io.reactivex.Observer<List<Word>> {
+
+        override fun onSubscribe(d: Disposable) {}
+        override fun onComplete() {}
+        override fun onError(e: Throwable) {}
+
+        override fun onNext(t: List<Word>) {
+            wordViewModel.wordList = t
+            view.initializeActivityMode()
+        }
+    }
+
+    private fun getWordById(wordId: Int): Word {
+        for (word in wordViewModel.wordList) {
+            if (word.id == wordId) return word
+        }
+        return wordViewModel.wordList[0]
+    }
 }
