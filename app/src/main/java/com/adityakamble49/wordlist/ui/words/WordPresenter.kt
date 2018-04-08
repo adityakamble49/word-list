@@ -8,6 +8,9 @@ import com.adityakamble49.wordlist.model.Word
  */
 class WordPresenter constructor(private val view: WordContract.View) : WordContract.Presenter {
 
+    override fun initialize() {
+    }
+
     override fun onClickedTextToSpeech(word: Word) {
         view.speakWord(word.name)
     }
