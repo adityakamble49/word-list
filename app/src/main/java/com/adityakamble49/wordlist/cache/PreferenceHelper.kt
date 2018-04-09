@@ -16,8 +16,8 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
 
     companion object {
         private const val PREF_WORDLIST_PACKAGE_NAME = BuildConfig.APPLICATION_ID
-        private const val PREF_KEY_CURRENT_LIST_TYPE = "current_list_type"
-        const val DEFAULT_CURRENT_LIST_TYPE = 0
+        private const val PREF_KEY_CURRENT_LIST_ID = "current_list_type"
+        const val DEFAULT_CURRENT_LIST_ID = 1
         private const val PREF_KEY_WORDS_IMPORTED = "words_imported"
         const val DEFAULT_KEY_WORDS_IMPORTED = false
     }
@@ -29,9 +29,9 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
                 Context.MODE_PRIVATE)
     }
 
-    var currentListType: Int
-        get() = wordListPref.getInt(PREF_KEY_CURRENT_LIST_TYPE, DEFAULT_CURRENT_LIST_TYPE)
-        set(currentListType) = wordListPref.edit().putInt(PREF_KEY_CURRENT_LIST_TYPE,
+    var currentLoadedListId: Int
+        get() = wordListPref.getInt(PREF_KEY_CURRENT_LIST_ID, DEFAULT_CURRENT_LIST_ID)
+        set(currentListType) = wordListPref.edit().putInt(PREF_KEY_CURRENT_LIST_ID,
                 currentListType).apply()
 
     var areWordsImported: Boolean

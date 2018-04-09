@@ -13,5 +13,7 @@ import com.adityakamble49.wordlist.utils.Constants
 @Entity(tableName = Constants.Database.TABLE_WORD_LISTS)
 data class WordList(
         @PrimaryKey(autoGenerate = true) var id: Int,
-        var name: String
+        var name: String,
+        var listType: Int,
+        var wordSequenceList: ArrayList<Int>
 )

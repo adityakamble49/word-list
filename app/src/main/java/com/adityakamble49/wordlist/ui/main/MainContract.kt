@@ -14,10 +14,9 @@ interface MainContract {
     interface View : BaseContract.View, LifecycleOwner {
         fun showLoadingDialog(toShow: Boolean, title: String = "Working",
                               content: String = "Working on something")
-
+        fun dataInitialized()
         fun updateSavedWordLists(savedWordLists: List<WordList>)
         fun showLoadSavedListDialog()
-        fun showChangeListTypeDialog(selectedWordListType: Int)
         fun alertListTypeUpdate(wordListType: Int)
         fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode)
     }
@@ -25,8 +24,6 @@ interface MainContract {
     interface Presenter : BaseContract.Presenter {
         fun onClickedLoadList()
         fun onClickedSavedListItem(selectedWordList: WordList)
-        fun onClickedChangeListType()
-        fun onListTypeSelected(wordListType: Int)
         fun onClickLearnWords()
         fun onClickPracticeWords()
     }

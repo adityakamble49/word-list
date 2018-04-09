@@ -3,14 +3,10 @@
 
     <item
         android:id="@+id/action_load_list"
-        android:title="@string/label_action_load_list"/>
+        android:title="@string/label_action_load_list" />
 
     <item
         android:id="@+id/action_save_list"
-        android:title="@string/label_action_save_list"/>
-
-    <item
-        android:id="@+id/action_change_list_type"
-        android:title="@string/label_action_change_list_type"/>
+        android:title="@string/label_action_save_list" />
 
 </menu>

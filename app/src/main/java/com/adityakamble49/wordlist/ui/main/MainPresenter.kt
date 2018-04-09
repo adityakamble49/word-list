@@ -38,6 +38,8 @@ class MainPresenter @Inject constructor(
     private fun checkIfWordsImported() {
         if (!preferenceHelper.areWordsImported) {
             startWordImportProcedure()
+        } else {
+            view.dataInitialized()
         }
     }
 
@@ -45,6 +47,7 @@ class MainPresenter @Inject constructor(
 
         override fun onComplete() {
             view.showLoadingDialog(false)
+            view.dataInitialized()
         }
 
         override fun onSubscribe(d: Disposable) {}
@@ -57,7 +60,7 @@ class MainPresenter @Inject constructor(
     }
 
     override fun onClickedSavedListItem(selectedWordList: WordList) {
-        viewModel.currentLoadedSavedList.postValue(selectedWordList)
+        viewModel.updateCurrentWordList(selectedWordList)
     }
 
     private fun observeWordLists() {
@@ -68,15 +71,6 @@ class MainPresenter @Inject constructor(
                 }
             }
         })
-    }
-
-    override fun onClickedChangeListType() {
-        view.showChangeListTypeDialog(preferenceHelper.currentListType)
-    }
-
-    override fun onListTypeSelected(wordListType: Int) {
-        viewModel.updateCurrentListType(wordListType)
-        view.alertListTypeUpdate(wordListType)
     }
 
     override fun onClickLearnWords() {

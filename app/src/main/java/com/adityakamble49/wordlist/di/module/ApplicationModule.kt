@@ -37,9 +37,4 @@ class ApplicationModule {
     @Provides
     @PerApplication
     fun provideWordListDao(wordListDatabase: WordListDatabase) = wordListDatabase.wordListDao()
-
-    @Provides
-    @PerApplication
-    fun provideWordListJoinDao(wordListDatabase: WordListDatabase) =
-            wordListDatabase.wordListJoinDao()
 }

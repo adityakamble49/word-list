@@ -20,13 +20,13 @@ class MainActivityViewModel @Inject constructor(
         ViewModel() {
 
     val savedWordList: LiveData<List<WordList>> = wordListRepo.getWordLists()
-    val currentLoadedSavedList = MutableLiveData<WordList>()
-    val currentListType = MutableLiveData<Int>()
+    private val currentWordList = MutableLiveData<WordList>()
 
-    fun updateCurrentListType(wordListType: Int) {
-        preferenceHelper.currentListType = wordListType
-        currentListType.postValue(wordListType)
+    fun updateCurrentWordList(currentLoadedSavedList: WordList) {
+        preferenceHelper.currentLoadedListId = currentLoadedSavedList.id
+        this.currentWordList.postValue(currentLoadedSavedList)
     }
 
+    fun getCurrentWordList() = currentWordList
 
 }

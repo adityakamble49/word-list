@@ -2,9 +2,13 @@ package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
 import com.adityakamble49.wordlist.cache.PreferenceHelper
+import com.adityakamble49.wordlist.cache.db.WordListRepo
+import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
+import com.adityakamble49.wordlist.utils.WordUtils
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
@@ -15,7 +19,9 @@ import javax.inject.Inject
  */
 class WordListPresenter @Inject constructor(
         private val view: WordListContract.View,
-        private val preferenceHelper: PreferenceHelper) :
+        private val preferenceHelper: PreferenceHelper,
+        private val wordListRepo: WordListRepo,
+        private val getCurrentWordListUseCase: GetCurrentWordListUseCase) :
         WordListContract.Presenter {
 
     private lateinit var mainActivityViewModel: MainActivityViewModel
@@ -30,30 +36,38 @@ class WordListPresenter @Inject constructor(
     }
 
     override fun initialize() {
-        observeWordList()
-        observeCurrentWordListType()
-        observeCurrentLoadedSavedList()
+        getCurrentWordList()
     }
 
     private fun observeWordList() {
         wordListViewModel.getWordList().observe(view, Observer<List<Word>> { it ->
             it?.let {
                 view.showLoading(false)
-                view.updateWordList(it)
+                view.updateWordList(WordUtils.sortWordList(it,
+                        wordListViewModel.currentWordList.wordSequenceList))
             }
         })
     }
 
-    private fun observeCurrentWordListType() {
-        mainActivityViewModel.currentListType.observe(view, Observer<Int> { t ->
-            t?.let {
-                wordListViewModel.updateCurrentWordListType(t)
-            }
-        })
+    private fun getCurrentWordList() {
+        getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
     }
 
-    private fun observeCurrentLoadedSavedList() {
-        mainActivityViewModel.currentLoadedSavedList.observe(view, Observer<WordList> { t ->
+    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
+        override fun onComplete() {}
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {}
+
+        override fun onNext(t: WordList) {
+            wordListViewModel.updateCurrentLoadedSavedList(t)
+            wordListViewModel.initialize()
+            observeWordList()
+            observeCurrentWordList()
+        }
+    }
+
+    private fun observeCurrentWordList() {
+        mainActivityViewModel.getCurrentWordList().observe(view, Observer<WordList> { t ->
             t?.let {
                 wordListViewModel.updateCurrentLoadedSavedList(it)
             }

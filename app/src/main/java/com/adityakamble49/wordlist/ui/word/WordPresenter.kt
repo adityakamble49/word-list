@@ -1,9 +1,13 @@
 package com.adityakamble49.wordlist.ui.word
 
 import com.adityakamble49.wordlist.cache.db.WordRepo
+import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetWordListUseCase
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
+import com.adityakamble49.wordlist.utils.WordUtils
+import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -16,13 +20,29 @@ import javax.inject.Inject
 class WordPresenter @Inject constructor(
         private val view: WordContract.View,
         private val wordRepo: WordRepo,
-        private val getWordListUseCase: GetWordListUseCase) :
+        private val getWordListUseCase: GetWordListUseCase,
+        private val getCurrentWordListUseCase: GetCurrentWordListUseCase) :
         WordContract.Presenter {
 
     lateinit var wordViewModel: WordViewModel
 
     override fun initialize() {
-        loadWords()
+        getCurrentWordList()
+    }
+
+    private fun getCurrentWordList() {
+        getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
+    }
+
+    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
+        override fun onComplete() {}
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {}
+
+        override fun onNext(t: WordList) {
+            wordViewModel.currentWordList = t
+            loadWords()
+        }
     }
 
     override fun loadWord(wordId: Int) {
@@ -33,14 +53,15 @@ class WordPresenter @Inject constructor(
         getWordListUseCase.execute().subscribe(GetWordListSubscriber())
     }
 
-    private inner class GetWordListSubscriber : io.reactivex.Observer<List<Word>> {
+    private inner class GetWordListSubscriber : Observer<List<Word>> {
 
         override fun onSubscribe(d: Disposable) {}
         override fun onComplete() {}
         override fun onError(e: Throwable) {}
 
         override fun onNext(t: List<Word>) {
-            wordViewModel.wordList = t
+            wordViewModel.wordList = WordUtils.sortWordList(t,
+                    wordViewModel.currentWordList.wordSequenceList)
             view.initializeActivityMode()
         }
     }

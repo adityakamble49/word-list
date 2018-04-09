@@ -24,4 +24,8 @@ interface WordListDao {
 
     @Query("SELECT  * FROM word_lists WHERE id= :id")
     fun getWordListById(id: Int): LiveData<WordList>
+
+    @Query("SELECT  * FROM word_lists WHERE id= :id")
+    fun getWordListByIdDirect(id: Int): WordList
+
 }

@@ -53,7 +53,6 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_load_list -> presenter.onClickedLoadList()
-            R.id.action_change_list_type -> presenter.onClickedChangeListType()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -65,7 +64,6 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     override fun getLayoutId() = R.layout.activity_main
 
     override fun bindView() {
-        loadDefaultFragment()
 
         // Setup Task FAB
         fab_learn_words.setOnClickListener(this)
@@ -102,6 +100,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         return loadingDialog
     }
 
+    override fun dataInitialized() {
+        loadDefaultFragment()
+    }
+
     override fun updateSavedWordLists(savedWordLists: List<WordList>) {
         this.savedWordLists = savedWordLists
     }
@@ -114,16 +116,6 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
                 .items(wordListNames)
                 .itemsCallback { _, _, which, _ ->
                     presenter.onClickedSavedListItem(savedWordLists[which])
-                }.build().show()
-    }
-
-    override fun showChangeListTypeDialog(selectedWordListType: Int) {
-        MaterialDialog.Builder(this)
-                .title(R.string.title_change_list_type_dialog)
-                .items(R.array.items_list_types)
-                .itemsCallbackSingleChoice(selectedWordListType) { _, _, which, _ ->
-                    presenter.onListTypeSelected(which)
-                    true
                 }.build().show()
     }
 
