@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_word_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,10 +19,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="16dp"
             android:maxLines="1"
-            android:text="abstain"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="abstain" />
 
         <TextView
             android:id="@+id/word_pronunciation"
@@ -37,9 +38,9 @@
             android:paddingEnd="14dp"
             android:paddingStart="14dp"
             android:paddingTop="2dp"
-            android:text="ab-STAIN"
             app:layout_constraintStart_toEndOf="@+id/word_type"
-            app:layout_constraintTop_toBottomOf="@+id/word_name" />
+            app:layout_constraintTop_toBottomOf="@+id/word_name"
+            tools:text="ab-STAIN" />
 
         <TextView
             android:id="@+id/word_type"
@@ -54,9 +55,9 @@
             android:paddingEnd="14dp"
             android:paddingStart="14dp"
             android:paddingTop="2dp"
-            android:text="verb"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_name" />
+            app:layout_constraintTop_toBottomOf="@+id/word_name"
+            tools:text="verb" />
 
         <android.support.constraint.Guideline
             android:id="@+id/start_guideline"
@@ -87,20 +88,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Word Information"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_type" />
+            app:layout_constraintTop_toBottomOf="@+id/word_type"
+            tools:text="Word Information" />
 
         <TextView
             android:id="@+id/word_mnemonic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Word Mnemonic"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_information" />
+            app:layout_constraintTop_toBottomOf="@+id/word_information"
+            tools:text="Word Mnemonic" />
 
 
     </android.support.constraint.ConstraintLayout>
