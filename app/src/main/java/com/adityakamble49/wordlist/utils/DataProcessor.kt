@@ -28,16 +28,7 @@ class DataProcessor @Inject constructor(@ApplicationContext var context: Context
         gsonParser = getGson()
     }
 
-    fun parseWordList(): List<Word> {
-        val essentialWordList = parseSingleWordList(WordListType.MANHATTAN_ESSENTIAL)
-        val advancedWordList = parseSingleWordList(WordListType.MANHATTAN_ADVANCED)
-        val totalList = mutableListOf<Word>()
-        totalList.addAll(essentialWordList)
-        totalList.addAll(advancedWordList)
-        return totalList
-    }
-
-    private fun parseSingleWordList(wordListType: WordListType): List<Word> {
+    fun parseWordList(wordListType: WordListType): List<Word> {
 
         // Get required file from raw
         val wordFileInputStream = context.resources.openRawResource(when (wordListType) {

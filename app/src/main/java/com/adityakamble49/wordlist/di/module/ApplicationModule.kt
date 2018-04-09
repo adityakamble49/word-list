@@ -26,11 +26,20 @@ class ApplicationModule {
 
     @Provides
     @PerApplication
+    fun provideWordListDatabase(application: Application): WordListDatabase =
+            Room.databaseBuilder(application.applicationContext, WordListDatabase::class.java,
+                    Database.DB_NAME).build()
+
+    @Provides
+    @PerApplication
     fun provideWordDao(wordListDatabase: WordListDatabase) = wordListDatabase.wordDao()
 
     @Provides
     @PerApplication
-    fun provideWordListDatabase(application: Application): WordListDatabase =
-            Room.databaseBuilder(application.applicationContext, WordListDatabase::class.java,
-                    Database.DB_NAME).build()
+    fun provideWordListDao(wordListDatabase: WordListDatabase) = wordListDatabase.wordListDao()
+
+    @Provides
+    @PerApplication
+    fun provideWordListJoinDao(wordListDatabase: WordListDatabase) =
+            wordListDatabase.wordListJoinDao()
 }

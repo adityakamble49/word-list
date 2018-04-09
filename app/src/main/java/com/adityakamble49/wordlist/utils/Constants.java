@@ -11,5 +11,10 @@ public class Constants {
     public static class Database {
         public static final String DB_NAME = "word_list.db";
         public static final String TABLE_WORD_NAME = "words";
+        public static final String TABLE_WORD_LISTS = "word_lists";
+        public static final String TABLE_WORD_LIST_JOIN = "word_list_join";
+
+        public static final String ENTRY_WORD_LIST_DEFAULT_1 = "Manhattan Essential - Alphabetical";
+        public static final String ENTRY_WORD_LIST_DEFAULT_2 = "Manhattan Advanced - Alphabetical";
     }
 }
