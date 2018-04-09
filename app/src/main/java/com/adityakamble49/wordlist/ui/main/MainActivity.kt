@@ -110,7 +110,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         var wordListNames = mutableListOf<String>()
         savedWordLists.forEach { wordList -> wordListNames.add(wordList.name) }
         MaterialDialog.Builder(this)
-                .title(R.string.title_change_list_type_dialog)
+                .title(R.string.title_load_saved_list)
                 .items(wordListNames)
                 .itemsCallback { _, _, which, _ ->
                     presenter.onClickedSavedListItem(savedWordLists[which])

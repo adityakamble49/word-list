@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Word List</string>
+
     <string name="label_action_change_list_type">Change List Type</string>
     <string name="label_action_load_list">Load List</string>
     <string name="label_action_save_list">Save List</string>
+
+    <string name="title_load_saved_list">Load Saved List</string>
     <string name="title_change_list_type_dialog">Change List Type</string>
     <string name="alert_list_change">List Changed to %1$s</string>
+
 </resources>
