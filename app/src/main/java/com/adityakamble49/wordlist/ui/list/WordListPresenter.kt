@@ -3,6 +3,7 @@ package com.adityakamble49.wordlist.ui.list
 import android.arch.lifecycle.Observer
 import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
 import javax.inject.Inject
 
@@ -31,6 +32,7 @@ class WordListPresenter @Inject constructor(
     override fun initialize() {
         observeWordList()
         observeCurrentWordListType()
+        observeCurrentLoadedSavedList()
     }
 
     private fun observeWordList() {
@@ -46,6 +48,14 @@ class WordListPresenter @Inject constructor(
         mainActivityViewModel.currentListType.observe(view, Observer<Int> { t ->
             t?.let {
                 wordListViewModel.updateCurrentWordListType(t)
+            }
+        })
+    }
+
+    private fun observeCurrentLoadedSavedList() {
+        mainActivityViewModel.currentLoadedSavedList.observe(view, Observer<WordList> { t ->
+            t?.let {
+                wordListViewModel.updateCurrentLoadedSavedList(it)
             }
         })
     }

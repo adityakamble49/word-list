@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.di.module.main
 
 import com.adityakamble49.wordlist.cache.PreferenceHelper
+import com.adityakamble49.wordlist.cache.db.WordListRepo
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -13,8 +14,8 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun provideMainActivityViewModelFactory(preferenceHelper: PreferenceHelper):
-            MainActivityViewModelFactory = MainActivityViewModelFactory(
-            preferenceHelper)
+    fun provideMainActivityViewModelFactory(preferenceHelper: PreferenceHelper,
+                                            wordListRepo: WordListRepo): MainActivityViewModelFactory =
+            MainActivityViewModelFactory(preferenceHelper, wordListRepo)
 
 }

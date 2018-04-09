@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.cache.db
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -22,5 +23,5 @@ interface WordListJoinDao {
     fun insertList(wordListJoinList: List<WordListJoin>)
 
     @Query("SELECT * FROM words INNER JOIN word_list_join ON words.id == word_list_join.wordId WHERE word_list_join.wordListId= :wordListId")
-    fun getWordsForWordList(wordListId: Int): List<Word>
+    fun getWordsForWordList(wordListId: Int): LiveData<List<Word>>
 }

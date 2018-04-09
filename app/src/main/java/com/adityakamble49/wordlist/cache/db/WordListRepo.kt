@@ -16,4 +16,6 @@ class WordListRepo @Inject constructor(private val wordListDao: WordListDao) {
     fun insert(wordList: WordList) = wordListDao.insert(wordList)
 
     fun insertList(listOfWordList: List<WordList>) = wordListDao.insertList(listOfWordList)
+
+    fun getWordLists() = wordListDao.getWordLists()
 }

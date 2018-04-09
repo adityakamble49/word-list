@@ -19,5 +19,5 @@ class WordListJoinRepo @Inject constructor(
     fun insertList(listOfWordListJoin: List<WordListJoin>) =
             wordListJoinDao.insertList(listOfWordListJoin)
 
-    fun getWords() = wordListJoinDao.getWordsForWordList(1)
+    fun getWords(selectedWordListId: Int) = wordListJoinDao.getWordsForWordList(selectedWordListId)
 }

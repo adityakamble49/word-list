@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.adityakamble49.wordlist.R
+import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
@@ -26,6 +27,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     private var loadingDialog: ProgressDialog? = null
 
     // Other Fields
+    private var savedWordLists: List<WordList> = mutableListOf()
 
 
     /*
@@ -50,6 +52,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            R.id.action_load_list -> presenter.onClickedLoadList()
             R.id.action_change_list_type -> presenter.onClickedChangeListType()
         }
         return super.onOptionsItemSelected(item)
@@ -97,6 +100,21 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
             it.setMessage(content)
         }
         return loadingDialog
+    }
+
+    override fun updateSavedWordLists(savedWordLists: List<WordList>) {
+        this.savedWordLists = savedWordLists
+    }
+
+    override fun showLoadSavedListDialog() {
+        var wordListNames = mutableListOf<String>()
+        savedWordLists.forEach { wordList -> wordListNames.add(wordList.name) }
+        MaterialDialog.Builder(this)
+                .title(R.string.title_change_list_type_dialog)
+                .items(wordListNames)
+                .itemsCallback { _, _, which, _ ->
+                    presenter.onClickedSavedListItem(savedWordLists[which])
+                }.build().show()
     }
 
     override fun showChangeListTypeDialog(selectedWordListType: Int) {

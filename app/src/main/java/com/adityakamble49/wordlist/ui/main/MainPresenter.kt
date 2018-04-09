@@ -1,7 +1,9 @@
 package com.adityakamble49.wordlist.ui.main
 
+import android.arch.lifecycle.Observer
 import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.interactor.ImportWordListToDatabaseUseCase
+import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
@@ -21,6 +23,7 @@ class MainPresenter @Inject constructor(
 
     override fun initialize() {
         checkIfWordsImported()
+        observeWordLists()
     }
 
     fun setViewModel(viewModel: MainActivityViewModel) {
@@ -47,6 +50,24 @@ class MainPresenter @Inject constructor(
         override fun onSubscribe(d: Disposable) {}
 
         override fun onError(e: Throwable) {}
+    }
+
+    override fun onClickedLoadList() {
+        view.showLoadSavedListDialog()
+    }
+
+    override fun onClickedSavedListItem(selectedWordList: WordList) {
+        viewModel.currentLoadedSavedList.postValue(selectedWordList)
+    }
+
+    private fun observeWordLists() {
+        viewModel.savedWordList.observe(view, object : Observer<List<WordList>> {
+            override fun onChanged(t: List<WordList>?) {
+                t?.let {
+                    view.updateSavedWordLists(it)
+                }
+            }
+        })
     }
 
     override fun onClickedChangeListType() {
