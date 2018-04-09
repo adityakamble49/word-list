@@ -32,8 +32,10 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     // View Fields
     private lateinit var wordListAdapter: WordListAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     // Other Fields
+
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val wordId = wordListAdapter.itemList[position].id
@@ -54,13 +56,16 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     override fun getLayoutId() = R.layout.fragment_wordlist
 
+    override fun bindViewOnCreate() {
+        linearLayoutManager = LinearLayoutManager(context)
+    }
+
     override fun bindView(rootView: View) {
         with(rootView) {
 
             // Setup Word List
             wordListAdapter = WordListAdapter()
             wordListAdapter.onItemClickListener = this@WordListFragment
-            val linearLayoutManager = LinearLayoutManager(context)
             val decorator = DividerItemDecoration(context, linearLayoutManager.orientation)
             recyclerview_word_list.adapter = wordListAdapter
             recyclerview_word_list.layoutManager = linearLayoutManager
