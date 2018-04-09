@@ -111,6 +111,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         if (currentActivityMode != WordActivityMode.PRACTICE.ordinal) {
             word_information.text = word.information
             word_mnemonic.text = word.mnemonic
+        } else {
+            word_information.text = "Tap to Show"
+            word_mnemonic.text = "Tap to Show"
         }
     }
 
