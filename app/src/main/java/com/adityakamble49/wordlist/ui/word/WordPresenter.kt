@@ -38,7 +38,7 @@ class WordPresenter @Inject constructor(
         getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
     }
 
-    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
+    private inner class GetCurrentWordListSubscriber : Observer<WordList> {
         override fun onComplete() {}
         override fun onSubscribe(d: Disposable) {}
         override fun onError(e: Throwable) {}
@@ -49,8 +49,13 @@ class WordPresenter @Inject constructor(
         }
     }
 
-    override fun loadWord(wordId: Int) {
-        view.updateWord(getWordById(wordId))
+    override fun loadWord(currentWordActivityMode: Int, wordId: Int) {
+        when (currentWordActivityMode) {
+            WordActivity.Companion.WordActivityMode.LEARN.ordinal,
+            WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> view.updateWord(
+                    getWordById(wordViewModel.currentWordList.lastWordId))
+            else -> view.updateWord(getWordById(wordId))
+        }
     }
 
     override fun loadWords() {

@@ -23,7 +23,7 @@ interface WordContract {
     interface Presenter : BaseContract.Presenter {
         fun onPause()
         fun loadWords()
-        fun loadWord(wordId: Int)
+        fun loadWord(currentWordActivityMode: Int, wordId: Int)
         fun onClickWordInformation()
         fun onClickWordMnemonic()
         fun onSwipe(swipeDirection: OnSwipeTouchListener.SwipeDirection)

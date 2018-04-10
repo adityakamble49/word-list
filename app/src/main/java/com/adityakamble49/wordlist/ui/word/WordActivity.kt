@@ -90,8 +90,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     }
 
     override fun initializeActivityMode() {
-        presenter.loadWord(getWordId())
         currentActivityMode = getWordActivityMode()
+        presenter.loadWord(currentActivityMode, getWordId())
         when (currentActivityMode) {
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
