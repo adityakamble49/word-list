@@ -14,7 +14,7 @@ import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
 interface WordContract {
 
     interface View : BaseContract.View, LifecycleOwner {
-        fun initializeActivityMode()
+        fun initializeActivityMode(currentWordActivityMode: Int)
         fun updateWord(word: Word)
         fun updateWordInformation(information: String)
         fun updateWordMnemonic(mnemonic: String)
@@ -22,8 +22,6 @@ interface WordContract {
 
     interface Presenter : BaseContract.Presenter {
         fun onPause()
-        fun loadWords()
-        fun loadWord(currentWordActivityMode: Int, wordId: Int)
         fun onClickWordInformation()
         fun onClickWordMnemonic()
         fun onSwipe(swipeDirection: OnSwipeTouchListener.SwipeDirection)

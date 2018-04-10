@@ -30,6 +30,8 @@ class WordPresenter @Inject constructor(
         WordContract.Presenter {
 
     lateinit var wordViewModel: WordViewModel
+    var currentWordActivityMode: Int = WordActivity.Companion.WordActivityMode.NORMAL.ordinal
+    var currentWordId = 0
 
     override fun initialize() {
         getCurrentWordList()
@@ -50,7 +52,25 @@ class WordPresenter @Inject constructor(
         }
     }
 
-    override fun loadWord(currentWordActivityMode: Int, wordId: Int) {
+    private fun loadWords() {
+        getWordListUseCase.execute().subscribe(GetWordListSubscriber())
+    }
+
+    private inner class GetWordListSubscriber : Observer<List<Word>> {
+
+        override fun onSubscribe(d: Disposable) {}
+        override fun onComplete() {}
+        override fun onError(e: Throwable) {}
+
+        override fun onNext(t: List<Word>) {
+            wordViewModel.wordList = WordUtils.sortWordList(t,
+                    wordViewModel.currentWordList.wordSequenceList)
+            view.initializeActivityMode(currentWordActivityMode)
+            loadWord(currentWordActivityMode, currentWordId)
+        }
+    }
+
+    private fun loadWord(currentWordActivityMode: Int, wordId: Int) {
         when (currentWordActivityMode) {
             WordActivity.Companion.WordActivityMode.LEARN.ordinal -> view.updateWord(
                     getWordById(wordViewModel.currentWordList.lastWordId))
@@ -67,30 +87,12 @@ class WordPresenter @Inject constructor(
         val practiceWordList = mutableListOf<Word>()
         for (i in 0 until wordViewModel.wordList.size) {
             val singleWord = wordViewModel.wordList[i]
-            if (singleWord.id != lastWordId) {
-                practiceWordList.add(singleWord)
-            } else {
+            practiceWordList.add(singleWord)
+            if (singleWord.id == lastWordId) {
                 break
             }
         }
         wordViewModel.wordList = practiceWordList.shuffled()
-    }
-
-    override fun loadWords() {
-        getWordListUseCase.execute().subscribe(GetWordListSubscriber())
-    }
-
-    private inner class GetWordListSubscriber : Observer<List<Word>> {
-
-        override fun onSubscribe(d: Disposable) {}
-        override fun onComplete() {}
-        override fun onError(e: Throwable) {}
-
-        override fun onNext(t: List<Word>) {
-            wordViewModel.wordList = WordUtils.sortWordList(t,
-                    wordViewModel.currentWordList.wordSequenceList)
-            view.initializeActivityMode()
-        }
     }
 
     private fun getWordById(wordId: Int): Word {
@@ -129,8 +131,10 @@ class WordPresenter @Inject constructor(
     }
 
     private fun updateLastWordInWordList() {
-        saveLastWordIdForWordListUseCase.execute(wordViewModel.currentWordList.id,
-                wordViewModel.currentWord.id).subscribe(SaveLastWordIdForWordListSubscriber())
+        if (currentWordActivityMode == WordActivity.Companion.WordActivityMode.LEARN.ordinal) {
+            saveLastWordIdForWordListUseCase.execute(wordViewModel.currentWordList.id,
+                    wordViewModel.currentWord.id).subscribe(SaveLastWordIdForWordListSubscriber())
+        }
     }
 
     private inner class SaveLastWordIdForWordListSubscriber : CompletableObserver {

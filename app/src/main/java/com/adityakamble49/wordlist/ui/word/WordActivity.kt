@@ -65,6 +65,11 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     override fun getLayoutId() = R.layout.activity_word_info
 
+    private fun getWordId() = intent.getIntExtra(IE_KEY_WORD_ID, IE_DEFAULT_WORD_ID)
+
+    private fun getWordActivityMode() =
+            intent.getIntExtra(IE_KEY_WORD_ACTIVITY_MODE, IE_DEFAULT_WORD_ACTIVITY_MODE)
+
     override fun bindView() {
 
         // Listen Swipe
@@ -86,12 +91,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     override fun initializePresenter() {
         presenter.wordViewModel = ViewModelProviders.of(this, wordViewModelFactory)
                 .get(WordViewModel::class.java)
+        presenter.currentWordActivityMode = getWordActivityMode()
+        presenter.currentWordId = getWordId()
         presenter.initialize()
     }
 
-    override fun initializeActivityMode() {
-        currentActivityMode = getWordActivityMode()
-        presenter.loadWord(currentActivityMode, getWordId())
+    override fun initializeActivityMode(activityMode: Int) {
+        currentActivityMode = activityMode
         when (currentActivityMode) {
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
@@ -108,11 +114,6 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_mnemonic.text = "Tap to View"
         }
     }
-
-    private fun getWordId() = intent.getIntExtra(IE_KEY_WORD_ID, IE_DEFAULT_WORD_ID)
-
-    private fun getWordActivityMode() =
-            intent.getIntExtra(IE_KEY_WORD_ACTIVITY_MODE, IE_DEFAULT_WORD_ACTIVITY_MODE)
 
     override fun updateWord(word: Word) {
         word_name.text = word.name
