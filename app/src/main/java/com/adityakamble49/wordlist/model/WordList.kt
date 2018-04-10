@@ -15,5 +15,6 @@ data class WordList(
         @PrimaryKey(autoGenerate = true) var id: Int,
         var name: String,
         var listType: Int,
+        var lastWordId: Int,
         var wordSequenceList: ArrayList<Int>
 )

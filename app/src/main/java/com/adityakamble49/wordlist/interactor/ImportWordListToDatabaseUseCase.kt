@@ -50,6 +50,7 @@ class ImportWordListToDatabaseUseCase @Inject constructor(
                 val wordListManhattanEssentialShuffled = WordList(0,
                         "Manhattan Essential - Shuffled",
                         WordListType.MANHATTAN_ESSENTIAL.ordinal,
+                        essentialShuffledSequence[0],
                         essentialShuffledSequence)
 
                 var advancedShuffledSequence: ArrayList<Int> = arrayListOf()
@@ -57,6 +58,7 @@ class ImportWordListToDatabaseUseCase @Inject constructor(
                 val wordListManhattanAdvancedShuffled = WordList(0,
                         "Manhattan Advanced - Shuffled",
                         WordListType.MANHATTAN_ADVANCED.ordinal,
+                        advancedShuffledSequence[0],
                         advancedShuffledSequence)
 
                 wordListRepo.insert(wordListManhattanEssentialShuffled)
@@ -68,10 +70,13 @@ class ImportWordListToDatabaseUseCase @Inject constructor(
 
                 // Create default shuffled word lists
                 var essentialAlphabeticalSequence: ArrayList<Int> = arrayListOf()
-                wordListManhattanEssentialFetched.forEach { essentialAlphabeticalSequence.add(it.id) }
+                wordListManhattanEssentialFetched.forEach {
+                    essentialAlphabeticalSequence.add(it.id)
+                }
                 val wordListManhattanEssentialAlphabetical = WordList(0,
                         "Manhattan Essential - Alphabetical",
                         WordListType.MANHATTAN_ESSENTIAL.ordinal,
+                        essentialAlphabeticalSequence[0],
                         essentialAlphabeticalSequence)
 
                 var advancedAlphabeticalSequence: ArrayList<Int> = arrayListOf()
@@ -79,6 +84,7 @@ class ImportWordListToDatabaseUseCase @Inject constructor(
                 val wordListManhattanAdvancedAlphabetical = WordList(0,
                         "Manhattan Advanced - Alphabetical",
                         WordListType.MANHATTAN_ADVANCED.ordinal,
+                        advancedAlphabeticalSequence[0],
                         advancedAlphabeticalSequence)
 
                 wordListRepo.insert(wordListManhattanEssentialAlphabetical)
