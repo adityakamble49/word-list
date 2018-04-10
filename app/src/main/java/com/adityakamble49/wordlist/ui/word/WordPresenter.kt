@@ -76,23 +76,30 @@ class WordPresenter @Inject constructor(
                     getWordById(wordViewModel.currentWordList.lastWordId))
             WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> {
                 updateWordListForPractice()
-                view.updateWord(wordViewModel.wordList[0])
+                view.updateWord(wordViewModel.wordList[wordViewModel.currentWordPosition])
             }
             else -> view.updateWord(getWordById(wordId))
         }
     }
 
     private fun updateWordListForPractice() {
-        val lastWordId = wordViewModel.currentWordList.lastWordId
         val practiceWordList = mutableListOf<Word>()
-        for (i in 0 until wordViewModel.wordList.size) {
-            val singleWord = wordViewModel.wordList[i]
-            practiceWordList.add(singleWord)
-            if (singleWord.id == lastWordId) {
-                break
+        lateinit var shuffledPracticeWordList: List<Word>
+        if (wordViewModel.wordListPractice.isEmpty()) {
+            val lastWordId = wordViewModel.currentWordList.lastWordId
+            for (i in 0 until wordViewModel.wordList.size) {
+                val singleWord = wordViewModel.wordList[i]
+                practiceWordList.add(singleWord)
+                if (singleWord.id == lastWordId) {
+                    break
+                }
             }
+            shuffledPracticeWordList = practiceWordList.shuffled()
+        } else {
+            shuffledPracticeWordList = wordViewModel.wordListPractice
         }
-        wordViewModel.wordList = practiceWordList.shuffled()
+        wordViewModel.wordList = shuffledPracticeWordList
+        wordViewModel.wordListPractice = shuffledPracticeWordList
     }
 
     private fun getWordById(wordId: Int): Word {
