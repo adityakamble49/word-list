@@ -38,6 +38,16 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     }
 
     /*
+     * Lifecycle Functions
+     */
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onPause()
+    }
+
+
+    /*
      * Listener Functions
      */
 

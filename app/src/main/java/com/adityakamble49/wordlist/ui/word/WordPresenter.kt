@@ -3,12 +3,15 @@ package com.adityakamble49.wordlist.ui.word
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetWordListUseCase
+import com.adityakamble49.wordlist.interactor.SaveLastWordIdForWordListUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
 import com.adityakamble49.wordlist.utils.WordUtils
+import io.reactivex.CompletableObserver
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -21,7 +24,8 @@ class WordPresenter @Inject constructor(
         private val view: WordContract.View,
         private val wordRepo: WordRepo,
         private val getWordListUseCase: GetWordListUseCase,
-        private val getCurrentWordListUseCase: GetCurrentWordListUseCase) :
+        private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
+        private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase) :
         WordContract.Presenter {
 
     lateinit var wordViewModel: WordViewModel
@@ -95,5 +99,24 @@ class WordPresenter @Inject constructor(
         }
         wordViewModel.currentWord = wordViewModel.wordList[wordViewModel.currentWordPosition]
         view.updateWord(wordViewModel.currentWord)
+    }
+
+    override fun onPause() {
+        updateLastWordInWordList()
+    }
+
+    private fun updateLastWordInWordList() {
+        saveLastWordIdForWordListUseCase.execute(wordViewModel.currentWordList.id,
+                wordViewModel.currentWord.id).subscribe(SaveLastWordIdForWordListSubscriber())
+    }
+
+    private inner class SaveLastWordIdForWordListSubscriber : CompletableObserver {
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {}
+
+        override fun onComplete() {
+            Timber.i("Last word id saved")
+        }
+
     }
 }

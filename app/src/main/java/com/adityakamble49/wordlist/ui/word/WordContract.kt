@@ -21,6 +21,7 @@ interface WordContract {
     }
 
     interface Presenter : BaseContract.Presenter {
+        fun onPause()
         fun loadWords()
         fun loadWord(wordId: Int)
         fun onClickWordInformation()

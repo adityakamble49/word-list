@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
+import android.arch.persistence.room.Update
 import com.adityakamble49.wordlist.model.WordList
 
 /**
@@ -28,4 +29,9 @@ interface WordListDao {
     @Query("SELECT  * FROM word_lists WHERE id= :id")
     fun getWordListByIdDirect(id: Int): WordList
 
+    @Update
+    fun update(wordList: WordList)
+
+    @Query("UPDATE word_lists SET lastWordId= :lastWordId WHERE id= :wordListId")
+    fun updateLastWordIdForWordList(wordListId: Int, lastWordId: Int)
 }
