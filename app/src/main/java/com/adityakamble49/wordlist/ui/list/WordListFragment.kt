@@ -94,7 +94,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         }
     }
 
-    override fun updateWordList(wordList: List<Word>) {
+    override fun updateWords(wordList: List<Word>) {
         wordListAdapter.itemList = wordList
         wordListAdapter.notifyDataSetChanged()
     }

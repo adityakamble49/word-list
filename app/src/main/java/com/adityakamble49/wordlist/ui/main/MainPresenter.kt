@@ -60,6 +60,7 @@ class MainPresenter @Inject constructor(
     }
 
     override fun onClickedSavedListItem(selectedWordList: WordList) {
+        preferenceHelper.currentLoadedListId = selectedWordList.id
         viewModel.updateCurrentWordList(selectedWordList)
     }
 

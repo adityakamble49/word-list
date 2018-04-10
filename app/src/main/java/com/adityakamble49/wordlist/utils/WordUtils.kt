@@ -10,7 +10,7 @@ import com.adityakamble49.wordlist.model.Word
  */
 object WordUtils {
 
-    fun sortWordList(wordList: List<Word>, wordSequenceList: List<Int>): List<Word> {
+    fun sortWords(wordList: List<Word>, wordSequenceList: List<Int>): List<Word> {
         val sortedList = mutableListOf<Word>()
         wordSequenceList.forEach { ws ->
             wordList.forEach { word ->

@@ -23,7 +23,6 @@ class MainActivityViewModel @Inject constructor(
     private val currentWordList = MutableLiveData<WordList>()
 
     fun updateCurrentWordList(currentLoadedSavedList: WordList) {
-        preferenceHelper.currentLoadedListId = currentLoadedSavedList.id
         this.currentWordList.postValue(currentLoadedSavedList)
     }
 

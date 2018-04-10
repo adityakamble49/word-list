@@ -63,7 +63,7 @@ class WordPresenter @Inject constructor(
         override fun onError(e: Throwable) {}
 
         override fun onNext(t: List<Word>) {
-            wordViewModel.wordList = WordUtils.sortWordList(t,
+            wordViewModel.wordList = WordUtils.sortWords(t,
                     wordViewModel.currentWordList.wordSequenceList)
             view.initializeActivityMode(currentWordActivityMode)
             loadWord(currentWordActivityMode, currentWordId)
