@@ -105,5 +105,6 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     override fun updateBookmarkItem(bookmarkItemId: Int) {
         wordListAdapter.bookMarkItemId = bookmarkItemId
+        wordListAdapter.notifyDataSetChanged()
     }
 }

@@ -39,17 +39,6 @@ class WordListPresenter @Inject constructor(
         getCurrentWordList()
     }
 
-    private fun observeWordList() {
-        wordListViewModel.getWordList().observe(view, Observer<List<Word>> { it ->
-            it?.let {
-                view.showLoading(false)
-                view.updateBookmarkItem(wordListViewModel.currentWordList.lastWordId)
-                view.updateWordList(WordUtils.sortWordList(it,
-                        wordListViewModel.currentWordList.wordSequenceList))
-            }
-        })
-    }
-
     private fun getCurrentWordList() {
         getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
     }
@@ -64,13 +53,37 @@ class WordListPresenter @Inject constructor(
             wordListViewModel.initialize()
             observeWordList()
             observeCurrentWordList()
+            observeSavedWordLists()
         }
+    }
+
+    private fun observeWordList() {
+        wordListViewModel.getWordList().observe(view, Observer<List<Word>> { it ->
+            it?.let {
+                view.showLoading(false)
+                view.updateBookmarkItem(wordListViewModel.currentWordList.lastWordId)
+                view.updateWordList(WordUtils.sortWordList(it,
+                        wordListViewModel.currentWordList.wordSequenceList))
+            }
+        })
     }
 
     private fun observeCurrentWordList() {
         mainActivityViewModel.getCurrentWordList().observe(view, Observer<WordList> { t ->
             t?.let {
                 wordListViewModel.updateCurrentLoadedSavedList(it)
+            }
+        })
+    }
+
+    private fun observeSavedWordLists() {
+        wordListRepo.getWordLists().observe(view, Observer<List<WordList>> {
+            it?.let {
+                it.forEach { wordList ->
+                    if (wordList.id == wordListViewModel.currentWordList.id) {
+                        view.updateBookmarkItem(wordList.lastWordId)
+                    }
+                }
             }
         })
     }
