@@ -102,4 +102,8 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     override fun openSingleWord(word: Word) {
 
     }
+
+    override fun updateBookmarkItem(bookmarkItemId: Int) {
+        wordListAdapter.bookMarkItemId = bookmarkItemId
+    }
 }

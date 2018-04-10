@@ -24,10 +24,12 @@ abstract class SimpleListAdapter<T> : RecyclerView.Adapter<SimpleListAdapter.Vie
     override fun getItemCount() = itemList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<T>? {
-        val view = parent.inflate(R.layout.simple_list_item)
+        val view = parent.inflate(getItemLayoutId())
         view?.let { return createCustomViewHolder(it) }
         return null
     }
+
+    open fun getItemLayoutId() = R.layout.simple_list_item
 
     abstract fun createCustomViewHolder(view: View): ViewHolder<T>
 

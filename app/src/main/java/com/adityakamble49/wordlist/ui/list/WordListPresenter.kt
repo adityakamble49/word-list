@@ -43,6 +43,7 @@ class WordListPresenter @Inject constructor(
         wordListViewModel.getWordList().observe(view, Observer<List<Word>> { it ->
             it?.let {
                 view.showLoading(false)
+                view.updateBookmarkItem(wordListViewModel.currentWordList.lastWordId)
                 view.updateWordList(WordUtils.sortWordList(it,
                         wordListViewModel.currentWordList.wordSequenceList))
             }

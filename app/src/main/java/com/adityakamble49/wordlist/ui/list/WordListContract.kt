@@ -14,6 +14,7 @@ interface WordListContract {
         fun showLoading(toShow: Boolean)
         fun updateWordList(wordList: List<Word>)
         fun openSingleWord(word: Word)
+        fun updateBookmarkItem(bookmarkItemId: Int)
     }
 
     interface Presenter : BaseContract.Presenter {
