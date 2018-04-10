@@ -14,6 +14,7 @@ import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
+
 /**
  * Word View Pager Presenter
  *
@@ -51,11 +52,28 @@ class WordPresenter @Inject constructor(
 
     override fun loadWord(currentWordActivityMode: Int, wordId: Int) {
         when (currentWordActivityMode) {
-            WordActivity.Companion.WordActivityMode.LEARN.ordinal,
-            WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> view.updateWord(
+            WordActivity.Companion.WordActivityMode.LEARN.ordinal -> view.updateWord(
                     getWordById(wordViewModel.currentWordList.lastWordId))
+            WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> {
+                updateWordListForPractice()
+                view.updateWord(wordViewModel.wordList[0])
+            }
             else -> view.updateWord(getWordById(wordId))
         }
+    }
+
+    private fun updateWordListForPractice() {
+        val lastWordId = wordViewModel.currentWordList.lastWordId
+        val practiceWordList = mutableListOf<Word>()
+        for (i in 0 until wordViewModel.wordList.size) {
+            val singleWord = wordViewModel.wordList[i]
+            if (singleWord.id != lastWordId) {
+                practiceWordList.add(singleWord)
+            } else {
+                break
+            }
+        }
+        wordViewModel.wordList = practiceWordList.shuffled()
     }
 
     override fun loadWords() {
