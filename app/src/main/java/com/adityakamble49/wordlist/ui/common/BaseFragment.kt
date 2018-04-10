@@ -15,7 +15,7 @@ import android.view.ViewGroup
  */
 abstract class BaseFragment : Fragment() {
 
-    private lateinit var rootView: View
+    lateinit var rootView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +27,9 @@ abstract class BaseFragment : Fragment() {
 
         val rootView = inflateLayout(inflater, container)
         this.rootView = rootView
-        return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        bindView(rootView)
+        bindView()
         initializePresenter()
+        return rootView
     }
 
     protected open fun inflateLayout(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -45,7 +41,7 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun bindViewOnCreate()
 
-    abstract fun bindView(rootView: View)
+    abstract fun bindView()
 
     abstract fun initializePresenter()
 }

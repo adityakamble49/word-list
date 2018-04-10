@@ -60,7 +60,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         linearLayoutManager = LinearLayoutManager(context)
     }
 
-    override fun bindView(rootView: View) {
+    override fun bindView() {
         with(rootView) {
 
             // Setup Word List

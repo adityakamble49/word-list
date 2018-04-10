@@ -11,7 +11,7 @@ import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
-import com.adityakamble49.wordlist.utils.addFragment
+import com.adityakamble49.wordlist.utils.replaceFragment
 import com.adityakamble49.wordlist.utils.showToast
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.activity_main.*
@@ -78,7 +78,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     }
 
     private fun loadDefaultFragment() {
-        addFragment(WordListFragment.newInstance(), R.id.main_container)
+        replaceFragment(WordListFragment.newInstance(), R.id.main_container)
     }
 
     override fun showLoadingDialog(toShow: Boolean, title: String, content: String) {
