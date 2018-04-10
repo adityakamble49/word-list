@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.di.module.list
 
 import com.adityakamble49.wordlist.ui.list.WordListContract
 import com.adityakamble49.wordlist.ui.list.WordListFragment
+import com.adityakamble49.wordlist.ui.list.WordListPresenter
 import dagger.Binds
 import dagger.Module
 
@@ -17,4 +18,8 @@ abstract class WordListFragmentViewModule {
     @Binds
     abstract fun provideWordListFragmentView(
             wordListFragment: WordListFragment): WordListContract.View
+
+    @Binds
+    abstract fun provideWordListPresenter(
+            wordListPresenter: WordListPresenter): WordListContract.Presenter
 }

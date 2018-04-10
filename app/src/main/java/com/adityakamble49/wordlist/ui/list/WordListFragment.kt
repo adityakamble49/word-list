@@ -28,7 +28,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     // Dagger Injected Fields
     @Inject lateinit var wordListViewModelFactory: WordListViewModelFactory
     @Inject lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
-    @Inject lateinit var presenter: WordListPresenter
+    @Inject lateinit var presenter: WordListContract.Presenter
 
     // View Fields
     private lateinit var wordListAdapter: WordListAdapter
