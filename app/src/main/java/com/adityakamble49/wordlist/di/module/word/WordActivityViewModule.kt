@@ -7,13 +7,13 @@ import dagger.Binds
 import dagger.Module
 
 /**
- * Word View Pager View Module
+ * [WordActivity] View Module
  *
  * @author Aditya Kamble
  * @since 8/4/2018
  */
 @Module
-abstract class WordViewPagerActivityViewModule {
+abstract class WordActivityViewModule {
 
     @Binds
     abstract fun provideWordActivityView(wordActivity: WordActivity): WordContract.View

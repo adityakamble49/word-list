@@ -3,8 +3,8 @@ package com.adityakamble49.wordlist.di.module
 import com.adityakamble49.wordlist.di.module.main.MainActivityModule
 import com.adityakamble49.wordlist.di.module.main.MainActivityViewModule
 import com.adityakamble49.wordlist.di.module.main.MainFragmentsModule
-import com.adityakamble49.wordlist.di.module.word.WordViewPagerActivityModule
-import com.adityakamble49.wordlist.di.module.word.WordViewPagerActivityViewModule
+import com.adityakamble49.wordlist.di.module.word.WordActivityModule
+import com.adityakamble49.wordlist.di.module.word.WordActivityViewModule
 import com.adityakamble49.wordlist.di.scope.PerActivity
 import com.adityakamble49.wordlist.ui.main.MainActivity
 import com.adityakamble49.wordlist.ui.word.WordActivity
@@ -27,7 +27,7 @@ abstract class ActivityBindingModule {
 
     @PerActivity
     @ContributesAndroidInjector(
-            modules = [(WordViewPagerActivityViewModule::class),
-                (WordViewPagerActivityModule::class)])
+            modules = [(WordActivityViewModule::class),
+                (WordActivityModule::class)])
     abstract fun contributeWordViewPagerActivity(): WordActivity
 }

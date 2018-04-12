@@ -7,15 +7,14 @@ import dagger.Provides
 
 
 /**
- * Word View Pager Module
+ * Word Activity Module
  *
  * @author Aditya Kamble
  * @since 8/4/2018
  */
 @Module
-class WordViewPagerActivityModule {
+class WordActivityModule {
 
     @Provides
-    fun provideWordViewPagerViewModelFactory(wordRepo: WordRepo) =
-            WordViewModelFactory(wordRepo)
+    fun provideWordViewModelFactory(wordRepo: WordRepo) = WordViewModelFactory(wordRepo)
 }
