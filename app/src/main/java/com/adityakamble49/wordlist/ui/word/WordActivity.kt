@@ -20,7 +20,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     // Dagger Injected Fields
     @Inject lateinit var wordViewModelFactory: WordViewModelFactory
-    @Inject lateinit var presenter: WordPresenter
+    @Inject lateinit var presenter: WordContract.Presenter
 
     // Other Fields
     private var currentActivityMode: Int = WordActivityMode.NORMAL.ordinal
@@ -89,10 +89,10 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     }
 
     override fun initializePresenter() {
-        presenter.wordViewModel = ViewModelProviders.of(this, wordViewModelFactory)
-                .get(WordViewModel::class.java)
-        presenter.currentWordActivityMode = getWordActivityMode()
-        presenter.currentWordId = getWordId()
+        presenter.setWordViewModel(ViewModelProviders.of(this, wordViewModelFactory)
+                .get(WordViewModel::class.java))
+        presenter.setActivityMode(getWordActivityMode())
+        presenter.setWordId(getWordId())
         presenter.initialize()
     }
 

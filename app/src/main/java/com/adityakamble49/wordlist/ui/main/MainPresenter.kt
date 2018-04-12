@@ -26,7 +26,7 @@ class MainPresenter @Inject constructor(
         observeWordLists()
     }
 
-    fun setViewModel(viewModel: MainActivityViewModel) {
+    override fun setViewModel(viewModel: MainActivityViewModel) {
         this.viewModel = viewModel
     }
 

@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.di.module.word
 
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.ui.word.WordContract
+import com.adityakamble49.wordlist.ui.word.WordPresenter
 import dagger.Binds
 import dagger.Module
 
@@ -15,6 +16,8 @@ import dagger.Module
 abstract class WordViewPagerActivityViewModule {
 
     @Binds
-    abstract fun provideWordViewPagerView(
-            wordActivity: WordActivity): WordContract.View
+    abstract fun provideWordActivityView(wordActivity: WordActivity): WordContract.View
+
+    @Binds
+    abstract fun provideWordActivityPresenter(wordPresenter: WordPresenter): WordContract.Presenter
 }

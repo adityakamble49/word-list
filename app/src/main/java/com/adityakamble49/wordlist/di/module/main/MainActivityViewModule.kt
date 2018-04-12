@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.di.module.main
 
 import com.adityakamble49.wordlist.ui.main.MainActivity
 import com.adityakamble49.wordlist.ui.main.MainContract
+import com.adityakamble49.wordlist.ui.main.MainPresenter
 import dagger.Binds
 import dagger.Module
 
@@ -16,4 +17,7 @@ abstract class MainActivityViewModule {
 
     @Binds
     abstract fun provideMainActivityView(mainActivity: MainActivity): MainContract.View
+
+    @Binds
+    abstract fun provideMainActivityPresenter(mainPresenter: MainPresenter): MainContract.Presenter
 }

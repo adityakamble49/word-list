@@ -21,6 +21,9 @@ interface WordContract {
     }
 
     interface Presenter : BaseContract.Presenter {
+        fun setWordViewModel(wordViewModel: WordViewModel)
+        fun setActivityMode(wordActivityMode: Int)
+        fun setWordId(wordId: Int)
         fun onPause()
         fun onClickWordInformation()
         fun onClickWordMnemonic()

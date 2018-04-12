@@ -21,7 +21,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     // Dagger Injected Fields
     @Inject lateinit var viewModelFactory: MainActivityViewModelFactory
-    @Inject lateinit var presenter: MainPresenter
+    @Inject lateinit var presenter: MainContract.Presenter
 
     // View Fields
     private var loadingDialog: ProgressDialog? = null

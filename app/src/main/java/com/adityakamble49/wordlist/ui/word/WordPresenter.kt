@@ -29,9 +29,21 @@ class WordPresenter @Inject constructor(
         private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase) :
         WordContract.Presenter {
 
-    lateinit var wordViewModel: WordViewModel
-    var currentWordActivityMode: Int = WordActivity.Companion.WordActivityMode.NORMAL.ordinal
-    var currentWordId = 0
+    private lateinit var currentWordViewModel: WordViewModel
+    private var currentWordActivityMode: Int = WordActivity.Companion.WordActivityMode.NORMAL.ordinal
+    private var currentWordId = 0
+
+    override fun setWordViewModel(currentWordViewModel: WordViewModel) {
+        this.currentWordViewModel = currentWordViewModel
+    }
+
+    override fun setActivityMode(wordActivityMode: Int) {
+        this.currentWordActivityMode = wordActivityMode
+    }
+
+    override fun setWordId(wordId: Int) {
+        this.currentWordId = wordId
+    }
 
     override fun initialize() {
         getCurrentWordList()
@@ -47,7 +59,7 @@ class WordPresenter @Inject constructor(
         override fun onError(e: Throwable) {}
 
         override fun onNext(t: WordList) {
-            wordViewModel.currentWordList = t
+            currentWordViewModel.currentWordList = t
             loadWords()
         }
     }
@@ -63,8 +75,8 @@ class WordPresenter @Inject constructor(
         override fun onError(e: Throwable) {}
 
         override fun onNext(t: List<Word>) {
-            wordViewModel.wordList = WordUtils.sortWords(t,
-                    wordViewModel.currentWordList.wordSequenceList)
+            currentWordViewModel.wordList = WordUtils.sortWords(t,
+                    currentWordViewModel.currentWordList.wordSequenceList)
             view.initializeActivityMode(currentWordActivityMode)
             loadWord(currentWordActivityMode, currentWordId)
         }
@@ -73,10 +85,10 @@ class WordPresenter @Inject constructor(
     private fun loadWord(currentWordActivityMode: Int, wordId: Int) {
         when (currentWordActivityMode) {
             WordActivity.Companion.WordActivityMode.LEARN.ordinal -> view.updateWord(
-                    getWordById(wordViewModel.currentWordList.lastWordId))
+                    getWordById(currentWordViewModel.currentWordList.lastWordId))
             WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> {
                 updateWordListForPractice()
-                view.updateWord(wordViewModel.wordList[wordViewModel.currentWordPosition])
+                view.updateWord(currentWordViewModel.wordList[currentWordViewModel.currentWordPosition])
             }
             else -> view.updateWord(getWordById(wordId))
         }
@@ -85,10 +97,10 @@ class WordPresenter @Inject constructor(
     private fun updateWordListForPractice() {
         val practiceWordList = mutableListOf<Word>()
         lateinit var shuffledPracticeWordList: List<Word>
-        if (wordViewModel.wordListPractice.isEmpty()) {
-            val lastWordId = wordViewModel.currentWordList.lastWordId
-            for (i in 0 until wordViewModel.wordList.size) {
-                val singleWord = wordViewModel.wordList[i]
+        if (currentWordViewModel.wordListPractice.isEmpty()) {
+            val lastWordId = currentWordViewModel.currentWordList.lastWordId
+            for (i in 0 until currentWordViewModel.wordList.size) {
+                val singleWord = currentWordViewModel.wordList[i]
                 practiceWordList.add(singleWord)
                 if (singleWord.id == lastWordId) {
                     break
@@ -96,41 +108,41 @@ class WordPresenter @Inject constructor(
             }
             shuffledPracticeWordList = practiceWordList.shuffled()
         } else {
-            shuffledPracticeWordList = wordViewModel.wordListPractice
+            shuffledPracticeWordList = currentWordViewModel.wordListPractice
         }
-        wordViewModel.wordList = shuffledPracticeWordList
-        wordViewModel.wordListPractice = shuffledPracticeWordList
+        currentWordViewModel.wordList = shuffledPracticeWordList
+        currentWordViewModel.wordListPractice = shuffledPracticeWordList
     }
 
     private fun getWordById(wordId: Int): Word {
-        wordViewModel.wordList.forEachIndexed { index, word ->
+        currentWordViewModel.wordList.forEachIndexed { index, word ->
             if (word.id == wordId) {
-                wordViewModel.currentWord = word
-                wordViewModel.currentWordPosition = index
-                return wordViewModel.currentWord
+                currentWordViewModel.currentWord = word
+                currentWordViewModel.currentWordPosition = index
+                return currentWordViewModel.currentWord
             }
         }
-        wordViewModel.currentWord = wordViewModel.wordList[0]
-        return wordViewModel.currentWord
+        currentWordViewModel.currentWord = currentWordViewModel.wordList[0]
+        return currentWordViewModel.currentWord
     }
 
     override fun onClickWordInformation() {
-        view.updateWordInformation(wordViewModel.currentWord.information)
+        view.updateWordInformation(currentWordViewModel.currentWord.information)
     }
 
     override fun onClickWordMnemonic() {
-        view.updateWordMnemonic(wordViewModel.currentWord.mnemonic)
+        view.updateWordMnemonic(currentWordViewModel.currentWord.mnemonic)
     }
 
     override fun onSwipe(swipeDirection: OnSwipeTouchListener.SwipeDirection) {
         if (swipeDirection == OnSwipeTouchListener.SwipeDirection.LEFT &&
-                wordViewModel.currentWordPosition < wordViewModel.wordList.size) {
-            wordViewModel.currentWordPosition++
-        } else if (swipeDirection == OnSwipeTouchListener.SwipeDirection.RIGHT && wordViewModel.currentWordPosition > 0) {
-            wordViewModel.currentWordPosition--
+                currentWordViewModel.currentWordPosition < currentWordViewModel.wordList.size) {
+            currentWordViewModel.currentWordPosition++
+        } else if (swipeDirection == OnSwipeTouchListener.SwipeDirection.RIGHT && currentWordViewModel.currentWordPosition > 0) {
+            currentWordViewModel.currentWordPosition--
         }
-        wordViewModel.currentWord = wordViewModel.wordList[wordViewModel.currentWordPosition]
-        view.updateWord(wordViewModel.currentWord)
+        currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
+        view.updateWord(currentWordViewModel.currentWord)
     }
 
     override fun onPause() {
@@ -139,8 +151,8 @@ class WordPresenter @Inject constructor(
 
     private fun updateLastWordInWordList() {
         if (currentWordActivityMode == WordActivity.Companion.WordActivityMode.LEARN.ordinal) {
-            saveLastWordIdForWordListUseCase.execute(wordViewModel.currentWordList.id,
-                    wordViewModel.currentWord.id).subscribe(SaveLastWordIdForWordListSubscriber())
+            saveLastWordIdForWordListUseCase.execute(currentWordViewModel.currentWordList.id,
+                    currentWordViewModel.currentWord.id).subscribe(SaveLastWordIdForWordListSubscriber())
         }
     }
 
