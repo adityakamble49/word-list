@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        fab:fab_addButtonColorNormal="@color/colorAccent"
-        fab:fab_addButtonColorPressed="@color/colorPrimary"
+        fab:fab_addButtonColorNormal="@color/default_accent"
+        fab:fab_addButtonColorPressed="@color/default_primary"
         fab:fab_addButtonPlusIconColor="@color/white"
         fab:fab_labelStyle="@style/menu_labels_style"
         fab:fab_labelsPosition="left">
