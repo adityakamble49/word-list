@@ -85,9 +85,12 @@
 
         <TextView
             android:id="@+id/word_information"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/default_secondary_text"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
             app:layout_constraintTop_toBottomOf="@+id/word_type"
@@ -95,9 +98,12 @@
 
         <TextView
             android:id="@+id/word_mnemonic"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/default_secondary_text"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
             app:layout_constraintTop_toBottomOf="@+id/word_information"
