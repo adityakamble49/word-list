@@ -1,8 +1,9 @@
 package com.adityakamble49.wordlist.ui.main
 
 import android.arch.lifecycle.Observer
-import com.adityakamble49.wordlist.cache.PreferenceHelper
+import com.adityakamble49.wordlist.interactor.AreWordsImportedUseCase
 import com.adityakamble49.wordlist.interactor.ImportWordListToDatabaseUseCase
+import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListIdUseCase
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import io.reactivex.CompletableObserver
@@ -10,12 +11,15 @@ import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
+ * Main Activity Presenter
+ *
  * @author Aditya Kamble
  * @since 5/4/2018
  */
 class MainPresenter @Inject constructor(
         private val view: MainContract.View,
-        private val preferenceHelper: PreferenceHelper,
+        private val areWordsImportedUseCase: AreWordsImportedUseCase,
+        private val updateCurrentLoadedListIdUseCase: UpdateCurrentLoadedListIdUseCase,
         private val importWordListToDatabaseUseCase: ImportWordListToDatabaseUseCase) :
         MainContract.Presenter {
 
@@ -36,7 +40,7 @@ class MainPresenter @Inject constructor(
     }
 
     private fun checkIfWordsImported() {
-        if (!preferenceHelper.areWordsImported) {
+        if (!areWordsImportedUseCase.execute()) {
             startWordImportProcedure()
         } else {
             view.dataInitialized()
@@ -60,7 +64,7 @@ class MainPresenter @Inject constructor(
     }
 
     override fun onClickedSavedListItem(selectedWordList: WordList) {
-        preferenceHelper.currentLoadedListId = selectedWordList.id
+        updateCurrentLoadedListIdUseCase.execute(selectedWordList.id)
         viewModel.updateCurrentWordList(selectedWordList)
     }
 
