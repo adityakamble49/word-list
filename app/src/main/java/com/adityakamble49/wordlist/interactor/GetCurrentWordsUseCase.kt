@@ -10,12 +10,12 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
- * Build Get Word List UseCase
+ * Get Current Words Use Case
  *
  * @author Aditya Kamble
  * @since 8/4/2018
  */
-class GetWordListUseCase @Inject constructor(
+class GetCurrentWordsUseCase @Inject constructor(
         private val preferenceHelper: PreferenceHelper,
         private val wordRepo: WordRepo,
         private val wordListRepo: WordListRepo) {

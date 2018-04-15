@@ -1,9 +1,8 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
-import com.adityakamble49.wordlist.cache.PreferenceHelper
-import com.adityakamble49.wordlist.cache.db.WordListRepo
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
+import com.adityakamble49.wordlist.interactor.GetWordListsUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
@@ -19,8 +18,7 @@ import javax.inject.Inject
  */
 class WordListPresenter @Inject constructor(
         private val view: WordListContract.View,
-        private val preferenceHelper: PreferenceHelper,
-        private val wordListRepo: WordListRepo,
+        private val getWordListsUseCase: GetWordListsUseCase,
         private val getCurrentWordListUseCase: GetCurrentWordListUseCase) :
         WordListContract.Presenter {
 
@@ -106,7 +104,7 @@ class WordListPresenter @Inject constructor(
      * Main list of Words
      */
     private fun observeSavedWordLists() {
-        wordListRepo.getWordLists().observe(view, Observer<List<WordList>> {
+        getWordListsUseCase.execute().observe(view, Observer<List<WordList>> {
             it?.let {
                 it.forEach { wordList ->
                     if (wordList.id == wordListViewModel.currentWordList.id) {

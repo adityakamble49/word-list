@@ -1,8 +1,7 @@
 package com.adityakamble49.wordlist.ui.word
 
-import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
-import com.adityakamble49.wordlist.interactor.GetWordListUseCase
+import com.adityakamble49.wordlist.interactor.GetCurrentWordsUseCase
 import com.adityakamble49.wordlist.interactor.SaveLastWordIdForWordListUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
@@ -23,8 +22,7 @@ import javax.inject.Inject
  */
 class WordPresenter @Inject constructor(
         private val view: WordContract.View,
-        private val wordRepo: WordRepo,
-        private val getWordListUseCase: GetWordListUseCase,
+        private val getCurrentWordsUseCase: GetCurrentWordsUseCase,
         private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
         private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase) :
         WordContract.Presenter {
@@ -65,7 +63,7 @@ class WordPresenter @Inject constructor(
     }
 
     private fun loadWords() {
-        getWordListUseCase.execute().subscribe(GetWordListSubscriber())
+        getCurrentWordsUseCase.execute().subscribe(GetWordListSubscriber())
     }
 
     private inner class GetWordListSubscriber : Observer<List<Word>> {
