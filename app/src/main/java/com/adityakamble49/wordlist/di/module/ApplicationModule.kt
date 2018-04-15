@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
+import com.adityakamble49.wordlist.di.module.common.ViewModelModule
 import com.adityakamble49.wordlist.di.qualifier.ApplicationContext
 import com.adityakamble49.wordlist.di.scope.PerApplication
 import com.adityakamble49.wordlist.utils.Constants.Database
@@ -16,7 +17,7 @@ import dagger.Provides
  * @author Aditya Kamble
  * @since 5/4/2018
  */
-@Module
+@Module(includes = [(ViewModelModule::class)])
 class ApplicationModule {
 
     @Provides

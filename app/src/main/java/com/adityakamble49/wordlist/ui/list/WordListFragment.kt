@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.ui.list
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.widget.DividerItemDecoration
@@ -10,7 +11,6 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
-import com.adityakamble49.wordlist.ui.main.MainActivityViewModelFactory
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
@@ -26,8 +26,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         AdapterView.OnItemClickListener {
 
     // Dagger Injected Fields
-    @Inject lateinit var wordListViewModelFactory: WordListViewModelFactory
-    @Inject lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var presenter: WordListContract.Presenter
 
     // View Fields
@@ -76,10 +75,10 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     override fun initializePresenter() {
         lateinit var mainActivityViewModel: MainActivityViewModel
         activity?.let {
-            mainActivityViewModel = ViewModelProviders.of(it, mainActivityViewModelFactory)
+            mainActivityViewModel = ViewModelProviders.of(it, viewModelFactory)
                     .get(MainActivityViewModel::class.java)
         }
-        val wordListViewModel = ViewModelProviders.of(this, wordListViewModelFactory)
+        val wordListViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(WordListViewModel::class.java)
         presenter.setMainViewModel(mainActivityViewModel)
         presenter.setWordListViewModel(wordListViewModel)

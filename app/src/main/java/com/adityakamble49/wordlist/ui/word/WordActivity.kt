@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.ui.word
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.view.View
 import com.adityakamble49.wordlist.R
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickListener {
 
     // Dagger Injected Fields
-    @Inject lateinit var wordViewModelFactory: WordViewModelFactory
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var presenter: WordContract.Presenter
 
     // Other Fields
@@ -89,7 +90,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     }
 
     override fun initializePresenter() {
-        presenter.setWordViewModel(ViewModelProviders.of(this, wordViewModelFactory)
+        presenter.setWordViewModel(ViewModelProviders.of(this, viewModelFactory)
                 .get(WordViewModel::class.java))
         presenter.setActivityMode(getWordActivityMode())
         presenter.setWordId(getWordId())

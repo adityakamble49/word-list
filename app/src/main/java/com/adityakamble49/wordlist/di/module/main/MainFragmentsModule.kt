@@ -1,7 +1,6 @@
 package com.adityakamble49.wordlist.di.module.main
 
 import com.adityakamble49.wordlist.di.module.list.WordListFragmentModule
-import com.adityakamble49.wordlist.di.module.list.WordListFragmentViewModule
 import com.adityakamble49.wordlist.ui.list.WordListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,7 +14,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class MainFragmentsModule {
 
-    @ContributesAndroidInjector(
-            modules = [(WordListFragmentViewModule::class), (WordListFragmentModule::class)])
+    @ContributesAndroidInjector(modules = [(WordListFragmentModule::class)])
     abstract fun contributeWordListFragment(): WordListFragment
 }

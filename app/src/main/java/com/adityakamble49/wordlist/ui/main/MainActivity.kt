@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.ui.main
 
 import android.app.ProgressDialog
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.view.Menu
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickListener {
 
     // Dagger Injected Fields
-    @Inject lateinit var viewModelFactory: MainActivityViewModelFactory
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var presenter: MainContract.Presenter
 
     // View Fields
