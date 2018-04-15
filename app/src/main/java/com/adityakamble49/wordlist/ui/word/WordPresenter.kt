@@ -133,7 +133,7 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onNextWordAction() {
-        if (currentWordViewModel.currentWordPosition < currentWordViewModel.wordList.size) {
+        if (currentWordViewModel.currentWordPosition < currentWordViewModel.wordList.size - 1) {
             currentWordViewModel.currentWordPosition++
         }
         currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
