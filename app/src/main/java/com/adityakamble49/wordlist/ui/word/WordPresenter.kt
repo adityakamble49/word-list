@@ -85,8 +85,7 @@ class WordPresenter @Inject constructor(
                     getWordById(currentWordViewModel.currentWordList.lastWordId))
             WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> {
                 updateWordListForPractice()
-                view.updateWord(
-                        currentWordViewModel.wordList[currentWordViewModel.currentWordPosition])
+                view.updateWord(currentWordViewModel.currentWord)
             }
             else -> view.updateWord(getWordById(wordId))
         }
@@ -110,6 +109,7 @@ class WordPresenter @Inject constructor(
         }
         currentWordViewModel.wordList = shuffledPracticeWordList
         currentWordViewModel.wordListPractice = shuffledPracticeWordList
+        currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
     }
 
     private fun getWordById(wordId: Int): Word {

@@ -3,7 +3,6 @@ package com.adityakamble49.wordlist.ui.word
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Build
-import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.Menu
 import android.view.MenuItem
@@ -50,11 +49,6 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     /*
      * Lifecycle Functions
      */
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initializeTTS()
-    }
 
     override fun onPause() {
         super.onPause()
@@ -134,6 +128,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
         }
+
+        initializeTTS()
     }
 
     private fun initializeTTS() {
