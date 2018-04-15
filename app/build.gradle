@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.oss.licenses.plugin'
+
 
 android {
     compileSdkVersion buildConfig.compileSdk
@@ -71,6 +73,7 @@ dependencies {
     implementation deps.android.support.constraintLayout
     implementation deps.android.support.design
     implementation deps.materialDialogs.core
+    implementation deps.materialAbout.core
     implementation deps.getbaseFAB.core
     implementation deps.timber.core
     implementation deps.gson.core
@@ -85,6 +88,7 @@ dependencies {
     implementation deps.android.arch.roomRuntime
     kapt deps.android.arch.archCompiler
     kapt deps.android.arch.roomCompiler
+    implementation deps.google.oosLicenses.core
 
     debugImplementation deps.debugDb.core
 

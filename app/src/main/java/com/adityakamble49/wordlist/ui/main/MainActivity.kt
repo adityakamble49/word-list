@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.WordList
+import com.adityakamble49.wordlist.ui.about.AboutActivity
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
@@ -54,6 +55,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_load_list -> presenter.onClickedLoadList()
+            R.id.action_about -> presenter.onClickedAbout()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -131,5 +133,9 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
                 wordActivityMode.ordinal)
         startActivity(wordActivityIntent)
         fab_new_task.collapse()
+    }
+
+    override fun startAboutActivity() {
+        startActivity(Intent(this, AboutActivity::class.java))
     }
 }

@@ -63,6 +63,10 @@ class MainPresenter @Inject constructor(
         view.showLoadSavedListDialog()
     }
 
+    override fun onClickedAbout() {
+        view.startAboutActivity()
+    }
+
     override fun onClickedSavedListItem(selectedWordList: WordList) {
         updateCurrentLoadedListIdUseCase.execute(selectedWordList.id)
         viewModel.updateCurrentWordList(selectedWordList)

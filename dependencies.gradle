@@ -16,33 +16,35 @@ buildscript {
 
     ext.versions = [
             // Basic
-            'supportLibrary'      : '27.0.2',
-            'constraintLayout'    : '1.0.2',
-            'kotlin'              : '1.2.30',
-            'arch'                : '1.0.0',
-            'javaxInject'         : '1',
-            'javaxAnnotation'     : '1.0',
-            'rxKotlin'            : '2.1.0',
-            'rxAndroid'           : '2.0.1',
-            'gson'                : '2.8.2',
-            'retrofit'            : '2.3.0',
-            'okhttp'              : '3.8.1',
-            'dagger'              : '2.12',
-            'timber'              : '4.6.0',
-            'exoplayer'           : '2.7.1',
-            'materialDialogs'     : '0.9.6.0',
-            'getbaseFAB'          : '1.10.1',
+            'supportLibrary'       : '27.0.2',
+            'constraintLayout'     : '1.0.2',
+            'kotlin'               : '1.2.30',
+            'arch'                 : '1.0.0',
+            'javaxInject'          : '1',
+            'javaxAnnotation'      : '1.0',
+            'rxKotlin'             : '2.1.0',
+            'rxAndroid'            : '2.0.1',
+            'gson'                 : '2.8.2',
+            'retrofit'             : '2.3.0',
+            'okhttp'               : '3.8.1',
+            'dagger'               : '2.12',
+            'timber'               : '4.6.0',
+            'exoplayer'            : '2.7.1',
+            'materialDialogs'      : '0.9.6.0',
+            'materialAboutVersion' : '2.2.3',
+            'getbaseFAB'           : '1.10.1',
+            'googleServicesVersion': '15.0.0',
 
             // Viewers
-            'pdfViewer'           : '2.8.2',
+            'pdfViewer'            : '2.8.2',
 
             // Debug
-            'debugDb'             : '1.0.1',
+            'debugDb'              : '1.0.1',
 
             // Testing
-            'junit'               : '4.12',
-            'expresso'            : '3.0.1',
-            'androidSupportRunner': '1.0.1',
+            'junit'                : '4.12',
+            'expresso'             : '3.0.1',
+            'androidSupportRunner' : '1.0.1',
     ]
 
     ext.deps = [
@@ -72,6 +74,11 @@ buildscript {
                             'exoplayer': "com.google.android.exoplayer:exoplayer:${versions.exoplayer}"
                     ]
             ],
+            'google'         : [
+                    'oosLicenses': [
+                            'core': "com.google.android.gms:play-services-oss-licenses:${versions.googleServicesVersion}",
+                    ],
+            ],
             'dagger'         : [
                     'runtime'  : "com.google.dagger:dagger:${versions.dagger}",
                     'compiler' : "com.google.dagger:dagger-compiler:${versions.dagger}",
@@ -98,6 +105,9 @@ buildscript {
             ],
             'materialDialogs': [
                     'core': "com.afollestad.material-dialogs:core:${versions.materialDialogs}"
+            ],
+            'materialAbout'  : [
+                    'core': "com.github.daniel-stoneuk:material-about-library:${versions.materialAboutVersion}"
             ],
             'getbaseFAB'     : [
                     'core': "com.getbase:floatingactionbutton:${versions.getbaseFAB}"

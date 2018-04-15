@@ -17,4 +17,10 @@ public class Constants {
         public static final String ENTRY_WORD_LIST_DEFAULT_1 = "Manhattan Essential - Alphabetical";
         public static final String ENTRY_WORD_LIST_DEFAULT_2 = "Manhattan Advanced - Alphabetical";
     }
+
+    public static class ReferenceUrls {
+        public static final String PERSONAL_WEBSITE = "http://adityakamble49.com";
+        public static final String GITHUB_PROFILE = "https://github.com/adityakamble49";
+        public static final String TWITTER_PROFILE = "https://twitter.com/adityakamble49";
+    }
 }

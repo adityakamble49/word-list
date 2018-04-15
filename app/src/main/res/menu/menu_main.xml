@@ -6,7 +6,7 @@
         android:title="@string/label_action_load_list" />
 
     <item
-        android:id="@+id/action_save_list"
-        android:title="@string/label_action_save_list" />
+        android:id="@+id/action_about"
+        android:title="@string/label_action_about" />
 
 </menu>

@@ -20,11 +20,13 @@ interface MainContract {
         fun showLoadSavedListDialog()
         fun alertListTypeUpdate(wordListType: Int)
         fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode)
+        fun startAboutActivity()
     }
 
     interface Presenter : BaseContract.Presenter {
         fun setViewModel(viewModel: MainActivityViewModel)
         fun onClickedLoadList()
+        fun onClickedAbout()
         fun onClickedSavedListItem(selectedWordList: WordList)
         fun onClickLearnWords()
         fun onClickPracticeWords()
