@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_previous_word"
+        android:icon="@drawable/ic_previous"
+        android:title="@string/label_action_previous_word"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_next_word"
+        android:icon="@drawable/ic_next"
+        android:title="@string/label_action_next_word"
+        app:showAsAction="always" />
+
+</menu>

@@ -3,7 +3,6 @@ package com.adityakamble49.wordlist.ui.word
 import android.arch.lifecycle.LifecycleOwner
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseContract
-import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
 
 /**
  * Word View Pager Contract
@@ -27,6 +26,7 @@ interface WordContract {
         fun onPause()
         fun onClickWordInformation()
         fun onClickWordMnemonic()
-        fun onSwipe(swipeDirection: OnSwipeTouchListener.SwipeDirection)
+        fun onNextWordAction()
+        fun onPreviousWordAction()
     }
 }

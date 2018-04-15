@@ -2,11 +2,12 @@ package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
-import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_word_info.*
 import javax.inject.Inject
@@ -47,10 +48,23 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         presenter.onPause()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_word, menu)
+        return true
+    }
 
     /*
      * Listener Functions
      */
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_next_word -> presenter.onNextWordAction()
+            R.id.action_previous_word -> presenter.onPreviousWordAction()
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -72,17 +86,6 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             intent.getIntExtra(IE_KEY_WORD_ACTIVITY_MODE, IE_DEFAULT_WORD_ACTIVITY_MODE)
 
     override fun bindView() {
-
-        // Listen Swipe
-        layout_word_info.setOnTouchListener(object : OnSwipeTouchListener(this) {
-            override fun onSwipeLeft() {
-                presenter.onSwipe(OnSwipeTouchListener.SwipeDirection.LEFT)
-            }
-
-            override fun onSwipeRight() {
-                presenter.onSwipe(OnSwipeTouchListener.SwipeDirection.RIGHT)
-            }
-        })
 
         // Setup word info
         word_information.setOnClickListener(this)

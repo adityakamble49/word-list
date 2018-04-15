@@ -5,7 +5,6 @@ import com.adityakamble49.wordlist.interactor.GetCurrentWordsUseCase
 import com.adityakamble49.wordlist.interactor.SaveLastWordIdForWordListUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import com.adityakamble49.wordlist.ui.common.OnSwipeTouchListener
 import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.CompletableObserver
 import io.reactivex.Observer
@@ -86,7 +85,8 @@ class WordPresenter @Inject constructor(
                     getWordById(currentWordViewModel.currentWordList.lastWordId))
             WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> {
                 updateWordListForPractice()
-                view.updateWord(currentWordViewModel.wordList[currentWordViewModel.currentWordPosition])
+                view.updateWord(
+                        currentWordViewModel.wordList[currentWordViewModel.currentWordPosition])
             }
             else -> view.updateWord(getWordById(wordId))
         }
@@ -132,11 +132,16 @@ class WordPresenter @Inject constructor(
         view.updateWordMnemonic(currentWordViewModel.currentWord.mnemonic)
     }
 
-    override fun onSwipe(swipeDirection: OnSwipeTouchListener.SwipeDirection) {
-        if (swipeDirection == OnSwipeTouchListener.SwipeDirection.LEFT &&
-                currentWordViewModel.currentWordPosition < currentWordViewModel.wordList.size) {
+    override fun onNextWordAction() {
+        if (currentWordViewModel.currentWordPosition < currentWordViewModel.wordList.size) {
             currentWordViewModel.currentWordPosition++
-        } else if (swipeDirection == OnSwipeTouchListener.SwipeDirection.RIGHT && currentWordViewModel.currentWordPosition > 0) {
+        }
+        currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
+        view.updateWord(currentWordViewModel.currentWord)
+    }
+
+    override fun onPreviousWordAction() {
+        if (currentWordViewModel.currentWordPosition > 0) {
             currentWordViewModel.currentWordPosition--
         }
         currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
@@ -150,7 +155,8 @@ class WordPresenter @Inject constructor(
     private fun updateLastWordInWordList() {
         if (currentWordActivityMode == WordActivity.Companion.WordActivityMode.LEARN.ordinal) {
             saveLastWordIdForWordListUseCase.execute(currentWordViewModel.currentWordList.id,
-                    currentWordViewModel.currentWord.id).subscribe(SaveLastWordIdForWordListSubscriber())
+                    currentWordViewModel.currentWord.id)
+                    .subscribe(SaveLastWordIdForWordListSubscriber())
         }
     }
 
