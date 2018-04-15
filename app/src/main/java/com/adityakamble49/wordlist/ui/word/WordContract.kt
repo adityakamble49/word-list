@@ -17,6 +17,7 @@ interface WordContract {
         fun updateWord(word: Word)
         fun updateWordInformation(information: String)
         fun updateWordMnemonic(mnemonic: String)
+        fun speakWord(name: String)
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -28,5 +29,6 @@ interface WordContract {
         fun onClickWordMnemonic()
         fun onNextWordAction()
         fun onPreviousWordAction()
+        fun onClickWordTTS()
     }
 }

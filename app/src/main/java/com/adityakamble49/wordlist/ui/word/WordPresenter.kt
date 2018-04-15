@@ -148,6 +148,10 @@ class WordPresenter @Inject constructor(
         view.updateWord(currentWordViewModel.currentWord)
     }
 
+    override fun onClickWordTTS() {
+        view.speakWord(currentWordViewModel.currentWord.name)
+    }
+
     override fun onPause() {
         updateLastWordInWordList()
     }

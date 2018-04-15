@@ -2,6 +2,9 @@ package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.os.Build
+import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -10,7 +13,10 @@ import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_word_info.*
+import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
+
 
 /**
  * WordView Pager Activity
@@ -18,7 +24,8 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 6/4/2018
  */
-class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickListener {
+class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickListener,
+        TextToSpeech.OnInitListener {
 
     // Dagger Injected Fields
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -26,6 +33,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     // Other Fields
     private var currentActivityMode: Int = WordActivityMode.NORMAL.ordinal
+    private lateinit var tts: TextToSpeech
 
     // Constants
     companion object {
@@ -43,9 +51,19 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
      * Lifecycle Functions
      */
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initializeTTS()
+    }
+
     override fun onPause() {
         super.onPause()
         presenter.onPause()
+    }
+
+    override fun onDestroy() {
+        closeTTS()
+        super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,9 +88,16 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         when (v?.id) {
             R.id.word_information -> presenter.onClickWordInformation()
             R.id.word_mnemonic -> presenter.onClickWordMnemonic()
+            R.id.word_text_to_speech -> presenter.onClickWordTTS()
         }
     }
 
+    override fun onInit(status: Int) {
+        Timber.i(status.toString())
+        if (status == TextToSpeech.SUCCESS) {
+
+        }
+    }
 
     /*
      * Helper Functions
@@ -90,6 +115,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         // Setup word info
         word_information.setOnClickListener(this)
         word_mnemonic.setOnClickListener(this)
+
+        // Setup Word TTS
+        word_text_to_speech.setOnClickListener(this)
     }
 
     override fun initializePresenter() {
@@ -106,6 +134,16 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
         }
+    }
+
+    private fun initializeTTS() {
+        tts = TextToSpeech(this, this)
+        tts.language = Locale.US
+    }
+
+    private fun closeTTS() {
+        tts.stop()
+        tts.shutdown()
     }
 
 
@@ -138,5 +176,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     override fun updateWordMnemonic(mnemonic: String) {
         word_mnemonic.text = mnemonic
+    }
+
+    override fun speakWord(name: String) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            tts.speak(name, TextToSpeech.QUEUE_ADD, null, "")
+        } else {
+            tts.speak(name, TextToSpeech.QUEUE_ADD, null)
+        }
     }
 }
