@@ -20,4 +20,10 @@
     <string name="label_action_next_word">Next Word</string>
     <string name="label_action_previous_word">Previous Word</string>
 
+    <string name="credits">Credits</string>
+    <string name="credit_name_wordlist">Manhattan-GRE-Words-Shuffled</string>
+    <string name="credit_description_wordlist">Word list by maykulkarni/Manhattan-GRE-Words-Shuffled</string>
+    <string name="credit_name_app_icon">Icon Monk</string>
+    <string name="credit_description_app_icon">Icon made by Icon Monk from www.flaticon.com</string>
+
 </resources>
