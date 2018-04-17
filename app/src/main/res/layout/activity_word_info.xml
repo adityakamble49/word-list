@@ -89,12 +89,13 @@
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:lineSpacingExtra="2dp"
             android:textColor="@color/default_secondary_text"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_type"
+            app:layout_constraintTop_toBottomOf="@+id/word_information_label"
             tools:text="Word Information" />
 
         <TextView
@@ -102,12 +103,13 @@
             style="@style/Base.TextAppearance.AppCompat.Subhead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:lineSpacingExtra="2dp"
             android:textColor="@color/default_secondary_text"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_information"
+            app:layout_constraintTop_toBottomOf="@+id/word_mnemonics_label"
             tools:text="Word Mnemonic" />
 
         <TextView
@@ -116,14 +118,40 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:text="0/0"
             android:background="@drawable/bg_word_index"
-            android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:text="0/0"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/word_information_label"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/label_word_information"
+            android:textColor="@color/default_primary_text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+            app:layout_constraintStart_toStartOf="@+id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/word_type" />
+
+        <TextView
+            android:id="@+id/word_mnemonics_label"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/label_word_mnemonics"
+            android:textColor="@color/default_primary_text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+            app:layout_constraintStart_toStartOf="@+id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/word_information" />
 
 
     </android.support.constraint.ConstraintLayout>

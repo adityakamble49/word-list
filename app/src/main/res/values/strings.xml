@@ -25,5 +25,7 @@
     <string name="credit_description_wordlist">Word list by maykulkarni/Manhattan-GRE-Words-Shuffled</string>
     <string name="credit_name_app_icon">Icon Monk</string>
     <string name="credit_description_app_icon">Icon made by Icon Monk from www.flaticon.com</string>
+    <string name="label_word_information">Information</string>
+    <string name="label_word_mnemonics">Mnemonics</string>
 
 </resources>
