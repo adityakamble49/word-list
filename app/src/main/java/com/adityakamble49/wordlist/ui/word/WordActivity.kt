@@ -153,10 +153,12 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         }
     }
 
-    override fun updateWord(word: Word) {
+    override fun updateWord(word: Word, wordIndex: Int, wordListSize: Int) {
         word_name.text = word.name
         word_type.text = word.type
         word_pronunciation.text = word.pronunciation
+        val wordIndex = "$wordIndex/$wordListSize"
+        word_index.text = wordIndex
         if (currentActivityMode != WordActivityMode.PRACTICE.ordinal) {
             word_information.text = word.information
             word_mnemonic.text = word.mnemonic

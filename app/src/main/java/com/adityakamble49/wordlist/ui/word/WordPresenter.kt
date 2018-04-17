@@ -81,13 +81,13 @@ class WordPresenter @Inject constructor(
 
     private fun loadWord(currentWordActivityMode: Int, wordId: Int) {
         when (currentWordActivityMode) {
-            WordActivity.Companion.WordActivityMode.LEARN.ordinal -> view.updateWord(
+            WordActivity.Companion.WordActivityMode.LEARN.ordinal -> updateWord(
                     getWordById(currentWordViewModel.currentWordList.lastWordId))
             WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> {
                 updateWordListForPractice()
-                view.updateWord(currentWordViewModel.currentWord)
+                updateWord(currentWordViewModel.currentWord)
             }
-            else -> view.updateWord(getWordById(wordId))
+            else -> updateWord(getWordById(wordId))
         }
     }
 
@@ -137,7 +137,7 @@ class WordPresenter @Inject constructor(
             currentWordViewModel.currentWordPosition++
         }
         currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
-        view.updateWord(currentWordViewModel.currentWord)
+        updateWord(currentWordViewModel.currentWord)
     }
 
     override fun onPreviousWordAction() {
@@ -145,7 +145,12 @@ class WordPresenter @Inject constructor(
             currentWordViewModel.currentWordPosition--
         }
         currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
-        view.updateWord(currentWordViewModel.currentWord)
+        updateWord(currentWordViewModel.currentWord)
+    }
+
+    private fun updateWord(word: Word) {
+        view.updateWord(word, currentWordViewModel.currentWordPosition,
+                currentWordViewModel.wordList.size)
     }
 
     override fun onClickWordTTS() {

@@ -14,7 +14,7 @@ interface WordContract {
 
     interface View : BaseContract.View, LifecycleOwner {
         fun initializeActivityMode(currentWordActivityMode: Int)
-        fun updateWord(word: Word)
+        fun updateWord(word: Word, wordIndex: Int, wordListSize: Int)
         fun updateWordInformation(information: String)
         fun updateWordMnemonic(mnemonic: String)
         fun speakWord(name: String)
