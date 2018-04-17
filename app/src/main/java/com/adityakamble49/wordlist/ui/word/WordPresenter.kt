@@ -149,7 +149,7 @@ class WordPresenter @Inject constructor(
     }
 
     private fun updateWord(word: Word) {
-        view.updateWord(word, currentWordViewModel.currentWordPosition,
+        view.updateWord(word, currentWordViewModel.currentWordPosition + 1,
                 currentWordViewModel.wordList.size)
     }
 
