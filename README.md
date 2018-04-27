@@ -11,6 +11,10 @@ Word List with Learn and Practice Modes
 
 ![Wordlist Screens](https://raw.githubusercontent.com/adityakamble49/adityakamble49.com/gh-pages/images/wordlist/wordlist_screens.png)
 
+## Download
+
+* [Download Word List Apk](https://drive.google.com/file/d/1okGy6EH2S2DRXkgOb592AiDj1h6nPahr/view?usp=sharing)
+
 ## Introduction
 
 Word List with Learn and Practice Modes
