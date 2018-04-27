@@ -1,5 +1,7 @@
 # Word List :heavy_check_mark:
 
+[![Build Status](https://travis-ci.org/adityakamble49/word-list.svg?branch=master)](https://travis-ci.org/adityakamble49/word-list)
+
 Word List with Learn and Practice Modes
 
 ![Wordlist Banner](https://raw.githubusercontent.com/adityakamble49/adityakamble49.com/gh-pages/images/wordlist/wordlist_banner.jpg)
@@ -44,6 +46,13 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contributions.
 <p align="center">
   <h3>Proudly :muscle: made in <b><a href="https://kotlinlang.org/">Kotlin</a></b></h3>
 </p>
+
+
+### Credits
+
+* [Manhattan-GRE-Words-Shuffled](https://github.com/maykulkarni/Manhattan-GRE-Words-Shuffled)
+* [App Icon made by Icon Monk from www.flaticon.com](https://www.flaticon.com/free-icon/checklist_273504#term=list&page=1&position=96)
+
 
 ### License
 -------
