@@ -13,7 +13,7 @@ Word List with Learn and Practice Modes
 
 ## Download
 
-* [Download Word List Apk](https://drive.google.com/file/d/1okGy6EH2S2DRXkgOb592AiDj1h6nPahr/view?usp=sharing)
+* [Download Word List Apk](https://goo.gl/uoEVGT)
 
 ## Introduction
 
