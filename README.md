@@ -13,7 +13,9 @@ Word List with Learn and Practice Modes
 
 ## Download
 
-* [Download Word List Apk](https://goo.gl/uoEVGT)
+[<img src="https://raw.githubusercontent.com/adityakamble49/adityakamble49.com/gh-pages/images/commons/direct-apk-download.png"
+      alt="Direct apk download"
+      height="80">](https://goo.gl/uoEVGT)
 
 ## Introduction
 
