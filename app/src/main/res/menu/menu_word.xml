@@ -6,12 +6,17 @@
         android:id="@+id/action_previous_word"
         android:icon="@drawable/ic_previous"
         android:title="@string/label_action_previous_word"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_next_word"
         android:icon="@drawable/ic_next"
         android:title="@string/label_action_next_word"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_dictation_mode"
+        android:title="@string/label_action_dictation_mode"
+        app:showAsAction="never" />
 
 </menu>
