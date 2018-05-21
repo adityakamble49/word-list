@@ -29,6 +29,8 @@ interface WordContract {
         fun onClickWordMnemonic()
         fun onNextWordAction()
         fun onPreviousWordAction()
+        fun onDictationModeAction()
         fun onClickWordTTS()
+        fun onTTSDone()
     }
 }

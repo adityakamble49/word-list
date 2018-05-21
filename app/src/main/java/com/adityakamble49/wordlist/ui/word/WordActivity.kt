@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Build
 import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -73,6 +74,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         when (item?.itemId) {
             R.id.action_next_word -> presenter.onNextWordAction()
             R.id.action_previous_word -> presenter.onPreviousWordAction()
+            R.id.action_dictation_mode -> presenter.onDictationModeAction()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -89,7 +91,15 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     override fun onInit(status: Int) {
         Timber.i(status.toString())
         if (status == TextToSpeech.SUCCESS) {
+            tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
 
+                override fun onDone(utteranceId: String?) {
+                    runOnUiThread { presenter.onTTSDone() }
+                }
+
+                override fun onError(utteranceId: String?) {}
+                override fun onStart(utteranceId: String?) {}
+            })
         }
     }
 
