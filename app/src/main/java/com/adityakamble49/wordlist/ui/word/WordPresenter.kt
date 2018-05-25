@@ -151,7 +151,7 @@ class WordPresenter @Inject constructor(
 
     override fun onDictateModeAction() {
         isDictateMode = true
-        val wordInfo = "${currentWordViewModel.currentWord.name} ${currentWordViewModel.currentWord.information}"
+        val wordInfo = "${currentWordViewModel.currentWord.name}. ${currentWordViewModel.currentWord.information}"
         view.speakWord(wordInfo)
     }
 
