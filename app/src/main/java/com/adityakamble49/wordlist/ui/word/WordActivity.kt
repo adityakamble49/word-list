@@ -187,6 +187,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     }
 
     override fun speakWord(name: String) {
+        tts.stop()
         if (Build.VERSION.SDK_INT >= 21) {
             tts.speak(name, TextToSpeech.QUEUE_ADD, null, "")
         } else {

@@ -139,6 +139,7 @@ class WordPresenter @Inject constructor(
         }
         currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
         updateWord(currentWordViewModel.currentWord)
+        onWordChanged()
     }
 
     override fun onPreviousWordAction() {
@@ -147,12 +148,23 @@ class WordPresenter @Inject constructor(
         }
         currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
         updateWord(currentWordViewModel.currentWord)
+        onWordChanged()
+    }
+
+    private fun onWordChanged() {
+        startDictate()
     }
 
     override fun onDictateModeAction() {
         isDictateMode = true
-        val wordInfo = "${currentWordViewModel.currentWord.name}. ${currentWordViewModel.currentWord.information}"
-        view.speakWord(wordInfo)
+        startDictate()
+    }
+
+    private fun startDictate() {
+        if (isDictateMode) {
+            val wordInfo = "${currentWordViewModel.currentWord.name}. ${currentWordViewModel.currentWord.information}"
+            view.speakWord(wordInfo)
+        }
     }
 
     private fun updateWord(word: Word) {
