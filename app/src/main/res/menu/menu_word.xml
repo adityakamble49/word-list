@@ -15,8 +15,8 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_dictation_mode"
-        android:title="@string/label_action_dictation_mode"
+        android:id="@+id/action_dictate_mode"
+        android:title="@string/label_action_dictate_mode"
         app:showAsAction="never" />
 
 </menu>

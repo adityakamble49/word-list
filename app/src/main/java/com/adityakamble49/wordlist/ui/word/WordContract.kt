@@ -29,7 +29,7 @@ interface WordContract {
         fun onClickWordMnemonic()
         fun onNextWordAction()
         fun onPreviousWordAction()
-        fun onDictationModeAction()
+        fun onDictateModeAction()
         fun onClickWordTTS()
         fun onTTSDone()
     }

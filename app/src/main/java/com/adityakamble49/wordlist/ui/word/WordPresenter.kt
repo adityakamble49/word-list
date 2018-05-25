@@ -29,7 +29,7 @@ class WordPresenter @Inject constructor(
     private lateinit var currentWordViewModel: WordViewModel
     private var currentWordActivityMode: Int = WordActivity.Companion.WordActivityMode.NORMAL.ordinal
     private var currentWordId = 0
-    private var isDictationMode = false
+    private var isDictateMode = false
 
     override fun setWordViewModel(currentWordViewModel: WordViewModel) {
         this.currentWordViewModel = currentWordViewModel
@@ -149,8 +149,8 @@ class WordPresenter @Inject constructor(
         updateWord(currentWordViewModel.currentWord)
     }
 
-    override fun onDictationModeAction() {
-        isDictationMode = true
+    override fun onDictateModeAction() {
+        isDictateMode = true
         val wordInfo = "${currentWordViewModel.currentWord.name} ${currentWordViewModel.currentWord.information}"
         view.speakWord(wordInfo)
     }
@@ -165,9 +165,9 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onTTSDone() {
-        if (isDictationMode) {
+        if (isDictateMode) {
             onNextWordAction()
-            onDictationModeAction()
+            onDictateModeAction()
         }
     }
 

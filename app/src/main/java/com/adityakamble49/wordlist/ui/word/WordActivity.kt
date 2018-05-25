@@ -74,7 +74,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         when (item?.itemId) {
             R.id.action_next_word -> presenter.onNextWordAction()
             R.id.action_previous_word -> presenter.onPreviousWordAction()
-            R.id.action_dictation_mode -> presenter.onDictationModeAction()
+            R.id.action_dictate_mode -> presenter.onDictateModeAction()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
