@@ -30,7 +30,7 @@ Start with learn mode and practice the words which you have learned with Practic
 * Manhattan Advanced
 * Learn Mode
 * Practice Mode
-* Dictation Mode
+* Dictate Mode
 
 
 ## Development
