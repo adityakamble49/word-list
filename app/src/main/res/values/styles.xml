@@ -21,5 +21,9 @@
         <item name="colorAccent">@color/default_accent</item>
     </style>
 
+    <style name="ButtonBlue">
+        <item name="colorButtonNormal">@color/word_info_bottom_sheet_bg</item>
+    </style>
+
 
 </resources>

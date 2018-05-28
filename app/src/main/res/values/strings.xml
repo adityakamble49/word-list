@@ -28,5 +28,7 @@
     <string name="label_word_information">Information</string>
     <string name="label_word_mnemonics">Mnemonics</string>
     <string name="label_action_dictate_mode">Dictate Mode</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 
 </resources>

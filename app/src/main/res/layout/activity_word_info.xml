@@ -1,160 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_word_info"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/llBottomNavigation">
 
-        <TextView
-            android:id="@+id/word_name"
-            style="@style/TextAppearance.AppCompat.Display1"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clWordInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/word_name"
+                style="@style/TextAppearance.AppCompat.Display1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="abstain"/>
+
+            <TextView
+                android:id="@+id/word_pronunciation"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_word_type"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingBottom="2dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp"
+                android:paddingTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/word_type"
+                app:layout_constraintTop_toBottomOf="@+id/word_name"
+                tools:text="ab-STAIN"/>
+
+            <TextView
+                android:id="@+id/word_type"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_word_type"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingBottom="2dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp"
+                android:paddingTop="2dp"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/word_name"
+                tools:text="verb"/>
+
+            <android.support.constraint.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp"/>
+
+            <android.support.constraint.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp"/>
+
+            <ImageView
+                android:id="@+id/word_text_to_speech"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/word_pronunciation"
+                app:layout_constraintTop_toBottomOf="@+id/word_name"
+                app:srcCompat="@drawable/ic_volume_up"/>
+
+            <TextView
+                android:id="@+id/word_information"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2dp"
+                android:textColor="@color/default_secondary_text"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/word_information_label"
+                tools:text="Word Information"/>
+
+            <TextView
+                android:id="@+id/word_mnemonic"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2dp"
+                android:paddingBottom="20dp"
+                android:textColor="@color/default_secondary_text"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/word_mnemonics_label"
+                tools:text="Word Mnemonic"/>
+
+            <TextView
+                android:id="@+id/word_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_word_index"
+                android:paddingBottom="4dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:text="0/0"
+                android:textColor="@color/default_secondary_text"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/word_information_label"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/label_word_information"
+                android:textColor="@color/default_primary_text"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/word_type"/>
+
+            <TextView
+                android:id="@+id/word_mnemonics_label"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/label_word_mnemonics"
+                android:textColor="@color/default_primary_text"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/word_information"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/llBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_word_info_bottom_navigation"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/previous_word"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="abstain" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/previous"
+            android:textColor="@color/white"
+            android:theme="@style/ButtonBlue"/>
 
-        <TextView
-            android:id="@+id/word_pronunciation"
-            style="@style/TextAppearance.AppCompat.Subhead"
+        <Button
+            android:id="@+id/next_word"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_word_type"
-            android:gravity="center"
-            android:maxLines="1"
-            android:paddingBottom="2dp"
-            android:paddingEnd="14dp"
-            android:paddingStart="14dp"
-            android:paddingTop="2dp"
-            app:layout_constraintStart_toEndOf="@+id/word_type"
-            app:layout_constraintTop_toBottomOf="@+id/word_name"
-            tools:text="ab-STAIN" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:theme="@style/ButtonBlue"/>
 
-        <TextView
-            android:id="@+id/word_type"
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_word_type"
-            android:gravity="center"
-            android:maxLines="1"
-            android:paddingBottom="2dp"
-            android:paddingEnd="14dp"
-            android:paddingStart="14dp"
-            android:paddingTop="2dp"
-            app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_name"
-            tools:text="verb" />
+    </LinearLayout>
 
-        <android.support.constraint.Guideline
-            android:id="@+id/start_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_dictate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/llBottomNavigation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-28dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_play"/>
 
-        <android.support.constraint.Guideline
-            android:id="@+id/end_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="16dp" />
-
-        <ImageView
-            android:id="@+id/word_text_to_speech"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/word_pronunciation"
-            app:layout_constraintTop_toBottomOf="@+id/word_name"
-            app:srcCompat="@drawable/ic_volume_up" />
-
-        <TextView
-            android:id="@+id/word_information"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:lineSpacingExtra="2dp"
-            android:textColor="@color/default_secondary_text"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_information_label"
-            android:textIsSelectable="true"
-            tools:text="Word Information" />
-
-        <TextView
-            android:id="@+id/word_mnemonic"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:lineSpacingExtra="2dp"
-            android:textColor="@color/default_secondary_text"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_mnemonics_label"
-            tools:text="Word Mnemonic" />
-
-        <TextView
-            android:id="@+id/word_index"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_word_index"
-            android:paddingBottom="4dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:text="0/0"
-            android:textColor="@color/default_secondary_text"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/word_information_label"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/label_word_information"
-            android:textColor="@color/default_primary_text"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_type" />
-
-        <TextView
-            android:id="@+id/word_mnemonics_label"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/label_word_mnemonics"
-            android:textColor="@color/default_primary_text"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintStart_toStartOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/word_information" />
-
-
-    </android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

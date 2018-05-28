@@ -15,4 +15,7 @@
     <color name="black_semi_transparent">#B2000000</color>
     <color name="white">#FFFFFF</color>
 
+    <!--Word Info-->
+    <color name="word_info_bottom_sheet_bg">#166ea7</color>
+
 </resources>
