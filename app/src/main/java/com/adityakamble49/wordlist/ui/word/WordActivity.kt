@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Build
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.support.v4.content.res.ResourcesCompat
 import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
@@ -184,5 +185,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         } else {
             tts.speak(name, TextToSpeech.QUEUE_ADD, null)
         }
+    }
+
+    override fun stopSpeaking() {
+        tts.stop()
+    }
+
+    override fun updateFABDictateIcon(icon: Int) {
+        fab_dictate.setImageDrawable(ResourcesCompat.getDrawable(resources, icon, null))
     }
 }

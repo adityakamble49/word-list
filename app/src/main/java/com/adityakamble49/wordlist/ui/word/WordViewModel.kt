@@ -20,4 +20,5 @@ class WordViewModel @Inject constructor(
     lateinit var currentWordList: WordList
     lateinit var wordList: List<Word>
     var wordListPractice: List<Word> = mutableListOf()
+    var isDictateModeOn = false
 }

@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.ui.word
 
+import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetCurrentWordsUseCase
 import com.adityakamble49.wordlist.interactor.SaveLastWordIdForWordListUseCase
@@ -29,7 +30,6 @@ class WordPresenter @Inject constructor(
     private lateinit var currentWordViewModel: WordViewModel
     private var currentWordActivityMode: Int = WordActivity.Companion.WordActivityMode.NORMAL.ordinal
     private var currentWordId = 0
-    private var isDictateMode = false
 
     override fun setWordViewModel(currentWordViewModel: WordViewModel) {
         this.currentWordViewModel = currentWordViewModel
@@ -156,15 +156,29 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onDictateModeAction() {
-        isDictateMode = true
-        startDictate()
+        when (currentWordViewModel.isDictateModeOn) {
+            false -> {
+                currentWordViewModel.isDictateModeOn = true
+                startDictate()
+                view.updateFABDictateIcon(R.drawable.ic_stop)
+            }
+            true -> {
+                currentWordViewModel.isDictateModeOn = false
+                stopDictate()
+                view.updateFABDictateIcon(R.drawable.ic_play)
+            }
+        }
     }
 
     private fun startDictate() {
-        if (isDictateMode) {
+        if (currentWordViewModel.isDictateModeOn) {
             val wordInfo = "${currentWordViewModel.currentWord.name}. ${currentWordViewModel.currentWord.information}"
             view.speakWord(wordInfo)
         }
+    }
+
+    private fun stopDictate() {
+        view.stopSpeaking()
     }
 
     private fun updateWord(word: Word) {
@@ -177,7 +191,7 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onTTSDone() {
-        if (isDictateMode) {
+        if (currentWordViewModel.isDictateModeOn) {
             onNextWordAction()
             onDictateModeAction()
         }

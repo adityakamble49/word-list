@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.LifecycleOwner
+import android.support.annotation.DrawableRes
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseContract
 
@@ -18,6 +19,8 @@ interface WordContract {
         fun updateWordInformation(information: String)
         fun updateWordMnemonic(mnemonic: String)
         fun speakWord(name: String)
+        fun updateFABDictateIcon(@DrawableRes icon: Int)
+        fun stopSpeaking()
     }
 
     interface Presenter : BaseContract.Presenter {
