@@ -193,7 +193,7 @@ class WordPresenter @Inject constructor(
     override fun onTTSDone() {
         if (currentWordViewModel.isDictateModeOn) {
             onNextWordAction()
-            onDictateModeAction()
+            startDictate()
         }
     }
 
