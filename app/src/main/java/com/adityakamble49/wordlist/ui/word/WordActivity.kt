@@ -5,8 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Build
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
@@ -61,30 +59,18 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         super.onDestroy()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_word, menu)
-        return true
-    }
-
     /*
      * Listener Functions
      */
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.action_next_word -> presenter.onNextWordAction()
-            R.id.action_previous_word -> presenter.onPreviousWordAction()
-            R.id.action_dictate_mode -> presenter.onDictateModeAction()
-            else -> return super.onOptionsItemSelected(item)
-        }
-        return true
-    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.word_information -> presenter.onClickWordInformation()
             R.id.word_mnemonic -> presenter.onClickWordMnemonic()
             R.id.word_text_to_speech -> presenter.onClickWordTTS()
+            R.id.previous_word -> presenter.onPreviousWordAction()
+            R.id.fab_dictate -> presenter.onDictateModeAction()
+            R.id.next_word -> presenter.onNextWordAction()
         }
     }
 
@@ -122,6 +108,11 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
         // Setup Word TTS
         word_text_to_speech.setOnClickListener(this)
+
+        // Bottom Navigation
+        previous_word.setOnClickListener(this)
+        fab_dictate.setOnClickListener(this)
+        next_word.setOnClickListener(this)
     }
 
     override fun initializePresenter() {
