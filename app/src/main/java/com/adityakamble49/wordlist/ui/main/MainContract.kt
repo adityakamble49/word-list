@@ -21,6 +21,7 @@ interface MainContract {
         fun alertListTypeUpdate(wordListType: Int)
         fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode)
         fun startAboutActivity()
+        fun handleFinishActivity()
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -30,5 +31,6 @@ interface MainContract {
         fun onClickedSavedListItem(selectedWordList: WordList)
         fun onClickLearnWords()
         fun onClickPracticeWords()
+        fun onBackPressed()
     }
 }

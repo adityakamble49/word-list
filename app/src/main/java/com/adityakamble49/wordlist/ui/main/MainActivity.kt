@@ -36,6 +36,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
      * Lifecycle Functions
      */
 
+    override fun onBackPressed() {
+        presenter.onBackPressed()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -137,5 +141,13 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     override fun startAboutActivity() {
         startActivity(Intent(this, AboutActivity::class.java))
+    }
+
+    override fun handleFinishActivity() {
+        if (fab_new_task.isExpanded) {
+            fab_new_task.collapse()
+        } else {
+            finish()
+        }
     }
 }

@@ -89,4 +89,8 @@ class MainPresenter @Inject constructor(
     override fun onClickPracticeWords() {
         view.startWordActivity(WordActivity.Companion.WordActivityMode.PRACTICE)
     }
+
+    override fun onBackPressed() {
+        view.handleFinishActivity()
+    }
 }
