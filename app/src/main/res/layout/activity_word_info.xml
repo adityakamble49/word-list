@@ -96,6 +96,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
             app:layout_constraintTop_toBottomOf="@+id/word_information_label"
+            android:textIsSelectable="true"
             tools:text="Word Information" />
 
         <TextView
