@@ -8,12 +8,12 @@ buildscript {
             'version'   : [
                     'major': 0,
                     'minor': 7,
-                    'patch': 0,
+                    'patch': 1,
             ],
     ]
 
     ext.buildConfig.version['name'] = "${buildConfig.version.major}.${buildConfig.version.minor}.${buildConfig.version.patch}"
-    ext.buildConfig.version['code'] = 12
+    ext.buildConfig.version['code'] = 13
 
     ext.versions = [
             // Basic
