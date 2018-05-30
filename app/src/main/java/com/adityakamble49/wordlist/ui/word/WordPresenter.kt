@@ -192,7 +192,7 @@ class WordPresenter @Inject constructor(
                 "${currentWordViewModel.currentWord.name}. ${extractWordDefinition()}"
             }
             Constants.DictateModeTypes.WORD_ONLY -> currentWordViewModel.currentWord.name
-        }
+        }.replace("\n\n", ".").replace("\n", " ")
     }
 
     private fun extractWordDefinition(): String {
