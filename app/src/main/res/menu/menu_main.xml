@@ -6,6 +6,10 @@
         android:title="@string/label_action_load_list" />
 
     <item
+        android:id="@+id/action_settings"
+        android:title="@string/label_action_settings" />
+
+    <item
         android:id="@+id/action_about"
         android:title="@string/label_action_about" />
 
