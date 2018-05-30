@@ -37,9 +37,9 @@
     <string name="label_activity_settings">Settings</string>
 
     <!--Dictate Mode-->
-    <string name="pref_dictate_mode_key">dictate_mode_type</string>
-    <string name="pref_dictate_mode_title">Dictate Mode</string>
-    <string name="pref_dictate_mode_summary">Select dictate mode type for words</string>
-    <string name="pref_dictate_mode_default">word_complete_info</string>
+    <string name="pref_dictate_mode_type_key">dictate_mode_type</string>
+    <string name="pref_dictate_mode_type_title">Dictate Mode</string>
+    <string name="pref_dictate_mode_type_summary">Select dictate mode type for words</string>
+    <string name="pref_dictate_mode_type_default">word_complete_info</string>
 
 </resources>

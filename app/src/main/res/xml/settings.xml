@@ -2,10 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        android:defaultValue="@string/pref_dictate_mode_default"
-        android:entries="@array/dictate_mode_entries"
-        android:entryValues="@array/dictate_mode_entry_values"
-        android:key="@string/pref_dictate_mode_key"
-        android:summary="@string/pref_dictate_mode_summary"
-        android:title="@string/pref_dictate_mode_title"/>
+        android:defaultValue="@string/pref_dictate_mode_type_default"
+        android:entries="@array/dictate_mode_type_entries"
+        android:entryValues="@array/dictate_mode_type_entry_values"
+        android:key="@string/pref_dictate_mode_type_key"
+        android:summary="@string/pref_dictate_mode_type_summary"
+        android:title="@string/pref_dictate_mode_type_title"/>
 </PreferenceScreen>
