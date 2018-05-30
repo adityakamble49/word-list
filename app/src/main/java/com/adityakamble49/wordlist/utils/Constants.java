@@ -18,6 +18,14 @@ public class Constants {
         public static final String ENTRY_WORD_LIST_DEFAULT_2 = "Manhattan Advanced - Alphabetical";
     }
 
+    public static class DictateModeSpeedValues {
+        public static final float SLOWER = 0.6f;
+        public static final float SLOW = 0.8f;
+        public static final float NORMAL = 1f;
+        public static final float FAST = 1.5f;
+        public static final float FASTER = 1.5f;
+    }
+
     public static class ReferenceUrls {
         public static final String PERSONAL_WEBSITE = "http://adityakamble49.com";
         public static final String GITHUB_PROFILE = "https://github.com/adityakamble49";

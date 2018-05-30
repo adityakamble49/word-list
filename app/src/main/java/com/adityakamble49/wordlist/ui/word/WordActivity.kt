@@ -187,6 +187,10 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         }
     }
 
+    override fun updateDictateModeSpeed(speed: Float) {
+        tts.setSpeechRate(speed)
+    }
+
     override fun stopSpeaking() {
         tts.stop()
     }

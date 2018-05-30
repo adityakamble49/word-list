@@ -2,9 +2,12 @@ package com.adityakamble49.wordlist.ui.word
 
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.interactor.*
+import com.adityakamble49.wordlist.model.DictateModeSpeed
 import com.adityakamble49.wordlist.model.DictateModeType
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
+import com.adityakamble49.wordlist.utils.Constants
+import com.adityakamble49.wordlist.utils.Constants.*
 import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.CompletableObserver
 import io.reactivex.Observer
@@ -164,8 +167,9 @@ class WordPresenter @Inject constructor(
         when (currentWordViewModel.isDictateModeOn) {
             false -> {
                 currentWordViewModel.isDictateModeOn = true
-                startDictate()
+                updateDictateModeSpeed()
                 view.updateFABDictateIcon(R.drawable.ic_stop)
+                startDictate()
             }
             true -> {
                 currentWordViewModel.isDictateModeOn = false
@@ -173,6 +177,16 @@ class WordPresenter @Inject constructor(
                 view.updateFABDictateIcon(R.drawable.ic_play)
             }
         }
+    }
+
+    private fun updateDictateModeSpeed() {
+        view.updateDictateModeSpeed(when (currentWordViewModel.dictateModeConfig.dictateModeSpeed) {
+            DictateModeSpeed.SLOWER -> DictateModeSpeedValues.SLOWER
+            DictateModeSpeed.SLOW -> DictateModeSpeedValues.SLOW
+            DictateModeSpeed.NORMAL -> DictateModeSpeedValues.NORMAL
+            DictateModeSpeed.FAST -> DictateModeSpeedValues.FAST
+            DictateModeSpeed.FASTER -> DictateModeSpeedValues.FASTER
+        })
     }
 
     private fun startDictate() {

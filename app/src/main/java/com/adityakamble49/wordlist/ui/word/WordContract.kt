@@ -19,6 +19,7 @@ interface WordContract {
         fun updateWordInformation(information: String)
         fun updateWordMnemonic(mnemonic: String)
         fun speakWord(name: String)
+        fun updateDictateModeSpeed(speed: Float)
         fun updateFABDictateIcon(@DrawableRes icon: Int)
         fun stopSpeaking()
     }
