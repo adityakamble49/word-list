@@ -42,4 +42,10 @@
     <string name="pref_dictate_mode_type_summary">Select dictate mode type for words</string>
     <string name="pref_dictate_mode_type_default">word_complete_info</string>
 
+    <!--Dictate Mode-->
+    <string name="pref_dictate_mode_speed_key">dictate_mode_speed</string>
+    <string name="pref_dictate_mode_speed_title">Dictate Mode Speed</string>
+    <string name="pref_dictate_mode_speed_summary">Select dictate mode speed for words</string>
+    <string name="pref_dictate_mode_speed_default">normal</string>
+
 </resources>

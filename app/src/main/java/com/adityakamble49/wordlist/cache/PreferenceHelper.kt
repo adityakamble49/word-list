@@ -4,7 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.adityakamble49.wordlist.BuildConfig
 import com.adityakamble49.wordlist.di.qualifier.ApplicationContext
-import com.adityakamble49.wordlist.utils.Constants
+import com.adityakamble49.wordlist.model.DictateModeSpeed
+import com.adityakamble49.wordlist.model.DictateModeType
 import javax.inject.Inject
 
 /**
@@ -23,7 +24,9 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
         private const val PREF_KEY_WORDS_IMPORTED = "words_imported"
         const val DEFAULT_KEY_WORDS_IMPORTED = false
         private const val PREF_KEY_DICTATE_MODE_TYPE = "dictate_mode_type"
-        val DEFAULT_DICTATE_MODE_TYPE = Constants.DictateModeTypes.WORD_COMPLETE_INFO.name.toLowerCase()
+        val DEFAULT_DICTATE_MODE_TYPE = DictateModeType.WORD_COMPLETE_INFO.name.toLowerCase()
+        private const val PREF_KEY_DICTATE_MODE_SPEED = "dictate_mode_speed"
+        val DEFAULT_DICTATE_MODE_SPEED = DictateModeSpeed.NORMAL.name.toLowerCase()
     }
 
     private val wordListPref: SharedPreferences
@@ -48,4 +51,7 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
 
     var dictateModeType: String = DEFAULT_DICTATE_MODE_TYPE
         get() = wordListSettings.getString(PREF_KEY_DICTATE_MODE_TYPE, DEFAULT_DICTATE_MODE_TYPE)
+
+    var dictateModeSpeed: String = DEFAULT_DICTATE_MODE_SPEED
+        get() = wordListSettings.getString(PREF_KEY_DICTATE_MODE_SPEED, DEFAULT_DICTATE_MODE_SPEED)
 }

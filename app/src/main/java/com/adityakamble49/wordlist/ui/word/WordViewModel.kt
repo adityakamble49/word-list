@@ -2,9 +2,9 @@ package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.ViewModel
 import com.adityakamble49.wordlist.cache.db.WordRepo
+import com.adityakamble49.wordlist.model.DictateModeConfig
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import com.adityakamble49.wordlist.utils.Constants
 import javax.inject.Inject
 
 /**
@@ -22,5 +22,5 @@ class WordViewModel @Inject constructor(
     lateinit var wordList: List<Word>
     var wordListPractice: List<Word> = mutableListOf()
     var isDictateModeOn = false
-    var dictateModeType = Constants.DictateModeTypes.WORD_COMPLETE_INFO
+    lateinit var dictateModeConfig: DictateModeConfig
 }

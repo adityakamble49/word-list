@@ -14,4 +14,18 @@
         <item>word_definition</item>
         <item>word_only</item>
     </string-array>
+    <string-array name="dictate_mode_speed_entries">
+        <item>Slower</item>
+        <item>Slow</item>
+        <item>Normal</item>
+        <item>Fast</item>
+        <item>Faster</item>
+    </string-array>
+    <string-array name="dictate_mode_speed_entry_values">
+        <item>slower</item>
+        <item>slow</item>
+        <item>normal</item>
+        <item>fast</item>
+        <item>faster</item>
+    </string-array>
 </resources>
