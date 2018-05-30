@@ -3,9 +3,11 @@ package com.adityakamble49.wordlist.ui.word
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetCurrentWordsUseCase
+import com.adityakamble49.wordlist.interactor.GetDictateModeTypeUseCase
 import com.adityakamble49.wordlist.interactor.SaveLastWordIdForWordListUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
+import com.adityakamble49.wordlist.utils.Constants
 import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.CompletableObserver
 import io.reactivex.Observer
@@ -24,7 +26,8 @@ class WordPresenter @Inject constructor(
         private val view: WordContract.View,
         private val getCurrentWordsUseCase: GetCurrentWordsUseCase,
         private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
-        private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase) :
+        private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase,
+        private val getDictateModeTypeUseCase: GetDictateModeTypeUseCase) :
         WordContract.Presenter {
 
     private lateinit var currentWordViewModel: WordViewModel
@@ -45,10 +48,15 @@ class WordPresenter @Inject constructor(
 
     override fun initialize() {
         getCurrentWordList()
+        getDictateType()
     }
 
     private fun getCurrentWordList() {
         getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
+    }
+
+    private fun getDictateType() {
+        currentWordViewModel.dictateModeType = getDictateModeTypeUseCase.execute()
     }
 
     private inner class GetCurrentWordListSubscriber : Observer<WordList> {
@@ -172,9 +180,23 @@ class WordPresenter @Inject constructor(
 
     private fun startDictate() {
         if (currentWordViewModel.isDictateModeOn) {
-            val wordInfo = "${currentWordViewModel.currentWord.name}. ${currentWordViewModel.currentWord.information}"
+            val wordInfo = getWordForDictate()
             view.speakWord(wordInfo)
         }
+    }
+
+    private fun getWordForDictate(): String {
+        return when (currentWordViewModel.dictateModeType) {
+            Constants.DictateModeTypes.WORD_COMPLETE_INFO -> "${currentWordViewModel.currentWord.name}. ${currentWordViewModel.currentWord.information}"
+            Constants.DictateModeTypes.WORD_DEFINITION -> {
+                "${currentWordViewModel.currentWord.name}. ${extractWordDefinition()}"
+            }
+            Constants.DictateModeTypes.WORD_ONLY -> currentWordViewModel.currentWord.name
+        }
+    }
+
+    private fun extractWordDefinition(): String {
+        return currentWordViewModel.currentWord.information.split("Usage:")[0]
     }
 
     private fun stopDictate() {
@@ -193,7 +215,6 @@ class WordPresenter @Inject constructor(
     override fun onTTSDone() {
         if (currentWordViewModel.isDictateModeOn) {
             onNextWordAction()
-            startDictate()
         }
     }
 
