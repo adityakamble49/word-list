@@ -63,6 +63,10 @@ class MainPresenter @Inject constructor(
         view.showLoadSavedListDialog()
     }
 
+    override fun onClickedSettings() {
+        view.startSettingsActivity()
+    }
+
     override fun onClickedAbout() {
         view.startAboutActivity()
     }

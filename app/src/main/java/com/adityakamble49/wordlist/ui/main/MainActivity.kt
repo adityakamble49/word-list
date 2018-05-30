@@ -12,6 +12,7 @@ import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.about.AboutActivity
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
+import com.adityakamble49.wordlist.ui.settings.SettingsActivity
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.replaceFragment
 import com.adityakamble49.wordlist.utils.showToast
@@ -59,6 +60,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_load_list -> presenter.onClickedLoadList()
+            R.id.action_settings -> presenter.onClickedSettings()
             R.id.action_about -> presenter.onClickedAbout()
         }
         return super.onOptionsItemSelected(item)
@@ -137,6 +139,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
                 wordActivityMode.ordinal)
         startActivity(wordActivityIntent)
         fab_new_task.collapse()
+    }
+
+    override fun startSettingsActivity() {
+        startActivity(Intent(this, SettingsActivity::class.java))
     }
 
     override fun startAboutActivity() {
