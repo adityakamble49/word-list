@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="@string/pref_dictate_mode_default"
+        android:entries="@array/dictate_mode_entries"
+        android:entryValues="@array/dictate_mode_entry_values"
+        android:key="@string/pref_dictate_mode_key"
+        android:summary="@string/pref_dictate_mode_summary"
+        android:title="@string/pref_dictate_mode_title"/>
+</PreferenceScreen>

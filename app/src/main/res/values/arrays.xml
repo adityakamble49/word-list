@@ -4,4 +4,14 @@
         <item>Manhattan Essential</item>
         <item>Manhattan Advanced</item>
     </string-array>
+    <string-array name="dictate_mode_entries">
+        <item>Word with Complete Info</item>
+        <item>Word with Definition</item>
+        <item>Word only</item>
+    </string-array>
+    <string-array name="dictate_mode_entry_values">
+        <item>word_complete_info</item>
+        <item>word_definition</item>
+        <item>word_only</item>
+    </string-array>
 </resources>
