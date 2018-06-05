@@ -117,7 +117,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     }
 
     private fun loadDefaultFragment() {
-        addFragment(WordListFragment.newInstance(), R.id.main_container)
+        replaceFragment(WordListFragment.newInstance(), R.id.main_container)
     }
 
     private fun showFAB(show: Boolean){
