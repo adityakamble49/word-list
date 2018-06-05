@@ -17,7 +17,7 @@ import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.replaceFragment
 import com.adityakamble49.wordlist.utils.showToast
 import com.afollestad.materialdialogs.MaterialDialog
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
 
 class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickListener {
@@ -73,6 +73,12 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     override fun getLayoutId() = R.layout.activity_main
 
     override fun bindView() {
+        // Setup Support Action Bar
+        setSupportActionBar(toolbar_main)
+
+        supportActionBar?.let {
+            it.title = getString(R.string.app_name)
+        }
 
         // Setup Task FAB
         fab_learn_words.setOnClickListener(this)
