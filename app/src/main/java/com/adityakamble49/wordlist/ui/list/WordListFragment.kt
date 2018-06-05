@@ -36,7 +36,6 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     // View Fields
     private lateinit var wordListAdapter: WordListAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
 
     // Other Fields
     private lateinit var savedWordLists: List<WordList>
@@ -77,9 +76,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     override fun getLayoutId() = R.layout.fragment_wordlist
 
-    override fun bindViewOnCreate() {
-        linearLayoutManager = LinearLayoutManager(context)
-    }
+    override fun bindViewOnCreate() {}
 
     override fun bindView() {
         with(rootView) {
@@ -87,6 +84,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
             // Setup Word List
             wordListAdapter = WordListAdapter()
             wordListAdapter.onItemClickListener = this@WordListFragment
+            val linearLayoutManager = LinearLayoutManager(context)
             val decorator = DividerItemDecoration(context, linearLayoutManager.orientation)
             recyclerview_word_list.adapter = wordListAdapter
             recyclerview_word_list.layoutManager = linearLayoutManager
