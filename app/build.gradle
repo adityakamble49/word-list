@@ -69,6 +69,8 @@ dependencies {
 
     implementation deps.kotlin.stdlib.jre
     implementation deps.android.support.appcompatV7
+    implementation deps.android.support.preferenceV7
+    implementation deps.android.support.preferenceV14
     implementation deps.android.support.recyclerView
     implementation deps.android.support.constraintLayout
     implementation deps.android.support.design

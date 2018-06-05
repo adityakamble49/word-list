@@ -65,6 +65,8 @@ buildscript {
                     'support': [
                             'supportV4'       : "com.android.support:support-v4:${versions.supportLibrary}",
                             'appcompatV7'     : "com.android.support:appcompat-v7:${versions.supportLibrary}",
+                            'preferenceV7'    : "com.android.support:preference-v7:${versions.supportLibrary}",
+                            'preferenceV14'   : "com.android.support:preference-v14:${versions.supportLibrary}",
                             'recyclerView'    : "com.android.support:recyclerview-v7:${versions.supportLibrary}",
                             'annotations'     : "com.android.support:support-annotations:${versions.supportLibrary}",
                             'vector'          : "com.android.support:support-vector-drawable:${versions.supportLibrary}",
