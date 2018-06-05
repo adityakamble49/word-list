@@ -16,9 +16,7 @@ import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
 import com.adityakamble49.wordlist.ui.settings.SettingsFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
-import com.adityakamble49.wordlist.utils.addFragment
-import com.adityakamble49.wordlist.utils.replaceFragment
-import com.adityakamble49.wordlist.utils.showToast
+import com.adityakamble49.wordlist.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
@@ -122,6 +120,14 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         addFragment(WordListFragment.newInstance(), R.id.main_container)
     }
 
+    private fun showFAB(show: Boolean){
+        if(show){
+            fab_new_task.visible()
+        }else {
+            fab_new_task.invisible()
+        }
+    }
+
     override fun showLoadingDialog(toShow: Boolean, title: String, content: String) {
         if (toShow) {
             buildLoadingDialog(title, content)?.show()
@@ -161,11 +167,13 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     override fun openWordList() {
         replaceFragment(WordListFragment.newInstance(), R.id.main_container)
         supportActionBar?.title = getString(R.string.label_word_list)
+        showFAB(true)
     }
 
     override fun openSettings() {
         replaceFragment(SettingsFragment.newInstance(), R.id.main_container)
         supportActionBar?.title = getString(R.string.label_settings)
+        showFAB(false)
     }
 
     override fun openAbout() {
