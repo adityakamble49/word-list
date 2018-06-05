@@ -1,49 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.main.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/main_container"
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/fab_new_task"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_main"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        fab:fab_addButtonColorNormal="@color/default_accent"
-        fab:fab_addButtonColorPressed="@color/default_primary"
-        fab:fab_addButtonPlusIconColor="@color/white"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        fab:fab_labelsPosition="left">
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/menu_main_navigation"/>
 
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_practice_words"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="#1976D2"
-            fab:fab_colorPressed="#0D47A1"
-            fab:fab_icon="@drawable/ic_practice"
-            fab:fab_size="mini"
-            fab:fab_title="Practice" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_learn_words"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="#D32F2F"
-            fab:fab_colorPressed="#B71C1C"
-            fab:fab_icon="@drawable/ic_learn"
-            fab:fab_size="mini"
-            fab:fab_title="Learn" />
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>
