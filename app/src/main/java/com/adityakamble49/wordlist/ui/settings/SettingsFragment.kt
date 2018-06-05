@@ -1,7 +1,7 @@
 package com.adityakamble49.wordlist.ui.settings
 
 import android.os.Bundle
-import android.preference.PreferenceFragment
+import android.support.v7.preference.PreferenceFragmentCompat
 import com.adityakamble49.wordlist.R
 
 /**
@@ -10,9 +10,13 @@ import com.adityakamble49.wordlist.R
  * @author Aditya Kamble
  * @since 30/5/2018
  */
-class SettingsFragment : PreferenceFragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class SettingsFragment : PreferenceFragmentCompat() {
+
+    companion object {
+        fun newInstance() = SettingsFragment()
+    }
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.settings)
     }
 }

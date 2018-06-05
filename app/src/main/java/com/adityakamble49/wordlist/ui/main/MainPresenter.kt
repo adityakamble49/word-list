@@ -1,10 +1,7 @@
 package com.adityakamble49.wordlist.ui.main
 
-import android.arch.lifecycle.Observer
 import com.adityakamble49.wordlist.interactor.AreWordsImportedUseCase
 import com.adityakamble49.wordlist.interactor.ImportWordListToDatabaseUseCase
-import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListIdUseCase
-import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
@@ -19,7 +16,6 @@ import javax.inject.Inject
 class MainPresenter @Inject constructor(
         private val view: MainContract.View,
         private val areWordsImportedUseCase: AreWordsImportedUseCase,
-        private val updateCurrentLoadedListIdUseCase: UpdateCurrentLoadedListIdUseCase,
         private val importWordListToDatabaseUseCase: ImportWordListToDatabaseUseCase) :
         MainContract.Presenter {
 
@@ -27,7 +23,6 @@ class MainPresenter @Inject constructor(
 
     override fun initialize() {
         checkIfWordsImported()
-        observeWordLists()
     }
 
     override fun setViewModel(viewModel: MainActivityViewModel) {
@@ -59,31 +54,16 @@ class MainPresenter @Inject constructor(
         override fun onError(e: Throwable) {}
     }
 
-    override fun onClickedLoadList() {
-        view.showLoadSavedListDialog()
+    override fun onClickWordList() {
+        view.openWordList()
     }
 
-    override fun onClickedSettings() {
-        view.startSettingsActivity()
+    override fun onClickSettings() {
+        view.openSettings()
     }
 
-    override fun onClickedAbout() {
-        view.startAboutActivity()
-    }
-
-    override fun onClickedSavedListItem(selectedWordList: WordList) {
-        updateCurrentLoadedListIdUseCase.execute(selectedWordList.id)
-        viewModel.updateCurrentWordList(selectedWordList)
-    }
-
-    private fun observeWordLists() {
-        viewModel.savedWordList.observe(view, object : Observer<List<WordList>> {
-            override fun onChanged(t: List<WordList>?) {
-                t?.let {
-                    view.updateSavedWordLists(it)
-                }
-            }
-        })
+    override fun onClickAbout() {
+        view.openAbout()
     }
 
     override fun onClickLearnWords() {

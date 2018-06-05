@@ -4,19 +4,22 @@ import android.app.ProgressDialog
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.view.Menu
-import android.view.MenuItem
+import android.os.Bundle
+import android.os.Handler
+import android.support.annotation.IdRes
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.view.View
 import com.adityakamble49.wordlist.R
-import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.about.AboutActivity
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
-import com.adityakamble49.wordlist.ui.settings.SettingsActivity
+import com.adityakamble49.wordlist.ui.settings.SettingsFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
+import com.adityakamble49.wordlist.utils.addFragment
 import com.adityakamble49.wordlist.utils.replaceFragment
 import com.adityakamble49.wordlist.utils.showToast
-import com.afollestad.materialdialogs.MaterialDialog
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
 
@@ -28,22 +31,27 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     // View Fields
     private var loadingDialog: ProgressDialog? = null
+    private var drawerToggle: ActionBarDrawerToggle? = null
 
     // Other Fields
-    private var savedWordLists: List<WordList> = mutableListOf()
+    private lateinit var uiHandler: Handler
+    @IdRes private var selectedNavigationItem = R.id.nav_wordlist
+    @IdRes private var previousNavigationItem = R.id.nav_wordlist
 
 
     /*
      * Lifecycle Functions
      */
 
-    override fun onBackPressed() {
-        presenter.onBackPressed()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Create UI Handler
+        uiHandler = Handler()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    override fun onBackPressed() {
+        presenter.onBackPressed()
     }
 
     /*
@@ -57,15 +65,6 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.action_load_list -> presenter.onClickedLoadList()
-            R.id.action_settings -> presenter.onClickedSettings()
-            R.id.action_about -> presenter.onClickedAbout()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     /*
      * Helper Functions
      */
@@ -76,13 +75,40 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         // Setup Support Action Bar
         setSupportActionBar(toolbar_main)
 
-        supportActionBar?.let {
-            it.title = getString(R.string.app_name)
+        if (savedInstanceState == null) {
+            supportActionBar?.title = getString(R.string.label_word_list)
         }
+
+        // Setup Navigation Drawer
+        navigation_main.setNavigationItemSelectedListener { item ->
+            selectedNavigationItem = item.itemId
+            drawer_layout_main.closeDrawer(GravityCompat.START)
+            true
+        }
+        drawerToggle = object : ActionBarDrawerToggle(this, drawer_layout_main, toolbar_main,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                if (selectedNavigationItem != previousNavigationItem) {
+                    handleNavigationDrawerSelection(selectedNavigationItem)
+                    previousNavigationItem = selectedNavigationItem
+                }
+            }
+        }
+        drawer_layout_main.addDrawerListener(drawerToggle as ActionBarDrawerToggle)
+        drawerToggle?.syncState()
 
         // Setup Task FAB
         fab_learn_words.setOnClickListener(this)
         fab_practice_words.setOnClickListener(this)
+    }
+
+    private fun handleNavigationDrawerSelection(@IdRes itemId: Int) {
+        when (itemId) {
+            R.id.nav_wordlist -> presenter.onClickWordList()
+            R.id.nav_settings -> presenter.onClickSettings()
+            R.id.nav_about -> presenter.onClickAbout()
+        }
     }
 
     override fun initializePresenter() {
@@ -93,7 +119,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     }
 
     private fun loadDefaultFragment() {
-        replaceFragment(WordListFragment.newInstance(), R.id.main_container)
+        addFragment(WordListFragment.newInstance(), R.id.main_container)
     }
 
     override fun showLoadingDialog(toShow: Boolean, title: String, content: String) {
@@ -119,21 +145,6 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         loadDefaultFragment()
     }
 
-    override fun updateSavedWordLists(savedWordLists: List<WordList>) {
-        this.savedWordLists = savedWordLists
-    }
-
-    override fun showLoadSavedListDialog() {
-        var wordListNames = mutableListOf<String>()
-        savedWordLists.forEach { wordList -> wordListNames.add(wordList.name) }
-        MaterialDialog.Builder(this)
-                .title(R.string.title_load_saved_list)
-                .items(wordListNames)
-                .itemsCallback { _, _, which, _ ->
-                    presenter.onClickedSavedListItem(savedWordLists[which])
-                }.build().show()
-    }
-
     override fun alertListTypeUpdate(wordListType: Int) {
         val selectedWordType = resources.getStringArray(R.array.items_list_types)[wordListType]
         showToast(resources.getString(R.string.alert_list_change, selectedWordType))
@@ -147,11 +158,17 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         fab_new_task.collapse()
     }
 
-    override fun startSettingsActivity() {
-        startActivity(Intent(this, SettingsActivity::class.java))
+    override fun openWordList() {
+        replaceFragment(WordListFragment.newInstance(), R.id.main_container)
+        supportActionBar?.title = getString(R.string.label_word_list)
     }
 
-    override fun startAboutActivity() {
+    override fun openSettings() {
+        replaceFragment(SettingsFragment.newInstance(), R.id.main_container)
+        supportActionBar?.title = getString(R.string.label_settings)
+    }
+
+    override fun openAbout() {
         startActivity(Intent(this, AboutActivity::class.java))
     }
 

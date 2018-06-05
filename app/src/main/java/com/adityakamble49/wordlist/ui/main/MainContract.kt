@@ -16,21 +16,19 @@ interface MainContract {
                               content: String = "Working on something")
 
         fun dataInitialized()
-        fun updateSavedWordLists(savedWordLists: List<WordList>)
-        fun showLoadSavedListDialog()
         fun alertListTypeUpdate(wordListType: Int)
         fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode)
-        fun startSettingsActivity()
-        fun startAboutActivity()
+        fun openWordList()
+        fun openSettings()
+        fun openAbout()
         fun handleFinishActivity()
     }
 
     interface Presenter : BaseContract.Presenter {
         fun setViewModel(viewModel: MainActivityViewModel)
-        fun onClickedLoadList()
-        fun onClickedSettings()
-        fun onClickedAbout()
-        fun onClickedSavedListItem(selectedWordList: WordList)
+        fun onClickWordList()
+        fun onClickSettings()
+        fun onClickAbout()
         fun onClickLearnWords()
         fun onClickPracticeWords()
         fun onBackPressed()

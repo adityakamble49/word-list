@@ -3,9 +3,9 @@ package com.adityakamble49.wordlist.ui.list
 import android.arch.lifecycle.Observer
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetWordListsUseCase
+import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListIdUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
 import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -19,18 +19,11 @@ import javax.inject.Inject
 class WordListPresenter @Inject constructor(
         private val view: WordListContract.View,
         private val getWordListsUseCase: GetWordListsUseCase,
+        private val updateCurrentLoadedListIdUseCase: UpdateCurrentLoadedListIdUseCase,
         private val getCurrentWordListUseCase: GetCurrentWordListUseCase) :
         WordListContract.Presenter {
 
-    private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var wordListViewModel: WordListViewModel
-
-    /**
-     * Set Main Activity ViewModel to access Common data
-     */
-    override fun setMainViewModel(mainActivityViewModel: MainActivityViewModel) {
-        this.mainActivityViewModel = mainActivityViewModel
-    }
 
     /**
      * Set Word List ViewModel to access word list related data
@@ -44,6 +37,7 @@ class WordListPresenter @Inject constructor(
      */
     override fun initialize() {
         getCurrentWordList()
+        observeWordLists()
     }
 
     /**
@@ -66,7 +60,6 @@ class WordListPresenter @Inject constructor(
             wordListViewModel.updateCurrentLoadedSavedList(t)
             wordListViewModel.initialize()
             observeWords()
-            observeCurrentWordList()
             observeSavedWordLists()
         }
     }
@@ -82,18 +75,6 @@ class WordListPresenter @Inject constructor(
                 view.updateBookmarkItem(wordListViewModel.currentWordList.lastWordId)
                 view.updateWords(WordUtils.sortWords(it,
                         wordListViewModel.currentWordList.wordSequenceList))
-            }
-        })
-    }
-
-    /**
-     * Observe current word list which is kept in Main View Model it's and can be changed from
-     * Main Activity by choosing specific word list from list of available word list
-     */
-    private fun observeCurrentWordList() {
-        mainActivityViewModel.getCurrentWordList().observe(view, Observer<WordList> { t ->
-            t?.let {
-                wordListViewModel.updateCurrentLoadedSavedList(it)
             }
         })
     }
@@ -115,7 +96,25 @@ class WordListPresenter @Inject constructor(
         })
     }
 
+    override fun onClickLoadList() {
+        view.showLoadSavedListDialog()
+    }
+
+    override fun onClickSavedListItem(selectedWordList: WordList) {
+        updateCurrentLoadedListIdUseCase.execute(selectedWordList.id)
+        wordListViewModel.updateCurrentLoadedSavedList(selectedWordList)
+    }
+
     override fun onClickedSingleWord(word: Word) {
 
+    }
+
+    private fun observeWordLists() {
+        wordListViewModel.savedWordList.observe(view,
+                Observer<List<WordList>> { t ->
+                    t?.let {
+                        view.updateSavedWordLists(it)
+                    }
+                })
     }
 }

@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.adityakamble49.wordlist.cache.PreferenceHelper
+import com.adityakamble49.wordlist.cache.db.WordListRepo
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
@@ -19,8 +20,10 @@ import javax.inject.Inject
  */
 class WordListViewModel @Inject constructor(
         private val preferenceHelper: PreferenceHelper,
+        private val wordListRepo: WordListRepo,
         private val wordRepo: WordRepo) : ViewModel() {
 
+    val savedWordList: LiveData<List<WordList>> = wordListRepo.getWordLists()
     private lateinit var wordList: LiveData<List<Word>>
     private val currentWordListLive = MutableLiveData<WordList>()
     lateinit var currentWordList: WordList
@@ -38,8 +41,4 @@ class WordListViewModel @Inject constructor(
         currentWordList = selectedSavedWordList
         currentWordListLive.postValue(selectedSavedWordList)
     }
-
-
-
-
 }

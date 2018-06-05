@@ -3,17 +3,22 @@ package com.adityakamble49.wordlist.ui.list
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
-import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
+import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.fragment_wordlist.*
 import kotlinx.android.synthetic.main.fragment_wordlist.view.*
 import javax.inject.Inject
@@ -34,7 +39,24 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     // Other Fields
+    private lateinit var savedWordLists: List<WordList>
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_wordlist, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_load_list -> presenter.onClickLoadList()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val wordId = wordListAdapter.itemList[position].id
@@ -73,14 +95,8 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     }
 
     override fun initializePresenter() {
-        lateinit var mainActivityViewModel: MainActivityViewModel
-        activity?.let {
-            mainActivityViewModel = ViewModelProviders.of(it, viewModelFactory)
-                    .get(MainActivityViewModel::class.java)
-        }
         val wordListViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(WordListViewModel::class.java)
-        presenter.setMainViewModel(mainActivityViewModel)
         presenter.setWordListViewModel(wordListViewModel)
         presenter.initialize()
     }
@@ -90,6 +106,23 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
             progress_word_list.visible()
         } else {
             progress_word_list.gone()
+        }
+    }
+
+    override fun updateSavedWordLists(savedWordLists: List<WordList>) {
+        this.savedWordLists = savedWordLists
+    }
+
+    override fun showLoadSavedListDialog() {
+        val wordListNames = mutableListOf<String>()
+        savedWordLists.forEach { wordList -> wordListNames.add(wordList.name) }
+        context?.let {
+            MaterialDialog.Builder(it)
+                    .title(R.string.title_load_saved_list)
+                    .items(wordListNames)
+                    .itemsCallback { _, _, which, _ ->
+                        presenter.onClickSavedListItem(savedWordLists[which])
+                    }.build().show()
         }
     }
 
