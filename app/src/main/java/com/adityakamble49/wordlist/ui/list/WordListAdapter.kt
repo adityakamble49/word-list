@@ -12,9 +12,9 @@ import kotlinx.android.synthetic.main.word_list_item.view.*
  * @author Aditya Kamble
  * @since 4/4/2018
  */
-class WordListAdapter : SimpleListAdapter<Word>() {
+open class WordListAdapter : SimpleListAdapter<Word>() {
 
-    var bookMarkItemId: Int = 1
+    open var bookMarkItemId: Int = 1
 
     override fun updateItemList(list: List<Word>) {
     }
