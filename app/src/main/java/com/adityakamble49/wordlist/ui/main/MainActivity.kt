@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.IdRes
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.View
@@ -37,7 +38,6 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     // Other Fields
     private lateinit var uiHandler: Handler
     @IdRes private var selectedNavigationItem = R.id.nav_wordlist
-    @IdRes private var previousNavigationItem = R.id.nav_wordlist
 
 
     /*
@@ -49,6 +49,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
         // Create UI Handler
         uiHandler = Handler()
+        observeFragmentBackStack()
     }
 
     override fun onBackPressed() {
@@ -81,7 +82,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         setSupportActionBar(toolbar_main)
 
         if (savedInstanceState == null) {
-            supportActionBar?.title = getString(R.string.label_word_list)
+            updateTitle(getString(R.string.label_word_list))
         }
 
         // Setup Navigation Drawer
@@ -94,10 +95,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
-                if (selectedNavigationItem != previousNavigationItem) {
-                    handleNavigationDrawerSelection(selectedNavigationItem)
-                    previousNavigationItem = selectedNavigationItem
-                }
+                handleNavigationDrawerSelection(selectedNavigationItem)
             }
         }
         drawer_layout_main.addDrawerListener(drawerToggle as ActionBarDrawerToggle)
@@ -106,6 +104,31 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         // Setup Task FAB
         fab_learn_words.setOnClickListener(this)
         fab_practice_words.setOnClickListener(this)
+    }
+
+    private fun updateTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
+    private fun observeFragmentBackStack() {
+        supportFragmentManager.addOnBackStackChangedListener {
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.main_container)
+            if (currentFragment != null) {
+                updateTitleAndDrawer(currentFragment)
+            }
+        }
+    }
+
+    private fun updateTitleAndDrawer(currentFragment: Fragment) {
+        showFAB(false)
+        when (currentFragment.javaClass.simpleName) {
+            "WordListFragment" -> {
+                updateTitle(getString(R.string.app_name))
+                showFAB(true)
+            }
+            "SettingsFragment" -> updateTitle(getString(R.string.label_settings))
+            "SearchFragment" -> updateTitle(getString(R.string.label_search))
+        }
     }
 
     private fun handleNavigationDrawerSelection(@IdRes itemId: Int) {
@@ -177,14 +200,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     override fun openWordList() {
         replaceFragment(WordListFragment.newInstance(), R.id.main_container)
-        supportActionBar?.title = getString(R.string.label_word_list)
-        showFAB(true)
     }
 
     override fun openSettings() {
         replaceFragment(SettingsFragment.newInstance(), R.id.main_container)
-        supportActionBar?.title = getString(R.string.label_settings)
-        showFAB(false)
     }
 
     override fun openAbout() {
