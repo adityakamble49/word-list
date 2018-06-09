@@ -22,6 +22,7 @@ interface WordContract {
         fun updateDictateModeSpeed(speed: Float)
         fun updateFABDictateIcon(@DrawableRes icon: Int)
         fun stopSpeaking()
+        fun updateWordSingle(word: Word)
     }
 
     interface Presenter : BaseContract.Presenter {

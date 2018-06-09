@@ -10,6 +10,7 @@ import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
+import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_word_info.*
 import timber.log.Timber
@@ -42,7 +43,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         var IE_DEFAULT_WORD_ACTIVITY_MODE = WordActivityMode.NORMAL.ordinal
 
         enum class WordActivityMode {
-            NORMAL, LEARN, PRACTICE
+            NORMAL, LEARN, PRACTICE, SINGLE
         }
     }
 
@@ -129,6 +130,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         when (currentActivityMode) {
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
+            WordActivityMode.SINGLE.ordinal -> toggleController(false)
         }
 
         initializeTTS()
@@ -152,6 +154,18 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         } else {
             word_information.text = "Tap to View"
             word_mnemonic.text = "Tap to View"
+        }
+    }
+
+    private fun toggleController(toShow: Boolean) {
+        if (toShow) {
+            word_index.visible()
+            llBottomNavigation.visible()
+            fab_dictate.visible()
+        } else {
+            word_index.gone()
+            llBottomNavigation.gone()
+            fab_dictate.gone()
         }
     }
 
@@ -193,6 +207,14 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     override fun stopSpeaking() {
         tts.stop()
+    }
+
+    override fun updateWordSingle(word: Word) {
+        word_name.text = word.name
+        word_type.text = word.type
+        word_pronunciation.text = word.pronunciation
+        word_information.text = word.information
+        word_mnemonic.text = word.mnemonic
     }
 
     override fun updateFABDictateIcon(icon: Int) {

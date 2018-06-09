@@ -1,16 +1,17 @@
 package com.adityakamble49.wordlist.ui.word
 
 import com.adityakamble49.wordlist.R
-import com.adityakamble49.wordlist.interactor.*
+import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
+import com.adityakamble49.wordlist.interactor.GetCurrentWordsUseCase
+import com.adityakamble49.wordlist.interactor.GetDictateModeConfigUseCase
+import com.adityakamble49.wordlist.interactor.SaveLastWordIdForWordListUseCase
 import com.adityakamble49.wordlist.model.DictateModeSpeed
 import com.adityakamble49.wordlist.model.DictateModeType
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import com.adityakamble49.wordlist.utils.Constants
-import com.adityakamble49.wordlist.utils.Constants.*
+import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
 import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.CompletableObserver
-import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
@@ -47,8 +48,14 @@ class WordPresenter @Inject constructor(
     }
 
     override fun initialize() {
-        getCurrentWordList()
-        getDictateConfig()
+        view.initializeActivityMode(currentWordActivityMode)
+        if (currentWordActivityMode != WordActivity.Companion.WordActivityMode.SINGLE.ordinal) {
+            getCurrentWordList()
+            getDictateConfig()
+        } else {
+            currentWordViewModel.setupSingleWord(currentWordId)
+            observeSingleWord()
+        }
     }
 
     private fun getCurrentWordList() {
@@ -59,7 +66,7 @@ class WordPresenter @Inject constructor(
         currentWordViewModel.dictateModeConfig = getDictateModeConfigUseCase.execute()
     }
 
-    private inner class GetCurrentWordListSubscriber : Observer<WordList> {
+    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
         override fun onComplete() {}
         override fun onSubscribe(d: Disposable) {}
         override fun onError(e: Throwable) {}
@@ -74,7 +81,7 @@ class WordPresenter @Inject constructor(
         getCurrentWordsUseCase.execute().subscribe(GetWordListSubscriber())
     }
 
-    private inner class GetWordListSubscriber : Observer<List<Word>> {
+    private inner class GetWordListSubscriber : io.reactivex.Observer<List<Word>> {
 
         override fun onSubscribe(d: Disposable) {}
         override fun onComplete() {}
@@ -83,7 +90,6 @@ class WordPresenter @Inject constructor(
         override fun onNext(t: List<Word>) {
             currentWordViewModel.wordList = WordUtils.sortWords(t,
                     currentWordViewModel.currentWordList.wordSequenceList)
-            view.initializeActivityMode(currentWordActivityMode)
             loadWord(currentWordActivityMode, currentWordId)
         }
     }
@@ -249,5 +255,11 @@ class WordPresenter @Inject constructor(
             Timber.i("Last word id saved")
         }
 
+    }
+
+    private fun observeSingleWord() {
+        currentWordViewModel.singleWord.observe(view, android.arch.lifecycle.Observer<Word> {
+            it?.let { view.updateWordSingle(it) }
+        })
     }
 }

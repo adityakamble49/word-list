@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.ui.word
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.model.DictateModeConfig
@@ -21,6 +22,11 @@ class WordViewModel @Inject constructor(
     lateinit var currentWordList: WordList
     lateinit var wordList: List<Word>
     var wordListPractice: List<Word> = mutableListOf()
+    lateinit var singleWord: LiveData<Word>
     var isDictateModeOn = false
     lateinit var dictateModeConfig: DictateModeConfig
+
+    fun setupSingleWord(id: Int){
+        singleWord = wordRepo.getWordById(id)
+    }
 }
