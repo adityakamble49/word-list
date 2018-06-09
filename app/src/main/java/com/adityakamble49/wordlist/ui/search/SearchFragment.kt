@@ -17,7 +17,6 @@ import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import kotlinx.android.synthetic.main.fragment_search.view.*
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -100,17 +99,24 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
         searchView.isIconified = false
         searchView.maxWidth = Integer.MAX_VALUE
 
+        searchView.setOnCloseListener {
+            searchView.onActionViewCollapsed()
+            closeFragment()
+            true
+        }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?) = true
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 handler.postDelayed({
-                    Timber.i(newText)
                     searchListAdapter.filter.filter(newText)
                 }, 500)
                 return true
             }
         })
     }
+
+    private fun closeFragment() {}
 }
