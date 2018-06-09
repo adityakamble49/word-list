@@ -57,10 +57,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
+        if (supportFragmentManager.backStackEntryCount > 1) {
             supportFragmentManager.popBackStack()
         } else {
-            super.onBackPressed()
+            finish()
         }
     }
 
