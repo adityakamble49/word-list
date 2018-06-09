@@ -259,7 +259,10 @@ class WordPresenter @Inject constructor(
 
     private fun observeSingleWord() {
         currentWordViewModel.singleWord.observe(view, android.arch.lifecycle.Observer<Word> {
-            it?.let { view.updateWordSingle(it) }
+            it?.let {
+                currentWordViewModel.currentWord = it
+                view.updateWordSingle(currentWordViewModel.currentWord)
+            }
         })
     }
 }
