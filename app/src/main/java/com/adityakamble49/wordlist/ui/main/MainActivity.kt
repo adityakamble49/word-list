@@ -130,13 +130,17 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     private fun updateTitleAndDrawer(currentFragment: Fragment) {
         showFAB(false)
+        toggleDrawerToggleIndicator(true)
         when (currentFragment.javaClass.simpleName) {
             "WordListFragment" -> {
                 updateTitle(getString(R.string.app_name))
                 showFAB(true)
             }
             "SettingsFragment" -> updateTitle(getString(R.string.label_settings))
-            "SearchFragment" -> updateTitle(getString(R.string.label_search))
+            "SearchFragment" -> {
+                toggleDrawerToggleIndicator(false)
+                updateTitle(getString(R.string.label_search))
+            }
         }
     }
 
