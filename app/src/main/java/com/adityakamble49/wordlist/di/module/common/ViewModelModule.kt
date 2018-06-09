@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.adityakamble49.wordlist.ui.common.WordListViewModelFactory
 import com.adityakamble49.wordlist.ui.list.WordListViewModel
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
+import com.adityakamble49.wordlist.ui.search.SearchViewModel
 import com.adityakamble49.wordlist.ui.word.WordViewModel
 import dagger.Binds
 import dagger.Module
@@ -35,6 +36,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WordViewModel::class)
     abstract fun bindWordViewModel(wordViewModel: WordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel::class)
+    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
 
 
     @Binds
