@@ -6,6 +6,7 @@ import android.os.Build
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.support.v4.content.res.ResourcesCompat
+import android.view.MenuItem
 import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
@@ -65,6 +66,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
      * Listener Functions
      */
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.word_information -> presenter.onClickWordInformation()
@@ -103,6 +111,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             intent.getIntExtra(IE_KEY_WORD_ACTIVITY_MODE, IE_DEFAULT_WORD_ACTIVITY_MODE)
 
     override fun bindView() {
+
+        // Setup Back Action Icon
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Setup word info
         word_information.setOnClickListener(this)
