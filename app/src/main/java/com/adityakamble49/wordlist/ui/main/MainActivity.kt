@@ -16,7 +16,10 @@ import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
 import com.adityakamble49.wordlist.ui.settings.SettingsFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
-import com.adityakamble49.wordlist.utils.*
+import com.adityakamble49.wordlist.utils.invisible
+import com.adityakamble49.wordlist.utils.replaceFragment
+import com.adityakamble49.wordlist.utils.showToast
+import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
@@ -120,10 +123,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         replaceFragment(WordListFragment.newInstance(), R.id.main_container)
     }
 
-    private fun showFAB(show: Boolean){
-        if(show){
+    private fun showFAB(show: Boolean) {
+        if (show) {
             fab_new_task.visible()
-        }else {
+        } else {
             fab_new_task.invisible()
         }
     }
@@ -149,6 +152,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     override fun dataInitialized() {
         loadDefaultFragment()
+    }
+
+    fun toggleDrawerToggleIndicator(toShow: Boolean) {
+        drawerToggle?.isDrawerIndicatorEnabled = toShow
     }
 
     override fun alertListTypeUpdate(wordListType: Int) {
