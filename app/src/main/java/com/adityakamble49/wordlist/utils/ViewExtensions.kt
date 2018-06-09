@@ -53,7 +53,9 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
     val fragmentPopped = supportFragmentManager.popBackStackImmediate(backStackName, 0)
     if (!fragmentPopped) {
         supportFragmentManager.inTransaction {
-            replace(frameId, fragment).addToBackStack(backStackName)
+            replace(frameId, fragment)
+                    .addToBackStack(backStackName)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         }
     }
 }
