@@ -123,7 +123,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         replaceFragment(WordListFragment.newInstance(), R.id.main_container)
     }
 
-    private fun showFAB(show: Boolean) {
+    fun showFAB(show: Boolean) {
         if (show) {
             fab_new_task.visible()
         } else {

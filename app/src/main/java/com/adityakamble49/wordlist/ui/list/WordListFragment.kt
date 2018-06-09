@@ -136,6 +136,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     override fun openSearch() {
         (activity as MainActivity).toggleDrawerToggleIndicator(false)
+        (activity as MainActivity).showFAB(false)
         (activity as AppCompatActivity).replaceFragment(SearchFragment.newInstance(),
                 R.id.main_container)
     }
