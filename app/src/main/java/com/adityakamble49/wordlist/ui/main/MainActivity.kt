@@ -135,8 +135,12 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
             "WordListFragment" -> {
                 updateTitle(getString(R.string.app_name))
                 showFAB(true)
+                previousNavigationItem = ID_NAV_WORD_LIST
             }
-            "SettingsFragment" -> updateTitle(getString(R.string.label_settings))
+            "SettingsFragment" -> {
+                updateTitle(getString(R.string.label_settings))
+                previousNavigationItem = ID_NAV_SETTINGS
+            }
             "SearchFragment" -> {
                 toggleDrawerToggleIndicator(false)
                 updateTitle(getString(R.string.label_search))
