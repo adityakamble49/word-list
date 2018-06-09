@@ -51,5 +51,6 @@
     <string name="pref_dictate_mode_speed_title">Dictate Mode Speed</string>
     <string name="pref_dictate_mode_speed_summary">Select dictate mode speed for words</string>
     <string name="pref_dictate_mode_speed_default">normal</string>
+    <string name="label_search">Search</string>
 
 </resources>
