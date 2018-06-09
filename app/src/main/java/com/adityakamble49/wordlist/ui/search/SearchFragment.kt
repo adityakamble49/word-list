@@ -15,6 +15,7 @@ import android.widget.AdapterView
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
+import com.adityakamble49.wordlist.ui.main.MainActivity
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import javax.inject.Inject
@@ -118,5 +119,7 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
         })
     }
 
-    private fun closeFragment() {}
+    private fun closeFragment() {
+        (activity as MainActivity).onBackPressed()
+    }
 }

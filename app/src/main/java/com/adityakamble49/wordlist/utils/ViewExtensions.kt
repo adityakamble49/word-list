@@ -49,7 +49,13 @@ fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
 }
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
-    supportFragmentManager.inTransaction { replace(frameId, fragment, fragment.tag) }
+    val backStackName = fragment.javaClass.name
+    val fragmentPopped = supportFragmentManager.popBackStackImmediate(backStackName, 0)
+    if (!fragmentPopped) {
+        supportFragmentManager.inTransaction {
+            replace(frameId, fragment).addToBackStack(backStackName)
+        }
+    }
 }
 
 fun Fragment.addFragment(fragment: Fragment, frameId: Int) {
