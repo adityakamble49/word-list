@@ -96,6 +96,10 @@ class WordListPresenter @Inject constructor(
         })
     }
 
+    override fun onClickSearch() {
+        view.openSearch()
+    }
+
     override fun onClickLoadList() {
         view.showLoadSavedListDialog()
     }

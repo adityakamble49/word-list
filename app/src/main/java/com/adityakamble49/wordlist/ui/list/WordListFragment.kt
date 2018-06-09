@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -15,8 +16,11 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
+import com.adityakamble49.wordlist.ui.main.MainActivity
+import com.adityakamble49.wordlist.ui.search.SearchFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
+import com.adityakamble49.wordlist.utils.replaceFragment
 import com.adityakamble49.wordlist.utils.visible
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.fragment_wordlist.*
@@ -52,6 +56,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_search -> presenter.onClickSearch()
             R.id.action_load_list -> presenter.onClickLoadList()
         }
         return super.onOptionsItemSelected(item)
@@ -127,6 +132,12 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     override fun updateWords(wordList: List<Word>) {
         wordListAdapter.itemList = wordList
         wordListAdapter.notifyDataSetChanged()
+    }
+
+    override fun openSearch() {
+        (activity as MainActivity).toggleDrawerToggleIndicator(false)
+        (activity as AppCompatActivity).replaceFragment(SearchFragment.newInstance(),
+                R.id.main_container)
     }
 
     override fun openSingleWord(word: Word) {

@@ -4,7 +4,6 @@ import android.arch.lifecycle.LifecycleOwner
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.BaseContract
-import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
 
 /**
  * @author Aditya Kamble
@@ -17,12 +16,14 @@ interface WordListContract {
         fun updateSavedWordLists(savedWordLists: List<WordList>)
         fun showLoadSavedListDialog()
         fun updateWords(wordList: List<Word>)
+        fun openSearch()
         fun openSingleWord(word: Word)
         fun updateBookmarkItem(bookmarkItemId: Int)
     }
 
     interface Presenter : BaseContract.Presenter {
         fun setWordListViewModel(wordListViewModel: WordListViewModel)
+        fun onClickSearch()
         fun onClickLoadList()
         fun onClickSavedListItem(selectedWordList: WordList)
         fun onClickedSingleWord(word: Word)
