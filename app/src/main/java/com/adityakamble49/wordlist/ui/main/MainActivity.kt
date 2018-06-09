@@ -38,6 +38,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     // Other Fields
     private lateinit var uiHandler: Handler
     @IdRes private var selectedNavigationItem = R.id.nav_wordlist
+    @IdRes private var previousNavigationItem = R.id.nav_wordlist
+    @IdRes private val ID_NAV_WORD_LIST = R.id.nav_wordlist
+    @IdRes private val ID_NAV_SETTINGS = R.id.nav_settings
+    @IdRes private val ID_NAV_ABOUT = R.id.nav_about
 
 
     /*
@@ -95,7 +99,12 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
-                handleNavigationDrawerSelection(selectedNavigationItem)
+                if (selectedNavigationItem != previousNavigationItem) {
+                    handleNavigationDrawerSelection(selectedNavigationItem)
+                    if (selectedNavigationItem != ID_NAV_ABOUT) {
+                        previousNavigationItem = selectedNavigationItem
+                    }
+                }
             }
         }
         drawer_layout_main.addDrawerListener(drawerToggle as ActionBarDrawerToggle)
