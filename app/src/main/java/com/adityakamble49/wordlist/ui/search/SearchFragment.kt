@@ -15,7 +15,6 @@ import android.widget.AdapterView
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
-import com.adityakamble49.wordlist.ui.main.MainActivity
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import javax.inject.Inject
@@ -61,6 +60,7 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
         wordIntent.putExtra(WordActivity.IE_KEY_WORD_ACTIVITY_MODE,
                 WordActivity.Companion.WordActivityMode.SINGLE.ordinal)
         startActivity(wordIntent)
+        closeFragment()
     }
 
     override fun getLayoutId() = R.layout.fragment_search
@@ -120,6 +120,6 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
     }
 
     private fun closeFragment() {
-        (activity as MainActivity).onBackPressed()
+        activity?.onBackPressed()
     }
 }
