@@ -16,7 +16,6 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
-import com.adityakamble49.wordlist.ui.main.MainActivity
 import com.adityakamble49.wordlist.ui.search.SearchFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
@@ -135,8 +134,6 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     }
 
     override fun openSearch() {
-        (activity as MainActivity).toggleDrawerToggleIndicator(false)
-        (activity as MainActivity).showFAB(false)
         (activity as AppCompatActivity).replaceFragment(SearchFragment.newInstance(),
                 R.id.main_container)
     }
