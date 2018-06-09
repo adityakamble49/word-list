@@ -32,4 +32,7 @@ interface WordDao {
 
     @Query("SELECT * FROM words WHERE id= :id")
     fun getWordById(id: Int): LiveData<Word>
+
+    @Query("SELECT * FROM words")
+    fun getAllWords(): List<Word>
 }
