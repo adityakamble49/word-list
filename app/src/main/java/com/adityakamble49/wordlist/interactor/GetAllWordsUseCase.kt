@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Get All Words Use Case
  *
  * @author Aditya Kamble
- * @since 8/4/2018
+ * @since 10/6/2018
  */
 class GetAllWordsUseCase @Inject constructor(
         private val wordRepo: WordRepo) {
