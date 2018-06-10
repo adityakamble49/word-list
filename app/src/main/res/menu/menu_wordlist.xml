@@ -12,4 +12,12 @@
         android:id="@+id/action_load_list"
         android:title="@string/label_load_list" />
 
+    <item
+        android:id="@+id/action_create_list"
+        android:title="@string/label_create_list" />
+
+    <item
+        android:id="@+id/action_add_word"
+        android:title="@string/label_add_word" />
+
 </menu>
