@@ -43,6 +43,10 @@ class WordPresenter @Inject constructor(
         this.currentWordActivityMode = wordActivityMode
     }
 
+    private fun isPracticeMode(): Boolean {
+        return currentWordActivityMode == WordActivity.Companion.WordActivityMode.PRACTICE.ordinal
+    }
+
     override fun setWordId(wordId: Int) {
         this.currentWordId = wordId
     }
@@ -140,11 +144,15 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onClickWordInformation() {
-        view.updateWordInformation(currentWordViewModel.currentWord.information)
+        if (isPracticeMode()) {
+            view.updateWordInformation(currentWordViewModel.currentWord.information)
+        }
     }
 
     override fun onClickWordMnemonic() {
-        view.updateWordMnemonic(currentWordViewModel.currentWord.mnemonic)
+        if (isPracticeMode()) {
+            view.updateWordMnemonic(currentWordViewModel.currentWord.mnemonic)
+        }
     }
 
     override fun onNextWordAction() {
@@ -237,6 +245,14 @@ class WordPresenter @Inject constructor(
 
     override fun onPause() {
         updateLastWordInWordList()
+    }
+
+    override fun onClickEditWord() {
+        view.toggleEditMode(true)
+    }
+
+    override fun onClickSubmitWord() {
+        view.toggleEditMode(false)
     }
 
     private fun updateLastWordInWordList() {

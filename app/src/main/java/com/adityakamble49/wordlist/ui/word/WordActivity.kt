@@ -6,6 +6,7 @@ import android.os.Build
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.support.v4.content.res.ResourcesCompat
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.adityakamble49.wordlist.R
@@ -32,6 +33,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var presenter: WordContract.Presenter
 
+    // View Fields
+    private var optionMenu: Menu? = null
+
     // Other Fields
     private var currentActivityMode: Int = WordActivityMode.NORMAL.ordinal
     private lateinit var tts: TextToSpeech
@@ -44,13 +48,21 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         var IE_DEFAULT_WORD_ACTIVITY_MODE = WordActivityMode.NORMAL.ordinal
 
         enum class WordActivityMode {
-            NORMAL, LEARN, PRACTICE, SINGLE
+            NORMAL, LEARN, PRACTICE, SINGLE, EDIT
         }
     }
 
     /*
      * Lifecycle Functions
      */
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_word_info, menu)
+        this.optionMenu = menu
+        val submitItem = menu.findItem(R.id.action_submit_word)
+        submitItem.isVisible = false
+        return super.onCreateOptionsMenu(menu)
+    }
 
     override fun onPause() {
         super.onPause()
@@ -69,6 +81,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> finish()
+            R.id.action_edit_word -> presenter.onClickEditWord()
+            R.id.action_submit_word -> presenter.onClickSubmitWord()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -138,10 +152,15 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     override fun initializeActivityMode(activityMode: Int) {
         currentActivityMode = activityMode
+        toggleEditMode(false)
         when (currentActivityMode) {
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
             WordActivityMode.SINGLE.ordinal -> toggleController(false)
+            WordActivityMode.EDIT.ordinal -> {
+                toggleEditMode(true)
+                toggleController(false)
+            }
         }
 
         initializeTTS()
@@ -163,8 +182,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_information.visible()
             word_mnemonic.visible()
         } else {
-            word_information.text = "Tap to View"
-            word_mnemonic.text = "Tap to View"
+            word_information.setText(getString(R.string.tap_to_show))
+            word_mnemonic.setText(getString(R.string.tap_to_show))
         }
     }
 
@@ -180,27 +199,47 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         }
     }
 
+    override fun toggleEditMode(toShow: Boolean) {
+        if (toShow) {
+            this.optionMenu?.findItem(R.id.action_edit_word)?.isVisible = false
+            this.optionMenu?.findItem(R.id.action_submit_word)?.isVisible = true
+            word_name.isEnabled = true
+            word_type.isEnabled = true
+            word_pronunciation.isEnabled = true
+            word_information.isEnabled = true
+            word_mnemonic.isEnabled = true
+        } else {
+            this.optionMenu?.findItem(R.id.action_edit_word)?.isVisible = true
+            this.optionMenu?.findItem(R.id.action_submit_word)?.isVisible = false
+            word_name.isEnabled = false
+            word_type.isEnabled = false
+            word_pronunciation.isEnabled = false
+            word_information.isEnabled = false
+            word_mnemonic.isEnabled = false
+        }
+    }
+
     override fun updateWord(word: Word, wordIndex: Int, wordListSize: Int) {
-        word_name.text = word.name
-        word_type.text = word.type
-        word_pronunciation.text = word.pronunciation
+        word_name.setText(word.name)
+        word_type.setText(word.type)
+        word_pronunciation.setText(word.pronunciation)
         val wordIndex = "$wordIndex/$wordListSize"
         word_index.text = wordIndex
         if (currentActivityMode != WordActivityMode.PRACTICE.ordinal) {
-            word_information.text = word.information
-            word_mnemonic.text = word.mnemonic
+            word_information.setText(word.information)
+            word_mnemonic.setText(word.mnemonic)
         } else {
-            word_information.text = "Tap to Show"
-            word_mnemonic.text = "Tap to Show"
+            word_information.setText(getString(R.string.tap_to_show))
+            word_mnemonic.setText(getString(R.string.tap_to_show))
         }
     }
 
     override fun updateWordInformation(information: String) {
-        word_information.text = information
+        word_information.setText(information)
     }
 
     override fun updateWordMnemonic(mnemonic: String) {
-        word_mnemonic.text = mnemonic
+        word_mnemonic.setText(mnemonic)
     }
 
     override fun speakWord(name: String) {
@@ -221,11 +260,11 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     }
 
     override fun updateWordSingle(word: Word) {
-        word_name.text = word.name
-        word_type.text = word.type
-        word_pronunciation.text = word.pronunciation
-        word_information.text = word.information
-        word_mnemonic.text = word.mnemonic
+        word_name.setText(word.name)
+        word_type.setText(word.type)
+        word_pronunciation.setText(word.pronunciation)
+        word_information.setText(word.information)
+        word_mnemonic.setText(word.mnemonic)
     }
 
     override fun updateFABDictateIcon(icon: Int) {
