@@ -142,28 +142,36 @@
             <TextView
                 android:id="@+id/word_information_label"
                 style="@style/Base.TextAppearance.AppCompat.Subhead"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/label_word_information"
                 android:textColor="@color/default_primary_text"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/word_type" />
 
             <TextView
                 android:id="@+id/word_mnemonics_label"
                 style="@style/Base.TextAppearance.AppCompat.Subhead"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/label_word_mnemonics"
                 android:textColor="@color/default_primary_text"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/word_information" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toEndOf="@+id/word_information_label"
+                app:layout_constraintTop_toBottomOf="@+id/word_type"
+                app:srcCompat="@drawable/ic_sync" />
 
         </android.support.constraint.ConstraintLayout>
 
