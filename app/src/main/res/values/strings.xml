@@ -5,6 +5,8 @@
     <string name="label_word_list">Word List</string>
     <string name="label_settings">Settings</string>
     <string name="label_load_list">Load List</string>
+    <string name="label_create_list">Create List</string>
+    <string name="label_add_word">Add Word</string>
     <string name="label_about">About</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -14,6 +16,13 @@
     <string name="title_load_saved_list">Load Saved List</string>
     <string name="title_change_list_type_dialog">Change List Type</string>
     <string name="alert_list_change">List Changed to %1$s</string>
+
+    <!--Word List Fragment-->
+    <string name="wordlist_empty_warning">Word List Empty! Add Words from Menu</string>
+    <string name="create_word_list_dialog_title">Create Word List</string>
+    <string name="create_word_list_dialog_content">Enter name for new Word List</string>
+    <string name="create_word_list_dialog_hint">Word List Name</string>
+    <string name="create_word_list_dialog_special_char_warning">Special characters not allowed</string>
 
     <!--About Activity-->
     <string name="version">Version</string>

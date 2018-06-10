@@ -1,12 +1,14 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
+import com.adityakamble49.wordlist.interactor.CreateWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetWordListsUseCase
 import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListIdUseCase
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.utils.WordUtils
+import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -20,7 +22,8 @@ class WordListPresenter @Inject constructor(
         private val view: WordListContract.View,
         private val getWordListsUseCase: GetWordListsUseCase,
         private val updateCurrentLoadedListIdUseCase: UpdateCurrentLoadedListIdUseCase,
-        private val getCurrentWordListUseCase: GetCurrentWordListUseCase) :
+        private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
+        private val createWordListUseCase: CreateWordListUseCase) :
         WordListContract.Presenter {
 
     private lateinit var wordListViewModel: WordListViewModel
@@ -104,9 +107,36 @@ class WordListPresenter @Inject constructor(
         view.showLoadSavedListDialog()
     }
 
+    override fun onClickCreateList() {
+        view.showCreateListDialog()
+    }
+
+    override fun onCreateWordListPositive(wordListName: String) {
+        createWordListUseCase.execute(wordListName).subscribe(CreateWordListObserver())
+    }
+
+    private inner class CreateWordListObserver : SingleObserver<WordList> {
+
+        override fun onSubscribe(d: Disposable) {}
+
+        override fun onSuccess(t: WordList) {
+            view.showCreateWordListResponse("Word List Created")
+            updateCurrentWordList(t)
+        }
+
+        override fun onError(e: Throwable) {
+            view.showCreateWordListResponse("Word List Name Exist!")
+        }
+
+    }
+
     override fun onClickSavedListItem(selectedWordList: WordList) {
-        updateCurrentLoadedListIdUseCase.execute(selectedWordList.id)
-        wordListViewModel.updateCurrentLoadedSavedList(selectedWordList)
+        updateCurrentWordList(selectedWordList)
+    }
+
+    private fun updateCurrentWordList(wordList: WordList) {
+        updateCurrentLoadedListIdUseCase.execute(wordList.id)
+        wordListViewModel.updateCurrentLoadedSavedList(wordList)
     }
 
     override fun onClickedSingleWord(word: Word) {

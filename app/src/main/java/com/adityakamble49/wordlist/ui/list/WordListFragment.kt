@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.text.InputType
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
@@ -19,8 +21,10 @@ import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.search.SearchFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
+import com.adityakamble49.wordlist.utils.hasSpecialChar
 import com.adityakamble49.wordlist.utils.replaceFragment
 import com.adityakamble49.wordlist.utils.visible
+import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.fragment_wordlist.*
 import kotlinx.android.synthetic.main.fragment_wordlist.view.*
@@ -57,6 +61,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         when (item.itemId) {
             R.id.action_search -> presenter.onClickSearch()
             R.id.action_load_list -> presenter.onClickLoadList()
+            R.id.action_create_list -> presenter.onClickCreateList()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -128,9 +133,50 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         }
     }
 
+    override fun showCreateListDialog() {
+        context?.let {
+            MaterialDialog.Builder(it)
+                    .title(getString(R.string.create_word_list_dialog_title))
+                    .content(getString(R.string.create_word_list_dialog_content))
+                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    .inputRange(1, 50)
+                    .input(getString(R.string.create_word_list_dialog_hint), "", { dialog, input ->
+                        val keyName = input.toString()
+                        if (keyName.hasSpecialChar()) {
+                            dialog.getActionButton(DialogAction.POSITIVE).isEnabled = false
+                            dialog.setContent(getString(
+                                    R.string.create_word_list_dialog_special_char_warning))
+                        } else {
+                            dialog.getActionButton(DialogAction.POSITIVE).isEnabled = true
+                            dialog.setContent(getString(R.string.create_word_list_dialog_content))
+                        }
+                    })
+                    .onPositive { dialog, _ ->
+                        dialog.inputEditText?.text.let {
+                            presenter.onCreateWordListPositive(it.toString())
+                        }
+                    }
+                    .alwaysCallInputCallback()
+                    .build().show()
+        }
+    }
+
+    override fun showCreateWordListResponse(response: String) {
+        Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
+    }
+
     override fun updateWords(wordList: List<Word>) {
+        toggleEmptyView(wordList.size)
         wordListAdapter.itemList = wordList
         wordListAdapter.notifyDataSetChanged()
+    }
+
+    private fun toggleEmptyView(size: Int) {
+        if (size > 0) {
+            ll_empty_view.gone()
+        } else {
+            ll_empty_view.visible()
+        }
     }
 
     override fun openSearch() {
