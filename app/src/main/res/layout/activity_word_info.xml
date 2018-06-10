@@ -26,6 +26,7 @@
                 android:layout_marginTop="16dp"
                 android:ellipsize="end"
                 android:enabled="false"
+                android:hint="@string/word_hint"
                 android:maxLines="1"
                 app:backgroundTint="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
@@ -33,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="abstain" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_pronunciation"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
@@ -43,6 +44,7 @@
                 android:background="@drawable/bg_word_type"
                 android:enabled="false"
                 android:gravity="center"
+                android:hint="@string/pronunciation_hint"
                 android:maxLines="1"
                 android:paddingBottom="2dp"
                 android:paddingEnd="14dp"
@@ -52,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/word_name"
                 tools:text="ab-STAIN" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_type"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
@@ -61,6 +63,7 @@
                 android:background="@drawable/bg_word_type"
                 android:enabled="false"
                 android:gravity="center"
+                android:hint="@string/word_type_hint"
                 android:maxLines="1"
                 android:paddingBottom="2dp"
                 android:paddingEnd="14dp"
@@ -100,6 +103,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:hint="@string/word_information_hint"
                 android:inputType="textMultiLine"
                 android:paddingBottom="20dp"
                 android:textColor="@color/default_secondary_text"
@@ -116,6 +120,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:hint="@string/word_mnemonic_hint"
                 android:lineSpacingExtra="2dp"
                 android:paddingBottom="20dp"
                 android:textColor="@color/default_secondary_text"

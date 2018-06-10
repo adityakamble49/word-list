@@ -66,5 +66,10 @@
     <string name="label_search">Search</string>
     <string name="add_word_success">Word Added Successfully</string>
     <string name="word_edit_success">Word Edited</string>
+    <string name="pronunciation_hint">Pronunciation</string>
+    <string name="word_type_hint">Word Type</string>
+    <string name="word_information_hint">Word Information</string>
+    <string name="word_mnemonic_hint">Word Mnemonic</string>
+    <string name="word_hint">Word</string>
 
 </resources>
