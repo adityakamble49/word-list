@@ -16,6 +16,11 @@ class SearchListAdapter : WordListAdapter(), Filterable {
     override var bookMarkItemId: Int = 0
     lateinit var unfilteredItemList: List<Word>
 
+    override fun getItemCount(): Int {
+        if (itemList.size < 20) return itemList.size
+        return 20
+    }
+
     override fun getFilter(): Filter {
         return object : Filter() {
 
