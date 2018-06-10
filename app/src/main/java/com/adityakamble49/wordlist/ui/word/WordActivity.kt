@@ -61,13 +61,14 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_word_info, menu)
         this.optionMenu = menu
-        val submitItem = menu.findItem(R.id.action_submit_word)
-        submitItem.isVisible = false
+        menu.findItem(R.id.action_submit_word).isVisible = false
+        menu.findItem(R.id.action_show_info).isVisible = false
         if (currentActivityMode == WordActivityMode.ADD.ordinal) {
             toggleEditMode(true)
         }
         if (currentActivityMode == WordActivityMode.PRACTICE.ordinal) {
             menu.findItem(R.id.action_edit_word).isVisible = false
+            menu.findItem(R.id.action_show_info).isVisible = true
         }
         return super.onCreateOptionsMenu(menu)
     }
@@ -91,14 +92,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             android.R.id.home -> finish()
             R.id.action_edit_word -> presenter.onClickEditWord()
             R.id.action_submit_word -> presenter.onClickSubmitWord()
+            R.id.action_show_info -> presenter.onClickShowInfo()
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.word_information -> presenter.onClickWordInformation()
-            R.id.word_mnemonic -> presenter.onClickWordMnemonic()
             R.id.word_text_to_speech -> presenter.onClickWordTTS()
             R.id.previous_word -> presenter.onPreviousWordAction()
             R.id.fab_dictate -> presenter.onDictateModeAction()
@@ -162,8 +162,6 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         currentActivityMode = activityMode
         toggleEditMode(false)
         when (currentActivityMode) {
-            WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
-            WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
             WordActivityMode.SINGLE.ordinal -> toggleController(false)
             WordActivityMode.ADD.ordinal -> {
                 toggleEditMode(true)
@@ -182,17 +180,6 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     private fun closeTTS() {
         tts.stop()
         tts.shutdown()
-    }
-
-
-    private fun toggleWordInfo(toShow: Boolean) {
-        if (toShow) {
-            word_information.visible()
-            word_mnemonic.visible()
-        } else {
-            word_information.setText(getString(R.string.tap_to_show))
-            word_mnemonic.setText(getString(R.string.tap_to_show))
-        }
     }
 
     private fun toggleController(toShow: Boolean) {
@@ -273,16 +260,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_information.setText(word.information)
             word_mnemonic.setText(word.mnemonic)
         } else {
-            word_information.setText(getString(R.string.tap_to_show))
-            word_mnemonic.setText(getString(R.string.tap_to_show))
+            word_information.setText("")
+            word_mnemonic.setText("")
         }
     }
 
-    override fun updateWordInformation(information: String) {
+    override fun showWordInfo(information: String, mnemonic: String) {
         word_information.setText(information)
-    }
-
-    override fun updateWordMnemonic(mnemonic: String) {
         word_mnemonic.setText(mnemonic)
     }
 

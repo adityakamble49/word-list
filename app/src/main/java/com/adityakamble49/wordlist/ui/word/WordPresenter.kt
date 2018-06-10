@@ -146,15 +146,10 @@ class WordPresenter @Inject constructor(
         return currentWordViewModel.currentWord
     }
 
-    override fun onClickWordInformation() {
+    override fun onClickShowInfo() {
         if (isPracticeMode()) {
-            view.updateWordInformation(currentWordViewModel.currentWord.information)
-        }
-    }
-
-    override fun onClickWordMnemonic() {
-        if (isPracticeMode()) {
-            view.updateWordMnemonic(currentWordViewModel.currentWord.mnemonic)
+            view.showWordInfo(currentWordViewModel.currentWord.information,
+                    currentWordViewModel.currentWord.mnemonic)
         }
     }
 

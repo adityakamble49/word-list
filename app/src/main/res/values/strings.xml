@@ -71,5 +71,6 @@
     <string name="word_information_hint">Word Information</string>
     <string name="word_mnemonic_hint">Word Mnemonic</string>
     <string name="word_hint">Word</string>
+    <string name="label_show_info">Show Info</string>
 
 </resources>
