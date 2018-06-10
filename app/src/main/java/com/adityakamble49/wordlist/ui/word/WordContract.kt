@@ -20,6 +20,7 @@ interface WordContract {
         fun submitWordInvalid()
         fun addWordSuccess()
         fun editWordSuccess()
+        fun showEmptyListWarning()
         fun updateWord(word: Word, wordIndex: Int, wordListSize: Int)
         fun showWordInfo(information: String, mnemonic: String)
         fun speakWord(name: String)

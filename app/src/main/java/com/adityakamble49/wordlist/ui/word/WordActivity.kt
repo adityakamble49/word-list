@@ -250,6 +250,11 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         toggleEditMode(false)
     }
 
+    override fun showEmptyListWarning() {
+        Toast.makeText(this, getString(R.string.empty_list_warning), Toast.LENGTH_LONG).show()
+        finish()
+    }
+
     override fun updateWord(word: Word, wordIndex: Int, wordListSize: Int) {
         word_name.setText(word.name)
         word_type.setText(word.type)

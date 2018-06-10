@@ -33,6 +33,7 @@ class WordPresenter @Inject constructor(
     private lateinit var currentWordViewModel: WordViewModel
     private var currentWordActivityMode: Int = WordActivity.Companion.WordActivityMode.NORMAL.ordinal
     private var currentWordId = 0
+    private var isWordListEmpty = false
 
     override fun setWordViewModel(currentWordViewModel: WordViewModel) {
         this.currentWordViewModel = currentWordViewModel
@@ -95,6 +96,11 @@ class WordPresenter @Inject constructor(
         override fun onError(e: Throwable) {}
 
         override fun onNext(t: List<Word>) {
+            if (t.isEmpty()) {
+                view.showEmptyListWarning()
+                isWordListEmpty = true
+                return
+            }
             currentWordViewModel.wordList = WordUtils.sortWords(t,
                     currentWordViewModel.currentWordList.wordSequenceList)
             loadWord(currentWordActivityMode, currentWordId)
@@ -293,6 +299,9 @@ class WordPresenter @Inject constructor(
     }
 
     private fun updateLastWordInWordList() {
+        if (isWordListEmpty) {
+            return
+        }
         if (currentWordActivityMode == WordActivity.Companion.WordActivityMode.LEARN.ordinal) {
             saveLastWordIdForWordListUseCase.execute(currentWordViewModel.currentWordList.id,
                     currentWordViewModel.currentWord.id)
