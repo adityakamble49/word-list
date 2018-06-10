@@ -22,3 +22,5 @@
 -keep class * implements com.google.gson.JsonDeserializer
 
 ##---------------End: proguard configuration for Gson  ----------
+
+-keep class android.support.v7.widget.SearchView { *; }

@@ -15,6 +15,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.ui.about.AboutActivity
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
+import com.adityakamble49.wordlist.ui.search.SearchFragment
 import com.adityakamble49.wordlist.ui.settings.SettingsFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.invisible
@@ -132,16 +133,16 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         showFAB(false)
         toggleDrawerToggleIndicator(true)
         when (currentFragment.javaClass.simpleName) {
-            "WordListFragment" -> {
+            WordListFragment::class.java.simpleName -> {
                 updateTitle(getString(R.string.app_name))
                 showFAB(true)
                 previousNavigationItem = ID_NAV_WORD_LIST
             }
-            "SettingsFragment" -> {
+            SettingsFragment::class.java.simpleName -> {
                 updateTitle(getString(R.string.label_settings))
                 previousNavigationItem = ID_NAV_SETTINGS
             }
-            "SearchFragment" -> {
+            SearchFragment::class.java.simpleName -> {
                 toggleDrawerToggleIndicator(false)
                 updateTitle(getString(R.string.label_search))
             }
