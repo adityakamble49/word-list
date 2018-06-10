@@ -64,6 +64,7 @@ class WordListPresenter @Inject constructor(
             wordListViewModel.initialize()
             observeWords()
             observeSavedWordLists()
+            view.updateCurrentWordListName(t.name)
         }
     }
 
@@ -136,6 +137,7 @@ class WordListPresenter @Inject constructor(
 
     override fun onClickSavedListItem(selectedWordList: WordList) {
         updateCurrentWordList(selectedWordList)
+        view.updateCurrentWordListName(selectedWordList.name)
     }
 
     private fun updateCurrentWordList(wordList: WordList) {

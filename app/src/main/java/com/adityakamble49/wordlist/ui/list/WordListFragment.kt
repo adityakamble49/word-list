@@ -121,6 +121,10 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         this.savedWordLists = savedWordLists
     }
 
+    override fun updateCurrentWordListName(wordListName: String) {
+        (activity as AppCompatActivity).supportActionBar?.title = wordListName
+    }
+
     override fun showLoadSavedListDialog() {
         val wordListNames = mutableListOf<String>()
         savedWordLists.forEach { wordList -> wordListNames.add(wordList.name) }

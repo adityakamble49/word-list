@@ -14,6 +14,7 @@ interface WordListContract {
     interface View : BaseContract.View, LifecycleOwner {
         fun showLoading(toShow: Boolean)
         fun updateSavedWordLists(savedWordLists: List<WordList>)
+        fun updateCurrentWordListName(wordListName: String)
         fun showCreateListDialog()
         fun showCreateWordListResponse(response: String)
         fun openAddWordUI()
