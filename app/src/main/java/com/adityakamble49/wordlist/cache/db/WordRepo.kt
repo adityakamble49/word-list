@@ -11,13 +11,13 @@ import javax.inject.Inject
 @PerApplication
 class WordRepo @Inject constructor(private var wordDao: WordDao) {
 
-    fun insertWord(word: Word) {
-        wordDao.insertWord(word)
-    }
+    fun insertWord(word: Word) = wordDao.insertWord(word)
 
     fun insertWords(wordList: List<Word>) {
         wordDao.insertWords(wordList)
     }
+
+    fun updateWord(word: Word) = wordDao.updateWord(word)
 
     fun getWordList() = wordDao.getWordList()
 

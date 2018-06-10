@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
+import android.arch.persistence.room.Update
 import com.adityakamble49.wordlist.model.Word
 
 /**
@@ -16,10 +17,13 @@ import com.adityakamble49.wordlist.model.Word
 interface WordDao {
 
     @Insert
-    fun insertWord(word: Word)
+    fun insertWord(word: Word): Long
 
     @Insert
     fun insertWords(wordList: List<Word>)
+
+    @Update
+    fun updateWord(word: Word)
 
     @Query("SELECT * FROM words")
     fun getWordList(): LiveData<List<Word>>
