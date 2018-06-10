@@ -1,8 +1,6 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations
-import com.adityakamble49.wordlist.cache.db.WordListRepo
 import com.adityakamble49.wordlist.interactor.CreateWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
 import com.adityakamble49.wordlist.interactor.GetWordListsUseCase
@@ -25,8 +23,7 @@ class WordListPresenter @Inject constructor(
         private val getWordListsUseCase: GetWordListsUseCase,
         private val updateCurrentLoadedListIdUseCase: UpdateCurrentLoadedListIdUseCase,
         private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
-        private val createWordListUseCase: CreateWordListUseCase,
-        private val wordListRepo: WordListRepo) :
+        private val createWordListUseCase: CreateWordListUseCase) :
         WordListContract.Presenter {
 
     private lateinit var wordListViewModel: WordListViewModel
@@ -54,13 +51,6 @@ class WordListPresenter @Inject constructor(
         getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
     }
 
-    private fun observeCurrentWordList() {
-        val wordList = Transformations.switchMap(wordListViewModel.currentWordListLive) { input ->
-            wordListRepo.getWordListById(input.id)
-        }
-        wordList.observe(view, Observer { it?.let { updateCurrentWordList(it) } })
-    }
-
     /**
      * Listen to Current WordList response and initiate other observers to do work
      */
@@ -71,7 +61,6 @@ class WordListPresenter @Inject constructor(
 
         override fun onNext(t: WordList) {
             wordListViewModel.updateCurrentLoadedSavedList(t)
-            observeCurrentWordList()
             wordListViewModel.initialize()
             observeWords()
             observeSavedWordLists()

@@ -23,7 +23,7 @@ class GetCurrentWordsUseCase @Inject constructor(
     private fun buildUseCaseObservable(): Observable<List<Word>> {
         return Observable.create { e ->
             val currentLoadedListId = preferenceHelper.currentLoadedListId
-            val currentWordList = wordListRepo.getWordListByIdDirect(currentLoadedListId)
+            val currentWordList = wordListRepo.getWordListById(currentLoadedListId)
             val wordList = wordRepo.getWordListDirect(currentWordList.id)
             e.onNext(wordList)
             e.onComplete()

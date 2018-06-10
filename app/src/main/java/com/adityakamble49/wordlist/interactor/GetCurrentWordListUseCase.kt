@@ -21,7 +21,7 @@ class GetCurrentWordListUseCase @Inject constructor(
     private fun buildUseCaseObservable(): Observable<WordList> {
         return Observable.create { e ->
             val currentWordListId = preferenceHelper.currentLoadedListId
-            val currentWordList = wordListRepo.getWordListByIdDirect(currentWordListId)
+            val currentWordList = wordListRepo.getWordListById(currentWordListId)
             e.onNext(currentWordList)
             e.onComplete()
         }

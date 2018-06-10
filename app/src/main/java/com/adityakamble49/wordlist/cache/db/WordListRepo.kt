@@ -21,10 +21,8 @@ class WordListRepo @Inject constructor(private val wordListDao: WordListDao) {
 
     fun getWordListsDirect() = wordListDao.getWordListsDirect()
 
-    fun getWordListByIdDirect(currentWordListId: Int) =
+    fun getWordListById(currentWordListId: Int) =
             wordListDao.getWordListByIdDirect(currentWordListId)
-
-    fun getWordListById(currentWordListId: Int) = wordListDao.getWordListById(currentWordListId)
 
     fun updateWordList(wordList: WordList) = wordListDao.update(wordList)
 

@@ -23,7 +23,7 @@ class SubmitNewWordUseCase @Inject constructor(
     private fun buildUseCaseObservable(newWord: Word): Completable {
         return Completable.create { e ->
             val currentWordListId = preferenceHelper.currentLoadedListId
-            val currentWordList = wordListRepo.getWordListByIdDirect(currentWordListId)
+            val currentWordList = wordListRepo.getWordListById(currentWordListId)
             newWord.listId = currentWordList.id
             val newWordId = wordRepo.insertWord(newWord)
             currentWordList.wordSequenceList.add(newWordId.toInt())
