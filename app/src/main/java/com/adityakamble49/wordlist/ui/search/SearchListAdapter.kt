@@ -24,7 +24,7 @@ class SearchListAdapter : WordListAdapter(), Filterable {
                 if (!charString.isEmpty()) {
                     val localList = mutableListOf<Word>()
                     for (word in unfilteredItemList) {
-                        if (word.name.contains(charString)) {
+                        if (word.name.toLowerCase().contains(charString.toString().toLowerCase())) {
                             localList.add(word)
                         }
                     }
