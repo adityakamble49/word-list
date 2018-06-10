@@ -3,7 +3,6 @@ package com.adityakamble49.wordlist.interactor
 import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.cache.db.WordListRepo
 import com.adityakamble49.wordlist.cache.db.WordRepo
-import com.adityakamble49.wordlist.model.WordComparator
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.model.WordListType
 import com.adityakamble49.wordlist.utils.DataProcessor
@@ -30,65 +29,53 @@ class ImportWordListToDatabaseUseCase @Inject constructor(
     private fun buildUseCaseObservable(): Completable {
         return Completable.create(object : CompletableOnSubscribe {
             override fun subscribe(importWordListToDBEmitter: CompletableEmitter) {
+
+                // Create Shuffled Word List
+                val wordListManhattanEssentialShuffled = WordList(0,
+                        "Manhattan Essential - Shuffled", 0, arrayListOf())
+                val wordListManhattanAdvancedShuffled = WordList(0,
+                        "Manhattan Advanced - Shuffled", 0, arrayListOf())
+                val wordListEssentialId = wordListRepo.insert(wordListManhattanEssentialShuffled)
+                val wordListAdvancedId = wordListRepo.insert(wordListManhattanAdvancedShuffled)
+
+
                 // Insert Words into DB
                 val wordListManhattanEssential = dataProcessor.parseWordList(
                         WordListType.MANHATTAN_ESSENTIAL)
+                wordListManhattanEssential.forEach {
+                    it.listId = wordListEssentialId.toInt()
+                }
                 val wordListManhattanAdvanced = dataProcessor.parseWordList(
                         WordListType.MANHATTAN_ADVANCED)
+                wordListManhattanAdvanced.forEach {
+                    it.listId = wordListAdvancedId.toInt()
+                }
                 wordRepo.insertWords(wordListManhattanEssential)
                 wordRepo.insertWords(wordListManhattanAdvanced)
 
                 // Fetch inserted words with updated primary key
                 val wordListManhattanEssentialFetched = wordRepo.getWordListDirect(
-                        WordListType.MANHATTAN_ESSENTIAL.ordinal)
+                        wordListEssentialId.toInt())
                 val wordListManhattanAdvancedFetched = wordRepo.getWordListDirect(
-                        WordListType.MANHATTAN_ADVANCED.ordinal)
+                        wordListAdvancedId.toInt())
 
                 // Create default shuffled word lists
                 var essentialShuffledSequence: ArrayList<Int> = arrayListOf()
                 wordListManhattanEssentialFetched.forEach { essentialShuffledSequence.add(it.id) }
-                val wordListManhattanEssentialShuffled = WordList(0,
+                val wordListManhattanEssentialShuffledUpdate = WordList(wordListEssentialId.toInt(),
                         "Manhattan Essential - Shuffled",
-                        WordListType.MANHATTAN_ESSENTIAL.ordinal,
                         essentialShuffledSequence[0],
                         essentialShuffledSequence)
 
                 var advancedShuffledSequence: ArrayList<Int> = arrayListOf()
                 wordListManhattanAdvancedFetched.forEach { advancedShuffledSequence.add(it.id) }
-                val wordListManhattanAdvancedShuffled = WordList(0,
+                val wordListManhattanAdvancedShuffledUpdate = WordList(wordListAdvancedId.toInt(),
                         "Manhattan Advanced - Shuffled",
-                        WordListType.MANHATTAN_ADVANCED.ordinal,
                         advancedShuffledSequence[0],
                         advancedShuffledSequence)
 
-                wordListRepo.insert(wordListManhattanEssentialShuffled)
-                wordListRepo.insert(wordListManhattanAdvancedShuffled)
-
-                // Sort Words alphabetically
-                Collections.sort(wordListManhattanEssentialFetched, WordComparator())
-                Collections.sort(wordListManhattanAdvancedFetched, WordComparator())
-
-                // Create default shuffled word lists
-                var essentialAlphabeticalSequence: ArrayList<Int> = arrayListOf()
-                wordListManhattanEssentialFetched.forEach {
-                    essentialAlphabeticalSequence.add(it.id)
-                }
-                val wordListManhattanEssentialAlphabetical = WordList(0,
-                        "Manhattan Essential - Alphabetical",
-                        WordListType.MANHATTAN_ESSENTIAL.ordinal,
-                        essentialAlphabeticalSequence[0],
-                        essentialAlphabeticalSequence)
-
-                var advancedAlphabeticalSequence: ArrayList<Int> = arrayListOf()
-                wordListManhattanAdvancedFetched.forEach { advancedAlphabeticalSequence.add(it.id) }
-                val wordListManhattanAdvancedAlphabetical = WordList(0,
-                        "Manhattan Advanced - Alphabetical",
-                        WordListType.MANHATTAN_ADVANCED.ordinal,
-                        advancedAlphabeticalSequence[0],
-                        advancedAlphabeticalSequence)
-
-                wordListRepo.insert(wordListManhattanEssentialAlphabetical)
-                wordListRepo.insert(wordListManhattanAdvancedAlphabetical)
+                wordListRepo.updateWordList(wordListManhattanEssentialShuffledUpdate)
+                wordListRepo.updateWordList(wordListManhattanAdvancedShuffledUpdate)
 
                 preferenceHelper.areWordsImported = true
                 importWordListToDBEmitter.onComplete()

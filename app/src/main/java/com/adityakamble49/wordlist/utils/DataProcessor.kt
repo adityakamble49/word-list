@@ -42,16 +42,6 @@ class DataProcessor @Inject constructor(@ApplicationContext var context: Context
         bufferedReader.lineSequence().forEach { stringBuilder.append(it) }
         val listType = object : TypeToken<List<Word>>() {}.type
         val wordList: List<Word> = gsonParser.fromJson(stringBuilder.toString(), listType)
-
-        // Append word list type
-        when (wordListType) {
-            WordListType.MANHATTAN_ESSENTIAL -> wordList.forEach {
-                it.listType = WordListType.MANHATTAN_ESSENTIAL.ordinal
-            }
-            WordListType.MANHATTAN_ADVANCED -> wordList.forEach {
-                it.listType = WordListType.MANHATTAN_ADVANCED.ordinal
-            }
-        }
         return wordList
     }
 

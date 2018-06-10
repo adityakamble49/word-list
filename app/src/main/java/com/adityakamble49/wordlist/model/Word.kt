@@ -13,7 +13,7 @@ import com.adityakamble49.wordlist.utils.Constants.Database
 @Entity(tableName = Database.TABLE_WORD_NAME)
 data class Word(
         @PrimaryKey(autoGenerate = true) var id: Int,
-        var listType: Int,
+        var listId: Int,
         var name: String,
         var type: String,
         var pronunciation: String,

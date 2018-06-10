@@ -31,7 +31,7 @@ class WordListViewModel @Inject constructor(
     fun initialize() {
         wordList = Transformations.switchMap(currentWordListLive,
                 Function<WordList, LiveData<List<Word>>> {
-                    return@Function wordRepo.getWordList(it.listType)
+                    return@Function wordRepo.getWordList(it.id)
                 })
     }
 

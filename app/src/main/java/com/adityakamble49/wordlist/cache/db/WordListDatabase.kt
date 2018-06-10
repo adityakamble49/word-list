@@ -12,7 +12,7 @@ import com.adityakamble49.wordlist.model.WordList
  * @author Aditya Kamble
  * @since 8/4/2018
  */
-@Database(entities = [(Word::class), (WordList::class)], version = 1)
+@Database(entities = [(Word::class), (WordList::class)], version = 2)
 @TypeConverters(Converter::class)
 abstract class WordListDatabase : RoomDatabase() {
 
