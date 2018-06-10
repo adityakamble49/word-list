@@ -25,7 +25,7 @@ class WordListViewModel @Inject constructor(
 
     val savedWordList: LiveData<List<WordList>> = wordListRepo.getWordLists()
     private lateinit var wordList: LiveData<List<Word>>
-    private val currentWordListLive = MutableLiveData<WordList>()
+    val currentWordListLive = MutableLiveData<WordList>()
     lateinit var currentWordList: WordList
 
     fun initialize() {
