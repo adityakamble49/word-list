@@ -111,6 +111,10 @@ class WordListPresenter @Inject constructor(
         view.showCreateListDialog()
     }
 
+    override fun onClickAddWord() {
+        view.openAddWordUI()
+    }
+
     override fun onCreateWordListPositive(wordListName: String) {
         createWordListUseCase.execute(wordListName).subscribe(CreateWordListObserver())
     }

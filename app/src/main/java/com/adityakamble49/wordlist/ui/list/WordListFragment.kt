@@ -62,6 +62,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
             R.id.action_search -> presenter.onClickSearch()
             R.id.action_load_list -> presenter.onClickLoadList()
             R.id.action_create_list -> presenter.onClickCreateList()
+            R.id.action_add_word -> presenter.onClickAddWord()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -163,6 +164,13 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     override fun showCreateWordListResponse(response: String) {
         Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun openAddWordUI() {
+        val wordIntent = Intent(activity, WordActivity::class.java)
+        wordIntent.putExtra(WordActivity.IE_KEY_WORD_ACTIVITY_MODE,
+                WordActivity.Companion.WordActivityMode.ADD.ordinal)
+        startActivity(wordIntent)
     }
 
     override fun updateWords(wordList: List<Word>) {
