@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_name"
                 style="@style/TextAppearance.AppCompat.Display1"
                 android:layout_width="0dp"
@@ -27,6 +27,7 @@
                 android:ellipsize="end"
                 android:enabled="false"
                 android:maxLines="1"
+                app:backgroundTint="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toTopOf="parent"
@@ -93,21 +94,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/word_name"
                 app:srcCompat="@drawable/ic_volume_up" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_information"
                 style="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:enabled="false"
                 android:inputType="textMultiLine"
+                android:paddingBottom="20dp"
                 android:textColor="@color/default_secondary_text"
+                app:backgroundTint="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/word_information_label"
                 tools:text="Word Information" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_mnemonic"
                 style="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
@@ -117,6 +121,7 @@
                 android:lineSpacingExtra="2dp"
                 android:paddingBottom="20dp"
                 android:textColor="@color/default_secondary_text"
+                app:backgroundTint="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"

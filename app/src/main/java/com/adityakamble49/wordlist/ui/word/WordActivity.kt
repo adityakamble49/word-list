@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.PorterDuff
 import android.os.Build
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
@@ -64,6 +65,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         submitItem.isVisible = false
         if (currentActivityMode == WordActivityMode.ADD.ordinal) {
             toggleEditMode(true)
+        }
+        if (currentActivityMode == WordActivityMode.PRACTICE.ordinal) {
+            menu.findItem(R.id.action_edit_word).isVisible = false
         }
         return super.onCreateOptionsMenu(menu)
     }
@@ -211,16 +215,29 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_type.isEnabled = true
             word_pronunciation.isEnabled = true
             word_information.isEnabled = true
+            word_information.isCursorVisible = true
+            word_information.background.setColorFilter(
+                    ResourcesCompat.getColor(resources, R.color.default_accent, theme),
+                    PorterDuff.Mode.SRC_ATOP)
             word_mnemonic.isEnabled = true
+            word_mnemonic.isCursorVisible = true
+            word_mnemonic.background.setColorFilter(
+                    ResourcesCompat.getColor(resources, R.color.default_accent, theme),
+                    PorterDuff.Mode.SRC_ATOP)
             word_text_to_speech.gone()
         } else {
             this.optionMenu?.findItem(R.id.action_edit_word)?.isVisible = true
             this.optionMenu?.findItem(R.id.action_submit_word)?.isVisible = false
             word_name.isEnabled = false
             word_type.isEnabled = false
+            word_name.background.clearColorFilter()
             word_pronunciation.isEnabled = false
             word_information.isEnabled = false
+            word_information.isCursorVisible = false
+            word_information.background.clearColorFilter()
             word_mnemonic.isEnabled = false
+            word_mnemonic.isCursorVisible = false
+            word_mnemonic.background.clearColorFilter()
             word_text_to_speech.visible()
         }
     }
