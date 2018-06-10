@@ -29,6 +29,7 @@ interface WordListContract {
         fun setWordListViewModel(wordListViewModel: WordListViewModel)
         fun onClickSearch()
         fun onClickLoadList()
+        fun requestUpdateWordList()
         fun onClickCreateList()
         fun onClickAddWord()
         fun onCreateWordListPositive(wordListName: String)

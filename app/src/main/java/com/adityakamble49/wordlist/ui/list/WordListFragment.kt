@@ -52,6 +52,11 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         setHasOptionsMenu(true)
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.requestUpdateWordList()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_wordlist, menu)
         super.onCreateOptionsMenu(menu, inflater)

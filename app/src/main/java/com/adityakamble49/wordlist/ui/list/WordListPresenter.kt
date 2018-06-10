@@ -108,6 +108,20 @@ class WordListPresenter @Inject constructor(
         view.showLoadSavedListDialog()
     }
 
+    override fun requestUpdateWordList() {
+        getCurrentWordListUseCase.execute().subscribe(RequestUpdateWordListSubscriber())
+    }
+
+    private inner class RequestUpdateWordListSubscriber : io.reactivex.Observer<WordList> {
+        override fun onComplete() {}
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {}
+
+        override fun onNext(t: WordList) {
+            wordListViewModel.updateCurrentLoadedSavedList(t)
+        }
+    }
+
     override fun onClickCreateList() {
         view.showCreateListDialog()
     }
