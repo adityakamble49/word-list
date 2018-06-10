@@ -1,10 +1,7 @@
 package com.adityakamble49.wordlist.ui.word
 
 import com.adityakamble49.wordlist.R
-import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
-import com.adityakamble49.wordlist.interactor.GetCurrentWordsUseCase
-import com.adityakamble49.wordlist.interactor.GetDictateModeConfigUseCase
-import com.adityakamble49.wordlist.interactor.SaveLastWordIdForWordListUseCase
+import com.adityakamble49.wordlist.interactor.*
 import com.adityakamble49.wordlist.model.DictateModeSpeed
 import com.adityakamble49.wordlist.model.DictateModeType
 import com.adityakamble49.wordlist.model.Word
@@ -28,7 +25,9 @@ class WordPresenter @Inject constructor(
         private val getCurrentWordsUseCase: GetCurrentWordsUseCase,
         private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
         private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase,
-        private val getDictateModeConfigUseCase: GetDictateModeConfigUseCase) :
+        private val getDictateModeConfigUseCase: GetDictateModeConfigUseCase,
+        private val submitNewWordUseCase: SubmitNewWordUseCase,
+        private val submitEditedWordUseCase: SubmitEditedWordUseCase) :
         WordContract.Presenter {
 
     private lateinit var currentWordViewModel: WordViewModel
@@ -43,9 +42,11 @@ class WordPresenter @Inject constructor(
         this.currentWordActivityMode = wordActivityMode
     }
 
-    private fun isPracticeMode(): Boolean {
-        return currentWordActivityMode == WordActivity.Companion.WordActivityMode.PRACTICE.ordinal
-    }
+    private fun isPracticeMode() =
+            currentWordActivityMode == WordActivity.Companion.WordActivityMode.PRACTICE.ordinal
+
+    private fun isAddMode() =
+            currentWordActivityMode == WordActivity.Companion.WordActivityMode.ADD.ordinal
 
     override fun setWordId(wordId: Int) {
         this.currentWordId = wordId
@@ -77,7 +78,9 @@ class WordPresenter @Inject constructor(
 
         override fun onNext(t: WordList) {
             currentWordViewModel.currentWordList = t
-            loadWords()
+            if (!isAddMode()) {
+                loadWords()
+            }
         }
     }
 
@@ -252,7 +255,46 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onClickSubmitWord() {
-        view.toggleEditMode(false)
+        view.submitWord()
+    }
+
+    override fun submitEditedWord(submittedWord: Word) {
+        if (isWordValid(submittedWord)) {
+            if (isAddMode()) {
+                submitNewWordUseCase.execute(submittedWord).subscribe(SubmitNewWordObserver())
+            } else {
+                submittedWord.id = currentWordViewModel.currentWord.id
+                submittedWord.listId = currentWordViewModel.currentWord.listId
+                submitEditedWordUseCase.execute(submittedWord).subscribe(SubmitEditedWordObserver())
+            }
+        } else {
+            view.submitWordInvalid()
+        }
+    }
+
+    private fun isWordValid(submittedWord: Word): Boolean {
+        if (!submittedWord.name.isEmpty()) {
+            return true
+        }
+        return false
+    }
+
+    private inner class SubmitNewWordObserver : CompletableObserver {
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {}
+
+        override fun onComplete() {
+            view.addWordSuccess()
+        }
+    }
+
+    private inner class SubmitEditedWordObserver : CompletableObserver {
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {}
+
+        override fun onComplete() {
+            view.editWordSuccess()
+        }
     }
 
     private fun updateLastWordInWordList() {

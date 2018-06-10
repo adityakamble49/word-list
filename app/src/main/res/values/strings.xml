@@ -64,5 +64,7 @@
     <string name="pref_dictate_mode_speed_summary">Select dictate mode speed for words</string>
     <string name="pref_dictate_mode_speed_default">normal</string>
     <string name="label_search">Search</string>
+    <string name="add_word_success">Word Added Successfully</string>
+    <string name="word_edit_success">Word Edited</string>
 
 </resources>

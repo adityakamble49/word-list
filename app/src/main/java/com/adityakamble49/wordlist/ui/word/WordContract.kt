@@ -16,6 +16,10 @@ interface WordContract {
     interface View : BaseContract.View, LifecycleOwner {
         fun initializeActivityMode(currentWordActivityMode: Int)
         fun toggleEditMode(toShow: Boolean)
+        fun submitWord()
+        fun submitWordInvalid()
+        fun addWordSuccess()
+        fun editWordSuccess()
         fun updateWord(word: Word, wordIndex: Int, wordListSize: Int)
         fun updateWordInformation(information: String)
         fun updateWordMnemonic(mnemonic: String)
@@ -33,6 +37,7 @@ interface WordContract {
         fun onPause()
         fun onClickEditWord()
         fun onClickSubmitWord()
+        fun submitEditedWord(submittedWord: Word)
         fun onClickWordInformation()
         fun onClickWordMnemonic()
         fun onNextWordAction()

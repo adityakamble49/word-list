@@ -9,6 +9,7 @@ import android.support.v4.content.res.ResourcesCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
@@ -48,7 +49,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         var IE_DEFAULT_WORD_ACTIVITY_MODE = WordActivityMode.NORMAL.ordinal
 
         enum class WordActivityMode {
-            NORMAL, LEARN, PRACTICE, SINGLE, EDIT
+            NORMAL, LEARN, PRACTICE, SINGLE, ADD
         }
     }
 
@@ -61,6 +62,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         this.optionMenu = menu
         val submitItem = menu.findItem(R.id.action_submit_word)
         submitItem.isVisible = false
+        if (currentActivityMode == WordActivityMode.ADD.ordinal) {
+            toggleEditMode(true)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -157,7 +161,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             WordActivityMode.LEARN.ordinal -> toggleWordInfo(true)
             WordActivityMode.PRACTICE.ordinal -> toggleWordInfo(false)
             WordActivityMode.SINGLE.ordinal -> toggleController(false)
-            WordActivityMode.EDIT.ordinal -> {
+            WordActivityMode.ADD.ordinal -> {
                 toggleEditMode(true)
                 toggleController(false)
             }
@@ -208,6 +212,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_pronunciation.isEnabled = true
             word_information.isEnabled = true
             word_mnemonic.isEnabled = true
+            word_text_to_speech.gone()
         } else {
             this.optionMenu?.findItem(R.id.action_edit_word)?.isVisible = true
             this.optionMenu?.findItem(R.id.action_submit_word)?.isVisible = false
@@ -216,7 +221,29 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_pronunciation.isEnabled = false
             word_information.isEnabled = false
             word_mnemonic.isEnabled = false
+            word_text_to_speech.visible()
         }
+    }
+
+    override fun submitWord() {
+        val submittedWord = Word(0, 0, word_name.text.toString(), word_type.text.toString(),
+                word_pronunciation.text.toString(), word_information.text.toString(),
+                word_mnemonic.text.toString())
+        presenter.submitEditedWord(submittedWord)
+    }
+
+    override fun submitWordInvalid() {
+        Toast.makeText(this, "Word Invalid", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun addWordSuccess() {
+        Toast.makeText(this, getString(R.string.add_word_success), Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    override fun editWordSuccess() {
+        Toast.makeText(this, getString(R.string.word_edit_success), Toast.LENGTH_SHORT).show()
+        toggleEditMode(false)
     }
 
     override fun updateWord(word: Word, wordIndex: Int, wordListSize: Int) {
