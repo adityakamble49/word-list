@@ -3,10 +3,13 @@ package com.adityakamble49.wordlist.di.module
 import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
+import com.adityakamble49.wordlist.BuildConfig
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.di.module.common.ViewModelModule
 import com.adityakamble49.wordlist.di.qualifier.ApplicationContext
 import com.adityakamble49.wordlist.di.scope.PerApplication
+import com.adityakamble49.wordlist.remote.WordListService
+import com.adityakamble49.wordlist.remote.WordListServiceFactory
 import com.adityakamble49.wordlist.utils.Constants.Database
 import dagger.Module
 import dagger.Provides
@@ -38,4 +41,9 @@ class ApplicationModule {
     @Provides
     @PerApplication
     fun provideWordListDao(wordListDatabase: WordListDatabase) = wordListDatabase.wordListDao()
+
+    @Provides
+    @PerApplication
+    fun provideWordListService(): WordListService = WordListServiceFactory.makeWordListService(
+            BuildConfig.DEBUG)
 }

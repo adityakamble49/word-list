@@ -26,6 +26,10 @@ public class Constants {
         public static final float FASTER = 1.5f;
     }
 
+    public static class RemoteUrls {
+        public static final String BASE_URL = "";
+    }
+
     public static class ReferenceUrls {
         public static final String PERSONAL_WEBSITE = "http://adityakamble49.com";
         public static final String GITHUB_PROFILE = "https://github.com/adityakamble49";
