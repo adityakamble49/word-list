@@ -95,8 +95,9 @@ buildscript {
                     'core': "com.google.code.gson:gson:${versions.gson}",
             ],
             'retrofit'       : [
-                    'core'         : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-                    'converterGson': "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+                    'core'           : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                    'converterGson'  : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+                    'retrofitAdapter': "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
             ],
             'okhttp'         : [
                     'core'              : "com.squareup.okhttp3:okhttp:${versions.okhttp}",

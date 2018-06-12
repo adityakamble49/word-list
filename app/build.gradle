@@ -83,6 +83,11 @@ dependencies {
     implementation deps.rx.rxKotlin
     implementation deps.dagger.runtime
     implementation deps.dagger.support
+    implementation deps.retrofit.core
+    implementation deps.retrofit.converterGson
+    implementation deps.retrofit.retrofitAdapter
+    implementation deps.okhttp.core
+    implementation deps.okhttp.loggingInterceptor
     kapt deps.dagger.processor
     kapt deps.dagger.compiler
     implementation deps.android.arch.archRuntime
