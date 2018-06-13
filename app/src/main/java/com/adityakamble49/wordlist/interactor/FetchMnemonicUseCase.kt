@@ -27,6 +27,7 @@ class FetchMnemonicUseCase @Inject constructor(
             val mnemonicResponseHtml = okHttpClient.newCall(
                     mnemonicRequest).execute().body()?.string()
             val doc = Jsoup.parse(mnemonicResponseHtml)
+            doc.select(Constants.JSoupQueries.MNEMONIC_ATTRIBUTION).remove()
             val mnemonicsList = doc.select(Constants.JSoupQueries.MNEMONIC_CARD)
             val sb = StringBuilder()
             mnemonicsList.forEachIndexed { index, element ->
