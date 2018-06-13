@@ -88,6 +88,7 @@ dependencies {
     implementation deps.retrofit.retrofitAdapter
     implementation deps.okhttp.core
     implementation deps.okhttp.loggingInterceptor
+    implementation deps.jsoup.core
     kapt deps.dagger.processor
     kapt deps.dagger.compiler
     implementation deps.android.arch.archRuntime
