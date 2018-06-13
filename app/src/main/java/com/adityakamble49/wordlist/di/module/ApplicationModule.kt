@@ -13,6 +13,7 @@ import com.adityakamble49.wordlist.remote.WordListServiceFactory
 import com.adityakamble49.wordlist.utils.Constants.Database
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 
 /**
  * Application Module
@@ -44,6 +45,11 @@ class ApplicationModule {
 
     @Provides
     @PerApplication
-    fun provideWordListService(): WordListService = WordListServiceFactory.makeWordListService(
+    fun provideOkHttpClient(): OkHttpClient = WordListServiceFactory.makeOkHttpClient(
             BuildConfig.DEBUG)
+
+    @Provides
+    @PerApplication
+    fun provideWordListService(okHttpClient: OkHttpClient): WordListService =
+            WordListServiceFactory.makeWordListService(okHttpClient)
 }

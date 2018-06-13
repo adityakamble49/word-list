@@ -19,8 +19,7 @@ import java.util.concurrent.TimeUnit
  */
 object WordListServiceFactory {
 
-    fun makeWordListService(isDebug: Boolean): WordListService {
-        val okHttpClient = makeOkHttpClient(makeLoggingInterceptor(isDebug))
+    fun makeWordListService(okHttpClient: OkHttpClient): WordListService {
         return makeQuotesService(okHttpClient, makeGson())
     }
 
@@ -39,6 +38,10 @@ object WordListServiceFactory {
                 .setLenient()
                 .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
                 .create()
+    }
+
+    fun makeOkHttpClient(debug: Boolean): OkHttpClient {
+        return makeOkHttpClient(makeLoggingInterceptor(debug))
     }
 
     private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
