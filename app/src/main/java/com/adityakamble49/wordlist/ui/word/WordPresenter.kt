@@ -9,6 +9,7 @@ import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
 import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.CompletableObserver
+import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,7 +28,8 @@ class WordPresenter @Inject constructor(
         private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase,
         private val getDictateModeConfigUseCase: GetDictateModeConfigUseCase,
         private val submitNewWordUseCase: SubmitNewWordUseCase,
-        private val submitEditedWordUseCase: SubmitEditedWordUseCase) :
+        private val submitEditedWordUseCase: SubmitEditedWordUseCase,
+        private val fetchMnemonicUseCase: FetchMnemonicUseCase) :
         WordContract.Presenter {
 
     private lateinit var currentWordViewModel: WordViewModel
@@ -239,6 +241,24 @@ class WordPresenter @Inject constructor(
 
     override fun onClickWordTTS() {
         view.speakWord(currentWordViewModel.currentWord.name)
+    }
+
+    override fun onClickWordMnemonicsSync(word: String) {
+        if (!word.isEmpty()) {
+            fetchMnemonicUseCase.execute(word).subscribe(FetchMnemonicObserver())
+        } else {
+            view.showMessage("Word Empty")
+        }
+    }
+
+    inner class FetchMnemonicObserver : Observer<String> {
+        override fun onSubscribe(d: Disposable) {}
+        override fun onComplete() {}
+        override fun onError(e: Throwable) {}
+        override fun onNext(t: String) {
+            view.updateMnemonics(t)
+        }
+
     }
 
     override fun onTTSDone() {

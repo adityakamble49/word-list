@@ -23,11 +23,13 @@ interface WordContract {
         fun showEmptyListWarning()
         fun updateWord(word: Word, wordIndex: Int, wordListSize: Int)
         fun showWordInfo(information: String, mnemonic: String)
+        fun updateMnemonics(mnemonics: String)
         fun speakWord(name: String)
         fun updateDictateModeSpeed(speed: Float)
         fun updateFABDictateIcon(@DrawableRes icon: Int)
         fun stopSpeaking()
         fun updateWordSingle(word: Word)
+        fun showMessage(message: String)
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -43,6 +45,7 @@ interface WordContract {
         fun onPreviousWordAction()
         fun onDictateModeAction()
         fun onClickWordTTS()
+        fun onClickWordMnemonicsSync(word: String)
         fun onTTSDone()
     }
 }

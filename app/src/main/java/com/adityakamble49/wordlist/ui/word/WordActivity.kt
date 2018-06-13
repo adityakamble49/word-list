@@ -100,6 +100,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.word_text_to_speech -> presenter.onClickWordTTS()
+            R.id.word_mnemonics_sync -> presenter.onClickWordMnemonicsSync(
+                    word_name.text.toString())
             R.id.previous_word -> presenter.onPreviousWordAction()
             R.id.fab_dictate -> presenter.onDictateModeAction()
             R.id.next_word -> presenter.onNextWordAction()
@@ -139,7 +141,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
         // Setup word info
         word_information.setOnClickListener(this)
+        word_info_sync.setOnClickListener(this)
         word_mnemonic.setOnClickListener(this)
+        word_mnemonics_sync.setOnClickListener(this)
 
         // Setup Word TTS
         word_text_to_speech.setOnClickListener(this)
@@ -275,6 +279,10 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         word_mnemonic.setText(mnemonic)
     }
 
+    override fun updateMnemonics(mnemonics: String) {
+        word_mnemonic.setText(mnemonics)
+    }
+
     override fun speakWord(name: String) {
         tts.stop()
         if (Build.VERSION.SDK_INT >= 21) {
@@ -302,5 +310,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     override fun updateFABDictateIcon(icon: Int) {
         fab_dictate.setImageDrawable(ResourcesCompat.getDrawable(resources, icon, null))
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
