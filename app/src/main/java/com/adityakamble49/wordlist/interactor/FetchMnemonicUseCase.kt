@@ -29,7 +29,12 @@ class FetchMnemonicUseCase @Inject constructor(
             val doc = Jsoup.parse(mnemonicResponseHtml)
             val mnemonicsList = doc.select(Constants.JSoupQueries.MNEMONIC_CARD)
             val sb = StringBuilder()
-            mnemonicsList.forEach { sb.append("${it.text()}\n") }
+            mnemonicsList.forEachIndexed { index, element ->
+                sb.append("${index + 1}. ${element.text()}")
+                if (index + 1 != mnemonicsList.size) {
+                    sb.append("\n\n")
+                }
+            }
             e.onNext(sb.toString())
             e.onComplete()
         }
