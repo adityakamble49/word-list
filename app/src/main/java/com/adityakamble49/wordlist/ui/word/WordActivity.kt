@@ -217,6 +217,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
                     ResourcesCompat.getColor(resources, R.color.default_accent, theme),
                     PorterDuff.Mode.SRC_ATOP)
             word_text_to_speech.gone()
+            word_info_sync.visible()
+            word_mnemonics_sync.visible()
         } else {
             this.optionMenu?.findItem(R.id.action_edit_word)?.isVisible = true
             this.optionMenu?.findItem(R.id.action_submit_word)?.isVisible = false
@@ -231,6 +233,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_mnemonic.isCursorVisible = false
             word_mnemonic.background.clearColorFilter()
             word_text_to_speech.visible()
+            word_info_sync.invisible()
+            word_mnemonics_sync.invisible()
         }
     }
 
