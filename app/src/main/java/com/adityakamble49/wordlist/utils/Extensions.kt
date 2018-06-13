@@ -24,3 +24,7 @@ fun String.hasSpecialChar(): Boolean {
     val matcher = specialCharPattern.matcher(this)
     return matcher.find()
 }
+
+fun getMnemonicAPIUrl(word: String): String {
+    return "${Constants.RemoteUrls.MNEMONICS_API_URL}$word"
+}
