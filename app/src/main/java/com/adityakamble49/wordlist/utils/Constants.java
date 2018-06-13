@@ -32,7 +32,7 @@ public class Constants {
     }
 
     public static class JSoupQueries {
-        public static final String MNEMONIC_CARD = "div.mnemonic-card";
+        public static final String MNEMONIC_CARD = "div.mnemonic-card div.card-text";
     }
 
     public static class ReferenceUrls {
