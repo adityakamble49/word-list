@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.adityakamble49.wordlist">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".WordListApp"
         android:allowBackup="true"
