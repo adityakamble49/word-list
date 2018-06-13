@@ -245,6 +245,7 @@ class WordPresenter @Inject constructor(
 
     override fun onClickWordMnemonicsSync(word: String) {
         if (!word.isEmpty()) {
+            view.showMnemonicProgress(true)
             fetchMnemonicUseCase.execute(word).subscribe(FetchMnemonicObserver())
         } else {
             view.showMessage("Word Empty")
@@ -256,6 +257,7 @@ class WordPresenter @Inject constructor(
         override fun onComplete() {}
         override fun onError(e: Throwable) {}
         override fun onNext(t: String) {
+            view.showMnemonicProgress(false)
             view.updateMnemonics(t)
         }
 

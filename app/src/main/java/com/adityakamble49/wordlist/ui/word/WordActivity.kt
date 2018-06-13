@@ -15,6 +15,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.utils.gone
+import com.adityakamble49.wordlist.utils.invisible
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_word_info.*
 import timber.log.Timber
@@ -314,5 +315,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
     override fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showMnemonicProgress(toShow: Boolean) {
+        if (toShow) {
+            word_mnemonics_sync_progress.visible()
+        } else {
+            word_mnemonics_sync_progress.invisible()
+        }
     }
 }

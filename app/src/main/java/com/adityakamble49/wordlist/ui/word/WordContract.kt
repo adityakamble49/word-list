@@ -30,6 +30,7 @@ interface WordContract {
         fun stopSpeaking()
         fun updateWordSingle(word: Word)
         fun showMessage(message: String)
+        fun showMnemonicProgress(toShow: Boolean)
     }
 
     interface Presenter : BaseContract.Presenter {
