@@ -27,7 +27,12 @@ public class Constants {
     }
 
     public static class RemoteUrls {
-        public static final String BASE_URL = "";
+        public static final String BASE_URL = "https://adityakamble49.com";
+        public static final String MNEMONICS_API_URL = "https://mnemonicdictionary.com/?word=";
+    }
+
+    public static class JSoupQueries {
+        public static final String MNEMONIC_CARD = "div.mnemonic-card";
     }
 
     public static class ReferenceUrls {
