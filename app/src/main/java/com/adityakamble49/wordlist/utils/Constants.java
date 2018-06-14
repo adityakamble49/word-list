@@ -27,7 +27,7 @@ public class Constants {
     }
 
     public static class RemoteUrls {
-        public static final String BASE_URL = "https://adityakamble49.com";
+        public static final String BASE_URL = "https://owlbot.info/api/v2/";
         public static final String MNEMONICS_API_URL = "https://mnemonicdictionary.com/?word=";
     }
 
