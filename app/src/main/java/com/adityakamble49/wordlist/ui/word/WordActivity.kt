@@ -167,8 +167,17 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         currentActivityMode = activityMode
         toggleEditMode(false)
         when (currentActivityMode) {
-            WordActivityMode.SINGLE.ordinal -> toggleController(false)
+            WordActivityMode.LEARN.ordinal -> {
+                supportActionBar?.title = getString(R.string.label_learn_mode)
+            }
+            WordActivityMode.PRACTICE.ordinal -> {
+                supportActionBar?.title = getString(R.string.label_practice_mode)
+            }
+            WordActivityMode.SINGLE.ordinal -> {
+                toggleController(false)
+            }
             WordActivityMode.ADD.ordinal -> {
+                supportActionBar?.title = getString(R.string.label_add_word)
                 toggleEditMode(true)
                 toggleController(false)
             }

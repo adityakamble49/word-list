@@ -73,5 +73,7 @@
     <string name="word_hint">Word</string>
     <string name="label_show_info">Show Info</string>
     <string name="empty_list_warning">List Empty!</string>
+    <string name="label_learn_mode">Learn Mode</string>
+    <string name="label_practice_mode">Practice Mode</string>
 
 </resources>
