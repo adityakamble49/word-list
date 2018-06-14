@@ -2,10 +2,7 @@ package com.adityakamble49.wordlist.ui.word
 
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.interactor.*
-import com.adityakamble49.wordlist.model.DictateModeSpeed
-import com.adityakamble49.wordlist.model.DictateModeType
-import com.adityakamble49.wordlist.model.Word
-import com.adityakamble49.wordlist.model.WordList
+import com.adityakamble49.wordlist.model.*
 import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
 import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.CompletableObserver
@@ -29,7 +26,8 @@ class WordPresenter @Inject constructor(
         private val getDictateModeConfigUseCase: GetDictateModeConfigUseCase,
         private val submitNewWordUseCase: SubmitNewWordUseCase,
         private val submitEditedWordUseCase: SubmitEditedWordUseCase,
-        private val fetchMnemonicUseCase: FetchMnemonicUseCase) :
+        private val fetchMnemonicUseCase: FetchMnemonicUseCase,
+        private val fetchWordInfoUseCase: FetchWordInfoUseCase) :
         WordContract.Presenter {
 
     private lateinit var currentWordViewModel: WordViewModel
@@ -252,6 +250,13 @@ class WordPresenter @Inject constructor(
         }
     }
 
+    override fun onClickWordInformationSync(word: String) {
+        if (!word.isEmpty()) {
+            view.showWordInfoProgress(true)
+            fetchWordInfoUseCase.execute(word).subscribe(FetchWordInfoObserver())
+        }
+    }
+
     inner class FetchMnemonicObserver : Observer<String> {
         override fun onSubscribe(d: Disposable) {}
         override fun onComplete() {}
@@ -261,6 +266,29 @@ class WordPresenter @Inject constructor(
             view.updateMnemonics(t)
         }
 
+    }
+
+    inner class FetchWordInfoObserver : Observer<List<DictionaryWord>> {
+        override fun onSubscribe(d: Disposable) {}
+        override fun onComplete() {}
+        override fun onError(e: Throwable) {}
+        override fun onNext(t: List<DictionaryWord>) {
+            view.showWordInfoProgress(false)
+            view.updateWordInfo(formatDictionaryWords(t))
+        }
+    }
+
+    private fun formatDictionaryWords(dictionaryWordList: List<DictionaryWord>): String {
+        val sb = StringBuilder()
+        dictionaryWordList.forEachIndexed { index, dictionaryWord ->
+            sb.append("${index+1}. " +
+                    "Definition: [${dictionaryWord.type}] - ${dictionaryWord.definition}\n " +
+                    "Example: ${dictionaryWord.example}")
+            if (index + 1 != dictionaryWordList.size) {
+                sb.append("\n\n")
+            }
+        }
+        return sb.toString()
     }
 
     override fun onTTSDone() {

@@ -103,6 +103,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             R.id.word_text_to_speech -> presenter.onClickWordTTS()
             R.id.word_mnemonics_sync -> presenter.onClickWordMnemonicsSync(
                     word_name.text.toString())
+            R.id.word_info_sync -> presenter.onClickWordInformationSync(word_name.text.toString())
             R.id.previous_word -> presenter.onPreviousWordAction()
             R.id.fab_dictate -> presenter.onDictateModeAction()
             R.id.next_word -> presenter.onNextWordAction()
@@ -293,6 +294,10 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         word_mnemonic.setText(mnemonic)
     }
 
+    override fun updateWordInfo(wordInfo: String) {
+        word_information.setText(wordInfo)
+    }
+
     override fun updateMnemonics(mnemonics: String) {
         word_mnemonic.setText(mnemonics)
     }
@@ -335,6 +340,14 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_mnemonics_sync_progress.visible()
         } else {
             word_mnemonics_sync_progress.invisible()
+        }
+    }
+
+    override fun showWordInfoProgress(toShow: Boolean) {
+        if (toShow) {
+            word_info_sync_progress.visible()
+        } else {
+            word_info_sync_progress.invisible()
         }
     }
 }
