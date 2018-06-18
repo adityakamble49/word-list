@@ -48,6 +48,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         const val IE_KEY_WORD_ID = "word_id"
         const val IE_DEFAULT_WORD_ID = 0
         const val IE_KEY_WORD_ACTIVITY_MODE = "word_activity_mode"
+        const val IE_KEY_WORD_TO_ADD = "word_to_add"
         var IE_DEFAULT_WORD_ACTIVITY_MODE = WordActivityMode.NORMAL.ordinal
 
         enum class WordActivityMode {
@@ -179,6 +180,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             }
             WordActivityMode.ADD.ordinal -> {
                 supportActionBar?.title = getString(R.string.label_add_word)
+                getWordToAdd()
                 toggleEditMode(true)
                 toggleController(false)
             }
@@ -195,6 +197,13 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     private fun closeTTS() {
         tts.stop()
         tts.shutdown()
+    }
+
+    private fun getWordToAdd() {
+        val wordToAdd = intent.getStringExtra(IE_KEY_WORD_TO_ADD)
+        wordToAdd?.let {
+            word_name.setText(it)
+        }
     }
 
     private fun toggleController(toShow: Boolean) {

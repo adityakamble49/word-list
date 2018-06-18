@@ -19,9 +19,7 @@ import com.adityakamble49.wordlist.ui.common.FilterResultListener
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
-import kotlinx.android.synthetic.main.fragment_wordlist.*
 import javax.inject.Inject
 
 /**
@@ -40,6 +38,7 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
     // View Fields
     private lateinit var handler: Handler
     private lateinit var searchListAdapter: SearchListAdapter
+    private lateinit var searchView: SearchView
 
     companion object {
         fun newInstance() = SearchFragment()
@@ -113,12 +112,13 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
         val wordIntent = Intent(activity, WordActivity::class.java)
         wordIntent.putExtra(WordActivity.IE_KEY_WORD_ACTIVITY_MODE,
                 WordActivity.Companion.WordActivityMode.ADD.ordinal)
+        wordIntent.putExtra(WordActivity.IE_KEY_WORD_TO_ADD, searchView.query.toString())
         startActivity(wordIntent)
     }
 
     private fun handleSearch(menu: Menu) {
         val searchItem = menu.findItem(R.id.action_search_all)
-        val searchView = searchItem.actionView as SearchView
+        searchView = searchItem.actionView as SearchView
         searchView.isIconified = false
         searchView.maxWidth = Integer.MAX_VALUE
 
