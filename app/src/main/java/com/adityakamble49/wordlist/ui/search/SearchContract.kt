@@ -14,10 +14,12 @@ interface SearchContract {
 
     interface View : BaseContract.View, LifecycleOwner {
         fun updateAllWordList(wordList: List<Word>)
+        fun openAddWordUI()
 
     }
 
     interface Presenter : BaseContract.Presenter {
         fun setViewModel(viewModel: SearchViewModel)
+        fun onClickAddWordAlert()
     }
 }

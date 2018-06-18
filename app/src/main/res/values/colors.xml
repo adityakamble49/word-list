@@ -18,4 +18,7 @@
     <!--Word Info-->
     <color name="word_info_bottom_sheet_bg">#166ea7</color>
 
+    <!--Search Fragment-->
+    <color name="add_word_alert">#2C85BF</color>
+
 </resources>

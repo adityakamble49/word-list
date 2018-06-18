@@ -26,6 +26,10 @@ class SearchPresenter @Inject constructor(
         this.viewModel = viewModel
     }
 
+    override fun onClickAddWordAlert() {
+        view.openAddWordUI()
+    }
+
     private fun getAllWords() {
         getAllWordsUseCase.execute().subscribe(GetAllWordsSubscriber())
     }

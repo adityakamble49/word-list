@@ -75,5 +75,6 @@
     <string name="empty_list_warning">List Empty!</string>
     <string name="label_learn_mode">Learn Mode</string>
     <string name="label_practice_mode">Practice Mode</string>
+    <string name="add_word_alert">Not found! Add word?</string>
 
 </resources>

@@ -3,6 +3,8 @@ package com.adityakamble49.wordlist.ui.search
 import android.widget.Filter
 import android.widget.Filterable
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.model.WordList
+import com.adityakamble49.wordlist.ui.common.FilterResultListener
 import com.adityakamble49.wordlist.ui.list.WordListAdapter
 
 /**
@@ -15,6 +17,7 @@ class SearchListAdapter : WordListAdapter(), Filterable {
 
     override var bookMarkItemId: Int = 0
     lateinit var unfilteredItemList: List<Word>
+    lateinit var filterResultListener: FilterResultListener<Word>
 
     override fun getItemCount(): Int {
         if (itemList.size < 20) return itemList.size
@@ -43,6 +46,7 @@ class SearchListAdapter : WordListAdapter(), Filterable {
 
             override fun publishResults(constraint: CharSequence, results: FilterResults) {
                 itemList = results.values as List<Word>
+                filterResultListener.onFilteredResult(itemList)
                 notifyDataSetChanged()
             }
         }
