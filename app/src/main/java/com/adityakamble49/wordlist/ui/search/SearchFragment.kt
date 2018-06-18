@@ -114,6 +114,7 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
                 WordActivity.Companion.WordActivityMode.ADD.ordinal)
         wordIntent.putExtra(WordActivity.IE_KEY_WORD_TO_ADD, searchView.query.toString())
         startActivity(wordIntent)
+        closeFragment()
     }
 
     private fun handleSearch(menu: Menu) {
