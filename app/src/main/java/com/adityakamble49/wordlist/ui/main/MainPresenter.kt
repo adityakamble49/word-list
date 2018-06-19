@@ -1,7 +1,7 @@
 package com.adityakamble49.wordlist.ui.main
 
-import com.adityakamble49.wordlist.interactor.AreWordsImportedUseCase
-import com.adityakamble49.wordlist.interactor.ImportWordListToDatabaseUseCase
+import com.adityakamble49.wordlist.interactor.AreWordsImported
+import com.adityakamble49.wordlist.interactor.ImportWordListToDatabase
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
@@ -15,8 +15,8 @@ import javax.inject.Inject
  */
 class MainPresenter @Inject constructor(
         private val view: MainContract.View,
-        private val areWordsImportedUseCase: AreWordsImportedUseCase,
-        private val importWordListToDatabaseUseCase: ImportWordListToDatabaseUseCase) :
+        private val areWordsImported: AreWordsImported,
+        private val importWordListToDatabase: ImportWordListToDatabase) :
         MainContract.Presenter {
 
     private lateinit var viewModel: MainActivityViewModel
@@ -31,11 +31,11 @@ class MainPresenter @Inject constructor(
 
     private fun startWordImportProcedure() {
         view.showLoadingDialog(true)
-        importWordListToDatabaseUseCase.execute().subscribe(ImportWordListToDatabaseSubscriber())
+        importWordListToDatabase.execute().subscribe(ImportWordListToDatabaseSubscriber())
     }
 
     private fun checkIfWordsImported() {
-        if (!areWordsImportedUseCase.execute()) {
+        if (!areWordsImported.execute()) {
             startWordImportProcedure()
         } else {
             view.dataInitialized()

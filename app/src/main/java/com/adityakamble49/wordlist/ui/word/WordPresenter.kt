@@ -20,14 +20,14 @@ import javax.inject.Inject
  */
 class WordPresenter @Inject constructor(
         private val view: WordContract.View,
-        private val getCurrentWordsUseCase: GetCurrentWordsUseCase,
-        private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
-        private val saveLastWordIdForWordListUseCase: SaveLastWordIdForWordListUseCase,
-        private val getDictateModeConfigUseCase: GetDictateModeConfigUseCase,
-        private val submitNewWordUseCase: SubmitNewWordUseCase,
-        private val submitEditedWordUseCase: SubmitEditedWordUseCase,
-        private val fetchMnemonicUseCase: FetchMnemonicUseCase,
-        private val fetchWordInfoUseCase: FetchWordInfoUseCase) :
+        private val getCurrentWords: GetCurrentWords,
+        private val getCurrentWordList: GetCurrentWordList,
+        private val saveLastWordIdForWordList: SaveLastWordIdForWordList,
+        private val getDictateModeConfig: GetDictateModeConfig,
+        private val submitNewWord: SubmitNewWord,
+        private val submitEditedWord: SubmitEditedWord,
+        private val fetchMnemonic: FetchMnemonic,
+        private val fetchWordInfo: FetchWordInfo) :
         WordContract.Presenter {
 
     private lateinit var currentWordViewModel: WordViewModel
@@ -65,11 +65,11 @@ class WordPresenter @Inject constructor(
     }
 
     private fun getCurrentWordList() {
-        getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
+        getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
     }
 
     private fun getDictateConfig() {
-        currentWordViewModel.dictateModeConfig = getDictateModeConfigUseCase.execute()
+        currentWordViewModel.dictateModeConfig = getDictateModeConfig.execute()
     }
 
     private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
@@ -86,7 +86,7 @@ class WordPresenter @Inject constructor(
     }
 
     private fun loadWords() {
-        getCurrentWordsUseCase.execute().subscribe(GetWordListSubscriber())
+        getCurrentWords.execute().subscribe(GetWordListSubscriber())
     }
 
     private inner class GetWordListSubscriber : io.reactivex.Observer<List<Word>> {
@@ -245,7 +245,7 @@ class WordPresenter @Inject constructor(
     override fun onClickWordMnemonicsSync(word: String) {
         if (!word.isEmpty()) {
             view.showMnemonicProgress(true)
-            fetchMnemonicUseCase.execute(word).subscribe(FetchMnemonicObserver())
+            fetchMnemonic.execute(word).subscribe(FetchMnemonicObserver())
         } else {
             view.showMessage("Word Empty")
         }
@@ -254,7 +254,7 @@ class WordPresenter @Inject constructor(
     override fun onClickWordInformationSync(word: String) {
         if (!word.isEmpty()) {
             view.showWordInfoProgress(true)
-            fetchWordInfoUseCase.execute(word).subscribe(FetchWordInfoObserver())
+            fetchWordInfo.execute(word).subscribe(FetchWordInfoObserver())
         }
     }
 
@@ -313,11 +313,11 @@ class WordPresenter @Inject constructor(
     override fun submitEditedWord(submittedWord: Word) {
         if (isWordValid(submittedWord)) {
             if (isAddMode()) {
-                submitNewWordUseCase.execute(submittedWord).subscribe(SubmitNewWordObserver())
+                submitNewWord.execute(submittedWord).subscribe(SubmitNewWordObserver())
             } else {
                 submittedWord.id = currentWordViewModel.currentWord.id
                 submittedWord.listId = currentWordViewModel.currentWord.listId
-                submitEditedWordUseCase.execute(submittedWord).subscribe(SubmitEditedWordObserver())
+                submitEditedWord.execute(submittedWord).subscribe(SubmitEditedWordObserver())
             }
         } else {
             view.submitWordInvalid()
@@ -354,7 +354,7 @@ class WordPresenter @Inject constructor(
             return
         }
         if (currentWordActivityMode == WordActivity.Companion.WordActivityMode.LEARN.ordinal) {
-            saveLastWordIdForWordListUseCase.execute(currentWordViewModel.currentWordList.id,
+            saveLastWordIdForWordList.execute(currentWordViewModel.currentWordList.id,
                     currentWordViewModel.currentWord.id)
                     .subscribe(SaveLastWordIdForWordListSubscriber())
         }

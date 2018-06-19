@@ -1,9 +1,9 @@
 package com.adityakamble49.wordlist.ui.list
 
-import com.adityakamble49.wordlist.interactor.CreateWordListUseCase
-import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
-import com.adityakamble49.wordlist.interactor.GetWordListsUseCase
-import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListIdUseCase
+import com.adityakamble49.wordlist.interactor.CreateWordList
+import com.adityakamble49.wordlist.interactor.GetCurrentWordList
+import com.adityakamble49.wordlist.interactor.GetWordLists
+import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListId
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
@@ -19,10 +19,10 @@ import org.mockito.MockitoAnnotations
  */
 class WordListTest {
 
-    @Mock private lateinit var getWordListsUseCase: GetWordListsUseCase
-    @Mock private lateinit var updateCurrentLoadedListIdUseCase: UpdateCurrentLoadedListIdUseCase
-    @Mock private lateinit var getCurrentWordListUseCase: GetCurrentWordListUseCase
-    @Mock private lateinit var createWordListUseCase: CreateWordListUseCase
+    @Mock private lateinit var getWordLists: GetWordLists
+    @Mock private lateinit var updateCurrentLoadedListId: UpdateCurrentLoadedListId
+    @Mock private lateinit var getCurrentWordList: GetCurrentWordList
+    @Mock private lateinit var createWordList: CreateWordList
     @InjectMocks private lateinit var presenter: WordListPresenter
     @Mock private lateinit var view: WordListContract.View
 

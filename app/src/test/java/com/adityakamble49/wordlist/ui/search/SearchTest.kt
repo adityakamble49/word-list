@@ -1,6 +1,6 @@
 package com.adityakamble49.wordlist.ui.search
 
-import com.adityakamble49.wordlist.interactor.GetAllWordsUseCase
+import com.adityakamble49.wordlist.interactor.GetAllWords
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
@@ -16,13 +16,13 @@ class SearchTest {
 
     private lateinit var presenter: SearchPresenter
     private lateinit var view: SearchContract.View
-    private lateinit var getAllWordsUseCase: GetAllWordsUseCase
+    private lateinit var getAllWords: GetAllWords
 
     @Before
     fun setUp() {
         view = mock(SearchContract.View::class.java)
-        getAllWordsUseCase = mock(GetAllWordsUseCase::class.java)
-        presenter = SearchPresenter(view, getAllWordsUseCase)
+        getAllWords = mock(GetAllWords::class.java)
+        presenter = SearchPresenter(view, getAllWords)
     }
 
     @Test

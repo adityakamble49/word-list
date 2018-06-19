@@ -13,7 +13,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 14/6/2018
  */
-class FetchWordInfoUseCase @Inject constructor(
+class FetchWordInfo @Inject constructor(
         private val wordListService: WordListService) {
 
     private fun buildUseCaseObservable(word: String) = wordListService.getWordInformation(word)

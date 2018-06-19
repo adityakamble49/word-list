@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 10/4/2018
  */
-class SaveLastWordIdForWordListUseCase @Inject constructor(
+class SaveLastWordIdForWordList @Inject constructor(
         private val wordListRepo: WordListRepo) {
 
     private fun buildUseCaseObservable(wordListId: Int, lastWordId: Int): Completable {

@@ -1,10 +1,10 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
-import com.adityakamble49.wordlist.interactor.CreateWordListUseCase
-import com.adityakamble49.wordlist.interactor.GetCurrentWordListUseCase
-import com.adityakamble49.wordlist.interactor.GetWordListsUseCase
-import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListIdUseCase
+import com.adityakamble49.wordlist.interactor.CreateWordList
+import com.adityakamble49.wordlist.interactor.GetCurrentWordList
+import com.adityakamble49.wordlist.interactor.GetWordLists
+import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListId
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.utils.WordUtils
@@ -20,10 +20,10 @@ import javax.inject.Inject
  */
 class WordListPresenter @Inject constructor(
         private val view: WordListContract.View,
-        private val getWordListsUseCase: GetWordListsUseCase,
-        private val updateCurrentLoadedListIdUseCase: UpdateCurrentLoadedListIdUseCase,
-        private val getCurrentWordListUseCase: GetCurrentWordListUseCase,
-        private val createWordListUseCase: CreateWordListUseCase) :
+        private val getWordLists: GetWordLists,
+        private val updateCurrentLoadedListId: UpdateCurrentLoadedListId,
+        private val getCurrentWordList: GetCurrentWordList,
+        private val createWordList: CreateWordList) :
         WordListContract.Presenter {
 
     private lateinit var wordListViewModel: WordListViewModel
@@ -48,7 +48,7 @@ class WordListPresenter @Inject constructor(
      * details can be fetched from db
      */
     private fun getCurrentWordList() {
-        getCurrentWordListUseCase.execute().subscribe(GetCurrentWordListSubscriber())
+        getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
     }
 
     /**
@@ -89,7 +89,7 @@ class WordListPresenter @Inject constructor(
      * Main list of Words
      */
     private fun observeSavedWordLists() {
-        getWordListsUseCase.execute().observe(view, Observer<List<WordList>> {
+        getWordLists.execute().observe(view, Observer<List<WordList>> {
             it?.let {
                 it.forEach { wordList ->
                     if (wordList.id == wordListViewModel.currentWordList.id) {
@@ -109,7 +109,7 @@ class WordListPresenter @Inject constructor(
     }
 
     override fun requestUpdateWordList() {
-        getCurrentWordListUseCase.execute().subscribe(RequestUpdateWordListSubscriber())
+        getCurrentWordList.execute().subscribe(RequestUpdateWordListSubscriber())
     }
 
     private inner class RequestUpdateWordListSubscriber : io.reactivex.Observer<WordList> {
@@ -132,7 +132,7 @@ class WordListPresenter @Inject constructor(
 
     override fun onCreateWordListPositive(wordListName: String) {
         if (!wordListName.isEmpty()) {
-            createWordListUseCase.execute(wordListName).subscribe(CreateWordListObserver())
+            createWordList.execute(wordListName).subscribe(CreateWordListObserver())
         } else {
             view.showMessage("Word List Name Empty!")
         }
@@ -159,7 +159,7 @@ class WordListPresenter @Inject constructor(
     }
 
     private fun updateCurrentWordList(wordList: WordList) {
-        updateCurrentLoadedListIdUseCase.execute(wordList.id)
+        updateCurrentLoadedListId.execute(wordList.id)
         wordListViewModel.updateCurrentLoadedSavedList(wordList)
     }
 

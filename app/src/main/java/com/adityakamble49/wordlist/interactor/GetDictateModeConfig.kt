@@ -12,7 +12,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 30/5/2018
  */
-class GetDictateModeConfigUseCase @Inject constructor(
+class GetDictateModeConfig @Inject constructor(
         private val preferenceHelper: PreferenceHelper) {
 
     private fun buildUseCaseExecutable() = DictateModeConfig(getDictateModeType(),

@@ -1,6 +1,6 @@
 package com.adityakamble49.wordlist.ui.search
 
-import com.adityakamble49.wordlist.interactor.GetAllWordsUseCase
+import com.adityakamble49.wordlist.interactor.GetAllWords
 import com.adityakamble49.wordlist.model.Word
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -14,7 +14,7 @@ import javax.inject.Inject
  */
 class SearchPresenter @Inject constructor(
         private val view: SearchContract.View,
-        private val getAllWordsUseCase: GetAllWordsUseCase) : SearchContract.Presenter {
+        private val getAllWords: GetAllWords) : SearchContract.Presenter {
 
     private lateinit var viewModel: SearchViewModel
 
@@ -31,7 +31,7 @@ class SearchPresenter @Inject constructor(
     }
 
     private fun getAllWords() {
-        getAllWordsUseCase.execute().subscribe(GetAllWordsSubscriber())
+        getAllWords.execute().subscribe(GetAllWordsSubscriber())
     }
 
     private inner class GetAllWordsSubscriber : Observer<List<Word>> {

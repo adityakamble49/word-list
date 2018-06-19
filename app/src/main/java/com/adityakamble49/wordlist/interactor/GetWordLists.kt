@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 15/4/2018
  */
-class GetWordListsUseCase @Inject constructor(
+class GetWordLists @Inject constructor(
         private val wordListRepo: WordListRepo) {
 
     private fun buildUseCaseExecutable() = wordListRepo.getWordLists()

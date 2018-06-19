@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 15/4/2018
  */
-class AreWordsImportedUseCase @Inject constructor(
+class AreWordsImported @Inject constructor(
         private val preferenceHelper: PreferenceHelper) {
 
     private fun buildUseCaseExecutable() = preferenceHelper.areWordsImported

@@ -13,7 +13,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 10/6/2018
  */
-class CreateWordListUseCase @Inject constructor(
+class CreateWordList @Inject constructor(
         private val wordListRepo: WordListRepo) {
 
     private fun buildUseCaseObservable(wordListName: String): Single<WordList> {

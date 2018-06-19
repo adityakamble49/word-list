@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 15/4/2018
  */
-class UpdateCurrentLoadedListIdUseCase @Inject constructor(
+class UpdateCurrentLoadedListId @Inject constructor(
         private val preferenceHelper: PreferenceHelper) {
 
     private fun buildUseCaseExecutable(id: Int) {

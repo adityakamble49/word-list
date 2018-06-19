@@ -15,7 +15,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 8/4/2018
  */
-class GetCurrentWordsUseCase @Inject constructor(
+class GetCurrentWords @Inject constructor(
         private val preferenceHelper: PreferenceHelper,
         private val wordRepo: WordRepo,
         private val wordListRepo: WordListRepo) {

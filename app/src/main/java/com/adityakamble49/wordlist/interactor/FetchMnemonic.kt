@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 13/6/2018
  */
-class FetchMnemonicUseCase @Inject constructor(
+class FetchMnemonic @Inject constructor(
         private val okHttpClient: OkHttpClient) {
 
     private fun buildUseCaseObservable(word: String): Observable<String> {
