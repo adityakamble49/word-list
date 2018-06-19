@@ -131,7 +131,11 @@ class WordListPresenter @Inject constructor(
     }
 
     override fun onCreateWordListPositive(wordListName: String) {
-        createWordListUseCase.execute(wordListName).subscribe(CreateWordListObserver())
+        if (!wordListName.isEmpty()) {
+            createWordListUseCase.execute(wordListName).subscribe(CreateWordListObserver())
+        } else {
+            view.showMessage("Word List Name Empty!")
+        }
     }
 
     private inner class CreateWordListObserver : SingleObserver<WordList> {
@@ -139,12 +143,12 @@ class WordListPresenter @Inject constructor(
         override fun onSubscribe(d: Disposable) {}
 
         override fun onSuccess(t: WordList) {
-            view.showCreateWordListResponse("Word List Created")
+            view.showMessage("Word List Created")
             updateCurrentWordList(t)
         }
 
         override fun onError(e: Throwable) {
-            view.showCreateWordListResponse("Word List Name Exist!")
+            view.showMessage("Word List Name Exist!")
         }
 
     }

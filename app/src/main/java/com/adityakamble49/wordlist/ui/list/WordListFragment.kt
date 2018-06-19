@@ -156,6 +156,9 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
                             dialog.getActionButton(DialogAction.POSITIVE).isEnabled = false
                             dialog.setContent(getString(
                                     R.string.create_word_list_dialog_special_char_warning))
+                        } else if (keyName.isEmpty()) {
+                            dialog.getActionButton(DialogAction.POSITIVE).isEnabled = false
+                            dialog.setContent(getString(R.string.create_word_list_dialog_content))
                         } else {
                             dialog.getActionButton(DialogAction.POSITIVE).isEnabled = true
                             dialog.setContent(getString(R.string.create_word_list_dialog_content))
@@ -171,7 +174,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         }
     }
 
-    override fun showCreateWordListResponse(response: String) {
+    override fun showMessage(response: String) {
         Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
     }
 

@@ -16,7 +16,7 @@ interface WordListContract {
         fun updateSavedWordLists(savedWordLists: List<WordList>)
         fun updateCurrentWordListName(wordListName: String)
         fun showCreateListDialog()
-        fun showCreateWordListResponse(response: String)
+        fun showMessage(response: String)
         fun openAddWordUI()
         fun showLoadSavedListDialog()
         fun updateWords(wordList: List<Word>)
