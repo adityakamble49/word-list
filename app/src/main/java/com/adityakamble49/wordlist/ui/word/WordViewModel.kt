@@ -2,7 +2,6 @@ package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.model.DictateModeConfig
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
@@ -14,8 +13,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 8/4/2018
  */
-class WordViewModel @Inject constructor(
-        private val wordRepo: WordRepo) : ViewModel() {
+class WordViewModel @Inject constructor() : ViewModel() {
 
     var currentWordPosition: Int = 0
     lateinit var currentWord: Word
@@ -26,7 +24,7 @@ class WordViewModel @Inject constructor(
     var isDictateModeOn = false
     lateinit var dictateModeConfig: DictateModeConfig
 
-    fun setupSingleWord(id: Int){
-        singleWord = wordRepo.getWordById(id)
+    fun setupSingleWord(word: LiveData<Word>) {
+        singleWord = word
     }
 }

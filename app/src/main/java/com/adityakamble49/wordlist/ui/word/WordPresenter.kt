@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.ui.word
 
 import com.adityakamble49.wordlist.R
+import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.interactor.*
 import com.adityakamble49.wordlist.model.*
 import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
@@ -20,6 +21,7 @@ import javax.inject.Inject
  */
 class WordPresenter @Inject constructor(
         private val view: WordContract.View,
+        private val wordRepo: WordRepo,
         private val getCurrentWords: GetCurrentWords,
         private val getCurrentWordList: GetCurrentWordList,
         private val saveLastWordIdForWordList: SaveLastWordIdForWordList,
@@ -59,7 +61,7 @@ class WordPresenter @Inject constructor(
             getCurrentWordList()
             getDictateConfig()
         } else {
-            currentWordViewModel.setupSingleWord(currentWordId)
+            currentWordViewModel.setupSingleWord(wordRepo.getWordById(currentWordId))
             observeSingleWord()
         }
     }
