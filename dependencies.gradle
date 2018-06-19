@@ -45,6 +45,7 @@ buildscript {
 
             // Testing
             'junit'                : '4.12',
+            'mockito'              : '2.8.9',
             'expresso'             : '3.0.1',
             'androidSupportRunner' : '1.0.1',
     ]
@@ -124,9 +125,11 @@ buildscript {
                     'core': "com.amitshekhar.android:debug-db:${versions.debugDb}"
             ],
             'test'           : [
-                    'junit'        : "junit:junit:${versions.junit}",
-                    'supportRunner': "com.android.support.test:runner:${versions.androidSupportRunner}",
-                    'expressoCore' : "com.android.support.test.espresso:espresso-core:${versions.expresso}",
+                    'junit'         : "junit:junit:${versions.junit}",
+                    'mockito'       : "org.mockito:mockito-core:${versions.mockito}",
+                    'mockitoAndroid': "org.mockito:mockito-android:${versions.mockito}",
+                    'supportRunner' : "com.android.support.test:runner:${versions.androidSupportRunner}",
+                    'expressoCore'  : "com.android.support.test.espresso:espresso-core:${versions.expresso}",
             ]
     ]
 

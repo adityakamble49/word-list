@@ -101,6 +101,8 @@ dependencies {
     debugImplementation deps.debugDb.core
 
     testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    androidTestImplementation deps.test.mockitoAndroid
     androidTestImplementation deps.test.supportRunner
     androidTestImplementation deps.test.expressoCore
 }
