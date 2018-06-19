@@ -359,4 +359,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_info_sync_progress.invisible()
         }
     }
+
+    override fun scrollToTop() {
+        word_scroll_view.scrollTo(0, 0)
+    }
 }

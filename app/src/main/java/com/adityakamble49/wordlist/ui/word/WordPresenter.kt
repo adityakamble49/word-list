@@ -179,6 +179,7 @@ class WordPresenter @Inject constructor(
 
     private fun onWordChanged() {
         startDictate()
+        view.scrollToTop()
     }
 
     override fun onDictateModeAction() {

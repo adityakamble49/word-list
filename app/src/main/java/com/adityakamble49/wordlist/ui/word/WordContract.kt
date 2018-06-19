@@ -33,6 +33,7 @@ interface WordContract {
         fun showMessage(message: String)
         fun showMnemonicProgress(toShow: Boolean)
         fun showWordInfoProgress(toShow: Boolean)
+        fun scrollToTop()
     }
 
     interface Presenter : BaseContract.Presenter {
