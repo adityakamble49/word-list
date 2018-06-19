@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.ui.word
 
 import android.content.Intent
 import com.adityakamble49.wordlist.BuildConfig
+import com.adityakamble49.wordlist.R
 import org.junit.Assert
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -19,7 +20,7 @@ import org.robolectric.annotation.Config
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-class WordActivitySingleModeTest {
+open class WordActivitySingleModeTest {
 
     private lateinit var singleWordActivity: WordActivity
 
@@ -39,6 +40,7 @@ class WordActivitySingleModeTest {
 
     @Test
     fun shouldHaveWordListAsTitle() {
-        Assert.assertEquals("Word List", singleWordActivity.supportActionBar?.title)
+        Assert.assertEquals(singleWordActivity.getString(R.string.app_name),
+                singleWordActivity.supportActionBar?.title)
     }
 }
