@@ -46,6 +46,7 @@ buildscript {
             // Testing
             'junit'                : '4.12',
             'mockito'              : '2.8.9',
+            'robolectric'          : '3.8',
             'expresso'             : '3.0.1',
             'androidSupportRunner' : '1.0.1',
     ]
@@ -128,6 +129,7 @@ buildscript {
                     'junit'         : "junit:junit:${versions.junit}",
                     'mockito'       : "org.mockito:mockito-core:${versions.mockito}",
                     'mockitoAndroid': "org.mockito:mockito-android:${versions.mockito}",
+                    'robolectric'   : "org.robolectric:robolectric:${versions.robolectric}",
                     'supportRunner' : "com.android.support.test:runner:${versions.androidSupportRunner}",
                     'expressoCore'  : "com.android.support.test.espresso:espresso-core:${versions.expresso}",
             ]

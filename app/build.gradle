@@ -41,6 +41,15 @@ android {
         }
     }
 
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            all {
+                systemProperty 'robolectric.enabledSdks', '21'
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -107,6 +116,7 @@ dependencies {
 
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
+    testImplementation deps.test.robolectric
     androidTestImplementation deps.test.mockitoAndroid
     androidTestImplementation deps.test.supportRunner
     androidTestImplementation deps.test.expressoCore
