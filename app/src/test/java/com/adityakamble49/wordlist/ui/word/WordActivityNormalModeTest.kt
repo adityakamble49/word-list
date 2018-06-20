@@ -20,7 +20,7 @@ open class WordActivityNormalModeTest : WordActivityModeTest() {
 
     override fun getActivityMode() = WordActivity.Companion.WordActivityMode.NORMAL
 
-    override fun getSpecifiedTitle(): String = wordActivityController.get().getString(R.string.app_name)
+    override fun getSpecifiedTitle(): String = wordActivity.getString(R.string.app_name)
 
     override fun getAvailableOptionMenus(): IntArray {
         val optionMenuArray = intArrayOf(R.id.action_edit_word)
