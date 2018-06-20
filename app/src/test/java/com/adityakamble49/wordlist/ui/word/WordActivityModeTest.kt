@@ -12,10 +12,8 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
-import timber.log.Timber
-import java.util.logging.Level
-import java.util.logging.Logger
 
 /**
  * Word Activity Mode Test
@@ -27,27 +25,27 @@ import java.util.logging.Logger
 @Config(constants = BuildConfig::class)
 abstract class WordActivityModeTest {
 
-    protected lateinit var wordActivity: WordActivity
+    protected lateinit var wordActivityController: ActivityController<WordActivity>
 
     @Before
     fun setUp() {
         val singleWordIntent = Intent(Intent.ACTION_VIEW)
-        singleWordIntent.putExtra(WordActivity.IE_KEY_WORD_ACTIVITY_MODE, getActivityMode())
-        wordActivity = Robolectric.buildActivity(WordActivity::class.java,
-                singleWordIntent).create().visible().get()
-        wordActivity.initializeActivityMode(getActivityMode().ordinal)
+        singleWordIntent.putExtra(WordActivity.IE_KEY_WORD_ACTIVITY_MODE, getActivityMode().ordinal)
+        wordActivityController = Robolectric.buildActivity(WordActivity::class.java,
+                singleWordIntent).create().visible()
     }
 
     abstract fun getActivityMode(): WordActivity.Companion.WordActivityMode
 
     @Test
     fun shouldNotBeNull() {
-        assertNotNull(wordActivity)
+        assertNotNull(wordActivityController)
     }
 
     @Test
     fun shouldHaveSpecifiedTitle() {
-        Assert.assertEquals(getSpecifiedTitle(), wordActivity.supportActionBar?.title)
+        Assert.assertEquals(getSpecifiedTitle(),
+                wordActivityController.get().supportActionBar?.title)
     }
 
     abstract fun getSpecifiedTitle(): String
@@ -56,7 +54,7 @@ abstract class WordActivityModeTest {
     fun checkOptionMenuAvailable() {
         val availableOptionMenus = getAvailableOptionMenus()
         availableOptionMenus.forEach {
-            val menuItem = shadowOf(wordActivity).optionsMenu.findItem(it)
+            val menuItem = shadowOf(wordActivityController.get()).optionsMenu.findItem(it)
             assertEquals(true, menuItem.isVisible)
         }
     }
@@ -65,9 +63,20 @@ abstract class WordActivityModeTest {
 
     @Test
     fun checkBottomNavigationController() {
-        assertEquals(getControllerVisibility(), wordActivity.fab_dictate.visibility)
-        assertEquals(getControllerVisibility(), wordActivity.llBottomNavigation.visibility)
+        assertEquals(getControllerVisibility(), wordActivityController.get().fab_dictate.visibility)
+        assertEquals(getControllerVisibility(),
+                wordActivityController.get().llBottomNavigation.visibility)
     }
 
     abstract fun getControllerVisibility(): Int
+
+    @Test
+    fun checkWordInfoEmpty() {
+        if (shouldWordInfoEmpty()) {
+            assertEquals("", wordActivityController.get().word_information.text.toString())
+            assertEquals("", wordActivityController.get().word_mnemonic.text.toString())
+        }
+    }
+
+    abstract fun shouldWordInfoEmpty(): Boolean
 }

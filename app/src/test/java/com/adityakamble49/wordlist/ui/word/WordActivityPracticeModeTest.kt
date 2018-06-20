@@ -8,26 +8,26 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 /**
- * Word Activity Normal Mode Test
+ * Word Activity Practice Mode Test
  *
  * @author Aditya Kamble
- * @since 19/6/2018
+ * @since 20/6/2018
  */
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-open class WordActivityNormalModeTest : WordActivityModeTest() {
+class WordActivityPracticeModeTest : WordActivityModeTest() {
 
-    override fun getActivityMode() = WordActivity.Companion.WordActivityMode.NORMAL
-
-    override fun getSpecifiedTitle(): String = wordActivityController.get().getString(R.string.app_name)
+    override fun getSpecifiedTitle(): String = wordActivityController.get().getString(R.string.label_practice_mode)
 
     override fun getAvailableOptionMenus(): IntArray {
-        val optionMenuArray = intArrayOf(R.id.action_edit_word)
+        val optionMenuArray = intArrayOf(R.id.action_show_info)
         return optionMenuArray
     }
 
+    override fun getActivityMode() = WordActivity.Companion.WordActivityMode.PRACTICE
+
     override fun getControllerVisibility() = View.VISIBLE
 
-    override fun shouldWordInfoEmpty() = false
+    override fun shouldWordInfoEmpty() = true
 }
