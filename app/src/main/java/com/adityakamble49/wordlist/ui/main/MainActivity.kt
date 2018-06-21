@@ -57,6 +57,11 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         observeFragmentBackStack()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
+    }
+
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 1) {
             supportFragmentManager.popBackStack()
@@ -102,9 +107,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
                 super.onDrawerClosed(drawerView)
                 if (selectedNavigationItem != previousNavigationItem) {
                     handleNavigationDrawerSelection(selectedNavigationItem)
-                    if (selectedNavigationItem != ID_NAV_ABOUT) {
-                        previousNavigationItem = selectedNavigationItem
-                    }
+                    previousNavigationItem = selectedNavigationItem
                 }
             }
         }
@@ -226,6 +229,11 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     override fun openAbout() {
         startActivity(Intent(this, AboutActivity::class.java))
+    }
+
+    override fun resetNavigationHistory() {
+        selectedNavigationItem = R.id.nav_wordlist
+        previousNavigationItem = R.id.nav_wordlist
     }
 
     override fun handleFinishActivity() {

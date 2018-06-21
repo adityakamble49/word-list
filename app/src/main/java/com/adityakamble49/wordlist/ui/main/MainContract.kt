@@ -21,6 +21,7 @@ interface MainContract {
         fun openWordList()
         fun openSettings()
         fun openAbout()
+        fun resetNavigationHistory()
         fun handleFinishActivity()
     }
 
@@ -31,6 +32,7 @@ interface MainContract {
         fun onClickAbout()
         fun onClickLearnWords()
         fun onClickPracticeWords()
+        fun onResume()
         fun onBackPressed()
     }
 }

@@ -74,6 +74,10 @@ class MainPresenter @Inject constructor(
         view.startWordActivity(WordActivity.Companion.WordActivityMode.PRACTICE)
     }
 
+    override fun onResume() {
+        view.resetNavigationHistory()
+    }
+
     override fun onBackPressed() {
         view.handleFinishActivity()
     }
