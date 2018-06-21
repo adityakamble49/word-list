@@ -15,10 +15,7 @@ import android.widget.AdapterView
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
-import com.adityakamble49.wordlist.ui.common.FilterResultListener
 import com.adityakamble49.wordlist.ui.word.WordActivity
-import com.adityakamble49.wordlist.utils.gone
-import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import javax.inject.Inject
 
@@ -29,7 +26,7 @@ import javax.inject.Inject
  * @since 9/6/2018
  */
 class SearchFragment : BaseInjectableFragment(), SearchContract.View,
-        AdapterView.OnItemClickListener, FilterResultListener<Word>, View.OnClickListener {
+        AdapterView.OnItemClickListener, View.OnClickListener {
 
     // Dagger Injected Fields
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -83,7 +80,6 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
             // Setup Search Result Recycler View
             searchListAdapter = SearchListAdapter()
             searchListAdapter.onItemClickListener = this@SearchFragment
-            searchListAdapter.filterResultListener = this@SearchFragment
             val linearLayoutManager = LinearLayoutManager(context)
             val decorator = DividerItemDecoration(context, linearLayoutManager.orientation)
             recyclerview_search_result.layoutManager = linearLayoutManager
@@ -140,16 +136,6 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
                 return true
             }
         })
-    }
-
-    override fun onFilteredResult(list: List<Word>) {
-        if (list.isEmpty()) {
-            rootView.add_word_alert_layout.visible()
-            rootView.recyclerview_search_result.gone()
-        } else {
-            rootView.recyclerview_search_result.visible()
-            rootView.add_word_alert_layout.gone()
-        }
     }
 
     private fun closeFragment() {
