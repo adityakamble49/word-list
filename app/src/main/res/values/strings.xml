@@ -79,5 +79,6 @@
     <string name="word_list_nav_title">Word List</string>
     <string name="marketplace_nav_title">Marketplace</string>
     <string name="marketplace_title">Marketplace</string>
+    <string name="marketplace_empty_warning">Marketplace Empty</string>
 
 </resources>
