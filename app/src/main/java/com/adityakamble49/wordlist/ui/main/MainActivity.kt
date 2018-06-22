@@ -63,10 +63,14 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 1) {
-            supportFragmentManager.popBackStack()
+        if (drawer_layout_main.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout_main.closeDrawer(GravityCompat.START)
         } else {
-            finish()
+            if (supportFragmentManager.backStackEntryCount > 1) {
+                supportFragmentManager.popBackStack()
+            } else {
+                finish()
+            }
         }
     }
 
