@@ -1,7 +1,8 @@
 package com.adityakamble49.wordlist.ui.main
 
 import android.arch.lifecycle.LifecycleOwner
-import com.adityakamble49.wordlist.model.WordList
+import android.support.annotation.IdRes
+import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.ui.common.BaseContract
 import com.adityakamble49.wordlist.ui.word.WordActivity
 
@@ -21,7 +22,7 @@ interface MainContract {
         fun openWordList()
         fun openSettings()
         fun openAbout()
-        fun resetNavigationHistory()
+        fun resetNavigationHistory(@IdRes navigationItem: Int = R.id.nav_wordlist)
         fun handleFinishActivity()
     }
 

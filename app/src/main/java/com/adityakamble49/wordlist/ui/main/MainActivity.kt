@@ -139,11 +139,11 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
             WordListFragment::class.java.simpleName -> {
                 updateTitle(getString(R.string.app_name))
                 showFAB(true)
-                previousNavigationItem = ID_NAV_WORD_LIST
+                resetNavigationHistory(ID_NAV_WORD_LIST)
             }
             SettingsFragment::class.java.simpleName -> {
                 updateTitle(getString(R.string.label_settings))
-                previousNavigationItem = ID_NAV_SETTINGS
+                resetNavigationHistory(ID_NAV_SETTINGS)
             }
             SearchFragment::class.java.simpleName -> {
                 toggleDrawerToggleIndicator(false)
@@ -202,7 +202,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         loadDefaultFragment()
     }
 
-    fun toggleDrawerToggleIndicator(toShow: Boolean) {
+    private fun toggleDrawerToggleIndicator(toShow: Boolean) {
         drawerToggle?.isDrawerIndicatorEnabled = toShow
     }
 
@@ -231,9 +231,9 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         startActivity(Intent(this, AboutActivity::class.java))
     }
 
-    override fun resetNavigationHistory() {
-        selectedNavigationItem = R.id.nav_wordlist
-        previousNavigationItem = R.id.nav_wordlist
+    override fun resetNavigationHistory(@IdRes navigationItem: Int) {
+        selectedNavigationItem = navigationItem
+        previousNavigationItem = navigationItem
     }
 
     override fun handleFinishActivity() {
