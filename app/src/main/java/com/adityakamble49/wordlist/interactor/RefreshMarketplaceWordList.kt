@@ -10,10 +10,10 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Fetch Word Information Use Case
+ * Refresh Marketplace Word List
  *
  * @author Aditya Kamble
- * @since 14/6/2018
+ * @since 23/6/2018
  */
 class RefreshMarketplaceWordList @Inject constructor(
         private val wordListService: WordListService,

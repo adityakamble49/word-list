@@ -2,8 +2,10 @@ package com.adityakamble49.wordlist.ui.marketplace
 
 import android.arch.lifecycle.Observer
 import com.adityakamble49.wordlist.cache.db.MarketplaceWordListDao
+import com.adityakamble49.wordlist.interactor.DownloadWordListFromMarketplace
 import com.adityakamble49.wordlist.interactor.RefreshMarketplaceWordList
 import com.adityakamble49.wordlist.model.MarketplaceWordList
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -16,7 +18,8 @@ import javax.inject.Inject
 class MarketplacePresenter @Inject constructor(
         private val view: MarketplaceContract.View,
         private val marketplaceWordListDao: MarketplaceWordListDao,
-        private val refreshMarketplaceWordList: RefreshMarketplaceWordList) :
+        private val refreshMarketplaceWordList: RefreshMarketplaceWordList,
+        private val downloadWordListFromMarketplace: DownloadWordListFromMarketplace) :
         MarketplaceContract.Presenter {
 
     private lateinit var viewModel: MarketplaceViewModel
@@ -40,6 +43,7 @@ class MarketplacePresenter @Inject constructor(
     }
 
     override fun onClickDownload(marketplaceWordList: MarketplaceWordList) {
-        // TODO Start download use case
+        downloadWordListFromMarketplace.execute(marketplaceWordList)
+                .subscribe({ view.showMessage("List Downloaded") }, { Timber.i(it) })
     }
 }
