@@ -7,7 +7,7 @@
             android:title="@string/word_list_nav_title" />
         <item
             android:id="@+id/nav_marketplace"
-            android:icon="@drawable/ic_list"
+            android:icon="@drawable/ic_marketplace"
             android:title="@string/marketplace_nav_title" />
     </group>
     <item android:title="Other">
