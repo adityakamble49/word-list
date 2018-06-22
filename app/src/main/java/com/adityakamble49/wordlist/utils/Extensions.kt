@@ -28,3 +28,7 @@ fun String.hasSpecialChar(): Boolean {
 fun getMnemonicAPIUrl(word: String): String {
     return "${Constants.RemoteUrls.MNEMONICS_API_URL}$word"
 }
+
+fun getWordListNameFromFileName(fileName: String): String {
+    return fileName.split(".")[0].replace("_", " ")
+}
