@@ -36,7 +36,7 @@ object WordListServiceFactory {
     private fun makeGson(): Gson {
         return GsonBuilder()
                 .setLenient()
-                .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create()
     }
 
