@@ -20,6 +20,7 @@ interface MainContract {
         fun alertListTypeUpdate(wordListType: Int)
         fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode)
         fun openWordList()
+        fun openMarketplace()
         fun openSettings()
         fun openAbout()
         fun resetNavigationHistory(@IdRes navigationItem: Int = R.id.nav_wordlist)
@@ -29,6 +30,7 @@ interface MainContract {
     interface Presenter : BaseContract.Presenter {
         fun setViewModel(viewModel: MainActivityViewModel)
         fun onClickWordList()
+        fun onClickMarketplace()
         fun onClickSettings()
         fun onClickAbout()
         fun onClickLearnWords()

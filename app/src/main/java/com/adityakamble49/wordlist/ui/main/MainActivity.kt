@@ -15,6 +15,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.ui.about.AboutActivity
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.list.WordListFragment
+import com.adityakamble49.wordlist.ui.marketplace.MarketplaceFragment
 import com.adityakamble49.wordlist.ui.search.SearchFragment
 import com.adityakamble49.wordlist.ui.settings.SettingsFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
@@ -159,6 +160,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     private fun handleNavigationDrawerSelection(@IdRes itemId: Int) {
         when (itemId) {
             R.id.nav_wordlist -> presenter.onClickWordList()
+            R.id.nav_marketplace -> presenter.onClickMarketplace()
             R.id.nav_settings -> presenter.onClickSettings()
             R.id.nav_about -> presenter.onClickAbout()
         }
@@ -225,6 +227,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     override fun openWordList() {
         replaceFragment(WordListFragment.newInstance(), R.id.main_container)
+    }
+
+    override fun openMarketplace() {
+        replaceFragment(MarketplaceFragment.newInstance(), R.id.main_container)
     }
 
     override fun openSettings() {

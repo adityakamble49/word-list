@@ -58,6 +58,10 @@ class MainPresenter @Inject constructor(
         view.openWordList()
     }
 
+    override fun onClickMarketplace() {
+        view.openMarketplace()
+    }
+
     override fun onClickSettings() {
         view.openSettings()
     }
