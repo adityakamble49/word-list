@@ -42,6 +42,7 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     @IdRes private var selectedNavigationItem = R.id.nav_wordlist
     @IdRes private var previousNavigationItem = R.id.nav_wordlist
     @IdRes private val ID_NAV_WORD_LIST = R.id.nav_wordlist
+    @IdRes private val ID_NAV_MARKETPLACE = R.id.nav_marketplace
     @IdRes private val ID_NAV_SETTINGS = R.id.nav_settings
     @IdRes private val ID_NAV_ABOUT = R.id.nav_about
 
@@ -145,6 +146,10 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
                 updateTitle(getString(R.string.app_name))
                 showFAB(true)
                 resetNavigationHistory(ID_NAV_WORD_LIST)
+            }
+            MarketplaceFragment::class.java.simpleName -> {
+                updateTitle(getString(R.string.marketplace_title))
+                resetNavigationHistory(ID_NAV_MARKETPLACE)
             }
             SettingsFragment::class.java.simpleName -> {
                 updateTitle(getString(R.string.label_settings))
