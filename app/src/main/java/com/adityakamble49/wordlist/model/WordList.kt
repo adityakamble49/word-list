@@ -3,6 +3,7 @@ package com.adityakamble49.wordlist.model
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.adityakamble49.wordlist.utils.Constants
+import java.util.*
 
 /**
  * Word List Model
@@ -13,6 +14,8 @@ import com.adityakamble49.wordlist.utils.Constants
 @Entity(tableName = Constants.Database.TABLE_WORD_LISTS)
 data class WordList(
         @PrimaryKey(autoGenerate = true) var id: Int,
+        var hash: String,
+        var marketplaceFilename: String,
         var name: String,
         var lastWordId: Int,
         var wordSequenceList: ArrayList<Int>

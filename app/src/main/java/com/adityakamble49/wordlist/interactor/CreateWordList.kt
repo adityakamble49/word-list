@@ -5,6 +5,7 @@ import com.adityakamble49.wordlist.model.WordList
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -24,7 +25,8 @@ class CreateWordList @Inject constructor(
                     throw WordListNameExistException("$wordListName - Word List Name Already Exist")
                 }
             }
-            val newWordList = WordList(0, wordListName, 0, arrayListOf())
+            val newWordList = WordList(0, UUID.randomUUID().toString(), "", wordListName, 0,
+                    arrayListOf())
             val newWordListId = wordListRepo.insert(newWordList)
             newWordList.id = newWordListId.toInt()
             e.onSuccess(newWordList)
