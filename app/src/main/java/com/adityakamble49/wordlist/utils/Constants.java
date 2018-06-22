@@ -1,5 +1,7 @@
 package com.adityakamble49.wordlist.utils;
 
+import com.adityakamble49.wordlist.BuildConfig;
+
 /**
  * Constants
  *
@@ -12,7 +14,7 @@ public class Constants {
         public static final String DB_NAME = "word_list.db";
         public static final String TABLE_WORD_NAME = "words";
         public static final String TABLE_WORD_LISTS = "word_lists";
-        public static final String TABLE_WORD_LIST_JOIN = "word_list_join";
+        public static final String TABLE_MARKETPLACE_WORDLIST = "marketplace_wordlist";
 
         public static final String ENTRY_WORD_LIST_DEFAULT_1 = "Manhattan Essential - Alphabetical";
         public static final String ENTRY_WORD_LIST_DEFAULT_2 = "Manhattan Advanced - Alphabetical";
@@ -29,6 +31,9 @@ public class Constants {
     public static class RemoteUrls {
         public static final String BASE_URL = "https://owlbot.info/api/v2/";
         public static final String MNEMONICS_API_URL = "https://mnemonicdictionary.com/?word=";
+        public static final String GITHUB_AUTH_TOKEN = BuildConfig.GitHubApiKey;
+        private static final String GITHUB_BASE = "https://api.github.com/";
+        public static final String GITHUB_WORDLIST = GITHUB_BASE + "repos/adityakamble49/wordlist-marketplace/contents/wordlists";
     }
 
     public static class JSoupQueries {
