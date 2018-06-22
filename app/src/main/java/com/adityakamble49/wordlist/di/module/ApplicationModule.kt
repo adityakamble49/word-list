@@ -45,6 +45,11 @@ class ApplicationModule {
 
     @Provides
     @PerApplication
+    fun provideMarketplaceWordListDao(wordListDatabase: WordListDatabase) =
+            wordListDatabase.marketplaceWordListDao()
+
+    @Provides
+    @PerApplication
     fun provideOkHttpClient(): OkHttpClient = WordListServiceFactory.makeOkHttpClient(
             BuildConfig.DEBUG)
 
