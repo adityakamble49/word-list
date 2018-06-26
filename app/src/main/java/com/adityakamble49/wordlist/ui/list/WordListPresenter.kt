@@ -159,6 +159,7 @@ class WordListPresenter @Inject constructor(
     private fun updateCurrentWordList(wordList: WordList) {
         updateCurrentLoadedListId.execute(wordList.id)
         wordListViewModel.updateCurrentLoadedSavedList(wordList)
+        view.updateMenus(wordList)
     }
 
     override fun onClickedSingleWord(word: Word) {

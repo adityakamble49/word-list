@@ -43,9 +43,11 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     // View Fields
     private lateinit var wordListAdapter: WordListAdapter
+    private var addWordMenuItem: MenuItem? = null
 
     // Other Fields
     private lateinit var savedWordLists: List<WordList>
+    private var disableAddWordMenu = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,10 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_wordlist, menu)
+        addWordMenuItem = menu?.findItem(R.id.action_add_word)
+        if (disableAddWordMenu) {
+            addWordMenuItem?.isVisible = false
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -211,5 +217,15 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     override fun updateBookmarkItem(bookmarkItemId: Int) {
         wordListAdapter.bookMarkItemId = bookmarkItemId
         wordListAdapter.notifyDataSetChanged()
+    }
+
+    override fun updateMenus(wordList: WordList) {
+        if (!wordList.marketplaceFilename.isEmpty()) {
+            disableAddWordMenu = true
+            addWordMenuItem?.isVisible = false
+        } else {
+            disableAddWordMenu = false
+            addWordMenuItem?.isVisible = true
+        }
     }
 }

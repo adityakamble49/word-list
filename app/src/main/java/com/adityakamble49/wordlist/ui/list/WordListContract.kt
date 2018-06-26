@@ -23,6 +23,7 @@ interface WordListContract {
         fun openSearch()
         fun openSingleWord(word: Word)
         fun updateBookmarkItem(bookmarkItemId: Int)
+        fun updateMenus(wordList: WordList)
     }
 
     interface Presenter : BaseContract.Presenter {
