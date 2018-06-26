@@ -230,6 +230,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_information.background.setColorFilter(
                     ResourcesCompat.getColor(resources, R.color.default_accent, theme),
                     PorterDuff.Mode.SRC_ATOP)
+            word_information.visible()
+            word_information_tv.invisible()
             word_mnemonic.isEnabled = true
             word_mnemonic.isCursorVisible = true
             word_mnemonic.background.setColorFilter(
@@ -248,6 +250,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_information.isEnabled = false
             word_information.isCursorVisible = false
             word_information.background.clearColorFilter()
+            word_information_tv.visible()
+            word_information.invisible()
             word_mnemonic.isEnabled = false
             word_mnemonic.isCursorVisible = false
             word_mnemonic.background.clearColorFilter()
@@ -291,20 +295,24 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         word_index.text = wordIndex
         if (currentActivityMode != WordActivityMode.PRACTICE.ordinal) {
             word_information.setText(word.information)
+            word_information_tv.text = word.information
             word_mnemonic.setText(word.mnemonic)
         } else {
             word_information.setText("")
+            word_information_tv.text = ""
             word_mnemonic.setText("")
         }
     }
 
     override fun showWordInfo(information: String, mnemonic: String) {
         word_information.setText(information)
+        word_information_tv.text = information
         word_mnemonic.setText(mnemonic)
     }
 
     override fun updateWordInfo(wordInfo: String) {
         word_information.setText(wordInfo)
+        word_information_tv.text = wordInfo
     }
 
     override fun updateMnemonics(mnemonics: String) {
@@ -333,6 +341,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         word_type.setText(word.type)
         word_pronunciation.setText(word.pronunciation)
         word_information.setText(word.information)
+        word_information_tv.text = word.information
         word_mnemonic.setText(word.mnemonic)
     }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/layout_word_info"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_word_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <android.support.v4.widget.NestedScrollView
@@ -33,7 +33,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="abstain"/>
+                tools:text="abstain" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_pronunciation"
@@ -53,7 +53,7 @@
                 android:paddingTop="2dp"
                 app:layout_constraintStart_toEndOf="@+id/word_type"
                 app:layout_constraintTop_toBottomOf="@+id/word_name"
-                tools:text="ab-STAIN"/>
+                tools:text="ab-STAIN" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_type"
@@ -72,21 +72,21 @@
                 android:paddingTop="2dp"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/word_name"
-                tools:text="verb"/>
+                tools:text="verb" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/start_guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="16dp"/>
+                app:layout_constraintGuide_begin="16dp" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/end_guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="16dp"/>
+                app:layout_constraintGuide_end="16dp" />
 
             <ImageView
                 android:id="@+id/word_text_to_speech"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toEndOf="@+id/word_pronunciation"
                 app:layout_constraintTop_toBottomOf="@+id/word_name"
-                app:srcCompat="@drawable/ic_volume_up"/>
+                app:srcCompat="@drawable/ic_volume_up" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_information"
@@ -113,7 +113,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/word_information_label"
-                tools:text="Word Information"/>
+                tools:text="Word Information" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/word_mnemonic"
@@ -130,7 +130,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/word_mnemonics_label"
-                tools:text="Word Mnemonic"/>
+                tools:text="Word Mnemonic" />
 
             <TextView
                 android:id="@+id/word_index"
@@ -146,7 +146,7 @@
                 android:text="0/0"
                 android:textColor="@color/default_secondary_text"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/word_information_label"
@@ -158,7 +158,7 @@
                 android:textColor="@color/default_primary_text"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/word_type"/>
+                app:layout_constraintTop_toBottomOf="@+id/word_type" />
 
             <TextView
                 android:id="@+id/word_mnemonics_label"
@@ -170,29 +170,29 @@
                 android:textColor="@color/default_primary_text"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/word_information"/>
+                app:layout_constraintTop_toBottomOf="@+id/word_information" />
 
             <ImageView
                 android:id="@+id/word_info_sync"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/word_information_label"
                 app:layout_constraintTop_toBottomOf="@+id/word_type"
-                app:srcCompat="@drawable/ic_sync"/>
+                app:srcCompat="@drawable/ic_sync" />
 
             <ImageView
                 android:id="@+id/word_mnemonics_sync"
                 android:layout_width="wrap_content"
-                android:visibility="invisible"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/word_mnemonics_label"
                 app:layout_constraintTop_toBottomOf="@+id/word_information"
-                app:srcCompat="@drawable/ic_sync"/>
+                app:srcCompat="@drawable/ic_sync" />
 
             <ProgressBar
                 android:id="@+id/word_mnemonics_sync_progress"
@@ -203,18 +203,32 @@
                 android:layout_marginTop="4dp"
                 android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/word_mnemonics_sync"
-                app:layout_constraintTop_toBottomOf="@+id/word_information"/>
+                app:layout_constraintTop_toBottomOf="@+id/word_information" />
 
             <ProgressBar
                 android:id="@+id/word_info_sync_progress"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="24dp"
-                android:visibility="invisible"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/word_info_sync"
-                app:layout_constraintTop_toBottomOf="@+id/word_type"/>
+                app:layout_constraintTop_toBottomOf="@+id/word_type" />
+
+            <TextView
+                android:id="@+id/word_information_tv"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Word Information"
+                android:paddingBottom="20dp"
+                android:textColor="@color/default_secondary_text"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toEndOf="@+id/word_information"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/word_information_label" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -238,7 +252,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/previous"
             android:textColor="@color/white"
-            android:theme="@style/ButtonBlue"/>
+            android:theme="@style/ButtonBlue" />
 
         <Button
             android:id="@+id/next_word"
@@ -249,7 +263,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/next"
             android:textColor="@color/white"
-            android:theme="@style/ButtonBlue"/>
+            android:theme="@style/ButtonBlue" />
 
     </LinearLayout>
 
@@ -261,6 +275,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-28dp"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_play"/>
+        app:srcCompat="@drawable/ic_play" />
 
 </RelativeLayout>
