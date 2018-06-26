@@ -18,6 +18,7 @@ data class MarketplaceWordList(
         var size: Int,
         var path: String,
         var sha: String,
+        var status: String = WordListStatus.NOT_AVAILABLE.name,
         var url: String,
         var gitUrl: String,
         var htmlUrl: String,
@@ -30,3 +31,7 @@ data class Links(
         var git: String,
         var html: String
 )
+
+enum class WordListStatus {
+    NOT_AVAILABLE, AVAILABLE, UPDATE_AVAILABLE
+}

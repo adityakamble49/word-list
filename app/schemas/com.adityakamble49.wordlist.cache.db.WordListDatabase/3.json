@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "26b1da58a81e704a65be1ba048d29019",
+    "identityHash": "b1e4b819529ffa4b514ae786237d839c",
     "entities": [
       {
         "tableName": "words",
@@ -115,7 +115,7 @@
       },
       {
         "tableName": "marketplace_wordlist",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `type` TEXT NOT NULL, `size` INTEGER NOT NULL, `path` TEXT NOT NULL, `sha` TEXT NOT NULL, `url` TEXT NOT NULL, `gitUrl` TEXT NOT NULL, `htmlUrl` TEXT NOT NULL, `downloadUrl` TEXT NOT NULL, `self` TEXT, `git` TEXT, `html` TEXT, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `type` TEXT NOT NULL, `size` INTEGER NOT NULL, `path` TEXT NOT NULL, `sha` TEXT NOT NULL, `status` TEXT NOT NULL, `url` TEXT NOT NULL, `gitUrl` TEXT NOT NULL, `htmlUrl` TEXT NOT NULL, `downloadUrl` TEXT NOT NULL, `self` TEXT, `git` TEXT, `html` TEXT, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -144,6 +144,12 @@
           {
             "fieldPath": "sha",
             "columnName": "sha",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -202,7 +208,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"26b1da58a81e704a65be1ba048d29019\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b1e4b819529ffa4b514ae786237d839c\")"
     ]
   }
 }
