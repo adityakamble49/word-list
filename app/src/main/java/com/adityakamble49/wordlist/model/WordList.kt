@@ -3,7 +3,6 @@ package com.adityakamble49.wordlist.model
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.adityakamble49.wordlist.utils.Constants
-import java.util.*
 
 /**
  * Word List Model
@@ -17,6 +16,5 @@ data class WordList(
         var hash: String,
         var marketplaceFilename: String,
         var name: String,
-        var lastWordId: Int,
-        var wordSequenceList: ArrayList<Int>
+        var lastWordId: Int
 )

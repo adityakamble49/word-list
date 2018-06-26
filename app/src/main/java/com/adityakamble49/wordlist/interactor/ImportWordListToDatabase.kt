@@ -29,9 +29,9 @@ class ImportWordListToDatabase @Inject constructor(
 
             // Create Shuffled Word List
             val wordListManhattanEssentialShuffled = WordList(0, UUID.randomUUID().toString(), "",
-                    "Manhattan Essential - Shuffled", 0, arrayListOf())
+                    "Manhattan Essential - Shuffled", 0)
             val wordListManhattanAdvancedShuffled = WordList(0, UUID.randomUUID().toString(), "",
-                    "Manhattan Advanced - Shuffled", 0, arrayListOf())
+                    "Manhattan Advanced - Shuffled", 0)
             val wordListEssentialId = wordListRepo.insert(wordListManhattanEssentialShuffled)
             val wordListEssentialUUID = wordListManhattanEssentialShuffled.hash
             val wordListAdvancedId = wordListRepo.insert(wordListManhattanAdvancedShuffled)
@@ -59,17 +59,13 @@ class ImportWordListToDatabase @Inject constructor(
                     wordListAdvancedId.toInt())
 
             // Create default shuffled word lists
-            var essentialShuffledSequence: ArrayList<Int> = arrayListOf()
-            wordListManhattanEssentialFetched.forEach { essentialShuffledSequence.add(it.id) }
             val wordListManhattanEssentialShuffledUpdate = WordList(wordListEssentialId.toInt(),
                     wordListEssentialUUID, "", "Manhattan Essential - Shuffled",
-                    essentialShuffledSequence[0], essentialShuffledSequence)
+                    wordListManhattanEssentialFetched[0].id)
 
-            var advancedShuffledSequence: ArrayList<Int> = arrayListOf()
-            wordListManhattanAdvancedFetched.forEach { advancedShuffledSequence.add(it.id) }
             val wordListManhattanAdvancedShuffledUpdate = WordList(wordListAdvancedId.toInt(),
                     wordListAdvancedUUID, "", "Manhattan Advanced - Shuffled",
-                    advancedShuffledSequence[0], advancedShuffledSequence)
+                    wordListManhattanAdvancedFetched[0].id)
 
             wordListRepo.updateWordList(wordListManhattanEssentialShuffledUpdate)
             wordListRepo.updateWordList(wordListManhattanAdvancedShuffledUpdate)

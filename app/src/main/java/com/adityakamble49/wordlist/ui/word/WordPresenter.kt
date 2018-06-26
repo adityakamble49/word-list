@@ -5,7 +5,6 @@ import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.interactor.*
 import com.adityakamble49.wordlist.model.*
 import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
-import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.CompletableObserver
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -32,13 +31,13 @@ class WordPresenter @Inject constructor(
         private val fetchWordInfo: FetchWordInfo) :
         WordContract.Presenter {
 
-    private lateinit var currentWordViewModel: WordViewModel
+    private lateinit var viewModel: WordViewModel
     private var currentWordActivityMode: Int = WordActivity.Companion.WordActivityMode.NORMAL.ordinal
     private var currentWordId = 0
     private var isWordListEmpty = false
 
     override fun setWordViewModel(currentWordViewModel: WordViewModel) {
-        this.currentWordViewModel = currentWordViewModel
+        this.viewModel = currentWordViewModel
     }
 
     override fun setActivityMode(wordActivityMode: Int) {
@@ -61,7 +60,7 @@ class WordPresenter @Inject constructor(
             getCurrentWordList()
             getDictateConfig()
         } else {
-            currentWordViewModel.setupSingleWord(wordRepo.getWordById(currentWordId))
+            viewModel.setupSingleWord(wordRepo.getWordById(currentWordId))
             observeSingleWord()
         }
     }
@@ -71,7 +70,7 @@ class WordPresenter @Inject constructor(
     }
 
     private fun getDictateConfig() {
-        currentWordViewModel.dictateModeConfig = getDictateModeConfig.execute()
+        viewModel.dictateModeConfig = getDictateModeConfig.execute()
     }
 
     private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
@@ -80,7 +79,7 @@ class WordPresenter @Inject constructor(
         override fun onError(e: Throwable) {}
 
         override fun onNext(t: WordList) {
-            currentWordViewModel.currentWordList = t
+            viewModel.currentWordList = t
             if (!isAddMode()) {
                 loadWords()
             }
@@ -103,8 +102,7 @@ class WordPresenter @Inject constructor(
                 isWordListEmpty = true
                 return
             }
-            currentWordViewModel.wordList = WordUtils.sortWords(t,
-                    currentWordViewModel.currentWordList.wordSequenceList)
+            viewModel.wordList = t
             loadWord(currentWordActivityMode, currentWordId)
         }
     }
@@ -112,10 +110,10 @@ class WordPresenter @Inject constructor(
     private fun loadWord(currentWordActivityMode: Int, wordId: Int) {
         when (currentWordActivityMode) {
             WordActivity.Companion.WordActivityMode.LEARN.ordinal -> updateWord(
-                    getWordById(currentWordViewModel.currentWordList.lastWordId))
+                    getWordById(viewModel.currentWordList.lastWordId))
             WordActivity.Companion.WordActivityMode.PRACTICE.ordinal -> {
                 updateWordListForPractice()
-                updateWord(currentWordViewModel.currentWord)
+                updateWord(viewModel.currentWord)
             }
             else -> updateWord(getWordById(wordId))
         }
@@ -124,10 +122,10 @@ class WordPresenter @Inject constructor(
     private fun updateWordListForPractice() {
         val practiceWordList = mutableListOf<Word>()
         lateinit var shuffledPracticeWordList: List<Word>
-        if (currentWordViewModel.wordListPractice.isEmpty()) {
-            val lastWordId = currentWordViewModel.currentWordList.lastWordId
-            for (i in 0 until currentWordViewModel.wordList.size) {
-                val singleWord = currentWordViewModel.wordList[i]
+        if (viewModel.wordListPractice.isEmpty()) {
+            val lastWordId = viewModel.currentWordList.lastWordId
+            for (i in 0 until viewModel.wordList.size) {
+                val singleWord = viewModel.wordList[i]
                 practiceWordList.add(singleWord)
                 if (singleWord.id == lastWordId) {
                     break
@@ -135,47 +133,47 @@ class WordPresenter @Inject constructor(
             }
             shuffledPracticeWordList = practiceWordList.shuffled()
         } else {
-            shuffledPracticeWordList = currentWordViewModel.wordListPractice
+            shuffledPracticeWordList = viewModel.wordListPractice
         }
-        currentWordViewModel.wordList = shuffledPracticeWordList
-        currentWordViewModel.wordListPractice = shuffledPracticeWordList
-        currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
+        viewModel.wordList = shuffledPracticeWordList
+        viewModel.wordListPractice = shuffledPracticeWordList
+        viewModel.currentWord = viewModel.wordList[viewModel.currentWordPosition]
     }
 
     private fun getWordById(wordId: Int): Word {
-        currentWordViewModel.wordList.forEachIndexed { index, word ->
+        viewModel.wordList.forEachIndexed { index, word ->
             if (word.id == wordId) {
-                currentWordViewModel.currentWord = word
-                currentWordViewModel.currentWordPosition = index
-                return currentWordViewModel.currentWord
+                viewModel.currentWord = word
+                viewModel.currentWordPosition = index
+                return viewModel.currentWord
             }
         }
-        currentWordViewModel.currentWord = currentWordViewModel.wordList[0]
-        return currentWordViewModel.currentWord
+        viewModel.currentWord = viewModel.wordList[0]
+        return viewModel.currentWord
     }
 
     override fun onClickShowInfo() {
         if (isPracticeMode()) {
-            view.showWordInfo(currentWordViewModel.currentWord.information,
-                    currentWordViewModel.currentWord.mnemonic)
+            view.showWordInfo(viewModel.currentWord.information,
+                    viewModel.currentWord.mnemonic)
         }
     }
 
     override fun onNextWordAction() {
-        if (currentWordViewModel.currentWordPosition < currentWordViewModel.wordList.size - 1) {
-            currentWordViewModel.currentWordPosition++
+        if (viewModel.currentWordPosition < viewModel.wordList.size - 1) {
+            viewModel.currentWordPosition++
         }
-        currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
-        updateWord(currentWordViewModel.currentWord)
+        viewModel.currentWord = viewModel.wordList[viewModel.currentWordPosition]
+        updateWord(viewModel.currentWord)
         onWordChanged()
     }
 
     override fun onPreviousWordAction() {
-        if (currentWordViewModel.currentWordPosition > 0) {
-            currentWordViewModel.currentWordPosition--
+        if (viewModel.currentWordPosition > 0) {
+            viewModel.currentWordPosition--
         }
-        currentWordViewModel.currentWord = currentWordViewModel.wordList[currentWordViewModel.currentWordPosition]
-        updateWord(currentWordViewModel.currentWord)
+        viewModel.currentWord = viewModel.wordList[viewModel.currentWordPosition]
+        updateWord(viewModel.currentWord)
         onWordChanged()
     }
 
@@ -185,15 +183,15 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onDictateModeAction() {
-        when (currentWordViewModel.isDictateModeOn) {
+        when (viewModel.isDictateModeOn) {
             false -> {
-                currentWordViewModel.isDictateModeOn = true
+                viewModel.isDictateModeOn = true
                 updateDictateModeSpeed()
                 view.updateFABDictateIcon(R.drawable.ic_stop)
                 startDictate()
             }
             true -> {
-                currentWordViewModel.isDictateModeOn = false
+                viewModel.isDictateModeOn = false
                 stopDictate()
                 view.updateFABDictateIcon(R.drawable.ic_play)
             }
@@ -201,7 +199,7 @@ class WordPresenter @Inject constructor(
     }
 
     private fun updateDictateModeSpeed() {
-        view.updateDictateModeSpeed(when (currentWordViewModel.dictateModeConfig.dictateModeSpeed) {
+        view.updateDictateModeSpeed(when (viewModel.dictateModeConfig.dictateModeSpeed) {
             DictateModeSpeed.SLOWER -> DictateModeSpeedValues.SLOWER
             DictateModeSpeed.SLOW -> DictateModeSpeedValues.SLOW
             DictateModeSpeed.NORMAL -> DictateModeSpeedValues.NORMAL
@@ -211,24 +209,24 @@ class WordPresenter @Inject constructor(
     }
 
     private fun startDictate() {
-        if (currentWordViewModel.isDictateModeOn) {
+        if (viewModel.isDictateModeOn) {
             val wordInfo = getWordForDictate()
             view.speakWord(wordInfo)
         }
     }
 
     private fun getWordForDictate(): String {
-        return when (currentWordViewModel.dictateModeConfig.dictateModeType) {
-            DictateModeType.WORD_COMPLETE_INFO -> "${currentWordViewModel.currentWord.name}. ${currentWordViewModel.currentWord.information}"
+        return when (viewModel.dictateModeConfig.dictateModeType) {
+            DictateModeType.WORD_COMPLETE_INFO -> "${viewModel.currentWord.name}. ${viewModel.currentWord.information}"
             DictateModeType.WORD_DEFINITION -> {
-                "${currentWordViewModel.currentWord.name}. ${extractWordDefinition()}"
+                "${viewModel.currentWord.name}. ${extractWordDefinition()}"
             }
-            DictateModeType.WORD_ONLY -> currentWordViewModel.currentWord.name
+            DictateModeType.WORD_ONLY -> viewModel.currentWord.name
         }.replace("\n\n", ".").replace("\n", " ")
     }
 
     private fun extractWordDefinition(): String {
-        return currentWordViewModel.currentWord.information.split("Usage:")[0]
+        return viewModel.currentWord.information.split("Usage:")[0]
     }
 
     private fun stopDictate() {
@@ -236,12 +234,12 @@ class WordPresenter @Inject constructor(
     }
 
     private fun updateWord(word: Word) {
-        view.updateWord(word, currentWordViewModel.currentWordPosition + 1,
-                currentWordViewModel.wordList.size)
+        view.updateWord(word, viewModel.currentWordPosition + 1,
+                viewModel.wordList.size)
     }
 
     override fun onClickWordTTS() {
-        view.speakWord(currentWordViewModel.currentWord.name)
+        view.speakWord(viewModel.currentWord.name)
     }
 
     override fun onClickWordMnemonicsSync(word: String) {
@@ -284,7 +282,7 @@ class WordPresenter @Inject constructor(
     private fun formatDictionaryWords(dictionaryWordList: List<DictionaryWord>): String {
         val sb = StringBuilder()
         dictionaryWordList.forEachIndexed { index, dictionaryWord ->
-            sb.append("${index+1}. " +
+            sb.append("${index + 1}. " +
                     "Definition: [${dictionaryWord.type}] - ${dictionaryWord.definition}\n " +
                     "Example: ${dictionaryWord.example}")
             if (index + 1 != dictionaryWordList.size) {
@@ -295,7 +293,7 @@ class WordPresenter @Inject constructor(
     }
 
     override fun onTTSDone() {
-        if (currentWordViewModel.isDictateModeOn) {
+        if (viewModel.isDictateModeOn) {
             onNextWordAction()
         }
     }
@@ -317,8 +315,8 @@ class WordPresenter @Inject constructor(
             if (isAddMode()) {
                 submitNewWord.execute(submittedWord).subscribe(SubmitNewWordObserver())
             } else {
-                submittedWord.id = currentWordViewModel.currentWord.id
-                submittedWord.listId = currentWordViewModel.currentWord.listId
+                submittedWord.id = viewModel.currentWord.id
+                submittedWord.listId = viewModel.currentWord.listId
                 submitEditedWord.execute(submittedWord).subscribe(SubmitEditedWordObserver())
             }
         } else {
@@ -356,8 +354,8 @@ class WordPresenter @Inject constructor(
             return
         }
         if (currentWordActivityMode == WordActivity.Companion.WordActivityMode.LEARN.ordinal) {
-            saveLastWordIdForWordList.execute(currentWordViewModel.currentWordList.id,
-                    currentWordViewModel.currentWord.id)
+            saveLastWordIdForWordList.execute(viewModel.currentWordList.id,
+                    viewModel.currentWord.id)
                     .subscribe(SaveLastWordIdForWordListSubscriber())
         }
     }
@@ -373,10 +371,10 @@ class WordPresenter @Inject constructor(
     }
 
     private fun observeSingleWord() {
-        currentWordViewModel.singleWord.observe(view, android.arch.lifecycle.Observer<Word> {
+        viewModel.singleWord.observe(view, android.arch.lifecycle.Observer<Word> {
             it?.let {
-                currentWordViewModel.currentWord = it
-                view.updateWordSingle(currentWordViewModel.currentWord)
+                viewModel.currentWord = it
+                view.updateWordSingle(viewModel.currentWord)
             }
         })
     }

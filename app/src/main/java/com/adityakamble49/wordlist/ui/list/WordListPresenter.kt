@@ -7,7 +7,6 @@ import com.adityakamble49.wordlist.interactor.GetWordLists
 import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListId
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import com.adityakamble49.wordlist.utils.WordUtils
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -77,8 +76,7 @@ class WordListPresenter @Inject constructor(
             it?.let {
                 view.showLoading(false)
                 view.updateBookmarkItem(wordListViewModel.currentWordList.lastWordId)
-                view.updateWords(WordUtils.sortWords(it,
-                        wordListViewModel.currentWordList.wordSequenceList))
+                view.updateWords(it)
             }
         })
     }

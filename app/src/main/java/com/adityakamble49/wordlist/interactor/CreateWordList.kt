@@ -25,8 +25,7 @@ class CreateWordList @Inject constructor(
                     throw WordListNameExistException("$wordListName - Word List Name Already Exist")
                 }
             }
-            val newWordList = WordList(0, UUID.randomUUID().toString(), "", wordListName, 0,
-                    arrayListOf())
+            val newWordList = WordList(0, UUID.randomUUID().toString(), "", wordListName, 0)
             val newWordListId = wordListRepo.insert(newWordList)
             newWordList.id = newWordListId.toInt()
             e.onSuccess(newWordList)

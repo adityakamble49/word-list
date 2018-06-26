@@ -25,9 +25,7 @@ class SubmitNewWord @Inject constructor(
             val currentWordListId = preferenceHelper.currentLoadedListId
             val currentWordList = wordListRepo.getWordListById(currentWordListId)
             newWord.listId = currentWordList.id
-            val newWordId = wordRepo.insertWord(newWord)
-            currentWordList.wordSequenceList.add(newWordId.toInt())
-            wordListRepo.updateWordList(currentWordList)
+            wordRepo.insertWord(newWord)
             e.onComplete()
         }
     }

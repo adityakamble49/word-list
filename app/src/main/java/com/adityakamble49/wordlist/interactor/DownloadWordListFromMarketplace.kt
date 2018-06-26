@@ -43,15 +43,12 @@ class DownloadWordListFromMarketplace @Inject constructor(
                 marketplaceWordList.sha,
                 marketplaceWordList.name,
                 getWordListNameFromFileName(marketplaceWordList.name),
-                0,
-                arrayListOf())
+                0)
         val wordListId = wordListDao.insert(wordList)
         words.forEach { it.listId = wordListId.toInt() }
         val wordsIds = wordDao.insertWords(words)
-        val sequenceList = arrayListOf<Int>()
-        wordsIds.forEach { sequenceList.add(it.toInt()) }
         val fetchedWordList = wordListDao.getWordListByIdDirect(wordListId.toInt())
-        fetchedWordList.wordSequenceList = sequenceList
+        fetchedWordList.lastWordId = wordsIds[0].toInt()
         wordListDao.update(fetchedWordList)
     }
 

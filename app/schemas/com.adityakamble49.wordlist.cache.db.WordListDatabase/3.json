@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "4b231e84cae081d5f71284dda43f70b6",
+    "identityHash": "043ba3a260dbb179a9e5c11293bb4d2f",
     "entities": [
       {
         "tableName": "words",
@@ -62,7 +62,7 @@
       },
       {
         "tableName": "word_lists",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `hash` TEXT NOT NULL, `marketplaceFilename` TEXT NOT NULL, `name` TEXT NOT NULL, `lastWordId` INTEGER NOT NULL, `wordSequenceList` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `hash` TEXT NOT NULL, `marketplaceFilename` TEXT NOT NULL, `name` TEXT NOT NULL, `lastWordId` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -92,12 +92,6 @@
             "fieldPath": "lastWordId",
             "columnName": "lastWordId",
             "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "wordSequenceList",
-            "columnName": "wordSequenceList",
-            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -199,7 +193,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"4b231e84cae081d5f71284dda43f70b6\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"043ba3a260dbb179a9e5c11293bb4d2f\")"
     ]
   }
 }
