@@ -60,6 +60,7 @@ class WordListPresenter @Inject constructor(
 
         override fun onNext(t: WordList) {
             wordListViewModel.updateCurrentLoadedSavedList(t)
+            view.updateMenus(t)
             wordListViewModel.initialize()
             observeWords()
             observeSavedWordLists()
@@ -117,6 +118,7 @@ class WordListPresenter @Inject constructor(
 
         override fun onNext(t: WordList) {
             wordListViewModel.updateCurrentLoadedSavedList(t)
+            view.updateMenus(t)
         }
     }
 
