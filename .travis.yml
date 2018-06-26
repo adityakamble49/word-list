@@ -25,6 +25,6 @@ before_script:
     # Prepare pre-accepted licenses to not be promted at installation
     - mkdir -p "$ANDROID_HOME/licenses"
     - cp ./google-licenses/* "$ANDROID_HOME/licenses/"
-    - echo "WordList_GitHubApiKey="a936cfcd543c184e3b161d38560101ca7460ed63" > $HOME/.gradle/gradle.properties
+    - echo "WordList_GitHubApiKey=\"a936cfcd543c184e3b161d38560101ca7460ed63\"" > $HOME/.gradle/gradle.properties
 script:
     - ./gradlew build check
