@@ -27,14 +27,28 @@ class DownloadWordListFromMarketplace @Inject constructor(
 
     private fun buildUseCaseObservable(marketplaceWordList: MarketplaceWordList): Completable {
         return Completable.create { e ->
-            wordListService.getWordListFromMarketplace(marketplaceWordList.downloadUrl,
-                    "token ${Constants.RemoteUrls.GITHUB_AUTH_TOKEN}")
-                    .subscribe({
-                        insertWordListToDatabase(marketplaceWordList, it)
-                        e.onComplete()
-                    }, { Timber.i(it) })
-
+            if (wordListVersionPresent(marketplaceWordList)) {
+                e.onComplete()
+            } else {
+                wordListService.getWordListFromMarketplace(marketplaceWordList.downloadUrl,
+                        "token ${Constants.RemoteUrls.GITHUB_AUTH_TOKEN}")
+                        .subscribe({
+                            insertWordListToDatabase(marketplaceWordList, it)
+                            e.onComplete()
+                        }, { Timber.i(it) })
+            }
         }
+    }
+
+    private fun wordListVersionPresent(marketplaceWordList: MarketplaceWordList): Boolean {
+        wordListDao.getWordListsDirect().forEach {
+            if (it.marketplaceFilename == marketplaceWordList.name) {
+                if (it.hash == marketplaceWordList.sha) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     private fun insertWordListToDatabase(marketplaceWordList: MarketplaceWordList,
