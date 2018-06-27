@@ -9,6 +9,8 @@ import com.adityakamble49.wordlist.model.MarketplaceWordList
 import com.adityakamble49.wordlist.model.WordListStatus
 import com.adityakamble49.wordlist.ui.common.SimpleListAdapter
 import com.adityakamble49.wordlist.utils.getWordListNameFromFileName
+import com.adityakamble49.wordlist.utils.gone
+import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.marketplace_list_item.view.*
 
 /**
@@ -36,6 +38,17 @@ open class MarketplaceListAdapter : SimpleListAdapter<MarketplaceWordList>() {
                 item_download_image.setOnClickListener(this@ViewHolder)
                 item_download_image.setImageDrawable(
                         getDrawableByStatus(item_download_image, item.status))
+                toggleLoading(item, itemView)
+            }
+        }
+
+        private fun toggleLoading(item: MarketplaceWordList, itemView: View) {
+            if (item.status == WordListStatus.DOWNLOADING.name) {
+                itemView.item_download_image.gone()
+                itemView.item_progress.visible()
+            } else {
+                itemView.item_progress.gone()
+                itemView.item_download_image.visible()
             }
         }
 

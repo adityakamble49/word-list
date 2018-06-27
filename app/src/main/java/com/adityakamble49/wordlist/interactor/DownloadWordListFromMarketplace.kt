@@ -33,6 +33,11 @@ class DownloadWordListFromMarketplace @Inject constructor(
             if (isWordListVersionPresent(marketplaceWordList)) {
                 e.onComplete()
             } else {
+                // Update Marketplace List Status as Downloading
+                marketplaceWordList.status = WordListStatus.DOWNLOADING.name
+                marketplaceWordListDao.updateList(marketplaceWordList)
+
+                // Start Word List Download
                 wordListService.getWordListFromMarketplace(marketplaceWordList.downloadUrl,
                         "token ${Constants.RemoteUrls.GITHUB_AUTH_TOKEN}")
                         .subscribe({
@@ -67,6 +72,8 @@ class DownloadWordListFromMarketplace @Inject constructor(
         val fetchedWordList = wordListDao.getWordListByIdDirect(wordListId.toInt())
         fetchedWordList.lastWordId = wordsIds[0].toInt()
         wordListDao.update(fetchedWordList)
+
+        // Update Marketplace List Status as Available
         marketplaceWordList.status = WordListStatus.AVAILABLE.name
         marketplaceWordListDao.updateList(marketplaceWordList)
     }
