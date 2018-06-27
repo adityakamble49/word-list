@@ -1,10 +1,12 @@
 package com.adityakamble49.wordlist.interactor
 
+import com.adityakamble49.wordlist.cache.db.MarketplaceWordListDao
 import com.adityakamble49.wordlist.cache.db.WordDao
 import com.adityakamble49.wordlist.cache.db.WordListDao
 import com.adityakamble49.wordlist.model.MarketplaceWordList
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
+import com.adityakamble49.wordlist.model.WordListStatus
 import com.adityakamble49.wordlist.remote.WordListService
 import com.adityakamble49.wordlist.utils.Constants
 import com.adityakamble49.wordlist.utils.getWordListNameFromFileName
@@ -23,11 +25,12 @@ import javax.inject.Inject
 class DownloadWordListFromMarketplace @Inject constructor(
         private val wordListService: WordListService,
         private val wordDao: WordDao,
-        private val wordListDao: WordListDao) {
+        private val wordListDao: WordListDao,
+        private val marketplaceWordListDao: MarketplaceWordListDao) {
 
     private fun buildUseCaseObservable(marketplaceWordList: MarketplaceWordList): Completable {
         return Completable.create { e ->
-            if (wordListVersionPresent(marketplaceWordList)) {
+            if (isWordListVersionPresent(marketplaceWordList)) {
                 e.onComplete()
             } else {
                 wordListService.getWordListFromMarketplace(marketplaceWordList.downloadUrl,
@@ -40,7 +43,7 @@ class DownloadWordListFromMarketplace @Inject constructor(
         }
     }
 
-    private fun wordListVersionPresent(marketplaceWordList: MarketplaceWordList): Boolean {
+    private fun isWordListVersionPresent(marketplaceWordList: MarketplaceWordList): Boolean {
         wordListDao.getWordListsDirect().forEach {
             if (it.marketplaceFilename == marketplaceWordList.name) {
                 if (it.hash == marketplaceWordList.sha) {
@@ -64,6 +67,8 @@ class DownloadWordListFromMarketplace @Inject constructor(
         val fetchedWordList = wordListDao.getWordListByIdDirect(wordListId.toInt())
         fetchedWordList.lastWordId = wordsIds[0].toInt()
         wordListDao.update(fetchedWordList)
+        marketplaceWordList.status = WordListStatus.AVAILABLE.name
+        marketplaceWordListDao.updateList(marketplaceWordList)
     }
 
     fun execute(marketplaceWordList: MarketplaceWordList): Completable {
