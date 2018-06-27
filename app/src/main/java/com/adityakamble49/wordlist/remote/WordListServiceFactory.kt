@@ -49,6 +49,7 @@ object WordListServiceFactory {
                 .addInterceptor(httpLoggingInterceptor)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
+                .cache(null)
                 .build()
     }
 
