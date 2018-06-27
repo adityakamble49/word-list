@@ -13,5 +13,6 @@ interface BaseContract {
     interface View : LifecycleOwner
     interface Presenter {
         fun initialize()
+        fun onStop()
     }
 }

@@ -8,6 +8,9 @@ import com.adityakamble49.wordlist.remote.WordListService
 import com.adityakamble49.wordlist.utils.Constants.RemoteUrls
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,6 +25,8 @@ class RefreshMarketplaceWordList @Inject constructor(
         private val wordListService: WordListService,
         private val wordListDao: WordListDao,
         private val marketplaceWordListDao: MarketplaceWordListDao) {
+
+    private val disposables = CompositeDisposable()
 
     private fun buildUseCaseObservable(): Completable {
         return Completable.create { e ->
@@ -77,9 +82,20 @@ class RefreshMarketplaceWordList @Inject constructor(
         return marketplaceWordLists
     }
 
-    fun execute(): Completable {
-        return buildUseCaseObservable()
+    private fun addDisposables(disposable: Disposable) {
+        disposables.add(disposable)
+    }
+
+    fun dispose() {
+        if (!disposables.isDisposed) {
+            disposables.dispose()
+        }
+    }
+
+    fun execute(observer: DisposableCompletableObserver) {
+        val completable = buildUseCaseObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+        addDisposables(completable.subscribeWith(observer))
     }
 }

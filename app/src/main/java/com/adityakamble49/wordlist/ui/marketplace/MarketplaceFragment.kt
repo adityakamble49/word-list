@@ -31,6 +31,14 @@ class MarketplaceFragment : BaseInjectableFragment(), MarketplaceContract.View,
     // View Fields
     private lateinit var marketplaceListAdapter: MarketplaceListAdapter
 
+    /*
+     * Lifecycle Functions
+     */
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (view?.id) {

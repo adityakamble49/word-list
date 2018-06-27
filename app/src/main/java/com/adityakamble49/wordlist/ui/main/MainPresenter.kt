@@ -25,6 +25,8 @@ class MainPresenter @Inject constructor(
         checkIfWordsImported()
     }
 
+    override fun onStop() {}
+
     override fun setViewModel(viewModel: MainActivityViewModel) {
         this.viewModel = viewModel
     }

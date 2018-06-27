@@ -22,6 +22,8 @@ class SearchPresenter @Inject constructor(
         getAllWords()
     }
 
+    override fun onStop() {}
+
     override fun setViewModel(viewModel: SearchViewModel) {
         this.viewModel = viewModel
     }

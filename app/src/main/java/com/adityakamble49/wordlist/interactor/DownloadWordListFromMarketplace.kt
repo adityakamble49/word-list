@@ -12,6 +12,9 @@ import com.adityakamble49.wordlist.utils.Constants
 import com.adityakamble49.wordlist.utils.getWordListNameFromFileName
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,6 +30,8 @@ class DownloadWordListFromMarketplace @Inject constructor(
         private val wordDao: WordDao,
         private val wordListDao: WordListDao,
         private val marketplaceWordListDao: MarketplaceWordListDao) {
+
+    private val disposables = CompositeDisposable()
 
     private fun buildUseCaseObservable(marketplaceWordList: MarketplaceWordList): Completable {
         return Completable.create { e ->
@@ -78,9 +83,20 @@ class DownloadWordListFromMarketplace @Inject constructor(
         marketplaceWordListDao.updateList(marketplaceWordList)
     }
 
-    fun execute(marketplaceWordList: MarketplaceWordList): Completable {
-        return buildUseCaseObservable(marketplaceWordList)
+    private fun addDisposables(disposable: Disposable) {
+        disposables.add(disposable)
+    }
+
+    fun dispose() {
+        if (!disposables.isDisposed) {
+            disposables.dispose()
+        }
+    }
+
+    fun execute(marketplaceWordList: MarketplaceWordList, observer: DisposableCompletableObserver) {
+        val completable = buildUseCaseObservable(marketplaceWordList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+        addDisposables(completable.subscribeWith(observer))
     }
 }

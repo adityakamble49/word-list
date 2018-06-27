@@ -65,6 +65,8 @@ class WordPresenter @Inject constructor(
         }
     }
 
+    override fun onStop() {}
+
     private fun getCurrentWordList() {
         getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
     }

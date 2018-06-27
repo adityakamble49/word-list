@@ -5,7 +5,7 @@ import com.adityakamble49.wordlist.cache.db.MarketplaceWordListDao
 import com.adityakamble49.wordlist.interactor.DownloadWordListFromMarketplace
 import com.adityakamble49.wordlist.interactor.RefreshMarketplaceWordList
 import com.adityakamble49.wordlist.model.MarketplaceWordList
-import timber.log.Timber
+import io.reactivex.observers.DisposableCompletableObserver
 import javax.inject.Inject
 
 /**
@@ -26,11 +26,24 @@ class MarketplacePresenter @Inject constructor(
 
     override fun initialize() {
         observeMarketplaceWordList()
-        refreshMarketplaceWordList.execute().subscribe { view.showMessage("Marketplace Refreshed") }
+        refreshMarketplaceWordList.execute(RefreshMarketplaceObserver())
+    }
+
+    override fun onStop() {
+        refreshMarketplaceWordList.dispose()
+        downloadWordListFromMarketplace.dispose()
     }
 
     override fun setViewModel(viewModel: MarketplaceViewModel) {
         this.viewModel = viewModel
+    }
+
+    private inner class RefreshMarketplaceObserver : DisposableCompletableObserver() {
+        override fun onComplete() {
+            view.showMessage("Marketplace Refreshed")
+        }
+
+        override fun onError(e: Throwable) {}
     }
 
     private fun observeMarketplaceWordList() {
@@ -43,7 +56,14 @@ class MarketplacePresenter @Inject constructor(
     }
 
     override fun onClickDownload(marketplaceWordList: MarketplaceWordList) {
-        downloadWordListFromMarketplace.execute(marketplaceWordList)
-                .subscribe({ view.showMessage("List Downloaded") }, { Timber.i(it) })
+        downloadWordListFromMarketplace.execute(marketplaceWordList, DownloadWordListObserver())
+    }
+
+    private inner class DownloadWordListObserver : DisposableCompletableObserver() {
+        override fun onComplete() {
+            view.showMessage("List Downloaded")
+        }
+
+        override fun onError(e: Throwable) {}
     }
 }

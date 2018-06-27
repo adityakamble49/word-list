@@ -42,6 +42,8 @@ class WordListPresenter @Inject constructor(
         observeWordLists()
     }
 
+    override fun onStop() {}
+
     /**
      * Get Current selected word list whose id is saved in preferences and that word list
      * details can be fetched from db
