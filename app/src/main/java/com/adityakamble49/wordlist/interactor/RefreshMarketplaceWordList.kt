@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.interactor
 
+import com.adityakamble49.wordlist.BuildConfig
 import com.adityakamble49.wordlist.cache.db.MarketplaceWordListDao
 import com.adityakamble49.wordlist.cache.db.WordListDao
 import com.adityakamble49.wordlist.model.MarketplaceWordList
@@ -59,7 +60,17 @@ class RefreshMarketplaceWordList @Inject constructor(
     }
 
     private fun updateWordListStatus(
-            marketplaceWordLists: List<MarketplaceWordList>): List<MarketplaceWordList> {
+            marketplaceWordListsFetched: List<MarketplaceWordList>): List<MarketplaceWordList> {
+
+        val marketplaceWordLists = marketplaceWordListsFetched.toMutableList()
+        // Keep Test Word List in Debug version only
+        if (!BuildConfig.DEBUG) {
+            marketplaceWordListsFetched.forEachIndexed { index, marketplaceWordList ->
+                if (marketplaceWordList.name == "Test.json") {
+                    marketplaceWordLists.removeAt(index)
+                }
+            }
+        }
 
         // Reset Status to Not available
         marketplaceWordLists.forEach { it.status = WordListStatus.NOT_AVAILABLE.name }
