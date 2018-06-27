@@ -29,6 +29,9 @@ interface WordListDao {
     @Query("SELECT  * FROM word_lists WHERE id= :id")
     fun getWordListByIdDirect(id: Int): WordList
 
+    @Query("SELECT  * FROM word_lists WHERE marketplaceFilename= :fileName")
+    fun getWordListByMarketplaceFileName(fileName: String): WordList?
+
     @Update
     fun update(wordList: WordList)
 

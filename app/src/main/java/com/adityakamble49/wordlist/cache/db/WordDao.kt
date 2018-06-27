@@ -39,4 +39,7 @@ interface WordDao {
 
     @Query("SELECT * FROM words")
     fun getAllWords(): List<Word>
+
+    @Query("DELETE FROM words WHERE listId= :listId")
+    fun deleteWordsOf(listId: Int)
 }

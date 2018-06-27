@@ -66,15 +66,27 @@ class DownloadWordListFromMarketplace @Inject constructor(
 
     private fun insertWordListToDatabase(marketplaceWordList: MarketplaceWordList,
                                          words: List<Word>) {
-        val wordList = WordList(0,
-                marketplaceWordList.sha,
-                marketplaceWordList.name,
-                getWordListNameFromFileName(marketplaceWordList.name),
-                0)
-        val wordListId = wordListDao.insert(wordList)
-        words.forEach { it.listId = wordListId.toInt() }
+        // Get word list if already present
+        var wordListId = 0
+        val wordListLocal = wordListDao.getWordListByMarketplaceFileName(marketplaceWordList.name)
+        if (wordListLocal != null) {
+            // Update List
+            wordListId = wordListLocal.id
+            wordDao.deleteWordsOf(wordListId)
+            wordListLocal.hash = marketplaceWordList.sha
+            wordListDao.update(wordListLocal)
+        } else {
+            // Insert list
+            val wordList = WordList(0,
+                    marketplaceWordList.sha,
+                    marketplaceWordList.name,
+                    getWordListNameFromFileName(marketplaceWordList.name),
+                    0)
+            wordListId = wordListDao.insert(wordList).toInt()
+        }
+        words.forEach { it.listId = wordListId }
         val wordsIds = wordDao.insertWords(words)
-        val fetchedWordList = wordListDao.getWordListByIdDirect(wordListId.toInt())
+        val fetchedWordList = wordListDao.getWordListByIdDirect(wordListId)
         fetchedWordList.lastWordId = wordsIds[0].toInt()
         wordListDao.update(fetchedWordList)
 
