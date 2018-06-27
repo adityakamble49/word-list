@@ -5,7 +5,6 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.di.qualifier.ApplicationContext
 import com.adityakamble49.wordlist.di.scope.PerApplication
 import com.adityakamble49.wordlist.model.Word
-import com.adityakamble49.wordlist.model.WordListType
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -28,13 +27,10 @@ class DataProcessor @Inject constructor(@ApplicationContext var context: Context
         gsonParser = getGson()
     }
 
-    fun parseWordList(wordListType: WordListType): List<Word> {
+    fun parseWordList(): List<Word> {
 
         // Get required file from raw
-        val wordFileInputStream = context.resources.openRawResource(when (wordListType) {
-            WordListType.MANHATTAN_ESSENTIAL -> R.raw.manhattan_essential_with_mnemonic
-            WordListType.MANHATTAN_ADVANCED -> R.raw.manhattan_advanced_with_mnemonic
-        })
+        val wordFileInputStream = context.resources.openRawResource(R.raw.sample_word_list)
 
         // Read and append content to list
         val bufferedReader = BufferedReader(InputStreamReader(wordFileInputStream))

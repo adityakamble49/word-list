@@ -4,7 +4,6 @@ import com.adityakamble49.wordlist.cache.PreferenceHelper
 import com.adityakamble49.wordlist.cache.db.WordListRepo
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.model.WordList
-import com.adityakamble49.wordlist.model.WordListType
 import com.adityakamble49.wordlist.utils.DataProcessor
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,47 +27,23 @@ class ImportWordListToDatabase @Inject constructor(
         return Completable.create { importWordListToDBEmitter ->
 
             // Create Shuffled Word List
-            val wordListManhattanEssentialShuffled = WordList(0, UUID.randomUUID().toString(), "",
-                    "Manhattan Essential - Shuffled", 0)
-            val wordListManhattanAdvancedShuffled = WordList(0, UUID.randomUUID().toString(), "",
-                    "Manhattan Advanced - Shuffled", 0)
-            val wordListEssentialId = wordListRepo.insert(wordListManhattanEssentialShuffled)
-            val wordListEssentialUUID = wordListManhattanEssentialShuffled.hash
-            val wordListAdvancedId = wordListRepo.insert(wordListManhattanAdvancedShuffled)
-            val wordListAdvancedUUID = wordListManhattanAdvancedShuffled.hash
-
+            val sampleWordList = WordList(0, UUID.randomUUID().toString(), "",
+                    "Sample Word List", 1)
+            val sampleWordListId = wordListRepo.insert(sampleWordList)
 
             // Insert Words into DB
-            val wordListManhattanEssential = dataProcessor.parseWordList(
-                    WordListType.MANHATTAN_ESSENTIAL)
-            wordListManhattanEssential.forEach {
-                it.listId = wordListEssentialId.toInt()
+            val wordListSample = dataProcessor.parseWordList()
+            wordListSample.forEach {
+                it.listId = sampleWordListId.toInt()
             }
-            val wordListManhattanAdvanced = dataProcessor.parseWordList(
-                    WordListType.MANHATTAN_ADVANCED)
-            wordListManhattanAdvanced.forEach {
-                it.listId = wordListAdvancedId.toInt()
-            }
-            wordRepo.insertWords(wordListManhattanEssential)
-            wordRepo.insertWords(wordListManhattanAdvanced)
+            wordRepo.insertWords(wordListSample)
 
             // Fetch inserted words with updated primary key
-            val wordListManhattanEssentialFetched = wordRepo.getWordListDirect(
-                    wordListEssentialId.toInt())
-            val wordListManhattanAdvancedFetched = wordRepo.getWordListDirect(
-                    wordListAdvancedId.toInt())
+            val wordListSampleFetched = wordRepo.getWordListDirect(sampleWordListId.toInt())
 
-            // Create default shuffled word lists
-            val wordListManhattanEssentialShuffledUpdate = WordList(wordListEssentialId.toInt(),
-                    wordListEssentialUUID, "", "Manhattan Essential - Shuffled",
-                    wordListManhattanEssentialFetched[0].id)
-
-            val wordListManhattanAdvancedShuffledUpdate = WordList(wordListAdvancedId.toInt(),
-                    wordListAdvancedUUID, "", "Manhattan Advanced - Shuffled",
-                    wordListManhattanAdvancedFetched[0].id)
-
-            wordListRepo.updateWordList(wordListManhattanEssentialShuffledUpdate)
-            wordListRepo.updateWordList(wordListManhattanAdvancedShuffledUpdate)
+            // Update wordList with last word Id
+            sampleWordList.lastWordId = wordListSampleFetched[0].id
+            wordListRepo.updateWordList(sampleWordList)
 
             preferenceHelper.areWordsImported = true
             importWordListToDBEmitter.onComplete()

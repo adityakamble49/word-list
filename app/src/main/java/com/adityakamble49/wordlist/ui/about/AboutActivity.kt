@@ -83,13 +83,6 @@ class AboutActivity : MaterialAboutActivity() {
         creditsCardBuilder.title(R.string.credits)
 
         creditsCardBuilder.addItem(MaterialAboutActionItem.Builder()
-                .text(R.string.credit_name_wordlist)
-                .subText(R.string.credit_description_wordlist)
-                .showIcon(false)
-                .setOnClickAction { openUrl(ReferenceUrls.CREDIT_WORD_LIST) }
-                .build())
-
-        creditsCardBuilder.addItem(MaterialAboutActionItem.Builder()
                 .text(R.string.credit_name_app_icon)
                 .subText(R.string.credit_description_app_icon)
                 .showIcon(false)

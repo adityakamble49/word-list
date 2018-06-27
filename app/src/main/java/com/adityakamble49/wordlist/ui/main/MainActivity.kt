@@ -21,7 +21,6 @@ import com.adityakamble49.wordlist.ui.settings.SettingsFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.invisible
 import com.adityakamble49.wordlist.utils.replaceFragment
-import com.adityakamble49.wordlist.utils.showToast
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -215,11 +214,6 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
 
     private fun toggleDrawerToggleIndicator(toShow: Boolean) {
         drawerToggle?.isDrawerIndicatorEnabled = toShow
-    }
-
-    override fun alertListTypeUpdate(wordListType: Int) {
-        val selectedWordType = resources.getStringArray(R.array.items_list_types)[wordListType]
-        showToast(resources.getString(R.string.alert_list_change, selectedWordType))
     }
 
     override fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode) {

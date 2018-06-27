@@ -17,7 +17,6 @@ interface MainContract {
                               content: String = "Working on something")
 
         fun dataInitialized()
-        fun alertListTypeUpdate(wordListType: Int)
         fun startWordActivity(wordActivityMode: WordActivity.Companion.WordActivityMode)
         fun openWordList()
         fun openMarketplace()
