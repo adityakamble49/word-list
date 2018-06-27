@@ -25,6 +25,7 @@ class RefreshMarketplaceWordList @Inject constructor(
 
     private fun buildUseCaseObservable(): Completable {
         return Completable.create { e ->
+            deleteIncompleteMarketplaceWordList()
             wordListService.getMarketplaceWordList(RemoteUrls.GITHUB_WORDLIST,
                     "token ${RemoteUrls.GITHUB_AUTH_TOKEN}")
                     .subscribe({
@@ -35,10 +36,33 @@ class RefreshMarketplaceWordList @Inject constructor(
         }
     }
 
+    private fun deleteIncompleteMarketplaceWordList() {
+        // Get Local Word Lists
+        val wordLists = wordListDao.getWordListsDirect()
+        // Delete Incomplete status Lists from Marketplace and Local WordList
+        val marketplaceWordListsLocal = marketplaceWordListDao.getMarketplaceWordListDirect()
+        marketplaceWordListsLocal.forEach { marketplaceWordList ->
+            if (marketplaceWordList.status == WordListStatus.DOWNLOADING.name) {
+                marketplaceWordListDao.deleteList(marketplaceWordList)
+                wordLists.forEach { wordList ->
+                    if (wordList.marketplaceFilename == marketplaceWordList.name) {
+                        wordListDao.delete(wordList)
+                    }
+                }
+            }
+        }
+    }
+
     private fun updateWordListStatus(
             marketplaceWordLists: List<MarketplaceWordList>): List<MarketplaceWordList> {
+
+        // Reset Status to Not available
         marketplaceWordLists.forEach { it.status = WordListStatus.NOT_AVAILABLE.name }
+
+        // Get Local Word Lists
         val wordLists = wordListDao.getWordListsDirect()
+
+        // Update status of Fetched Marketplace wordlist by checking available offline word lists
         marketplaceWordLists.forEach { marketplaceWordList ->
             wordLists.forEach { wordList ->
                 if (wordList.marketplaceFilename == marketplaceWordList.name) {

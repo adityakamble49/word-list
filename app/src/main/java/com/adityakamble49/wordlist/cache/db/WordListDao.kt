@@ -1,10 +1,7 @@
 package com.adityakamble49.wordlist.cache.db
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Update
+import android.arch.persistence.room.*
 import com.adityakamble49.wordlist.model.WordList
 
 /**
@@ -34,6 +31,9 @@ interface WordListDao {
 
     @Update
     fun update(wordList: WordList)
+
+    @Delete
+    fun delete(wordList: WordList)
 
     @Query("UPDATE word_lists SET lastWordId= :lastWordId WHERE id= :wordListId")
     fun updateLastWordIdForWordList(wordListId: Int, lastWordId: Int)

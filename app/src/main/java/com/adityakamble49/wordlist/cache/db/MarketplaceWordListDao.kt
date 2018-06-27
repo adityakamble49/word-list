@@ -22,6 +22,12 @@ interface MarketplaceWordListDao {
     @Update
     fun updateList(marketplaceWordList: MarketplaceWordList)
 
+    @Delete
+    fun deleteList(marketplaceWordList: MarketplaceWordList)
+
     @Query("SELECT * FROM marketplace_wordlist")
     fun getMarketplaceWordList(): LiveData<List<MarketplaceWordList>>
+
+    @Query("SELECT * FROM marketplace_wordlist")
+    fun getMarketplaceWordListDirect(): List<MarketplaceWordList>
 }
