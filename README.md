@@ -25,12 +25,10 @@ Start with learn mode and practice the words which you have learned with Practic
 
 ## Features
 
-* Word List for GRE words with shuffled and sorted lists
-* Manhattan Essential
-* Manhattan Advanced
 * Learn Mode
 * Practice Mode
 * Dictate Mode
+* Word List Marketplace
 
 
 ## Development
@@ -57,7 +55,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contributions.
 
 ### Credits
 
-* [Manhattan-GRE-Words-Shuffled](https://github.com/maykulkarni/Manhattan-GRE-Words-Shuffled)
 * [App Icon made by Icon Monk from www.flaticon.com](https://www.flaticon.com/free-icon/checklist_273504#term=list&page=1&position=96)
 
 
