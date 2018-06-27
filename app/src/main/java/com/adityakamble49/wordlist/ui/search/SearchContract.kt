@@ -14,6 +14,7 @@ interface SearchContract {
 
     interface View : BaseContract.View, LifecycleOwner {
         fun updateAllWordList(wordList: List<Word>)
+        fun toggleAddWordAlert(toShow: Boolean)
         fun openAddWordUI()
 
     }

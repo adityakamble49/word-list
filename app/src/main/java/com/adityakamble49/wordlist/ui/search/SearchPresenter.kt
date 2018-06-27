@@ -1,7 +1,9 @@
 package com.adityakamble49.wordlist.ui.search
 
 import com.adityakamble49.wordlist.interactor.GetAllWords
+import com.adityakamble49.wordlist.interactor.GetCurrentWordList
 import com.adityakamble49.wordlist.model.Word
+import com.adityakamble49.wordlist.model.WordList
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -14,12 +16,14 @@ import javax.inject.Inject
  */
 class SearchPresenter @Inject constructor(
         private val view: SearchContract.View,
-        private val getAllWords: GetAllWords) : SearchContract.Presenter {
+        private val getAllWords: GetAllWords,
+        private val getCurrentWordList: GetCurrentWordList) : SearchContract.Presenter {
 
     private lateinit var viewModel: SearchViewModel
 
     override fun initialize() {
         getAllWords()
+        fetchCurrentWordList()
     }
 
     override fun onStop() {}
@@ -44,6 +48,20 @@ class SearchPresenter @Inject constructor(
         override fun onNext(t: List<Word>) {
             viewModel.allWordsList = t
             updateAllWordList(viewModel.allWordsList)
+        }
+    }
+
+    private fun fetchCurrentWordList() {
+        getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
+    }
+
+    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
+        override fun onComplete() {}
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {}
+
+        override fun onNext(t: WordList) {
+            view.toggleAddWordAlert(t.marketplaceFilename.isEmpty())
         }
     }
 

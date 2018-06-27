@@ -16,6 +16,8 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
+import com.adityakamble49.wordlist.utils.invisible
+import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import javax.inject.Inject
 
@@ -55,7 +57,7 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.add_word_alert_layout -> presenter.onClickAddWordAlert()
         }
     }
@@ -102,6 +104,14 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
         searchListAdapter.itemList = wordList
         searchListAdapter.unfilteredItemList = wordList
         searchListAdapter.notifyDataSetChanged()
+    }
+
+    override fun toggleAddWordAlert(toShow: Boolean) {
+        if (toShow) {
+            rootView.add_word_alert_layout.visible()
+        } else {
+            rootView.add_word_alert_layout.invisible()
+        }
     }
 
     override fun openAddWordUI() {
