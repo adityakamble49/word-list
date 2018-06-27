@@ -147,6 +147,7 @@ class WordListPresenter @Inject constructor(
         override fun onSuccess(t: WordList) {
             view.showMessage("Word List Created")
             updateCurrentWordList(t)
+            view.updateCurrentWordListName(t.name)
         }
 
         override fun onError(e: Throwable) {
