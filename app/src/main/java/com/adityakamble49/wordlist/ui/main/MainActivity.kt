@@ -140,21 +140,21 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
     private fun updateTitleAndDrawer(currentFragment: Fragment) {
         showFAB(false)
         toggleDrawerToggleIndicator(true)
-        when (currentFragment.javaClass.simpleName) {
-            WordListFragment::class.java.simpleName -> {
+        when (currentFragment.javaClass.name) {
+            WordListFragment::class.java.name -> {
                 updateTitle(getString(R.string.app_name))
                 showFAB(true)
                 resetNavigationHistory(ID_NAV_WORD_LIST)
             }
-            MarketplaceFragment::class.java.simpleName -> {
+            MarketplaceFragment::class.java.name -> {
                 updateTitle(getString(R.string.marketplace_title))
                 resetNavigationHistory(ID_NAV_MARKETPLACE)
             }
-            SettingsFragment::class.java.simpleName -> {
+            SettingsFragment::class.java.name -> {
                 updateTitle(getString(R.string.label_settings))
                 resetNavigationHistory(ID_NAV_SETTINGS)
             }
-            SearchFragment::class.java.simpleName -> {
+            SearchFragment::class.java.name -> {
                 toggleDrawerToggleIndicator(false)
                 updateTitle(getString(R.string.label_search))
             }
