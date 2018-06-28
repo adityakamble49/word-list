@@ -7,6 +7,7 @@ import com.adityakamble49.wordlist.model.*
 import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
 import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
 import javax.inject.Inject
@@ -354,13 +355,11 @@ class WordPresenter @Inject constructor(
         }
         if (currentWordActivityMode == WordActivity.Companion.WordActivityMode.LEARN.ordinal) {
             saveLastWordIdForWordList.execute(viewModel.currentWordList.id,
-                    viewModel.currentWord.id)
-                    .subscribe(SaveLastWordIdForWordListSubscriber())
+                    viewModel.currentWord.id, SaveLastWordIdForWordListSubscriber())
         }
     }
 
-    private inner class SaveLastWordIdForWordListSubscriber : CompletableObserver {
-        override fun onSubscribe(d: Disposable) {}
+    private inner class SaveLastWordIdForWordListSubscriber : DisposableCompletableObserver() {
         override fun onError(e: Throwable) {}
 
         override fun onComplete() {
