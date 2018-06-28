@@ -67,6 +67,7 @@ class WordPresenter @Inject constructor(
 
     override fun onStop() {
         fetchMnemonic.dispose()
+        fetchWordInfo.dispose()
     }
 
     private fun getCurrentWordList() {
