@@ -69,6 +69,7 @@ class WordPresenter @Inject constructor(
         fetchMnemonic.dispose()
         fetchWordInfo.dispose()
         getCurrentWordList.dispose()
+        getCurrentWords.dispose()
     }
 
     private fun getCurrentWordList() {
@@ -91,16 +92,14 @@ class WordPresenter @Inject constructor(
     }
 
     private fun loadWords() {
-        getCurrentWords.execute().subscribe(GetWordListSubscriber())
+        getCurrentWords.execute(GetWordListSubscriber())
     }
 
-    private inner class GetWordListSubscriber : io.reactivex.Observer<List<Word>> {
+    private inner class GetWordListSubscriber : DisposableSingleObserver<List<Word>>() {
 
-        override fun onSubscribe(d: Disposable) {}
-        override fun onComplete() {}
         override fun onError(e: Throwable) {}
 
-        override fun onNext(t: List<Word>) {
+        override fun onSuccess(t: List<Word>) {
             if (t.isEmpty()) {
                 view.showEmptyListWarning()
                 isWordListEmpty = true
