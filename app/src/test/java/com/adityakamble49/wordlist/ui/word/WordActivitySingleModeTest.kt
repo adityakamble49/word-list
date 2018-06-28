@@ -2,7 +2,6 @@ package com.adityakamble49.wordlist.ui.word
 
 import android.view.View
 import com.adityakamble49.wordlist.BuildConfig
-import com.adityakamble49.wordlist.R
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -19,6 +18,8 @@ import org.robolectric.annotation.Config
 class WordActivitySingleModeTest : WordActivityNormalModeTest() {
 
     override fun getActivityMode() = WordActivity.Companion.WordActivityMode.SINGLE
+
+    override fun getAvailableOptionMenus() = intArrayOf()
 
     override fun getControllerVisibility() = View.GONE
 }
