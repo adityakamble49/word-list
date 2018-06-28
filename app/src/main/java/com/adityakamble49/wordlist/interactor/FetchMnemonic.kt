@@ -2,8 +2,9 @@ package com.adityakamble49.wordlist.interactor
 
 import com.adityakamble49.wordlist.utils.Constants
 import com.adityakamble49.wordlist.utils.getMnemonicAPIUrl
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -17,10 +18,10 @@ import javax.inject.Inject
  * @since 13/6/2018
  */
 class FetchMnemonic @Inject constructor(
-        private val okHttpClient: OkHttpClient) {
+        private val okHttpClient: OkHttpClient) : BaseRxUseCase() {
 
-    private fun buildUseCaseObservable(word: String): Observable<String> {
-        return Observable.create { e ->
+    private fun buildUseCaseObservable(word: String): Single<String> {
+        return Single.create { e ->
             val mnemonicRequest = Request.Builder()
                     .url(getMnemonicAPIUrl(word))
                     .build()
@@ -36,14 +37,14 @@ class FetchMnemonic @Inject constructor(
                     sb.append("\n\n")
                 }
             }
-            e.onNext(sb.toString())
-            e.onComplete()
+            e.onSuccess(sb.toString())
         }
     }
 
-    fun execute(word: String): Observable<String> {
-        return buildUseCaseObservable(word)
+    fun execute(word: String, observer: DisposableSingleObserver<String>) {
+        val observable = buildUseCaseObservable(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+        addDisposables(observable.subscribeWith(observer))
     }
 }

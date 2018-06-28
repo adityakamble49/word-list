@@ -8,6 +8,7 @@ import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
 import io.reactivex.CompletableObserver
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -65,7 +66,9 @@ class WordPresenter @Inject constructor(
         }
     }
 
-    override fun onStop() {}
+    override fun onStop() {
+        fetchMnemonic.dispose()
+    }
 
     private fun getCurrentWordList() {
         getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
@@ -247,7 +250,7 @@ class WordPresenter @Inject constructor(
     override fun onClickWordMnemonicsSync(word: String) {
         if (!word.isEmpty()) {
             view.showMnemonicProgress(true)
-            fetchMnemonic.execute(word).subscribe(FetchMnemonicObserver())
+            fetchMnemonic.execute(word, FetchMnemonicObserver())
         } else {
             view.showMessage("Word Empty")
         }
@@ -260,11 +263,9 @@ class WordPresenter @Inject constructor(
         }
     }
 
-    inner class FetchMnemonicObserver : Observer<String> {
-        override fun onSubscribe(d: Disposable) {}
-        override fun onComplete() {}
+    inner class FetchMnemonicObserver : DisposableSingleObserver<String>() {
         override fun onError(e: Throwable) {}
-        override fun onNext(t: String) {
+        override fun onSuccess(t: String) {
             view.showMnemonicProgress(false)
             view.updateMnemonics(t)
         }
