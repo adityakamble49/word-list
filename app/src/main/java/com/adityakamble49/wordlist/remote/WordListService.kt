@@ -4,6 +4,7 @@ import com.adityakamble49.wordlist.model.DictionaryWord
 import com.adityakamble49.wordlist.model.MarketplaceWordList
 import com.adityakamble49.wordlist.model.Word
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -18,7 +19,7 @@ import retrofit2.http.Url
 interface WordListService {
 
     @GET("dictionary/{word}")
-    fun getWordInformation(@Path("word") word: String): Observable<List<DictionaryWord>>
+    fun getWordInformation(@Path("word") word: String): Single<List<DictionaryWord>>
 
     @GET
     fun getMarketplaceWordList(@Url marketplaceWordListUrl: String, @Header(

@@ -6,7 +6,6 @@ import com.adityakamble49.wordlist.interactor.*
 import com.adityakamble49.wordlist.model.*
 import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
 import io.reactivex.CompletableObserver
-import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
@@ -259,7 +258,7 @@ class WordPresenter @Inject constructor(
     override fun onClickWordInformationSync(word: String) {
         if (!word.isEmpty()) {
             view.showWordInfoProgress(true)
-            fetchWordInfo.execute(word).subscribe(FetchWordInfoObserver())
+            fetchWordInfo.execute(word, FetchWordInfoObserver())
         }
     }
 
@@ -272,11 +271,9 @@ class WordPresenter @Inject constructor(
 
     }
 
-    inner class FetchWordInfoObserver : Observer<List<DictionaryWord>> {
-        override fun onSubscribe(d: Disposable) {}
-        override fun onComplete() {}
+    inner class FetchWordInfoObserver : DisposableSingleObserver<List<DictionaryWord>>() {
         override fun onError(e: Throwable) {}
-        override fun onNext(t: List<DictionaryWord>) {
+        override fun onSuccess(t: List<DictionaryWord>) {
             view.showWordInfoProgress(false)
             view.updateWordInfo(formatDictionaryWords(t))
         }
