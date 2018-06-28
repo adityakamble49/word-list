@@ -3,8 +3,7 @@ package com.adityakamble49.wordlist.ui.main
 import com.adityakamble49.wordlist.interactor.AreWordsImported
 import com.adityakamble49.wordlist.interactor.ImportWordListToDatabase
 import com.adityakamble49.wordlist.ui.word.WordActivity
-import io.reactivex.CompletableObserver
-import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableCompletableObserver
 import javax.inject.Inject
 
 /**
@@ -25,7 +24,9 @@ class MainPresenter @Inject constructor(
         checkIfWordsImported()
     }
 
-    override fun onStop() {}
+    override fun onStop() {
+        importWordListToDatabase.dispose()
+    }
 
     override fun setViewModel(viewModel: MainActivityViewModel) {
         this.viewModel = viewModel
@@ -33,7 +34,7 @@ class MainPresenter @Inject constructor(
 
     private fun startWordImportProcedure() {
         view.showLoadingDialog(true)
-        importWordListToDatabase.execute().subscribe(ImportWordListToDatabaseSubscriber())
+        importWordListToDatabase.execute(ImportWordListToDatabaseSubscriber())
     }
 
     private fun checkIfWordsImported() {
@@ -44,14 +45,12 @@ class MainPresenter @Inject constructor(
         }
     }
 
-    private inner class ImportWordListToDatabaseSubscriber : CompletableObserver {
+    private inner class ImportWordListToDatabaseSubscriber : DisposableCompletableObserver() {
 
         override fun onComplete() {
             view.showLoadingDialog(false)
             view.dataInitialized()
         }
-
-        override fun onSubscribe(d: Disposable) {}
 
         override fun onError(e: Throwable) {}
     }

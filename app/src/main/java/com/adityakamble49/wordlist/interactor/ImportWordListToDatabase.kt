@@ -7,6 +7,7 @@ import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.utils.DataProcessor
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
@@ -21,7 +22,7 @@ class ImportWordListToDatabase @Inject constructor(
         private val dataProcessor: DataProcessor,
         private val preferenceHelper: PreferenceHelper,
         private val wordRepo: WordRepo,
-        private val wordListRepo: WordListRepo) {
+        private val wordListRepo: WordListRepo) : BaseRxUseCase() {
 
     private fun buildUseCaseObservable(): Completable {
         return Completable.create { importWordListToDBEmitter ->
@@ -50,9 +51,10 @@ class ImportWordListToDatabase @Inject constructor(
         }
     }
 
-    fun execute(): Completable {
-        return buildUseCaseObservable()
+    fun execute(observer: DisposableCompletableObserver) {
+        val observable = buildUseCaseObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+        addDisposables(observable.subscribeWith(observer))
     }
 }
