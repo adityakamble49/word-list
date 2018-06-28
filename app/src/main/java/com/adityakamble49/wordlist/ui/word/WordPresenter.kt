@@ -71,6 +71,7 @@ class WordPresenter @Inject constructor(
         fetchWordInfo.dispose()
         getCurrentWordList.dispose()
         getCurrentWords.dispose()
+        submitEditedWord.dispose()
     }
 
     private fun getCurrentWordList() {
@@ -317,7 +318,7 @@ class WordPresenter @Inject constructor(
             } else {
                 submittedWord.id = viewModel.currentWord.id
                 submittedWord.listId = viewModel.currentWord.listId
-                submitEditedWord.execute(submittedWord).subscribe(SubmitEditedWordObserver())
+                submitEditedWord.execute(submittedWord, SubmitEditedWordObserver())
             }
         } else {
             view.submitWordInvalid()
@@ -340,8 +341,7 @@ class WordPresenter @Inject constructor(
         }
     }
 
-    private inner class SubmitEditedWordObserver : CompletableObserver {
-        override fun onSubscribe(d: Disposable) {}
+    private inner class SubmitEditedWordObserver : DisposableCompletableObserver() {
         override fun onError(e: Throwable) {}
 
         override fun onComplete() {
