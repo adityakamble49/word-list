@@ -4,7 +4,6 @@ import com.adityakamble49.wordlist.interactor.GetAllWords
 import com.adityakamble49.wordlist.interactor.GetCurrentWordList
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
@@ -28,6 +27,7 @@ class SearchPresenter @Inject constructor(
 
     override fun onStop() {
         getAllWords.dispose()
+        getCurrentWordList.dispose()
     }
 
     override fun setViewModel(viewModel: SearchViewModel) {
@@ -52,15 +52,13 @@ class SearchPresenter @Inject constructor(
     }
 
     private fun fetchCurrentWordList() {
-        getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
+        getCurrentWordList.execute(GetCurrentWordListSubscriber())
     }
 
-    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
-        override fun onComplete() {}
-        override fun onSubscribe(d: Disposable) {}
+    private inner class GetCurrentWordListSubscriber : DisposableSingleObserver<WordList>() {
         override fun onError(e: Throwable) {}
 
-        override fun onNext(t: WordList) {
+        override fun onSuccess(t: WordList) {
             view.toggleAddWordAlert(t.marketplaceFilename.isEmpty())
         }
     }

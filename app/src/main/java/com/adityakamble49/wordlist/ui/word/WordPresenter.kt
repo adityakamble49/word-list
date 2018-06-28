@@ -68,22 +68,21 @@ class WordPresenter @Inject constructor(
     override fun onStop() {
         fetchMnemonic.dispose()
         fetchWordInfo.dispose()
+        getCurrentWordList.dispose()
     }
 
     private fun getCurrentWordList() {
-        getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
+        getCurrentWordList.execute(GetCurrentWordListSubscriber())
     }
 
     private fun getDictateConfig() {
         viewModel.dictateModeConfig = getDictateModeConfig.execute()
     }
 
-    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
-        override fun onComplete() {}
-        override fun onSubscribe(d: Disposable) {}
+    private inner class GetCurrentWordListSubscriber : DisposableSingleObserver<WordList>() {
         override fun onError(e: Throwable) {}
 
-        override fun onNext(t: WordList) {
+        override fun onSuccess(t: WordList) {
             viewModel.currentWordList = t
             if (!isAddMode()) {
                 loadWords()

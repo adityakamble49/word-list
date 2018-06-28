@@ -7,7 +7,6 @@ import com.adityakamble49.wordlist.interactor.GetWordLists
 import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListId
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
@@ -44,6 +43,7 @@ class WordListPresenter @Inject constructor(
 
     override fun onStop() {
         createWordList.dispose()
+        getCurrentWordList.dispose()
     }
 
     /**
@@ -51,18 +51,16 @@ class WordListPresenter @Inject constructor(
      * details can be fetched from db
      */
     private fun getCurrentWordList() {
-        getCurrentWordList.execute().subscribe(GetCurrentWordListSubscriber())
+        getCurrentWordList.execute(GetCurrentWordListSubscriber())
     }
 
     /**
      * Listen to Current WordList response and initiate other observers to do work
      */
-    private inner class GetCurrentWordListSubscriber : io.reactivex.Observer<WordList> {
-        override fun onComplete() {}
-        override fun onSubscribe(d: Disposable) {}
+    private inner class GetCurrentWordListSubscriber : DisposableSingleObserver<WordList>() {
         override fun onError(e: Throwable) {}
 
-        override fun onNext(t: WordList) {
+        override fun onSuccess(t: WordList) {
             wordListViewModel.updateCurrentLoadedSavedList(t)
             view.updateMenus(t)
             wordListViewModel.initialize()
@@ -112,15 +110,13 @@ class WordListPresenter @Inject constructor(
     }
 
     override fun requestUpdateWordList() {
-        getCurrentWordList.execute().subscribe(RequestUpdateWordListSubscriber())
+        getCurrentWordList.execute(RequestUpdateWordListSubscriber())
     }
 
-    private inner class RequestUpdateWordListSubscriber : io.reactivex.Observer<WordList> {
-        override fun onComplete() {}
-        override fun onSubscribe(d: Disposable) {}
+    private inner class RequestUpdateWordListSubscriber : DisposableSingleObserver<WordList>() {
         override fun onError(e: Throwable) {}
 
-        override fun onNext(t: WordList) {
+        override fun onSuccess(t: WordList) {
             wordListViewModel.updateCurrentLoadedSavedList(t)
             view.updateMenus(t)
         }
