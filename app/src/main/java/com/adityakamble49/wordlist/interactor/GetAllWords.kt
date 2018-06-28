@@ -2,8 +2,9 @@ package com.adityakamble49.wordlist.interactor
 
 import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.model.Word
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -14,19 +15,19 @@ import javax.inject.Inject
  * @since 10/6/2018
  */
 class GetAllWords @Inject constructor(
-        private val wordRepo: WordRepo) {
+        private val wordRepo: WordRepo) : BaseRxUseCase() {
 
-    private fun buildUseCaseObservable(): Observable<List<Word>> {
-        return Observable.create { e ->
+    private fun buildUseCaseObservable(): Single<List<Word>> {
+        return Single.create { e ->
             val allWordList = wordRepo.getAllWords()
-            e.onNext(allWordList)
-            e.onComplete()
+            e.onSuccess(allWordList)
         }
     }
 
-    fun execute(): Observable<List<Word>> {
-        return buildUseCaseObservable()
+    fun execute(observer: DisposableSingleObserver<List<Word>>) {
+        val observable = buildUseCaseObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+        addDisposables(observable.subscribeWith(observer))
     }
 }

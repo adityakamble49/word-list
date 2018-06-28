@@ -4,8 +4,8 @@ import com.adityakamble49.wordlist.interactor.GetAllWords
 import com.adityakamble49.wordlist.interactor.GetCurrentWordList
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
 /**
@@ -26,7 +26,9 @@ class SearchPresenter @Inject constructor(
         fetchCurrentWordList()
     }
 
-    override fun onStop() {}
+    override fun onStop() {
+        getAllWords.dispose()
+    }
 
     override fun setViewModel(viewModel: SearchViewModel) {
         this.viewModel = viewModel
@@ -37,15 +39,13 @@ class SearchPresenter @Inject constructor(
     }
 
     private fun getAllWords() {
-        getAllWords.execute().subscribe(GetAllWordsSubscriber())
+        getAllWords.execute(GetAllWordsSubscriber())
     }
 
-    private inner class GetAllWordsSubscriber : Observer<List<Word>> {
-        override fun onSubscribe(d: Disposable) {}
-        override fun onComplete() {}
+    private inner class GetAllWordsSubscriber : DisposableSingleObserver<List<Word>>() {
         override fun onError(e: Throwable) {}
 
-        override fun onNext(t: List<Word>) {
+        override fun onSuccess(t: List<Word>) {
             viewModel.allWordsList = t
             updateAllWordList(viewModel.allWordsList)
         }
