@@ -10,8 +10,10 @@ import android.widget.Toast
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.MarketplaceWordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
+import com.adityakamble49.wordlist.ui.main.MainActivity
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_marketplace.view.*
 import javax.inject.Inject
 
@@ -38,6 +40,7 @@ class MarketplaceFragment : BaseInjectableFragment(), MarketplaceContract.View,
     override fun onStop() {
         super.onStop()
         presenter.onStop()
+        showLoadingTitleBar(false)
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -85,6 +88,14 @@ class MarketplaceFragment : BaseInjectableFragment(), MarketplaceContract.View,
             rootView.progress_marketplace.visible()
         } else {
             rootView.progress_marketplace.gone()
+        }
+    }
+
+    override fun showLoadingTitleBar(toShow: Boolean) {
+        if (toShow) {
+            (activity as MainActivity).toolbar_progress.visible()
+        } else {
+            (activity as MainActivity).toolbar_progress.gone()
         }
     }
 

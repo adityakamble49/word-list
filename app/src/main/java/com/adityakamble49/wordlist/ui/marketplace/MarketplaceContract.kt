@@ -14,6 +14,7 @@ interface MarketplaceContract {
 
     interface View : BaseContract.View, LifecycleOwner {
         fun showLoading(toShow: Boolean)
+        fun showLoadingTitleBar(toShow: Boolean)
         fun showMessage(message: String)
         fun updateMarketplaceList(marketplaceWordList: List<MarketplaceWordList>)
     }

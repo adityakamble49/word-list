@@ -27,6 +27,7 @@ class MarketplacePresenter @Inject constructor(
     override fun initialize() {
         observeMarketplaceWordList()
         refreshMarketplaceWordList.execute(RefreshMarketplaceObserver())
+        view.showLoadingTitleBar(true)
     }
 
     override fun onStop() {
@@ -41,6 +42,7 @@ class MarketplacePresenter @Inject constructor(
     private inner class RefreshMarketplaceObserver : DisposableCompletableObserver() {
         override fun onComplete() {
             view.showMessage("Marketplace Refreshed")
+            view.showLoadingTitleBar(false)
         }
 
         override fun onError(e: Throwable) {}
