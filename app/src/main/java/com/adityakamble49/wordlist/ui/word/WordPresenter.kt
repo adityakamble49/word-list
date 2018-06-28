@@ -5,8 +5,6 @@ import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.interactor.*
 import com.adityakamble49.wordlist.model.*
 import com.adityakamble49.wordlist.utils.Constants.DictateModeSpeedValues
-import io.reactivex.CompletableObserver
-import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
@@ -72,6 +70,7 @@ class WordPresenter @Inject constructor(
         getCurrentWordList.dispose()
         getCurrentWords.dispose()
         submitEditedWord.dispose()
+        submitNewWord.dispose()
     }
 
     private fun getCurrentWordList() {
@@ -314,7 +313,7 @@ class WordPresenter @Inject constructor(
     override fun submitEditedWord(submittedWord: Word) {
         if (isWordValid(submittedWord)) {
             if (isAddMode()) {
-                submitNewWord.execute(submittedWord).subscribe(SubmitNewWordObserver())
+                submitNewWord.execute(submittedWord, SubmitNewWordObserver())
             } else {
                 submittedWord.id = viewModel.currentWord.id
                 submittedWord.listId = viewModel.currentWord.listId
@@ -332,8 +331,7 @@ class WordPresenter @Inject constructor(
         return false
     }
 
-    private inner class SubmitNewWordObserver : CompletableObserver {
-        override fun onSubscribe(d: Disposable) {}
+    private inner class SubmitNewWordObserver : DisposableCompletableObserver() {
         override fun onError(e: Throwable) {}
 
         override fun onComplete() {

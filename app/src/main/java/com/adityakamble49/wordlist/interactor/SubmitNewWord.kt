@@ -6,6 +6,7 @@ import com.adityakamble49.wordlist.cache.db.WordRepo
 import com.adityakamble49.wordlist.model.Word
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class SubmitNewWord @Inject constructor(
         private val preferenceHelper: PreferenceHelper,
         private val wordListRepo: WordListRepo,
-        private val wordRepo: WordRepo) {
+        private val wordRepo: WordRepo) : BaseRxUseCase() {
 
     private fun buildUseCaseObservable(newWord: Word): Completable {
         return Completable.create { e ->
@@ -30,9 +31,10 @@ class SubmitNewWord @Inject constructor(
         }
     }
 
-    fun execute(newWord: Word): Completable {
-        return buildUseCaseObservable(newWord)
+    fun execute(newWord: Word, observer: DisposableCompletableObserver) {
+        val observable = buildUseCaseObservable(newWord)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+        addDisposables(observable.subscribeWith(observer))
     }
 }
