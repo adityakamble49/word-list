@@ -68,6 +68,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         if (currentActivityMode == WordActivityMode.ADD.ordinal) {
             toggleEditMode(true)
         }
+        if (currentActivityMode == WordActivityMode.SINGLE.ordinal) {
+            lockEditMode(true)
+        }
         if (currentActivityMode == WordActivityMode.PRACTICE.ordinal) {
             menu.findItem(R.id.action_edit_word).isVisible = false
             menu.findItem(R.id.action_show_info).isVisible = true
@@ -259,6 +262,11 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
             word_info_sync.invisible()
             word_mnemonics_sync.invisible()
         }
+    }
+
+    private fun lockEditMode(toLock: Boolean) {
+        val editMenu = optionMenu?.findItem(R.id.action_edit_word)
+        editMenu?.isVisible = !toLock
     }
 
     override fun submitWord() {
