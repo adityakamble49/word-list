@@ -32,6 +32,11 @@ abstract class BaseFragment : Fragment() {
         return rootView
     }
 
+    override fun onStop() {
+        super.onStop()
+        getFragmentPresenter().onStop()
+    }
+
     protected open fun inflateLayout(inflater: LayoutInflater, container: ViewGroup?): View {
         @LayoutRes val layoutResource = getLayoutId()
         return inflater.inflate(layoutResource, container, false)
@@ -44,4 +49,6 @@ abstract class BaseFragment : Fragment() {
     abstract fun bindView()
 
     abstract fun initializePresenter()
+
+    abstract fun getFragmentPresenter(): BaseContract.Presenter
 }

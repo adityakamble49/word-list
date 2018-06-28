@@ -100,6 +100,8 @@ class SearchFragment : BaseInjectableFragment(), SearchContract.View,
         presenter.initialize()
     }
 
+    override fun getFragmentPresenter() = presenter
+
     override fun updateAllWordList(wordList: List<Word>) {
         searchListAdapter.itemList = wordList
         searchListAdapter.unfilteredItemList = wordList

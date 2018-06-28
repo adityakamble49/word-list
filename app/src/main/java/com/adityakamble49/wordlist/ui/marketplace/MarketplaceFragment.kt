@@ -39,7 +39,6 @@ class MarketplaceFragment : BaseInjectableFragment(), MarketplaceContract.View,
 
     override fun onStop() {
         super.onStop()
-        presenter.onStop()
         showLoadingTitleBar(false)
     }
 
@@ -82,6 +81,8 @@ class MarketplaceFragment : BaseInjectableFragment(), MarketplaceContract.View,
         presenter.setViewModel(viewModel)
         presenter.initialize()
     }
+
+    override fun getFragmentPresenter() = presenter
 
     override fun showLoading(toShow: Boolean) {
         if (toShow) {

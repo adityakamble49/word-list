@@ -42,8 +42,8 @@ class WordListPresenter @Inject constructor(
     }
 
     override fun onStop() {
-        createWordList.dispose()
-        getCurrentWordList.dispose()
+        //createWordList.dispose()
+        //getCurrentWordList.dispose()
     }
 
     /**

@@ -120,6 +120,8 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
         presenter.initialize()
     }
 
+    override fun getFragmentPresenter() = presenter
+
     override fun showLoading(toShow: Boolean) {
         if (toShow) {
             progress_word_list.visible()
