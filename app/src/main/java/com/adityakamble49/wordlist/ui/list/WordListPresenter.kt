@@ -7,8 +7,8 @@ import com.adityakamble49.wordlist.interactor.GetWordLists
 import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListId
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
-import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
 /**
@@ -42,7 +42,9 @@ class WordListPresenter @Inject constructor(
         observeWordLists()
     }
 
-    override fun onStop() {}
+    override fun onStop() {
+        createWordList.dispose()
+    }
 
     /**
      * Get Current selected word list whose id is saved in preferences and that word list
@@ -134,15 +136,13 @@ class WordListPresenter @Inject constructor(
 
     override fun onCreateWordListPositive(wordListName: String) {
         if (!wordListName.isEmpty()) {
-            createWordList.execute(wordListName).subscribe(CreateWordListObserver())
+            createWordList.execute(wordListName, CreateWordListObserver())
         } else {
             view.showMessage("Word List Name Empty!")
         }
     }
 
-    private inner class CreateWordListObserver : SingleObserver<WordList> {
-
-        override fun onSubscribe(d: Disposable) {}
+    private inner class CreateWordListObserver : DisposableSingleObserver<WordList>() {
 
         override fun onSuccess(t: WordList) {
             view.showMessage("Word List Created")
@@ -153,7 +153,6 @@ class WordListPresenter @Inject constructor(
         override fun onError(e: Throwable) {
             view.showMessage("Word List Name Exist!")
         }
-
     }
 
     override fun onClickSavedListItem(selectedWordList: WordList) {

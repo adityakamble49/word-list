@@ -4,6 +4,7 @@ import com.adityakamble49.wordlist.cache.db.WordListRepo
 import com.adityakamble49.wordlist.model.WordList
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Inject
  * @since 10/6/2018
  */
 class CreateWordList @Inject constructor(
-        private val wordListRepo: WordListRepo) {
+        private val wordListRepo: WordListRepo) : BaseUseCase() {
 
     private fun buildUseCaseObservable(wordListName: String): Single<WordList> {
         return Single.create { e ->
@@ -32,9 +33,10 @@ class CreateWordList @Inject constructor(
         }
     }
 
-    fun execute(wordListName: String): Single<WordList> {
-        return buildUseCaseObservable(wordListName)
+    fun execute(wordListName: String, observer: DisposableSingleObserver<WordList>) {
+        val observable = buildUseCaseObservable(wordListName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+        addDisposables(observable.subscribeWith(observer))
     }
 }
