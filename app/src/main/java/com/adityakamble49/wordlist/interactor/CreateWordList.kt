@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @since 10/6/2018
  */
 class CreateWordList @Inject constructor(
-        private val wordListRepo: WordListRepo) : BaseUseCase() {
+        private val wordListRepo: WordListRepo) : BaseRxUseCase() {
 
     private fun buildUseCaseObservable(wordListName: String): Single<WordList> {
         return Single.create { e ->

@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
  * @author Aditya Kamble
  * @since 28/6/2018
  */
-abstract class BaseUseCase {
+abstract class BaseRxUseCase {
 
     private val disposables = CompositeDisposable()
 
