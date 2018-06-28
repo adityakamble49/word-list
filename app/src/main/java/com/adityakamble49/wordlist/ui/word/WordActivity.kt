@@ -42,6 +42,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     // Other Fields
     private var currentActivityMode: Int = WordActivityMode.NORMAL.ordinal
     private lateinit var tts: TextToSpeech
+    private var isEditModeLocked = false
 
     // Constants
     companion object {
@@ -65,6 +66,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         this.optionMenu = menu
         menu.findItem(R.id.action_submit_word).isVisible = false
         menu.findItem(R.id.action_show_info).isVisible = false
+        lockEditMode(isEditModeLocked)
         if (currentActivityMode == WordActivityMode.ADD.ordinal) {
             toggleEditMode(true)
         }
@@ -264,7 +266,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         }
     }
 
-    private fun lockEditMode(toLock: Boolean) {
+    override fun lockEditMode(toLock: Boolean) {
+        isEditModeLocked = toLock
         val editMenu = optionMenu?.findItem(R.id.action_edit_word)
         editMenu?.isVisible = !toLock
     }

@@ -86,6 +86,9 @@ class WordPresenter @Inject constructor(
 
         override fun onSuccess(t: WordList) {
             viewModel.currentWordList = t
+            if (t.marketplaceFilename.isNotEmpty()) {
+                view.lockEditMode(true)
+            }
             if (!isAddMode()) {
                 loadWords()
             }

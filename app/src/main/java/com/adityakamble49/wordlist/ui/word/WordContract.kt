@@ -34,6 +34,7 @@ interface WordContract {
         fun showMnemonicProgress(toShow: Boolean)
         fun showWordInfoProgress(toShow: Boolean)
         fun scrollToTop()
+        fun lockEditMode(toLock: Boolean)
     }
 
     interface Presenter : BaseContract.Presenter {
