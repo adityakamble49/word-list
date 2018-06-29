@@ -11,9 +11,12 @@ import io.reactivex.disposables.Disposable
  */
 abstract class BaseRxUseCase {
 
-    private val disposables = CompositeDisposable()
+    private var disposables = CompositeDisposable()
 
     protected fun addDisposables(disposable: Disposable) {
+        if (disposables.isDisposed) {
+            disposables = CompositeDisposable()
+        }
         disposables.add(disposable)
     }
 
