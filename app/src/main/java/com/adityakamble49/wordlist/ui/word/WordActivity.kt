@@ -170,6 +170,8 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         presenter.initialize()
     }
 
+    override fun getActivityPresenter() = presenter
+
     override fun initializeActivityMode(activityMode: Int) {
         currentActivityMode = activityMode
         toggleEditMode(false)

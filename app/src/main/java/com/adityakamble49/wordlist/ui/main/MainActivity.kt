@@ -177,6 +177,8 @@ class MainActivity : BaseInjectableActivity(), MainContract.View, View.OnClickLi
         presenter.initialize()
     }
 
+    override fun getActivityPresenter() = presenter
+
     private fun loadDefaultFragment() {
         replaceFragment(WordListFragment.newInstance(), R.id.main_container)
     }

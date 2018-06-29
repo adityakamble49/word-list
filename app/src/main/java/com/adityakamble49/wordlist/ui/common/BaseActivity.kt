@@ -21,9 +21,16 @@ abstract class BaseActivity : AppCompatActivity() {
         initializePresenter()
     }
 
+    override fun onStop() {
+        super.onStop()
+        getActivityPresenter().onStop()
+    }
+
     abstract fun getLayoutId(): Int
 
     abstract fun bindView()
 
     abstract fun initializePresenter()
+
+    abstract fun getActivityPresenter(): BaseContract.Presenter
 }
