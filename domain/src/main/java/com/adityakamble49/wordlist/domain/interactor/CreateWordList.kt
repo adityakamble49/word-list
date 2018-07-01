@@ -20,7 +20,7 @@ class CreateWordList @Inject constructor(
         postExecutionThread: PostExecutionThread) :
         SingleUseCase<WordList, CreateWordList.Params>(postExecutionThread) {
 
-    override fun buildUseCase(param: Params?): Single<WordList> {
+    override fun buildSingleUseCase(param: Params?): Single<WordList> {
         if (param == null) throw IllegalArgumentException()
         val savedWordLists = wordListRepository.getWordLists()
         savedWordLists.forEach {
