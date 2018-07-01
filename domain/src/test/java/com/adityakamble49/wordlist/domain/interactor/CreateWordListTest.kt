@@ -36,6 +36,12 @@ class CreateWordListTest {
         testObserver.assertComplete()
     }
 
+    @Test(expected = IllegalArgumentException::class)
+    fun createWordListThrowsException() {
+        stubCreateWordList()
+        createWordList.buildSingleUseCase().test()
+    }
+
     private fun stubCreateWordList() {
         whenever(wordListRepository.getWordLists()).thenReturn(
                 WordListDataFactory.makeListOfWordList(2))
