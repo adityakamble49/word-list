@@ -1,0 +1,17 @@
+apply plugin: 'kotlin'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.kotlin.stdlib.jre
+    implementation deps.rx.rxKotlin
+    implementation deps.javax.annotations
+    implementation deps.javax.inject
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.assertJ
+}
