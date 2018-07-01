@@ -46,6 +46,7 @@ buildscript {
             // Testing
             'junit'                : '4.12',
             'mockito'              : '2.8.9',
+            'mockitoKotlin'        : '1.6.0',
             'assertJ'              : '3.8.0',
             'robolectric'          : '3.8',
             'expresso'             : '3.0.1',
@@ -134,6 +135,7 @@ buildscript {
                     'junit'         : "junit:junit:${versions.junit}",
                     'mockito'       : "org.mockito:mockito-core:${versions.mockito}",
                     'mockitoAndroid': "org.mockito:mockito-android:${versions.mockito}",
+                    'mockitoKotlin' : "com.nhaarman:mockito-kotlin-kt1.1:${versions.mockitoKotlin}",
                     'assertJ'       : "org.assertj:assertj-core:${versions.assertJ}",
                     'robolectric'   : "org.robolectric:robolectric:${versions.robolectric}",
                     'supportRunner' : "com.android.support.test:runner:${versions.androidSupportRunner}",
