@@ -22,7 +22,7 @@ class WordListCacheImpl @Inject constructor(
                     }
                     return@map false
                 }
-                .elementAt(0, false)
+                .first(false)
                 .map {
                     if (!it) {
                         return@map wordListDatabase.cachedWordListDao()
