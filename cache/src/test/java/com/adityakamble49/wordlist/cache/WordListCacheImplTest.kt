@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.cache.mapper.CachedWordListMapper
 import com.adityakamble49.wordlist.cache.test.WordListDataFactory
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -24,5 +25,10 @@ class WordListCacheImplTest {
         val wordList = WordListDataFactory.makeWordListEntity()
         val testObserver = cache.saveWordList(wordList).test()
         testObserver.assertComplete()
+    }
+
+    @After
+    fun closeDatabase() {
+        database.close()
     }
 }
