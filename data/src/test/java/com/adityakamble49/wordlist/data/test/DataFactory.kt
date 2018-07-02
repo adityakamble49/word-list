@@ -13,5 +13,7 @@ object DataFactory {
 
     fun randomUUID() = UUID.randomUUID().toString()
 
-    fun randomNumber() = Random().nextInt()
+    fun randomInteger() = Random().nextInt()
+
+    fun randomLong() = Random().nextLong()
 }

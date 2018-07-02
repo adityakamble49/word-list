@@ -5,9 +5,9 @@ import com.adityakamble49.wordlist.domain.model.WordList
 
 object WordListDataFactory {
 
-    fun makeWordList() = WordList(DataFactory.randomNumber(), DataFactory.randomUUID(),
-            DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomNumber())
+    fun makeWordList() = WordList(DataFactory.randomInteger(), DataFactory.randomUUID(),
+            DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomInteger())
 
-    fun makeWordListEntity() = WordListEntity(DataFactory.randomNumber(), DataFactory.randomUUID(),
-            DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomNumber())
+    fun makeWordListEntity() = WordListEntity(DataFactory.randomInteger(), DataFactory.randomUUID(),
+            DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomInteger())
 }
