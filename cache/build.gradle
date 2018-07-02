@@ -10,10 +10,14 @@ android {
         targetSdkVersion buildConfig.targetSdk
     }
 
-    buildTypes.all {
-        buildConfigField 'String', "GitHubApiKey", WordList_GitHubApiKey
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            all {
+                systemProperty 'robolectric.enabledSdks', '21'
+            }
+        }
     }
-
 }
 
 dependencies {
@@ -22,9 +26,16 @@ dependencies {
     implementation project(':data')
 
     implementation deps.kotlin.stdlib.jre
+    implementation deps.gson.core
     implementation deps.rx.rxKotlin
     implementation deps.javax.annotations
     implementation deps.javax.inject
     implementation deps.android.arch.roomRuntime
     kapt deps.android.arch.roomCompiler
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
+    testImplementation deps.test.assertJ
+    testImplementation deps.test.robolectric
 }
