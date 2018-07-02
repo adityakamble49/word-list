@@ -17,6 +17,13 @@ class WordListMapperTest {
         assertDataEquals(entity, model)
     }
 
+    @Test
+    fun mapToEntityTest() {
+        val model = WordListDataFactory.makeWordList()
+        val entity = mapper.mapToEntity(model)
+        assertDataEquals(entity, model)
+    }
+
     private fun assertDataEquals(entity: WordListEntity, model: WordList) {
         assertEquals(entity.id, model.id)
         assertEquals(entity.hash, model.hash)
