@@ -2,7 +2,9 @@ package com.adityakamble49.wordlist.cache.dao
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Query
 import com.adityakamble49.wordlist.cache.model.CachedWordList
+import io.reactivex.Observable
 
 /**
  * Cached Word List Dao
@@ -18,4 +20,7 @@ interface CachedWordListDao {
 
     @Insert
     fun insertList(listOfWordList: List<CachedWordList>): List<Long>
+
+    @Query("SELECT * FROM word_lists")
+    fun getWordList(): Observable<List<CachedWordList>>
 }
