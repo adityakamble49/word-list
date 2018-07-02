@@ -44,8 +44,9 @@ class WordListCacheDataStoreTest {
     @Test
     fun saveWordListCallsCacheSource() {
         stubWordListCacheSaveWordList(Single.just(DataFactory.randomLong()))
-        store.saveWordList(WordListDataFactory.makeWordListEntity()).test()
-        verify(cache).saveWordList(any())
+        val wordListEntity = WordListDataFactory.makeWordListEntity()
+        store.saveWordList(wordListEntity).test()
+        verify(cache).saveWordList(wordListEntity)
     }
 
     private fun stubWordListCacheSaveWordList(single: Single<Long>) {
