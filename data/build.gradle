@@ -12,6 +12,7 @@ dependencies {
     implementation deps.rx.rxKotlin
     implementation deps.javax.annotations
     implementation deps.javax.inject
+
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
     testImplementation deps.test.mockitoKotlin
