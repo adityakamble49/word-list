@@ -1,11 +1,13 @@
 package com.adityakamble49.wordlist.cache
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.persistence.room.Room
-import android.database.sqlite.SQLiteConstraintException
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
+import com.adityakamble49.wordlist.cache.exceptions.WordListNameExistException
 import com.adityakamble49.wordlist.cache.mapper.CachedWordListMapper
 import com.adityakamble49.wordlist.cache.test.WordListDataFactory
 import org.junit.After
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -13,6 +15,10 @@ import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
 class WordListCacheImplTest {
+
+    @Rule
+    @JvmField
+    var instantTaskExecutableRule = InstantTaskExecutorRule()
 
     private val database = Room.inMemoryDatabaseBuilder(
             RuntimeEnvironment.application.applicationContext, WordListDatabase::class.java)
@@ -28,11 +34,11 @@ class WordListCacheImplTest {
         testObserver.assertComplete()
     }
 
-    @Test(expected = SQLiteConstraintException::class)
+    @Test
     fun saveWordListDuplicateNameThrowException() {
         val wordList = WordListDataFactory.makeWordListEntity()
-        cache.saveWordList(wordList).test()
-        cache.saveWordList(wordList).test()
+        cache.saveWordList(wordList).test().assertComplete()
+        cache.saveWordList(wordList).test().assertError(WordListNameExistException::class.java)
     }
 
     @After

@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.cache
 
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
+import com.adityakamble49.wordlist.cache.exceptions.WordListNameExistException
 import com.adityakamble49.wordlist.cache.mapper.CachedWordListMapper
 import com.adityakamble49.wordlist.data.model.WordListEntity
 import com.adityakamble49.wordlist.data.repository.WordListCache
@@ -12,7 +13,23 @@ class WordListCacheImpl @Inject constructor(
         private val mapper: CachedWordListMapper) : WordListCache {
 
     override fun saveWordList(wordListEntity: WordListEntity): Single<Long> {
-        return Single.just(wordListDatabase.cachedWordListDao()
-                .insert(mapper.mapToCache(wordListEntity)))
+        return wordListDatabase.cachedWordListDao().getWordList()
+                .map {
+                    it.forEach {
+                        if (it.name == wordListEntity.name) {
+                            return@map true
+                        }
+                    }
+                    return@map false
+                }
+                .elementAt(0, false)
+                .map {
+                    if (!it) {
+                        return@map wordListDatabase.cachedWordListDao()
+                                .insert(mapper.mapToCache(wordListEntity))
+                    } else {
+                        throw WordListNameExistException("${wordListEntity.name} already exists")
+                    }
+                }
     }
 }
