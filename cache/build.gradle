@@ -44,5 +44,6 @@ dependencies {
     testImplementation deps.test.mockito
     testImplementation deps.test.mockitoKotlin
     testImplementation deps.test.assertJ
+    testImplementation deps.test.archTesting
     testImplementation deps.test.robolectric
 }
