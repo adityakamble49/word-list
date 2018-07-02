@@ -31,6 +31,7 @@ dependencies {
     implementation deps.javax.annotations
     implementation deps.javax.inject
     implementation deps.android.arch.roomRuntime
+    implementation deps.android.arch.roomRx
     kapt deps.android.arch.roomCompiler
 
     testImplementation deps.test.junit

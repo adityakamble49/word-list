@@ -70,6 +70,7 @@ buildscript {
                             'archCompiler'  : "android.arch.lifecycle:compiler:${versions.arch}",
                             'roomRuntime'   : "android.arch.persistence.room:runtime:${versions.arch}",
                             'roomCompiler'  : "android.arch.persistence.room:compiler:${versions.arch}",
+                            'roomRx'        : "android.arch.persistence.room:rxjava2:${versions.arch}",
                     ],
                     'support': [
                             'supportV4'       : "com.android.support:support-v4:${versions.supportLibrary}",
