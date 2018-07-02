@@ -38,6 +38,15 @@ class CreateWordListTest {
         testObserver.assertComplete()
     }
 
+    @Test
+    fun createWordListReturnWordList() {
+        stubCreateWordList(WordListDataFactory.makeListOfWordList(3))
+        val wordListName = WordListDataFactory.randomUUID()
+        val testObserver = createWordList.buildSingleUseCase(
+                CreateWordList.Params.forWordList(wordListName)).test()
+        testObserver.assertValue { v -> v.name == wordListName }
+    }
+
     @Test(expected = WordListNameExistException::class)
     fun createWordListDuplicateName() {
         val sampleWordList = WordListDataFactory.makeListOfWordList(3)
