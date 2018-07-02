@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.cache
 
 import android.arch.persistence.room.Room
+import android.database.sqlite.SQLiteConstraintException
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.cache.mapper.CachedWordListMapper
 import com.adityakamble49.wordlist.cache.test.WordListDataFactory
@@ -27,7 +28,7 @@ class WordListCacheImplTest {
         testObserver.assertComplete()
     }
 
-    @Test
+    @Test(expected = SQLiteConstraintException::class)
     fun saveWordListDuplicateNameThrowException() {
         val wordList = WordListDataFactory.makeWordListEntity()
         cache.saveWordList(wordList).test()
