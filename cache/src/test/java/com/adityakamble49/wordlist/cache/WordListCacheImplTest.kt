@@ -27,6 +27,13 @@ class WordListCacheImplTest {
         testObserver.assertComplete()
     }
 
+    @Test
+    fun saveWordListDuplicateNameThrowException() {
+        val wordList = WordListDataFactory.makeWordListEntity()
+        cache.saveWordList(wordList).test()
+        cache.saveWordList(wordList).test()
+    }
+
     @After
     fun closeDatabase() {
         database.close()
