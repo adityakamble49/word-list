@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.domain.repository
 
 import com.adityakamble49.wordlist.domain.model.WordList
+import io.reactivex.Single
 
 /**
  * Word List Repository
@@ -11,6 +12,5 @@ import com.adityakamble49.wordlist.domain.model.WordList
  * @since 1/7/2018
  */
 interface WordListRepository {
-    fun getWordLists(): List<WordList>
-    fun insertWordList(wordList: WordList): Long
+    fun createWordList(wordList: WordList): Single<WordList>
 }

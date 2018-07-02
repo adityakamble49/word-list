@@ -1,6 +1,5 @@
 package com.adityakamble49.wordlist.domain.interactor
 
-import com.adityakamble49.wordlist.domain.exceptions.WordListNameExistException
 import com.adityakamble49.wordlist.domain.executor.PostExecutionThread
 import com.adityakamble49.wordlist.domain.interactor.common.SingleUseCase
 import com.adityakamble49.wordlist.domain.model.WordList
@@ -22,17 +21,8 @@ class CreateWordList @Inject constructor(
 
     override fun buildSingleUseCase(param: Params?): Single<WordList> {
         if (param == null) throw IllegalArgumentException()
-        val savedWordLists = wordListRepository.getWordLists()
-        savedWordLists.forEach {
-            if (it.name.toLowerCase() == param.wordListName.toLowerCase()) {
-                throw WordListNameExistException(
-                        "${param.wordListName} - Word List Name Already Exist")
-            }
-        }
-        val newWordList = WordList(0, UUID.randomUUID().toString(), "", param.wordListName, 0)
-        val newWordListId = wordListRepository.insertWordList(newWordList)
-        newWordList.id = newWordListId.toInt()
-        return Single.just(newWordList)
+        val wordList = WordList(0, UUID.randomUUID().toString(), "", param.wordListName, 0)
+        return wordListRepository.createWordList(wordList)
     }
 
     data class Params constructor(val wordListName: String) {

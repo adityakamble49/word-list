@@ -1,12 +1,12 @@
 package com.adityakamble49.wordlist.domain.interactor
 
-import com.adityakamble49.wordlist.domain.exceptions.WordListNameExistException
 import com.adityakamble49.wordlist.domain.executor.PostExecutionThread
 import com.adityakamble49.wordlist.domain.model.WordList
 import com.adityakamble49.wordlist.domain.repository.WordListRepository
 import com.adityakamble49.wordlist.domain.test.WordListDataFactory
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -32,7 +32,7 @@ class CreateWordListTest {
 
     @Test
     fun createWordListCompletes() {
-        stubCreateWordList(WordListDataFactory.makeListOfWordList(3))
+        stubCreateWordList(Single.just(WordListDataFactory.makeWordList()))
         val testObserver = createWordList.buildSingleUseCase(
                 CreateWordList.Params.forWordList(WordListDataFactory.randomUUID())).test()
         testObserver.assertComplete()
@@ -40,29 +40,19 @@ class CreateWordListTest {
 
     @Test
     fun createWordListReturnWordList() {
-        stubCreateWordList(WordListDataFactory.makeListOfWordList(3))
-        val wordListName = WordListDataFactory.randomUUID()
+        val sampleWordList = WordListDataFactory.makeWordList()
+        stubCreateWordList(Single.just(sampleWordList))
         val testObserver = createWordList.buildSingleUseCase(
-                CreateWordList.Params.forWordList(wordListName)).test()
-        testObserver.assertValue { v -> v.name == wordListName }
-    }
-
-    @Test(expected = WordListNameExistException::class)
-    fun createWordListDuplicateName() {
-        val sampleWordList = WordListDataFactory.makeListOfWordList(3)
-        stubCreateWordList(sampleWordList)
-        createWordList.buildSingleUseCase(
-                CreateWordList.Params.forWordList(sampleWordList[0].name)).test()
+                CreateWordList.Params.forWordList(sampleWordList.name)).test()
+        testObserver.assertValue { v -> v.name == sampleWordList.name }
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun createWordListThrowsIllegalException() {
-        stubCreateWordList(WordListDataFactory.makeListOfWordList(3))
         createWordList.buildSingleUseCase().test()
     }
 
-    private fun stubCreateWordList(listOfWordList: List<WordList>) {
-        whenever(wordListRepository.getWordLists()).thenReturn(listOfWordList)
-        whenever(wordListRepository.insertWordList(any())).thenReturn(1)
+    private fun stubCreateWordList(single: Single<WordList>) {
+        whenever(wordListRepository.createWordList(any())).thenReturn(single)
     }
 }
