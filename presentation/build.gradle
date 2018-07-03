@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion buildConfig.compileSdk
+
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':domain')
+
+    implementation deps.kotlin.stdlib.jre
+    implementation deps.rx.rxKotlin
+    implementation deps.javax.inject
+    implementation deps.android.arch.archRuntime
+    implementation deps.android.arch.archExtensions
+    kapt deps.android.arch.archCompiler
+
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
+    testImplementation deps.test.assertJ
+    testImplementation deps.test.archTesting
+    testImplementation deps.test.robolectric
+}
