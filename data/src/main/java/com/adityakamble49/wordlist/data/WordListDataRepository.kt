@@ -4,6 +4,7 @@ import com.adityakamble49.wordlist.data.mapper.WordListMapper
 import com.adityakamble49.wordlist.data.store.WordListDataStoreFactory
 import com.adityakamble49.wordlist.domain.model.WordList
 import com.adityakamble49.wordlist.domain.repository.WordListRepository
+import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -19,5 +20,13 @@ class WordListDataRepository @Inject constructor(
                             wordList.marketplaceFilename, wordList.name,
                             wordList.lastWordId)
                 }
+    }
+
+    override fun getWordLists(): Observable<List<WordList>> {
+        return factory.getDataStore().getWordLists()
+                .map {
+                    it.map { mapper.mapFromEntity(it) }
+                }
+
     }
 }

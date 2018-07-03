@@ -41,6 +41,14 @@ class WordListCacheImplTest {
         cache.saveWordList(wordList).test().assertError(WordListNameExistException::class.java)
     }
 
+    @Test
+    fun getWordListReturnsData() {
+        val wordList = WordListDataFactory.makeWordListEntity()
+        cache.saveWordList(wordList).test()
+        val testObserver = cache.getWordLists().test()
+        testObserver.assertValues(listOf(wordList))
+    }
+
     @After
     fun closeDatabase() {
         database.close()
