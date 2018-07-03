@@ -91,6 +91,9 @@ dependencies {
     implementation deps.android.arch.archRuntime
     implementation deps.android.arch.archExtensions
     kapt deps.android.arch.archCompiler
+    implementation deps.android.arch.roomRuntime
+    implementation deps.android.arch.roomRx
+    kapt deps.android.arch.roomCompiler
 
     debugImplementation deps.debugDb.core
 
