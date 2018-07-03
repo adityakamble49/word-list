@@ -9,6 +9,17 @@ android {
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.targetSdk
     }
+
+    buildTypes {
+        staging {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 dependencies {
@@ -22,7 +33,6 @@ dependencies {
     implementation deps.android.arch.archRuntime
     implementation deps.android.arch.archExtensions
     kapt deps.android.arch.archCompiler
-
 
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
