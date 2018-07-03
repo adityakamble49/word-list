@@ -9,6 +9,7 @@ import com.adityakamble49.wordlist.data.test.WordListDataFactory
 import com.adityakamble49.wordlist.domain.model.WordList
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -35,7 +36,7 @@ class WordListDataRepositoryTest {
     @Test
     fun createWordListCompletes() {
         stubSaveWordList(Single.just(DataFactory.randomLong()))
-        stubMapper(WordListDataFactory.makeWordListEntity(), any())
+        stubMapperToEntity(WordListDataFactory.makeWordListEntity(), any())
         val testObserver = wordListDataRepository.createWordList(WordListDataFactory.makeWordList())
                 .test()
         testObserver.assertComplete()
@@ -46,10 +47,27 @@ class WordListDataRepositoryTest {
         val wordListId = DataFactory.randomLong()
         val wordList = WordListDataFactory.makeWordList()
         stubSaveWordList(Single.just(wordListId))
-        stubMapper(WordListDataFactory.makeWordListEntity(), any())
+        stubMapperToEntity(WordListDataFactory.makeWordListEntity(), any())
         val testObserver = wordListDataRepository.createWordList(wordList).test()
         wordList.id = wordListId.toInt()
         testObserver.assertValue(wordList)
+    }
+
+    @Test
+    fun getWordListsCompletes() {
+        stubGetWordLists(Observable.just(WordListDataFactory.makeWordListEntityList(3)))
+        val testObserver = wordListDataRepository.getWordLists().test()
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun getWordListsReturnsData() {
+        val wordListEntity = WordListDataFactory.makeWordListEntity()
+        val wordList = WordListDataFactory.makeWordList()
+        stubGetWordLists(Observable.just(listOf(wordListEntity)))
+        stubMapperFromEntity(wordListEntity, wordList)
+        val testObserver = wordListDataRepository.getWordLists().test()
+        testObserver.assertValue(listOf(wordList))
     }
 
     private fun stubFactoryGetDataStore() {
@@ -60,7 +78,15 @@ class WordListDataRepositoryTest {
         whenever(store.saveWordList(any())).thenReturn(single)
     }
 
-    private fun stubMapper(entity: WordListEntity, model: WordList) {
+    private fun stubGetWordLists(observable: Observable<List<WordListEntity>>) {
+        whenever(store.getWordLists()).thenReturn(observable)
+    }
+
+    private fun stubMapperToEntity(entity: WordListEntity, model: WordList) {
         whenever(mapper.mapToEntity(model)).thenReturn(entity)
+    }
+
+    private fun stubMapperFromEntity(entity: WordListEntity, model: WordList) {
+        whenever(mapper.mapFromEntity(entity)).thenReturn(model)
     }
 }
