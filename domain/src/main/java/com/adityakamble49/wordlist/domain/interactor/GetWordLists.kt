@@ -18,7 +18,7 @@ class GetWordLists @Inject constructor(
         postExecutionThread: PostExecutionThread) :
         ObservableUseCase<List<WordList>, Nothing>(postExecutionThread) {
 
-    override fun buildSingleUseCase(param: Nothing?): Observable<List<WordList>> {
+    override fun buildUseCaseObservable(param: Nothing?): Observable<List<WordList>> {
         return wordListRepository.getWordLists()
     }
 }

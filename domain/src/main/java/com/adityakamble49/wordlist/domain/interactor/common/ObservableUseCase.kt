@@ -19,10 +19,10 @@ abstract class ObservableUseCase<T, in Param> @Inject constructor(
 
     private var disposables = CompositeDisposable()
 
-    abstract fun buildSingleUseCase(param: Param? = null): Observable<T>
+    abstract fun buildUseCaseObservable(param: Param? = null): Observable<T>
 
     fun execute(observer: DisposableObserver<T>, param: Param? = null) {
-        val observable = buildSingleUseCase(param)
+        val observable = buildUseCaseObservable(param)
                 .subscribeOn(Schedulers.io())
                 .observeOn(postExecutionThread.scheduler)
         addDisposables(observable.subscribeWith(observer))

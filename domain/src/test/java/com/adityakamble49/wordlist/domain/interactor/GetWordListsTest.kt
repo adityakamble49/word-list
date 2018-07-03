@@ -30,7 +30,7 @@ class GetWordListsTest {
     @Test
     fun getWordListsCompletes() {
         stubGetWordLists(Observable.just(WordListDataFactory.makeListOfWordList(3)))
-        val testObserver = getWordLists.buildSingleUseCase().test()
+        val testObserver = getWordLists.buildUseCaseObservable().test()
         testObserver.assertComplete()
     }
 
