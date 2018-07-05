@@ -2,7 +2,7 @@ package com.adityakamble49.wordlist.remote
 
 import com.adityakamble49.wordlist.data.model.DictionaryWordEntity
 import com.adityakamble49.wordlist.data.repository.DictionaryWordRemote
-import com.adityakamble49.wordlist.remote.mapper.DictionaryWordListMapper
+import com.adityakamble49.wordlist.remote.mapper.DictionaryWordMapper
 import com.adityakamble49.wordlist.remote.service.WordListService
 import io.reactivex.Single
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import javax.inject.Inject
  */
 class DictionaryWordRemoteImpl @Inject constructor(
         private val wordListService: WordListService,
-        private val mapper: DictionaryWordListMapper) : DictionaryWordRemote {
+        private val mapper: DictionaryWordMapper) : DictionaryWordRemote {
 
     override fun getDictionaryWord(word: String): Single<List<DictionaryWordEntity>> {
         return wordListService.getWordInformation(word)

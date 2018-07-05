@@ -5,18 +5,18 @@ import com.adityakamble49.wordlist.remote.model.DictionaryWord
 import javax.inject.Inject
 
 /**
- * DictionaryWord Word List Mapper
+ * DictionaryWord Word Mapper
  *
  * @author Aditya Kamble
  * @since 5/7/2018
  */
-class DictionaryWordListMapper @Inject constructor() :
+class DictionaryWordMapper @Inject constructor() :
         Mapper<DictionaryWord, DictionaryWordEntity> {
 
     override fun mapFromModel(model: DictionaryWord): DictionaryWordEntity {
-        val definition = model.definition ?: ""
         val type = model.type ?: ""
+        val definition = model.definition ?: ""
         val example = model.example ?: ""
-        return DictionaryWordEntity(definition, type, example)
+        return DictionaryWordEntity(type, definition, example)
     }
 }
