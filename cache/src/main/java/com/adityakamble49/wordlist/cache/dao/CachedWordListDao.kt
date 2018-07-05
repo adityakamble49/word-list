@@ -1,8 +1,6 @@
 package com.adityakamble49.wordlist.cache.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.adityakamble49.wordlist.cache.model.CachedWordList
 import io.reactivex.Flowable
 
@@ -21,6 +19,21 @@ interface CachedWordListDao {
     @Insert
     fun insertList(listOfWordList: List<CachedWordList>): List<Long>
 
+    @Update
+    fun update(wordList: CachedWordList)
+
+    @Query("UPDATE word_lists SET lastWordId= :lastWordId WHERE id= :wordListId")
+    fun updateLastWordIdForWordList(wordListId: Int, lastWordId: Int)
+
+    @Delete
+    fun delete(wordList: CachedWordList)
+
     @Query("SELECT * FROM word_lists")
     fun getWordList(): Flowable<List<CachedWordList>>
+
+    @Query("SELECT  * FROM word_lists WHERE id= :id")
+    fun getWordListById(id: Int): Flowable<CachedWordList>
+
+    @Query("SELECT  * FROM word_lists WHERE marketplaceFilename= :fileName")
+    fun getWordListByMarketplaceFileName(fileName: String): Flowable<CachedWordList?>
 }
