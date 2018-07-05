@@ -1,0 +1,27 @@
+apply plugin: 'kotlin'
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':data')
+
+    implementation deps.javax.annotations
+    implementation deps.javax.inject
+    implementation deps.gson.core
+    implementation deps.rx.rxKotlin
+    implementation deps.retrofit.core
+    implementation deps.retrofit.converterGson
+    implementation deps.retrofit.retrofitAdapter
+    implementation deps.okhttp.core
+    implementation deps.okhttp.loggingInterceptor
+    implementation deps.jsoup.core
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
+    testImplementation deps.test.assertJ
+
+}
