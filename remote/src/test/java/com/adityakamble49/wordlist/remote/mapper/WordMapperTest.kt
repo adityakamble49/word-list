@@ -5,6 +5,8 @@ import com.adityakamble49.wordlist.remote.model.Word
 import com.adityakamble49.wordlist.remote.test.RemoteDataFactory
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 /**
  * Word Mapper Test
@@ -12,6 +14,7 @@ import org.junit.Test
  * @author Aditya Kamble
  * @since 5/7/2018
  */
+@RunWith(JUnit4::class)
 class WordMapperTest {
 
     private val mapper = WordMapper()
