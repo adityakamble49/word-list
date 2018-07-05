@@ -6,6 +6,7 @@ import com.adityakamble49.wordlist.remote.model.MarketplaceWordList
 import com.adityakamble49.wordlist.remote.service.WordListService
 import com.adityakamble49.wordlist.remote.test.RemoteDataFactory
 import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
 import org.junit.Before
@@ -35,12 +36,35 @@ class MarketplaceWordListRemoteImplTest {
     }
 
     @Test
-    fun getMarketplaceWordListTest() {
+    fun getMarketplaceWordListCompletes() {
         stubWordListServiceGetMarketplaceWordList(
                 Single.just(RemoteDataFactory.makeListOfMarketplaceWordList(4)))
         stubMarketplaceWordListMapper(any(), RemoteDataFactory.makeMarketplaceWordListEntity())
         val testObserver = marketplaceWordListRemoteImpl.getMarketplaceWordList().test()
         testObserver.assertComplete()
+    }
+
+    @Test
+    fun getMarketplaceWordListCallsServer() {
+        stubWordListServiceGetMarketplaceWordList(
+                Single.just(RemoteDataFactory.makeListOfMarketplaceWordList(4)))
+        stubMarketplaceWordListMapper(any(), RemoteDataFactory.makeMarketplaceWordListEntity())
+        marketplaceWordListRemoteImpl.getMarketplaceWordList().test()
+        verify(wordListService).getMarketplaceWordList(any(), any())
+    }
+
+    @Test
+    fun getMarketplaceWordListReturnsData() {
+        val marketplaceWordList = RemoteDataFactory.makeListOfMarketplaceWordList(4)
+        stubWordListServiceGetMarketplaceWordList(Single.just(marketplaceWordList))
+        val entities = mutableListOf<MarketplaceWordListEntity>()
+        marketplaceWordList.forEach {
+            val entity = RemoteDataFactory.makeMarketplaceWordListEntity()
+            entities.add(entity)
+            stubMarketplaceWordListMapper(it, entity)
+        }
+        val testObserver = marketplaceWordListRemoteImpl.getMarketplaceWordList().test()
+        testObserver.assertValues(entities)
     }
 
     private fun stubWordListServiceGetMarketplaceWordList(
