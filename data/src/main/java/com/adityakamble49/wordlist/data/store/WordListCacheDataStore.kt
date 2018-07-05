@@ -7,6 +7,12 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
+/**
+ * WordList Cache DataStore
+ *
+ * @author Aditya Kamble
+ * @since 3/7/2018
+ */
 class WordListCacheDataStore @Inject constructor(
         private val wordListCache: WordListCache) : WordListDataStore {
 

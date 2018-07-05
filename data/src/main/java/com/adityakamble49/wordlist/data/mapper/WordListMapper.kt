@@ -3,6 +3,12 @@ package com.adityakamble49.wordlist.data.mapper
 import com.adityakamble49.wordlist.data.model.WordListEntity
 import com.adityakamble49.wordlist.domain.model.WordList
 
+/**
+ * WordList Entity Mapper
+ *
+ * @author Aditya Kamble
+ * @since 3/7/2018
+ */
 class WordListMapper : EntityMapper<WordListEntity, WordList> {
 
     override fun mapFromEntity(entity: WordListEntity): WordList {

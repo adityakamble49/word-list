@@ -8,6 +8,12 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
+/**
+ * WordList Data Repository
+ *
+ * @author Aditya Kamble
+ * @since 3/7/2018
+ */
 class WordListDataRepository @Inject constructor(
         private val mapper: WordListMapper,
         private val factory: WordListDataStoreFactory) : WordListRepository {
