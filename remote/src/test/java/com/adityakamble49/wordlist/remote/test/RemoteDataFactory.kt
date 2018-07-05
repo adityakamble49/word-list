@@ -1,5 +1,7 @@
 package com.adityakamble49.wordlist.remote.test
 
+import com.adityakamble49.wordlist.data.model.MarketplaceWordListEntity
+import com.adityakamble49.wordlist.data.model.MarketplaceWordListStatus
 import com.adityakamble49.wordlist.remote.model.DictionaryWord
 import com.adityakamble49.wordlist.remote.model.Links
 import com.adityakamble49.wordlist.remote.model.MarketplaceWordList
@@ -24,6 +26,19 @@ object RemoteDataFactory {
     private fun makeLinks(): Links {
         return Links(DataFactory.randomString(), DataFactory.randomString(),
                 DataFactory.randomString())
+    }
+
+    fun makeListOfMarketplaceWordList(count: Int): MutableList<MarketplaceWordList> {
+        val listOfMarketplaceWordList = mutableListOf<MarketplaceWordList>()
+        repeat(count) {
+            listOfMarketplaceWordList.add(makeMarketplaceWordList())
+        }
+        return listOfMarketplaceWordList
+    }
+
+    fun makeMarketplaceWordListEntity(): MarketplaceWordListEntity {
+        return MarketplaceWordListEntity(DataFactory.randomString(), DataFactory.randomString(),
+                DataFactory.randomString(), MarketplaceWordListStatus.NOT_AVAILABLE)
     }
 
     fun makeWord(): Word {
