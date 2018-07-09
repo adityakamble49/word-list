@@ -40,7 +40,8 @@ class DictionaryWordRemoteImplTest {
     fun getDictionaryWordCompletes() {
         stubWordListServiceGetWordInformation(Single.just(RemoteDataFactory.makeDictionaryWords(4)))
         stubDictionaryWordMapper(any(), RemoteDataFactory.makeDictionaryWordEntity())
-        val testObserver = dictionaryWordRemoteImpl.getDictionaryWord("").test()
+        val testObserver = dictionaryWordRemoteImpl.getDictionaryWord(DataFactory.randomString())
+                .test()
         testObserver.assertComplete()
     }
 
