@@ -3,6 +3,7 @@ package com.adityakamble49.wordlist.remote.test
 import com.adityakamble49.wordlist.data.model.DictionaryWordEntity
 import com.adityakamble49.wordlist.data.model.MarketplaceWordListEntity
 import com.adityakamble49.wordlist.data.model.MarketplaceWordListStatus
+import com.adityakamble49.wordlist.data.model.WordEntity
 import com.adityakamble49.wordlist.remote.model.DictionaryWord
 import com.adityakamble49.wordlist.remote.model.Links
 import com.adityakamble49.wordlist.remote.model.MarketplaceWordList
@@ -53,6 +54,11 @@ object RemoteDataFactory {
             words.add(makeWord())
         }
         return words
+    }
+
+    fun makeWordEntity(): WordEntity {
+        return WordEntity(0, 0, DataFactory.randomString(), DataFactory.randomString(),
+                DataFactory.randomString(), DataFactory.randomString(), DataFactory.randomString())
     }
 
     fun makeDictionaryWord(enableNull: Boolean = false): DictionaryWord {
