@@ -70,6 +70,14 @@ object RemoteDataFactory {
                 DataFactory.randomString())
     }
 
+    fun makeDictionaryWordEntityList(count: Int): List<DictionaryWordEntity> {
+        val dictionaryWordEntityList = mutableListOf<DictionaryWordEntity>()
+        repeat(count) {
+            dictionaryWordEntityList.add(makeDictionaryWordEntity())
+        }
+        return dictionaryWordEntityList
+    }
+
     fun makeDictionaryWords(count: Int): List<DictionaryWord> {
         val dictionaryWords = mutableListOf<DictionaryWord>()
         repeat(count) {

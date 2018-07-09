@@ -55,14 +55,19 @@ class MarketplaceWordListRemoteImplTest {
 
     @Test
     fun getMarketplaceWordListReturnsData() {
+        // Stub Marketplace Word List response
         val marketplaceWordList = RemoteDataFactory.makeListOfMarketplaceWordList(4)
         stubWordListServiceGetMarketplaceWordList(Single.just(marketplaceWordList))
+
+        // Stub Marketplace Word List Mapping to Entity
         val entities = mutableListOf<MarketplaceWordListEntity>()
         marketplaceWordList.forEach {
             val entity = RemoteDataFactory.makeMarketplaceWordListEntity()
             entities.add(entity)
             stubMarketplaceWordListMapper(it, entity)
         }
+
+        // Test getMarketplaceWordList
         val testObserver = marketplaceWordListRemoteImpl.getMarketplaceWordList().test()
         testObserver.assertValues(entities)
     }
