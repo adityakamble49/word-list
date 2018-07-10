@@ -40,7 +40,7 @@ class MarketplaceWordListRemoteImplTest {
         stubWordListServiceGetMarketplaceWordList(
                 Single.just(RemoteDataFactory.makeListOfMarketplaceWordList(4)))
         stubMarketplaceWordListMapper(any(), RemoteDataFactory.makeMarketplaceWordListEntity())
-        val testObserver = marketplaceWordListRemoteImpl.getMarketplaceWordList().test()
+        val testObserver = marketplaceWordListRemoteImpl.getMarketplaceWordLists().test()
         testObserver.assertComplete()
     }
 
@@ -49,7 +49,7 @@ class MarketplaceWordListRemoteImplTest {
         stubWordListServiceGetMarketplaceWordList(
                 Single.just(RemoteDataFactory.makeListOfMarketplaceWordList(4)))
         stubMarketplaceWordListMapper(any(), RemoteDataFactory.makeMarketplaceWordListEntity())
-        marketplaceWordListRemoteImpl.getMarketplaceWordList().test()
+        marketplaceWordListRemoteImpl.getMarketplaceWordLists().test()
         verify(wordListService).getMarketplaceWordList(any(), any())
     }
 
@@ -67,8 +67,8 @@ class MarketplaceWordListRemoteImplTest {
             stubMarketplaceWordListMapper(it, entity)
         }
 
-        // Test getMarketplaceWordList
-        val testObserver = marketplaceWordListRemoteImpl.getMarketplaceWordList().test()
+        // Test getMarketplaceWordLists
+        val testObserver = marketplaceWordListRemoteImpl.getMarketplaceWordLists().test()
         testObserver.assertValues(entities)
     }
 

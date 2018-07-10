@@ -18,7 +18,7 @@ class MarketplaceWordListRemoteImpl @Inject constructor(
         private val wordListService: WordListService,
         private val mapper: MarketplaceWordListMapper) : MarketplaceWordListRemote {
 
-    override fun getMarketplaceWordList(): Single<List<MarketplaceWordListEntity>> {
+    override fun getMarketplaceWordLists(): Single<List<MarketplaceWordListEntity>> {
         return wordListService.getMarketplaceWordList(RemoteUrls.GITHUB_WORDLIST,
                 "token ${RemoteUrls.GITHUB_AUTH_TOKEN}")
                 .map { it.map { mapper.mapFromModel(it) } }

@@ -11,5 +11,5 @@ import io.reactivex.Single
  */
 interface MarketplaceWordListRemote {
 
-    fun getMarketplaceWordList(): Single<List<MarketplaceWordListEntity>>
+    fun getMarketplaceWordLists(): Single<List<MarketplaceWordListEntity>>
 }
