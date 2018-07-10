@@ -26,7 +26,6 @@ class WordListViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        wordlistViewModel = WordListViewModel(mapper, createWordList, getWordLists)
     }
 
     @Test
