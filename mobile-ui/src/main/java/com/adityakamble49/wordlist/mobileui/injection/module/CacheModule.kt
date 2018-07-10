@@ -21,6 +21,7 @@ abstract class CacheModule {
     @Module
     companion object {
         @Provides
+        @JvmStatic
         fun provideDatabase(application: Application): WordListDatabase {
             return WordListDatabase.getInstance(application)
         }
