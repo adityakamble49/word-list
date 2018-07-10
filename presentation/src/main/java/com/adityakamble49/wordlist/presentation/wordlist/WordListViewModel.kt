@@ -10,8 +10,8 @@ import com.adityakamble49.wordlist.presentation.mapper.WordListMapper
 import com.adityakamble49.wordlist.presentation.model.WordListView
 import com.adityakamble49.wordlist.presentation.state.Resource
 import com.adityakamble49.wordlist.presentation.state.ResourceState
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.subscribers.DisposableSubscriber
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -46,18 +46,21 @@ class WordListViewModel @Inject constructor(
         getWordLists.execute(GetWordListsSubscriber())
     }
 
-    private inner class GetWordListsSubscriber : DisposableObserver<List<WordList>>() {
-        override fun onComplete() {}
+    private inner class GetWordListsSubscriber : DisposableSubscriber<List<WordList>>() {
+
         override fun onNext(t: List<WordList>) {
             wordListsLiveData.postValue(Resource(ResourceState.SUCCESS,
                     t.map { mapper.mapToView(it) },
                     null))
         }
 
-        override fun onError(e: Throwable) {
+        override fun onComplete() {
+            Timber.i("Called")
+        }
+
+        override fun onError(t: Throwable) {
             wordListsLiveData.postValue(Resource(ResourceState.ERROR,
-                    null,
-                    e.localizedMessage))
+                    null, t.localizedMessage))
         }
     }
 

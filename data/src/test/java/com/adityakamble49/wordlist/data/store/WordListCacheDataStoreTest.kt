@@ -7,7 +7,7 @@ import com.adityakamble49.wordlist.data.test.WordListDataFactory
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -54,7 +54,7 @@ class WordListCacheDataStoreTest {
     @Test
     fun getWordListsCompletes() {
         stubWordListCacheGetWordLists(
-                Observable.just(WordListDataFactory.makeWordListEntityList(3)))
+                Flowable.just(WordListDataFactory.makeWordListEntityList(3)))
         val testObserver = store.getWordLists().test()
         testObserver.assertComplete()
     }
@@ -62,7 +62,7 @@ class WordListCacheDataStoreTest {
     @Test
     fun getWordListsReturnsData() {
         val testWordListEntityList = WordListDataFactory.makeWordListEntityList(3)
-        stubWordListCacheGetWordLists(Observable.just(testWordListEntityList))
+        stubWordListCacheGetWordLists(Flowable.just(testWordListEntityList))
         val testObserver = store.getWordLists().test()
         testObserver.assertValue(testWordListEntityList)
     }
@@ -70,7 +70,7 @@ class WordListCacheDataStoreTest {
     @Test
     fun getWordListsCallsCacheResource() {
         stubWordListCacheGetWordLists(
-                Observable.just(WordListDataFactory.makeWordListEntityList(3)))
+                Flowable.just(WordListDataFactory.makeWordListEntityList(3)))
         store.getWordLists().test()
         verify(cache).getWordLists()
     }
@@ -80,7 +80,7 @@ class WordListCacheDataStoreTest {
         whenever(cache.saveWordList(any())).thenReturn(single)
     }
 
-    private fun stubWordListCacheGetWordLists(observable: Observable<List<WordListEntity>>) {
-        whenever(cache.getWordLists()).thenReturn(observable)
+    private fun stubWordListCacheGetWordLists(flowable: Flowable<List<WordListEntity>>) {
+        whenever(cache.getWordLists()).thenReturn(flowable)
     }
 }

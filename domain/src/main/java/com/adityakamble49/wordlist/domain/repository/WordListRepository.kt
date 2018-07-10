@@ -1,7 +1,7 @@
 package com.adityakamble49.wordlist.domain.repository
 
 import com.adityakamble49.wordlist.domain.model.WordList
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 /**
@@ -16,5 +16,5 @@ interface WordListRepository {
 
     fun createWordList(wordList: WordList): Single<WordList>
 
-    fun getWordLists(): Observable<List<WordList>>
+    fun getWordLists(): Flowable<List<WordList>>
 }

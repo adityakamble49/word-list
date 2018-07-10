@@ -1,10 +1,10 @@
 package com.adityakamble49.wordlist.domain.interactor
 
 import com.adityakamble49.wordlist.domain.executor.PostExecutionThread
-import com.adityakamble49.wordlist.domain.interactor.common.ObservableUseCase
+import com.adityakamble49.wordlist.domain.interactor.common.FlowableUseCase
 import com.adityakamble49.wordlist.domain.model.WordList
 import com.adityakamble49.wordlist.domain.repository.WordListRepository
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 /**
@@ -16,9 +16,9 @@ import javax.inject.Inject
 class GetWordLists @Inject constructor(
         private val wordListRepository: WordListRepository,
         postExecutionThread: PostExecutionThread) :
-        ObservableUseCase<List<WordList>, Nothing>(postExecutionThread) {
+        FlowableUseCase<List<WordList>, Nothing>(postExecutionThread) {
 
-    override fun buildUseCaseObservable(param: Nothing?): Observable<List<WordList>> {
+    override fun buildUseCaseFlowable(param: Nothing?): Flowable<List<WordList>> {
         return wordListRepository.getWordLists()
     }
 }

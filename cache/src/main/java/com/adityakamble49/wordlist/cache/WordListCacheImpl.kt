@@ -5,7 +5,7 @@ import com.adityakamble49.wordlist.cache.exceptions.WordListNameExistException
 import com.adityakamble49.wordlist.cache.mapper.CachedWordListMapper
 import com.adityakamble49.wordlist.data.model.WordListEntity
 import com.adityakamble49.wordlist.data.repository.WordListCache
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -34,11 +34,10 @@ class WordListCacheImpl @Inject constructor(
                 }
     }
 
-    override fun getWordLists(): Observable<List<WordListEntity>> {
+    override fun getWordLists(): Flowable<List<WordListEntity>> {
         return wordListDatabase.cachedWordListDao().getWordList()
                 .map {
                     it.map { mapper.mapFromCache(it) }
                 }
-                .toObservable()
     }
 }

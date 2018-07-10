@@ -5,9 +5,8 @@ import com.adityakamble49.wordlist.domain.model.WordList
 import com.adityakamble49.wordlist.domain.repository.WordListRepository
 import com.adityakamble49.wordlist.domain.test.WordListDataFactory
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Before
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -29,12 +28,12 @@ class GetWordListsTest {
 
     @Test
     fun getWordListsCompletes() {
-        stubGetWordLists(Observable.just(WordListDataFactory.makeListOfWordList(3)))
-        val testObserver = getWordLists.buildUseCaseObservable().test()
+        stubGetWordLists(Flowable.just(WordListDataFactory.makeListOfWordList(3)))
+        val testObserver = getWordLists.buildUseCaseFlowable().test()
         testObserver.assertComplete()
     }
 
-    private fun stubGetWordLists(observable: Observable<List<WordList>>) {
-        whenever(wordListRepository.getWordLists()).thenReturn(observable)
+    private fun stubGetWordLists(flowable: Flowable<List<WordList>>) {
+        whenever(wordListRepository.getWordLists()).thenReturn(flowable)
     }
 }
