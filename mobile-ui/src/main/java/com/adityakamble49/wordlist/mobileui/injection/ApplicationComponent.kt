@@ -21,7 +21,8 @@ import javax.inject.Singleton
     (UIModule::class),
     (PresentationModule::class),
     (DataModule::class),
-    (CacheModule::class)])
+    (CacheModule::class),
+    (RemoteModule::class)])
 interface ApplicationComponent {
 
     @Component.Builder
