@@ -11,6 +11,8 @@ import com.adityakamble49.wordlist.presentation.model.WordListView
 import com.adityakamble49.wordlist.presentation.state.Resource
 import com.adityakamble49.wordlist.presentation.state.ResourceState
 import io.reactivex.observers.DisposableObserver
+import io.reactivex.observers.DisposableSingleObserver
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -25,6 +27,10 @@ class WordListViewModel @Inject constructor(
         private val getWordLists: GetWordLists) : ViewModel() {
 
     private val wordListsLiveData: MutableLiveData<Resource<List<WordListView>>> = MutableLiveData()
+
+    init {
+        fetchWordLists()
+    }
 
     override fun onCleared() {
         createWordList.dispose()
@@ -55,4 +61,18 @@ class WordListViewModel @Inject constructor(
         }
     }
 
+    fun addWordList(wordListName: String) {
+        createWordList.execute(CreateWordListSubscriber(),
+                CreateWordList.Params.forWordList(wordListName))
+    }
+
+    private inner class CreateWordListSubscriber : DisposableSingleObserver<WordList>() {
+
+        override fun onSuccess(t: WordList) {
+            Timber.i(mapper.mapToView(t).toString())
+        }
+
+        override fun onError(e: Throwable) {
+        }
+    }
 }
