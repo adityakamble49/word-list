@@ -6,7 +6,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 /**
  * Single Use Case
@@ -14,7 +13,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 1/7/2018
  */
-abstract class SingleUseCase<T, in Param> @Inject constructor(
+abstract class SingleUseCase<T, in Param> constructor(
         private val postExecutionThread: PostExecutionThread) {
 
     private var disposables = CompositeDisposable()

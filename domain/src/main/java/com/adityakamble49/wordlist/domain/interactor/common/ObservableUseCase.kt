@@ -6,7 +6,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 /**
  * Flowable Use Case
@@ -14,7 +13,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 3/7/2018
  */
-abstract class ObservableUseCase<T, in Param> @Inject constructor(
+abstract class ObservableUseCase<T, in Param> constructor(
         private val postExecutionThread: PostExecutionThread) {
 
     private var disposables = CompositeDisposable()
