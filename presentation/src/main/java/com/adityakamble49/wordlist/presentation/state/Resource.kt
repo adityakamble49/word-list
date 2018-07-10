@@ -8,6 +8,6 @@ package com.adityakamble49.wordlist.presentation.state
  * @since 3/7/2018
  */
 class Resource<out T> constructor(
-        private val state: ResourceState,
-        private val data: T?,
-        private val message: String?)
+        val state: ResourceState,
+        val data: T?,
+        val message: String?)
