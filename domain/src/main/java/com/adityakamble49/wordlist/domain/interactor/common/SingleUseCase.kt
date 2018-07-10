@@ -13,21 +13,21 @@ import io.reactivex.schedulers.Schedulers
  * @author Aditya Kamble
  * @since 1/7/2018
  */
-abstract class SingleUseCase<T, in Param> constructor(
+abstract class SingleUseCase<T, in Params> constructor(
         private val postExecutionThread: PostExecutionThread) {
 
     private var disposables = CompositeDisposable()
 
-    abstract fun buildSingleUseCase(param: Param? = null): Single<T>
+    abstract fun buildSingleUseCase(param: Params? = null): Single<T>
 
-    fun execute(observer: DisposableSingleObserver<T>, param: Param? = null) {
-        val observable = buildSingleUseCase(param)
+    fun execute(observer: DisposableSingleObserver<T>, params: Params? = null) {
+        val observable = buildSingleUseCase(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(postExecutionThread.scheduler)
-        addDisposables(observable.subscribeWith(observer))
+        addDisposable(observable.subscribeWith(observer))
     }
 
-    private fun addDisposables(disposable: Disposable) {
+    private fun addDisposable(disposable: Disposable) {
         if (disposables.isDisposed) {
             disposables = CompositeDisposable()
         }
