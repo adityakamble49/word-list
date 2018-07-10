@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.data.mapper
 
 import com.adityakamble49.wordlist.data.model.WordListEntity
 import com.adityakamble49.wordlist.domain.model.WordList
+import javax.inject.Inject
 
 /**
  * WordList Entity Mapper
@@ -9,7 +10,7 @@ import com.adityakamble49.wordlist.domain.model.WordList
  * @author Aditya Kamble
  * @since 3/7/2018
  */
-class WordListMapper : EntityMapper<WordListEntity, WordList> {
+class WordListMapper @Inject constructor(): EntityMapper<WordListEntity, WordList> {
 
     override fun mapFromEntity(entity: WordListEntity): WordList {
         return WordList(entity.id, entity.hash, entity.marketplaceFilename, entity.name,

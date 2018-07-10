@@ -16,4 +16,8 @@ class WordListMapper @Inject constructor() : Mapper<WordList, WordListView> {
         return WordListView(model.id, model.hash, model.marketplaceFilename, model.name,
                 model.lastWordId)
     }
+
+    override fun mapFromView(view: WordListView): WordList {
+        return WordList(view.id, view.hash, view.marketplaceFilename, view.name, view.lastWordId)
+    }
 }

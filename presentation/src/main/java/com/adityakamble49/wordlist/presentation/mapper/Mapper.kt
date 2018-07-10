@@ -1,6 +1,8 @@
 package com.adityakamble49.wordlist.presentation.mapper
 
-interface Mapper<in D, out V> {
+interface Mapper<D, V> {
 
     fun mapToView(model: D): V
+
+    fun mapFromView(view: V): D
 }

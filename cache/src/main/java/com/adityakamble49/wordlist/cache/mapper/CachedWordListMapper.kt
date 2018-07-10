@@ -2,8 +2,9 @@ package com.adityakamble49.wordlist.cache.mapper
 
 import com.adityakamble49.wordlist.cache.model.CachedWordList
 import com.adityakamble49.wordlist.data.model.WordListEntity
+import javax.inject.Inject
 
-class CachedWordListMapper : CacheMapper<CachedWordList, WordListEntity> {
+class CachedWordListMapper @Inject constructor() : CacheMapper<CachedWordList, WordListEntity> {
 
     override fun mapFromCache(cache: CachedWordList): WordListEntity {
         return WordListEntity(cache.id, cache.hash, cache.marketplaceFilename, cache.name,

@@ -9,11 +9,19 @@ import org.junit.Test
 
 class WordListMapperTest {
     private val mapper = WordListMapper()
+
     @Test
     fun mapToViewTest() {
         val model = WordListDataFactory.makeWordList()
         val modelView = mapper.mapToView(model)
         assertDataEquals(modelView, model)
+    }
+
+    @Test
+    fun mapFromViewTest() {
+        val view = WordListDataFactory.makeWordListView()
+        val model = mapper.mapFromView(view)
+        assertDataEquals(view, model)
     }
 
     private fun assertDataEquals(modelView: WordListView, model: WordList) {
