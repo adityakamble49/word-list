@@ -28,6 +28,7 @@ dependencies {
     implementation project(':domain')
 
     implementation deps.kotlin.stdlib.jre
+    implementation deps.timber.core
     implementation deps.rx.rxKotlin
     implementation deps.javax.inject
     implementation deps.android.arch.archRuntime
