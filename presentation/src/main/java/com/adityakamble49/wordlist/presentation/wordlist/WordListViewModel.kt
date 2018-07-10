@@ -41,7 +41,7 @@ class WordListViewModel @Inject constructor(
         return wordListsLiveData
     }
 
-    fun fetchWordLists() {
+    private fun fetchWordLists() {
         wordListsLiveData.postValue(Resource(ResourceState.LOADING, null, null))
         getWordLists.execute(GetWordListsSubscriber())
     }
@@ -54,9 +54,7 @@ class WordListViewModel @Inject constructor(
                     null))
         }
 
-        override fun onComplete() {
-            Timber.i("Called")
-        }
+        override fun onComplete() {}
 
         override fun onError(t: Throwable) {
             wordListsLiveData.postValue(Resource(ResourceState.ERROR,

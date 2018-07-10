@@ -23,7 +23,7 @@ abstract class CacheModule {
         @Provides
         @JvmStatic
         fun provideDatabase(application: Application): WordListDatabase {
-            return WordListDatabase.getInstance(application)
+            return WordListDatabase.getInstance(application.applicationContext)
         }
     }
 
