@@ -78,8 +78,10 @@ dependencies {
     implementation project(':domain')
     implementation project(':data')
     implementation project(':cache')
+    implementation project(':remote')
 
     implementation deps.kotlin.stdlib.jre
+    implementation deps.android.support.recyclerView
     implementation deps.timber.core
     implementation deps.gson.core
     implementation deps.rx.rxAndroid
@@ -94,13 +96,13 @@ dependencies {
     implementation deps.android.arch.roomRuntime
     implementation deps.android.arch.roomRx
     kapt deps.android.arch.roomCompiler
+    implementation deps.okhttp.core
 
     debugImplementation deps.debugDb.core
 
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
     testImplementation deps.test.robolectric
-    androidTestImplementation deps.test.mockitoAndroid
     androidTestImplementation deps.test.supportRunner
     androidTestImplementation deps.test.expressoCore
 }

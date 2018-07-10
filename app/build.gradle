@@ -120,7 +120,6 @@ dependencies {
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
     testImplementation deps.test.robolectric
-    androidTestImplementation deps.test.mockitoAndroid
     androidTestImplementation deps.test.supportRunner
     androidTestImplementation deps.test.expressoCore
 }
