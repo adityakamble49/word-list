@@ -1,5 +1,9 @@
 package com.adityakamble49.wordlist.mobileui
 
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.contrib.RecyclerViewActions
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.adityakamble49.wordlist.domain.model.WordList
@@ -11,6 +15,12 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * Main Activity Test
+ *
+ * @author Aditya Kamble
+ * @since 11/7/2018
+ */
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
@@ -21,6 +31,20 @@ class MainActivityTest {
     fun activityLaunches() {
         stubWordListRepositoryGetWordList(Flowable.just(listOf(WordListDataFactory.makeWordList())))
         activity.launchActivity(null)
+    }
+
+    @Test
+    fun wordListDisplays() {
+        val wordLists = WordListDataFactory.makeWordLists(20)
+        stubWordListRepositoryGetWordList(Flowable.just(wordLists))
+        activity.launchActivity(null)
+
+        wordLists.forEachIndexed { index, wordList ->
+            onView(withId(R.id.rv_wordlist)).perform(
+                    RecyclerViewActions.scrollToPosition<WordListAdapter.ViewHolder>(index))
+            onView(withId(R.id.rv_wordlist))
+                    .check(matches(hasDescendant(withText(wordList.name))))
+        }
     }
 
     private fun stubWordListRepositoryGetWordList(flowable: Flowable<List<WordList>>) {

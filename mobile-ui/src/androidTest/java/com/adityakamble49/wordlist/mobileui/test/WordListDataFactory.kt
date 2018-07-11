@@ -8,6 +8,14 @@ object WordListDataFactory {
     fun makeWordList() = WordList(DataFactory.randomInteger(), DataFactory.randomUUID(),
             DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomInteger())
 
+    fun makeWordLists(count: Int): List<WordList> {
+        val wordLists = mutableListOf<WordList>()
+        repeat(count) {
+            wordLists.add(makeWordList())
+        }
+        return wordLists
+    }
+
     fun makeWordListView() = WordListView(DataFactory.randomInteger(), DataFactory.randomUUID(),
             DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomInteger())
 }
