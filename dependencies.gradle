@@ -45,9 +45,9 @@ buildscript {
 
             // Testing
             'junit'                : '4.12',
-            'mockito'              : '2.8.9',
+            'mockito'              : '1.9.5',
             'mockitoAndroid'       : '2.8.9',
-            'mockitoKotlin'        : '1.6.0',
+            'mockitoKotlin'        : '1.5.0',
             'assertJ'              : '3.8.0',
             'robolectric'          : '3.8',
             'expresso'             : '3.0.1',
@@ -134,16 +134,19 @@ buildscript {
                     'core': "com.amitshekhar.android:debug-db:${versions.debugDb}"
             ],
             'test'           : [
-                    'junit'         : "junit:junit:${versions.junit}",
-                    'mockito'       : "org.mockito:mockito-core:${versions.mockito}",
-                    'mockitoAndroid': "org.mockito:mockito-android:${versions.mockito}",
-                    'mockitoKotlin' : "com.nhaarman:mockito-kotlin-kt1.1:${versions.mockitoKotlin}",
-                    'assertJ'       : "org.assertj:assertj-core:${versions.assertJ}",
-                    'archTesting'   : "android.arch.core:core-testing:${versions.arch}",
-                    'roomTesting'   : "android.arch.persistence.room:testing:${versions.arch}",
-                    'robolectric'   : "org.robolectric:robolectric:${versions.robolectric}",
-                    'supportRunner' : "com.android.support.test:runner:${versions.androidSupportRunner}",
-                    'expressoCore'  : "com.android.support.test.espresso:espresso-core:${versions.expresso}",
+                    'junit'               : "junit:junit:${versions.junit}",
+                    'mockito'             : "org.mockito:mockito-core:${versions.mockito}",
+                    'mockitoAndroid'      : "org.mockito:mockito-android:${versions.mockitoAndroid}",
+                    'mockitoKotlin'       : "com.nhaarman:mockito-kotlin-kt1.1:${versions.mockitoKotlin}",
+                    'assertJ'             : "org.assertj:assertj-core:${versions.assertJ}",
+                    'archTesting'         : "android.arch.core:core-testing:${versions.arch}",
+                    'roomTesting'         : "android.arch.persistence.room:testing:${versions.arch}",
+                    'robolectric'         : "org.robolectric:robolectric:${versions.robolectric}",
+                    'androidSupportRunner': "com.android.support.test:runner:${versions.androidSupportRunner}",
+                    'androidSupportRules' : "com.android.support.test:rules:${versions.androidSupportRunner}",
+                    'expressoCore'        : "com.android.support.test.espresso:espresso-core:${versions.expresso}",
+                    'espressoIntents'     : "com.android.support.test.espresso:espresso-intents:${versions.expresso}",
+                    'espressoContrib'     : "com.android.support.test.espresso:espresso-contrib:${versions.expresso}",
             ]
     ]
 
