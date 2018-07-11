@@ -46,6 +46,7 @@ buildscript {
             // Testing
             'junit'                : '4.12',
             'mockito'              : '2.8.9',
+            'mockitoAndroid'       : '2.8.9',
             'mockitoKotlin'        : '1.6.0',
             'assertJ'              : '3.8.0',
             'robolectric'          : '3.8',

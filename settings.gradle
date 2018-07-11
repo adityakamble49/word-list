@@ -1,1 +1,1 @@
-include ':app', ':domain', ':data', ':cache', ':presentation', ':mobile-ui', ':remote'
+include ':domain', ':data', ':cache', ':presentation', ':mobile-ui', ':remote'

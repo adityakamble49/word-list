@@ -17,7 +17,7 @@ android {
         versionCode buildConfig.version.code
         versionName buildConfig.version.name
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.adityakamble49.wordlist.mobileui.test.TestRunner"
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -100,9 +100,12 @@ dependencies {
 
     debugImplementation deps.debugDb.core
 
-    testImplementation deps.test.junit
-    testImplementation deps.test.mockito
-    testImplementation deps.test.robolectric
+    androidTestImplementation deps.test.junit
+    androidTestImplementation deps.test.mockito
+    androidTestImplementation deps.test.mockitoKotlin
+    androidTestImplementation deps.test.mockitoAndroid
+    kaptTest deps.dagger.compiler
+    kaptAndroidTest deps.dagger.compiler
     androidTestImplementation deps.test.supportRunner
     androidTestImplementation deps.test.expressoCore
 }
