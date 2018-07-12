@@ -1,18 +1,12 @@
 package com.adityakamble49.wordlist.cache.dao
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.persistence.room.Room
 import android.database.sqlite.SQLiteConstraintException
-import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.cache.test.DataFactory
 import com.adityakamble49.wordlist.cache.test.WordListDataFactory
 import junit.framework.TestCase.assertNotNull
-import org.junit.After
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 
 /**
  * CachedWordList Dao Test
@@ -21,21 +15,7 @@ import org.robolectric.RuntimeEnvironment
  * @since 2/7/2018
  */
 @RunWith(RobolectricTestRunner::class)
-class CachedWordListDaoTest {
-
-    @Rule
-    @JvmField
-    var instantTaskExecutableRule = InstantTaskExecutorRule()
-
-    private val database = Room.inMemoryDatabaseBuilder(
-            RuntimeEnvironment.application.applicationContext, WordListDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
-
-    @After
-    fun closeDatabase() {
-        database.close()
-    }
+class CachedWordListDaoTest : DaoTest() {
 
     @Test
     fun insertWordListReturnId() {
