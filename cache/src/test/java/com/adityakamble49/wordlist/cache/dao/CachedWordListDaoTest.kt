@@ -46,8 +46,8 @@ class CachedWordListDaoTest : DaoTest() {
 
         // Change data and update list
         cachedWordList.lastWordId = DataFactory.randomInteger()
-        cachedWordList.name = DataFactory.randomUUID()
-        cachedWordList.hash = DataFactory.randomUUID()
+        cachedWordList.name = DataFactory.randomString()
+        cachedWordList.hash = DataFactory.randomString()
         database.cachedWordListDao().update(cachedWordList)
 
         // Fetch updated word list and assert lastWordId

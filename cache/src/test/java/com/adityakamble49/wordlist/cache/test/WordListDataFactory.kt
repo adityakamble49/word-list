@@ -11,9 +11,9 @@ import com.adityakamble49.wordlist.data.model.WordListEntity
  */
 object WordListDataFactory {
 
-    fun makeCachedWordList() = CachedWordList(DataFactory.randomInteger(), DataFactory.randomUUID(),
-            DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomInteger())
+    fun makeCachedWordList() = CachedWordList(DataFactory.randomInteger(), DataFactory.randomString(),
+            DataFactory.randomString(), DataFactory.randomString(), DataFactory.randomInteger())
 
-    fun makeWordListEntity() = WordListEntity(DataFactory.randomInteger(), DataFactory.randomUUID(),
-            DataFactory.randomUUID(), DataFactory.randomUUID(), DataFactory.randomInteger())
+    fun makeWordListEntity() = WordListEntity(DataFactory.randomInteger(), DataFactory.randomString(),
+            DataFactory.randomString(), DataFactory.randomString(), DataFactory.randomInteger())
 }

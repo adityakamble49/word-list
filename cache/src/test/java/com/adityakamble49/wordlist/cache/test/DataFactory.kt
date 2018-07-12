@@ -11,7 +11,7 @@ import java.util.*
  */
 object DataFactory {
 
-    fun randomUUID() = UUID.randomUUID().toString()
+    fun randomString() = UUID.randomUUID().toString()
 
     fun randomInteger() = Random().nextInt()
 
