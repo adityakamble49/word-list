@@ -5,7 +5,9 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import com.adityakamble49.wordlist.cache.dao.CachedWordDao
 import com.adityakamble49.wordlist.cache.dao.CachedWordListDao
+import com.adityakamble49.wordlist.cache.model.CachedWord
 import com.adityakamble49.wordlist.cache.model.CachedWordList
 
 /**
@@ -14,7 +16,7 @@ import com.adityakamble49.wordlist.cache.model.CachedWordList
  * @author Aditya Kamble
  * @since 2/7/2018
  */
-@Database(entities = [(CachedWordList::class)], version = 1)
+@Database(entities = [(CachedWordList::class), (CachedWord::class)], version = 1)
 @TypeConverters(Converter::class)
 abstract class WordListDatabase : RoomDatabase() {
 
@@ -36,4 +38,6 @@ abstract class WordListDatabase : RoomDatabase() {
     }
 
     abstract fun cachedWordListDao(): CachedWordListDao
+
+    abstract fun cachedWordDao(): CachedWordDao
 }
