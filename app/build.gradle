@@ -117,6 +117,9 @@ dependencies {
 
     debugImplementation deps.debugDb.core
 
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.robolectric
     androidTestImplementation deps.test.junit
     androidTestImplementation deps.test.mockito
     androidTestImplementation deps.test.mockitoKotlin
