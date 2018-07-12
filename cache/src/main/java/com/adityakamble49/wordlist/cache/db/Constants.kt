@@ -10,4 +10,5 @@ object Constants {
     const val DB_NAME = "word_list.db"
     const val TABLE_WORD_LISTS = "word_lists"
     const val TABLE_WORDS = "words"
+    const val TABLE_MARKETPLACE_WORDLIST = "marketplace_wordlist"
 }
