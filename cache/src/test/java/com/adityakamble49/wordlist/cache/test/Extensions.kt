@@ -14,7 +14,7 @@ import java.util.*
 /**
  * Sort Word List Entities as per item ids
  */
-fun List<WordListEntity>.sort() {
+fun List<WordListEntity>.sortWordListEntity() {
     Collections.sort(this, { item1, item2 ->
         return@sort item1.id.compareTo(item2.id)
     })

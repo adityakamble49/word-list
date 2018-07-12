@@ -6,7 +6,7 @@ import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.cache.exceptions.WordListNameExistException
 import com.adityakamble49.wordlist.cache.mapper.CachedWordListMapper
 import com.adityakamble49.wordlist.cache.test.WordListDataFactory
-import com.adityakamble49.wordlist.cache.test.sort
+import com.adityakamble49.wordlist.cache.test.sortWordListEntity
 import junit.framework.TestCase.assertEquals
 import org.junit.After
 import org.junit.Rule
@@ -59,7 +59,7 @@ class WordListCacheImplTest {
         testObserver.assertValues(listOf(wordList1))
         val wordList2 = WordListDataFactory.makeWordListEntity()
         cache.saveWordList(wordList2).test()
-        assertEquals(listOf(wordList1, wordList2).sort(), testObserver.values()[1].sort())
+        assertEquals(listOf(wordList1, wordList2).sortWordListEntity(), testObserver.values()[1].sortWordListEntity())
     }
 
     @After
