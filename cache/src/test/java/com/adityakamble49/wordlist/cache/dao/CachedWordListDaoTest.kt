@@ -17,24 +17,26 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class CachedWordListDaoTest : DaoTest() {
 
+    private val dao = database.cachedWordListDao()
+
     @Test
     fun insertWordListReturnId() {
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        val wordListId = database.cachedWordListDao().insert(cachedWordList)
+        val wordListId = dao.insert(cachedWordList)
         assertNotNull(wordListId)
     }
 
     @Test(expected = SQLiteConstraintException::class)
     fun insertWordListDuplicateNameThrowsException() {
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        database.cachedWordListDao().insert(cachedWordList)
-        database.cachedWordListDao().insert(cachedWordList)
+        dao.insert(cachedWordList)
+        dao.insert(cachedWordList)
     }
 
     @Test
     fun insertListOfWordListReturnsIds() {
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        val wordListIds = database.cachedWordListDao().insertList(listOf(cachedWordList))
+        val wordListIds = dao.insertList(listOf(cachedWordList))
         assertNotNull(wordListIds)
     }
 
@@ -42,16 +44,16 @@ class CachedWordListDaoTest : DaoTest() {
     fun updateWordListCompletes() {
         // Insert Word List
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        val wordListId = database.cachedWordListDao().insert(cachedWordList)
+        val wordListId = dao.insert(cachedWordList)
 
         // Change data and update list
         cachedWordList.lastWordId = DataFactory.randomInteger()
         cachedWordList.name = DataFactory.randomString()
         cachedWordList.hash = DataFactory.randomString()
-        database.cachedWordListDao().update(cachedWordList)
+        dao.update(cachedWordList)
 
         // Fetch updated word list and assert lastWordId
-        val testObserver = database.cachedWordListDao().getWordListById(wordListId.toInt()).test()
+        val testObserver = dao.getWordListById(wordListId.toInt()).test()
         testObserver.assertValue(cachedWordList)
     }
 
@@ -59,15 +61,15 @@ class CachedWordListDaoTest : DaoTest() {
     fun updateLastWordIdForWordListCompletes() {
         // Insert Word List
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        val wordListId = database.cachedWordListDao().insert(cachedWordList)
+        val wordListId = dao.insert(cachedWordList)
 
         // Change lastWordId and update list
         val updatedLastWordId = DataFactory.randomInteger()
         cachedWordList.lastWordId = updatedLastWordId
-        database.cachedWordListDao().update(cachedWordList)
+        dao.update(cachedWordList)
 
         // Fetch updated word list and assert lastWordId
-        val testObserver = database.cachedWordListDao().getWordListById(wordListId.toInt()).test()
+        val testObserver = dao.getWordListById(wordListId.toInt()).test()
         testObserver.assertValue({ it.lastWordId == updatedLastWordId })
     }
 
@@ -75,21 +77,21 @@ class CachedWordListDaoTest : DaoTest() {
     fun deleteWordListCompletes() {
         // Insert Word List
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        val wordListId = database.cachedWordListDao().insert(cachedWordList)
+        val wordListId = dao.insert(cachedWordList)
 
         // Delete WordList
-        database.cachedWordListDao().delete(cachedWordList)
+        dao.delete(cachedWordList)
 
         // Fetch updated word list and assert lastWordId
-        val testObserver = database.cachedWordListDao().getWordListById(wordListId.toInt()).test()
+        val testObserver = dao.getWordListById(wordListId.toInt()).test()
         testObserver.assertEmpty()
     }
 
     @Test
     fun getWordListTest() {
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        database.cachedWordListDao().insert(cachedWordList)
-        val testObserver = database.cachedWordListDao().getWordList().test()
+        dao.insert(cachedWordList)
+        val testObserver = dao.getWordList().test()
         testObserver.assertValue(listOf(cachedWordList))
     }
 
@@ -97,10 +99,10 @@ class CachedWordListDaoTest : DaoTest() {
     fun getWordListByIdReturns() {
         // Insert Word List
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        val wordListId = database.cachedWordListDao().insert(cachedWordList)
+        val wordListId = dao.insert(cachedWordList)
 
         // Fetch WordList by Id
-        val testObserver = database.cachedWordListDao().getWordListById(wordListId.toInt()).test()
+        val testObserver = dao.getWordListById(wordListId.toInt()).test()
         testObserver.assertValue(cachedWordList)
     }
 
@@ -108,10 +110,10 @@ class CachedWordListDaoTest : DaoTest() {
     fun getWordListByMarketplaceFileNameReturns() {
         // Insert Word List
         val cachedWordList = WordListDataFactory.makeCachedWordList()
-        database.cachedWordListDao().insert(cachedWordList)
+        dao.insert(cachedWordList)
 
         // Fetch WordList by Id
-        val testObserver = database.cachedWordListDao()
+        val testObserver = dao
                 .getWordListByMarketplaceFileName(cachedWordList.marketplaceFilename).test()
         testObserver.assertValue(cachedWordList)
     }
