@@ -117,9 +117,31 @@ dependencies {
 
     debugImplementation deps.debugDb.core
 
-    testImplementation deps.test.junit
-    testImplementation deps.test.mockito
-    testImplementation deps.test.robolectric
-    androidTestImplementation deps.test.supportRunner
-    androidTestImplementation deps.test.expressoCore
+    androidTestImplementation deps.test.junit
+    androidTestImplementation deps.test.mockito
+    androidTestImplementation deps.test.mockitoKotlin
+    androidTestImplementation deps.test.mockitoAndroid
+    kaptTest deps.dagger.compiler
+    kaptAndroidTest deps.dagger.compiler
+    androidTestImplementation(deps.test.expressoCore) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(deps.test.androidSupportRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(deps.test.androidSupportRules) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(deps.test.espressoIntents) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(deps.test.espressoContrib) {
+        exclude module: 'appcompat'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    }
 }
