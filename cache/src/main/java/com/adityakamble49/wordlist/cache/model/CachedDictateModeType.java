@@ -6,7 +6,7 @@ package com.adityakamble49.wordlist.cache.model;
  * @author Aditya Kamble
  * @since 13/7/2018
  */
-public enum DictateModeType {
+public enum CachedDictateModeType {
     WORD_COMPLETE_INFO,
     WORD_DEFINITION,
     WORD_ONLY

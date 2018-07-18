@@ -1,7 +1,7 @@
 package com.adityakamble49.wordlist.cache.preference
 
-import com.adityakamble49.wordlist.cache.model.DictateModeSpeed
-import com.adityakamble49.wordlist.cache.model.DictateModeType
+import com.adityakamble49.wordlist.cache.model.CachedDictateModeSpeed
+import com.adityakamble49.wordlist.cache.model.CachedDictateModeType
 import com.adityakamble49.wordlist.cache.test.PreferenceDataFactory
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
@@ -24,7 +24,7 @@ class PreferenceHelperTest {
     @Test
     fun dictateModeTypeDefaultTest() {
         // Default Dictate Mode Type
-        val defaultDictateModeType = DictateModeType.WORD_COMPLETE_INFO.name.toLowerCase()
+        val defaultDictateModeType = CachedDictateModeType.WORD_COMPLETE_INFO.name.toLowerCase()
 
         // Get Dictate Mode Type and Assert
         val dictateModeTypeReturn = preferenceHelper.dictateModeType
@@ -45,7 +45,7 @@ class PreferenceHelperTest {
     @Test
     fun dictateModeSpeedDefaultTest() {
         // Default Dictate Mode Speed
-        val defaultDictateModeSpeed = DictateModeSpeed.NORMAL.name.toLowerCase()
+        val defaultDictateModeSpeed = CachedDictateModeSpeed.NORMAL.name.toLowerCase()
 
         // Get Dictate Mode Speed and Assert
         val dictateModeSpeedReturn = preferenceHelper.dictateModeSpeed

@@ -6,7 +6,7 @@ package com.adityakamble49.wordlist.cache.model;
  * @author Aditya Kamble
  * @since 13/7/2018
  */
-public enum DictateModeSpeed {
+public enum CachedDictateModeSpeed {
     SLOWER,
     SLOW,
     NORMAL,
