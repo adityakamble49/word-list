@@ -2,8 +2,8 @@ package com.adityakamble49.wordlist.cache.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.adityakamble49.wordlist.cache.model.CachedDictateModeSpeed
-import com.adityakamble49.wordlist.cache.model.CachedDictateModeType
+import com.adityakamble49.wordlist.domain.model.DictateModeSpeed
+import com.adityakamble49.wordlist.domain.model.DictateModeType
 import javax.inject.Inject
 
 /**
@@ -18,9 +18,9 @@ class PreferenceHelper @Inject constructor(private val context: Context) {
         const val PREF_WORDLIST_PACKAGE_NAME = "com.adityakamble49.wordlist"
         const val PREF_WORDLIST_SETTINGS = "com.adityakamble49.wordlist_preferences"
         const val PREF_KEY_DICTATE_MODE_TYPE = "dictate_mode_type"
-        val DEFAULT_DICTATE_MODE_TYPE = CachedDictateModeType.WORD_COMPLETE_INFO.name.toLowerCase()
+        val DEFAULT_DICTATE_MODE_TYPE = DictateModeType.WORD_COMPLETE_INFO.name.toLowerCase()
         const val PREF_KEY_DICTATE_MODE_SPEED = "dictate_mode_speed"
-        val DEFAULT_DICTATE_MODE_SPEED = CachedDictateModeSpeed.NORMAL.name.toLowerCase()
+        val DEFAULT_DICTATE_MODE_SPEED = DictateModeSpeed.NORMAL.name.toLowerCase()
     }
 
     private val wordListPref: SharedPreferences

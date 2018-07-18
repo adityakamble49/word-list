@@ -1,7 +1,7 @@
 package com.adityakamble49.wordlist.cache.test
 
-import com.adityakamble49.wordlist.cache.model.CachedDictateModeSpeed
-import com.adityakamble49.wordlist.cache.model.CachedDictateModeType
+import com.adityakamble49.wordlist.domain.model.DictateModeSpeed
+import com.adityakamble49.wordlist.domain.model.DictateModeType
 import java.util.*
 
 /**
@@ -14,13 +14,13 @@ object PreferenceDataFactory {
 
     private val random = Random()
 
-    fun makeDictateModeType(): CachedDictateModeType {
-        return CachedDictateModeType.values()[random.nextInt(
-                CachedDictateModeType.values().size)]
+    fun makeDictateModeType(): DictateModeType {
+        return DictateModeType.values()[random.nextInt(
+                DictateModeType.values().size)]
     }
 
-    fun makeDictateModeSpeed(): CachedDictateModeSpeed {
-        return CachedDictateModeSpeed.values()[random.nextInt(
-                CachedDictateModeSpeed.values().size)]
+    fun makeDictateModeSpeed(): DictateModeSpeed {
+        return DictateModeSpeed.values()[random.nextInt(
+                DictateModeSpeed.values().size)]
     }
 }

@@ -41,6 +41,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation project(':data')
+    implementation project(':domain')
 
     implementation deps.kotlin.stdlib.jre
     implementation deps.gson.core
