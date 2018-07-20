@@ -1,11 +1,11 @@
 package com.adityakamble49.wordlist.cache
 
 import com.adityakamble49.wordlist.cache.preference.PreferenceHelper
-import org.junit.Before
+import com.adityakamble49.wordlist.cache.test.DictateModeSettingsFactory
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import javax.inject.Inject
+import org.robolectric.RuntimeEnvironment
 
 /**
  * DictateModeSettingsImpl Test
@@ -16,12 +16,22 @@ import javax.inject.Inject
 @RunWith(RobolectricTestRunner::class)
 class DictateModeSettingsImplTest {
 
-    private lateinit var dictateModeSettingsCacheImpl: DictateModeSettingsCacheImpl
-    @Inject lateinit var preferenceHelper: PreferenceHelper
+    private val preferenceHelper = PreferenceHelper(
+            RuntimeEnvironment.application.applicationContext)
+    private val dictateModeSettingsCacheImpl = DictateModeSettingsCacheImpl(preferenceHelper)
 
-    @Before
-    fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        dictateModeSettingsCacheImpl = DictateModeSettingsCacheImpl(preferenceHelper)
+    @Test
+    fun getDictateModeSettingsCompletes() {
+        val testObserver = dictateModeSettingsCacheImpl.getDictateModeSettings().test()
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun getDictateModeSettingsReturnsData() {
+        val testDictateModeSettings = DictateModeSettingsFactory.makeDictateModeSettings()
+        preferenceHelper.dictateModeSpeed = testDictateModeSettings.dictateModeSpeed.name.toLowerCase()
+        preferenceHelper.dictateModeType = testDictateModeSettings.dictateModeType.name.toLowerCase()
+        val testObserver = dictateModeSettingsCacheImpl.getDictateModeSettings().test()
+        testObserver.assertValue(testDictateModeSettings)
     }
 }
