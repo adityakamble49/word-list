@@ -18,6 +18,12 @@ import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
+/**
+ * WordList Data Repository Test
+ *
+ * @author Aditya Kamble
+ * @since 3/7/2018
+ */
 @RunWith(JUnit4::class)
 class WordListDataRepositoryTest {
 
