@@ -1,5 +1,7 @@
 package com.adityakamble49.wordlist.utils;
 
+import android.os.Environment;
+
 import com.adityakamble49.wordlist.BuildConfig;
 
 /**
@@ -44,5 +46,11 @@ public class Constants {
         public static final String TWITTER_PROFILE = "https://twitter.com/adityakamble49";
         public static final String CREDIT_APP_ICON = "https://www.flaticon" +
                 ".com/free-icon/checklist_273504#term=list&page=1&position=96";
+    }
+
+    public static class Files {
+        private static final String ROOT_DIR = Environment.getExternalStorageDirectory()
+                .getAbsolutePath();
+        public static final String EXPORT_DIR = ROOT_DIR + "/wordlist-exported";
     }
 }

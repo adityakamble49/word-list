@@ -17,6 +17,14 @@
         android:title="@string/label_create_list" />
 
     <item
+        android:id="@+id/action_import_list"
+        android:title="@string/label_import_list" />
+
+    <item
+        android:id="@+id/action_export_list"
+        android:title="@string/label_export_list" />
+
+    <item
         android:id="@+id/action_add_word"
         android:title="@string/label_add_word" />
 

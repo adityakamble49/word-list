@@ -1,13 +1,12 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
-import com.adityakamble49.wordlist.interactor.CreateWordList
-import com.adityakamble49.wordlist.interactor.GetCurrentWordList
-import com.adityakamble49.wordlist.interactor.GetWordLists
-import com.adityakamble49.wordlist.interactor.UpdateCurrentLoadedListId
+import com.adityakamble49.wordlist.interactor.*
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
+import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -21,7 +20,8 @@ class WordListPresenter @Inject constructor(
         private val getWordLists: GetWordLists,
         private val updateCurrentLoadedListId: UpdateCurrentLoadedListId,
         private val getCurrentWordList: GetCurrentWordList,
-        private val createWordList: CreateWordList) :
+        private val createWordList: CreateWordList,
+        private val exportListUseCase: ExportListUseCase) :
         WordListContract.Presenter {
 
     private lateinit var wordListViewModel: WordListViewModel
@@ -107,6 +107,27 @@ class WordListPresenter @Inject constructor(
 
     override fun onClickLoadList() {
         view.showLoadSavedListDialog()
+    }
+
+    override fun onClickImportList() {
+
+    }
+
+    override fun onClickExportList() {
+        exportListUseCase.execute(ExportListObserver())
+    }
+
+    private inner class ExportListObserver : DisposableCompletableObserver() {
+
+        override fun onComplete() {
+            view.showMessage("List Exported")
+        }
+
+        override fun onError(e: Throwable) {
+            Timber.i(e)
+            view.showMessage("List Export Failed")
+        }
+
     }
 
     override fun requestUpdateWordList() {

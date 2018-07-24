@@ -1,9 +1,13 @@
 package com.adityakamble49.wordlist.ui.list
 
+import android.Manifest
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -48,10 +52,16 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     // Other Fields
     private lateinit var savedWordLists: List<WordList>
     private var disableAddWordMenu = false
+    private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private val RC_PERMISSIONS = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        if (!arePermissionGranted()) {
+            askRequiredPermissions()
+        }
     }
 
     override fun onResume() {
@@ -73,6 +83,8 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
             R.id.action_search -> presenter.onClickSearch()
             R.id.action_load_list -> presenter.onClickLoadList()
             R.id.action_create_list -> presenter.onClickCreateList()
+            R.id.action_import_list -> presenter.onClickImportList()
+            R.id.action_export_list -> presenter.onClickExportList()
             R.id.action_add_word -> presenter.onClickAddWord()
         }
         return super.onOptionsItemSelected(item)
@@ -179,6 +191,38 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
                     }
                     .alwaysCallInputCallback()
                     .build().show()
+        }
+    }
+
+    private fun arePermissionGranted(): Boolean {
+        context?.let {
+            return !(ContextCompat.checkSelfPermission(it,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(it,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        }
+        return false
+    }
+
+    private fun askRequiredPermissions() {
+        if (!arePermissionGranted()) {
+            activity?.let {
+                ActivityCompat.requestPermissions(it, PERMISSIONS_REQUIRED, RC_PERMISSIONS)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
+        when (requestCode) {
+            RC_PERMISSIONS -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Permission Not Granted", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
     }
 
