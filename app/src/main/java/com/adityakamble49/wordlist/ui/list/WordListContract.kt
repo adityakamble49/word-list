@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.LifecycleOwner
+import android.net.Uri
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
 import com.adityakamble49.wordlist.ui.common.BaseContract
@@ -24,6 +25,7 @@ interface WordListContract {
         fun openSingleWord(word: Word)
         fun updateBookmarkItem(bookmarkItemId: Int)
         fun updateMenus(wordList: WordList)
+        fun openFileDialog()
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -38,5 +40,6 @@ interface WordListContract {
         fun onCreateWordListPositive(wordListName: String)
         fun onClickSavedListItem(selectedWordList: WordList)
         fun onClickedSingleWord(word: Word)
+        fun importList(uri: Uri)
     }
 }

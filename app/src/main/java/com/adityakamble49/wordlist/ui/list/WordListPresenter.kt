@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.arch.lifecycle.Observer
+import android.net.Uri
 import com.adityakamble49.wordlist.interactor.*
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.model.WordList
@@ -21,7 +22,8 @@ class WordListPresenter @Inject constructor(
         private val updateCurrentLoadedListId: UpdateCurrentLoadedListId,
         private val getCurrentWordList: GetCurrentWordList,
         private val createWordList: CreateWordList,
-        private val exportListUseCase: ExportListUseCase) :
+        private val exportListUseCase: ExportListUseCase,
+        private val importWordList: ImportWordList) :
         WordListContract.Presenter {
 
     private lateinit var wordListViewModel: WordListViewModel
@@ -110,6 +112,23 @@ class WordListPresenter @Inject constructor(
     }
 
     override fun onClickImportList() {
+        view.openFileDialog()
+    }
+
+    override fun importList(uri: Uri) {
+        importWordList.execute(uri, ImportListObserver())
+    }
+
+    private inner class ImportListObserver : DisposableCompletableObserver() {
+
+        override fun onComplete() {
+            view.showMessage("List Imported")
+        }
+
+        override fun onError(e: Throwable) {
+            Timber.i(e)
+            view.showMessage("List Import Failed")
+        }
 
     }
 

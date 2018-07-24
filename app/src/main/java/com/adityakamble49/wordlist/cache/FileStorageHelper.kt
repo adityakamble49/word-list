@@ -94,6 +94,11 @@ class FileStorageHelper @Inject constructor(
         }
     }
 
+    fun getFileNameWithoutExtension(uri: Uri): String {
+        val fileName = getFileName(uri)
+        return fileName.split(".")[0]
+    }
+
     fun writeFileToExternalStorage(fileDir: String, fileName: String, content: String) {
         if (!isExternalStorageAvailable()) {
             throw ExternalStorageException("External Storage not Available")

@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.ui.list
 
 import android.Manifest
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -55,6 +56,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
     private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE)
     private val RC_PERMISSIONS = 101
+    private val REQ_FILE_CHOOSER = 901
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -225,6 +227,28 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
             else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
     }
+
+    override fun openFileDialog() {
+        val openFileIntent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        openFileIntent.addCategory(Intent.CATEGORY_OPENABLE)
+        openFileIntent.type = "*/*"
+        startActivityForResult(openFileIntent, REQ_FILE_CHOOSER)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQ_FILE_CHOOSER -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    data?.let {
+                        val uri = it.data
+                        presenter.importList(uri)
+                    }
+                }
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
 
     override fun showMessage(response: String) {
         Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
