@@ -23,7 +23,8 @@ class WordListPresenter @Inject constructor(
         private val getCurrentWordList: GetCurrentWordList,
         private val createWordList: CreateWordList,
         private val exportListUseCase: ExportListUseCase,
-        private val importWordList: ImportWordList) :
+        private val importWordList: ImportWordList,
+        private val deleteWordList: DeleteWordList) :
         WordListContract.Presenter {
 
     private lateinit var wordListViewModel: WordListViewModel
@@ -145,6 +146,23 @@ class WordListPresenter @Inject constructor(
         override fun onError(e: Throwable) {
             Timber.i(e)
             view.showMessage("List Export Failed")
+        }
+
+    }
+
+    override fun onClickDeleteList() {
+        deleteWordList.execute(DeleteListObserver())
+    }
+
+    private inner class DeleteListObserver : DisposableCompletableObserver() {
+
+        override fun onComplete() {
+            view.showMessage("List Deleted")
+        }
+
+        override fun onError(e: Throwable) {
+            Timber.i(e)
+            view.showMessage("List Delete Failed")
         }
 
     }

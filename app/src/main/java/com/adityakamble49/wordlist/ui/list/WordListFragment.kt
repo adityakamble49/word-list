@@ -87,6 +87,7 @@ class WordListFragment : BaseInjectableFragment(), WordListContract.View,
             R.id.action_create_list -> presenter.onClickCreateList()
             R.id.action_import_list -> presenter.onClickImportList()
             R.id.action_export_list -> presenter.onClickExportList()
+            R.id.action_delete_list -> presenter.onClickDeleteList()
             R.id.action_add_word -> presenter.onClickAddWord()
         }
         return super.onOptionsItemSelected(item)

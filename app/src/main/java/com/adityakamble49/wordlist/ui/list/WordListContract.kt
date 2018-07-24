@@ -41,5 +41,6 @@ interface WordListContract {
         fun onClickSavedListItem(selectedWordList: WordList)
         fun onClickedSingleWord(word: Word)
         fun importList(uri: Uri)
+        fun onClickDeleteList()
     }
 }

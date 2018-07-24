@@ -38,6 +38,9 @@ interface WordListDao {
     @Delete
     fun delete(wordList: WordList)
 
+    @Query("DELETE FROM word_lists WHERE id= :id")
+    fun deleteById(id: Int)
+
     @Query("UPDATE word_lists SET lastWordId= :lastWordId WHERE id= :wordListId")
     fun updateLastWordIdForWordList(wordListId: Int, lastWordId: Int)
 }

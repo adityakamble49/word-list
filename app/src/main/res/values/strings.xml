@@ -80,5 +80,6 @@
     <string name="marketplace_empty_warning">Marketplace Empty</string>
     <string name="label_import_list">Import List</string>
     <string name="label_export_list">Export List</string>
+    <string name="label_delete_list">Delete List</string>
 
 </resources>
