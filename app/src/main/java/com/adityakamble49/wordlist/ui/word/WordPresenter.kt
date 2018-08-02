@@ -249,6 +249,10 @@ class WordPresenter @Inject constructor(
         view.speakWord(viewModel.currentWord.name)
     }
 
+    override fun onClickWordImageSearch() {
+        view.openImageSearch(viewModel.currentWord.name)
+    }
+
     override fun onClickWordMnemonicsSync(word: String) {
         if (!word.isEmpty()) {
             view.showMnemonicProgress(true)

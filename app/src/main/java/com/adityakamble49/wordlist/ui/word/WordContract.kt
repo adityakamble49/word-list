@@ -35,6 +35,7 @@ interface WordContract {
         fun showWordInfoProgress(toShow: Boolean)
         fun scrollToTop()
         fun lockEditMode(toLock: Boolean)
+        fun openImageSearch(name: String)
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -50,6 +51,7 @@ interface WordContract {
         fun onPreviousWordAction()
         fun onDictateModeAction()
         fun onClickWordTTS()
+        fun onClickWordImageSearch()
         fun onClickWordMnemonicsSync(word: String)
         fun onClickWordInformationSync(word: String)
         fun onTTSDone()

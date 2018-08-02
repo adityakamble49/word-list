@@ -3,9 +3,11 @@ package com.adityakamble49.wordlist.ui.word
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Build
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.support.customtabs.CustomTabsIntent
 import android.support.v4.content.res.ResourcesCompat
 import android.view.Menu
 import android.view.MenuItem
@@ -14,6 +16,7 @@ import android.widget.Toast
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
+import com.adityakamble49.wordlist.utils.Constants
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.invisible
 import com.adityakamble49.wordlist.utils.visible
@@ -107,6 +110,7 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.word_text_to_speech -> presenter.onClickWordTTS()
+            R.id.word_image_search -> presenter.onClickWordImageSearch()
             R.id.word_mnemonics_sync -> presenter.onClickWordMnemonicsSync(
                     word_name.text.toString())
             R.id.word_info_sync -> presenter.onClickWordInformationSync(word_name.text.toString())
@@ -155,6 +159,9 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
 
         // Setup Word TTS
         word_text_to_speech.setOnClickListener(this)
+
+        // Setup Image Search
+        word_image_search.setOnClickListener(this)
 
         // Bottom Navigation
         previous_word.setOnClickListener(this)
@@ -272,6 +279,12 @@ class WordActivity : BaseInjectableActivity(), WordContract.View, View.OnClickLi
         isEditModeLocked = toLock
         val editMenu = optionMenu?.findItem(R.id.action_edit_word)
         editMenu?.isVisible = !toLock
+    }
+
+    override fun openImageSearch(name: String) {
+        val chromeTabBuilder = CustomTabsIntent.Builder()
+        val chromeTabIntent = chromeTabBuilder.build()
+        chromeTabIntent.launchUrl(this, Uri.parse("${Constants.RemoteUrls.IMAGE_SEARCH}$name"))
     }
 
     override fun submitWord() {
