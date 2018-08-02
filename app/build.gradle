@@ -91,6 +91,7 @@ dependencies {
     implementation deps.android.support.recyclerView
     implementation deps.android.support.constraintLayout
     implementation deps.android.support.design
+    implementation deps.android.support.chromeCustomTabs
     implementation deps.materialDialogs.core
     implementation deps.materialAbout.core
     implementation deps.getbaseFAB.core

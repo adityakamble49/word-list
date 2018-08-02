@@ -74,6 +74,7 @@ buildscript {
                             'annotations'     : "com.android.support:support-annotations:${versions.supportLibrary}",
                             'vector'          : "com.android.support:support-vector-drawable:${versions.supportLibrary}",
                             'design'          : "com.android.support:design:${versions.supportLibrary}",
+                            'chromeCustomTabs': "com.android.support:customtabs:${versions.supportLibrary}",
                             'constraintLayout': "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
                     ],
                     'video'  : [
