@@ -40,9 +40,11 @@
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_word_type"
+                android:ellipsize="end"
                 android:enabled="false"
                 android:gravity="center"
                 android:hint="@string/pronunciation_hint"
@@ -51,6 +53,8 @@
                 android:paddingEnd="14dp"
                 android:paddingStart="14dp"
                 android:paddingTop="2dp"
+                app:layout_constraintEnd_toStartOf="@+id/word_text_to_speech"
+                app:layout_constraintHorizontal_bias="0.066"
                 app:layout_constraintStart_toEndOf="@+id/word_type"
                 app:layout_constraintTop_toBottomOf="@+id/word_name"
                 tools:text="ab-STAIN" />
@@ -62,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_word_type"
+                android:ellipsize="end"
                 android:enabled="false"
                 android:gravity="center"
                 android:hint="@string/word_type_hint"
@@ -90,11 +95,11 @@
 
             <ImageView
                 android:id="@+id/word_text_to_speech"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/word_pronunciation"
+                app:layout_constraintEnd_toStartOf="@+id/word_image_search"
                 app:layout_constraintTop_toBottomOf="@+id/word_name"
                 app:srcCompat="@drawable/ic_volume_up" />
 
@@ -229,6 +234,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/word_information"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/word_information_label" />
+
+            <ImageView
+                android:id="@+id/word_image_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/word_name"
+                app:srcCompat="@drawable/ic_image_search" />
 
         </android.support.constraint.ConstraintLayout>
 
