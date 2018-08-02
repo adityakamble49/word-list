@@ -33,6 +33,7 @@ public class Constants {
         public static final String GITHUB_AUTH_TOKEN = BuildConfig.GitHubApiKey;
         private static final String GITHUB_BASE = "https://api.github.com/";
         public static final String GITHUB_WORDLIST = GITHUB_BASE + "repos/adityakamble49/wordlist-marketplace/contents/wordlists";
+        public static final String IMAGE_SEARCH = "https://www.google.com/search?tbm=isch&q=";
     }
 
     public static class JSoupQueries {
