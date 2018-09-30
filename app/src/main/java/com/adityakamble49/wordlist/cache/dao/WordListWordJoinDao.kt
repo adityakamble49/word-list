@@ -1,8 +1,10 @@
 package com.adityakamble49.wordlist.cache.dao
 
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import com.adityakamble49.wordlist.cache.entities.Word
+import com.adityakamble49.wordlist.cache.entities.WordListWordJoin
 import io.reactivex.Flowable
 
 /**
@@ -13,6 +15,12 @@ import io.reactivex.Flowable
  */
 @Dao
 interface WordListWordJoinDao {
+
+    @Insert
+    fun insert(wordListWordJoin: WordListWordJoin)
+
+    @Insert
+    fun insertList(listOfWordListWordJoin: List<WordListWordJoin>)
 
     @Query("SELECT * FROM words INNER JOIN word_list_words_join ON words.id = word_list_words_join.wordId WHERE word_list_words_join.wordListId= :wordListId")
     fun getWordsInWordList(wordListId: Int): Flowable<List<Word>>
