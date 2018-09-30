@@ -33,6 +33,30 @@ class WordListDatabaseTest {
             .build()
 
     @Test
+    fun insertWordCompletes() {
+        val words = WordDataFactory.makeWords(100)
+        val testResult = database.wordDao().insertWords(words)
+        assertThat(testResult, not(hasItem(-1L)))
+    }
+
+    @Test
+    fun getWordReturnsData() {
+        val words = WordDataFactory.makeWords(100)
+        database.wordDao().insertWords(words)
+        val testObserver = database.wordDao().getWords().test()
+        testObserver.assertValue(words)
+    }
+
+    @Test
+    fun getWordByIdReturnsData() {
+        val words = WordDataFactory.makeWords(100)
+        val wordToFetch = words[45]
+        database.wordDao().insertWords(words)
+        val testObserver = database.wordDao().getWordById(wordToFetch.id).test()
+        testObserver.assertValue(wordToFetch)
+    }
+
+    @Test
     fun insertWordListCompletes() {
         val wordList = WordListDataFactory.makeWordList(1)
         val testResult = database.wordListDao().insert(wordList)
