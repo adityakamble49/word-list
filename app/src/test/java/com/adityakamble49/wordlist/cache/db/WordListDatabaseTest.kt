@@ -71,7 +71,7 @@ class WordListDatabaseTest {
     }
 
     @Test
-    fun getWordListCompletes() {
+    fun getWordListReturnsData() {
         val listOfWordList = WordListDataFactory.makeListOfWordList(10)
         database.wordListDao().insertList(listOfWordList)
         val testObserver = database.wordListDao().getWordList().test()
@@ -79,7 +79,16 @@ class WordListDatabaseTest {
     }
 
     @Test
-    fun insertWordsInWordList() {
+    fun getWordListByIdReturnsData() {
+        val listOfWordList = WordListDataFactory.makeListOfWordList(10)
+        val wordListToFetch = listOfWordList[5]
+        database.wordListDao().insertList(listOfWordList)
+        val testObserver = database.wordListDao().getWordListById(wordListToFetch.id).test()
+        testObserver.assertValue(wordListToFetch)
+    }
+
+    @Test
+    fun insertAndGetWordsInWordList() {
         val words = WordDataFactory.makeWords(10)
         val wordList = WordListDataFactory.makeWordList(1)
         val insertedWordIds = database.wordDao().insertWords(words)
