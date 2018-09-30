@@ -1,10 +1,18 @@
-package com.adityakamble49.wordlist.db.entities
+package com.adityakamble49.wordlist.cache.entities
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
-import com.adityakamble49.wordlist.db.Constants
+import android.arch.persistence.room.Index
+import com.adityakamble49.wordlist.cache.db.DBConstants
 
-@Entity(tableName = Constants.TABLE_WORD_LISTS_WORDS_JOIN,
+/**
+ * Word List Word Join
+ *
+ * @author Aditya Kamble
+ * @since 30/9/2018
+ */
+@Entity(tableName = DBConstants.TABLE_WORD_LISTS_WORDS_JOIN,
+        indices = [Index(value = ["wordId"])],
         primaryKeys = ["wordListId", "wordId"],
         foreignKeys = [
             (ForeignKey(entity = WordList::class,

@@ -14,7 +14,7 @@ android {
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.targetSdk
 
-        versionCode buildConfig.version.code
+        versionCode  buildConfig.version.code
         versionName buildConfig.version.name
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -84,7 +84,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation deps.kotlin.stdlib.jre
+    implementation deps.kotlin.stdlib.jdk
     implementation deps.android.support.appcompatV7
     implementation deps.android.support.preferenceV7
     implementation deps.android.support.preferenceV14
@@ -111,6 +111,7 @@ dependencies {
     implementation deps.android.arch.archRuntime
     implementation deps.android.arch.archExtensions
     implementation deps.android.arch.roomRuntime
+    implementation deps.android.arch.roomRx
     kapt deps.android.arch.archCompiler
     kapt deps.android.arch.roomCompiler
     implementation deps.google.oosLicenses.core
@@ -119,8 +120,8 @@ dependencies {
 
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
+    testImplementation deps.test.assertJ
+    testImplementation deps.test.archTesting
     testImplementation deps.test.robolectric
-    androidTestImplementation deps.test.mockitoAndroid
-    androidTestImplementation deps.test.supportRunner
-    androidTestImplementation deps.test.expressoCore
 }

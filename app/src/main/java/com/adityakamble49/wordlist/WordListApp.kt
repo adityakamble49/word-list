@@ -2,14 +2,17 @@ package com.adityakamble49.wordlist
 
 import android.app.Activity
 import android.app.Application
+import com.adityakamble49.wordlist.di.DaggerApplicationComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
+ * Word List App
+ *
  * @author Aditya Kamble
- * @since 4/4/2018
+ * @since 30/9/2018
  */
 class WordListApp : Application(), HasActivityInjector {
 
@@ -29,10 +32,10 @@ class WordListApp : Application(), HasActivityInjector {
     }
 
     private fun setupDagger() {
-        /*DaggerApplicationComponent.builder()
+        DaggerApplicationComponent.builder()
                 .application(this)
                 .build()
-                .inject(this)*/
+                .inject(this)
     }
 
     override fun activityInjector() = dispatchingAndroidInjector
