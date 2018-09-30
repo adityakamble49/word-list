@@ -10,13 +10,15 @@ import com.adityakamble49.wordlist.cache.entities.WordList
  */
 object WordListDataFactory {
 
-    fun makeWordList() = WordList(0, DataFactory.randomString(),
+    fun makeWordList(id: Int) = WordList(id, DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString())
 
     fun makeListOfWordList(count: Int): List<WordList> {
         val listOfWordList = mutableListOf<WordList>()
+        var counter = 1
         repeat(count) {
-            listOfWordList.add(makeWordList())
+            listOfWordList.add(makeWordList(counter))
+            counter++
         }
         return listOfWordList
     }

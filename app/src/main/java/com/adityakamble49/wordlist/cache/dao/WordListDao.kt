@@ -1,6 +1,5 @@
 package com.adityakamble49.wordlist.cache.dao
 
-import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import com.adityakamble49.wordlist.cache.entities.WordList
 import io.reactivex.Flowable
@@ -27,7 +26,7 @@ interface WordListDao {
     fun delete(wordList: WordList)
 
     @Query("SELECT * FROM word_lists")
-    fun getWordList(): LiveData<List<WordList>>
+    fun getWordList(): Flowable<List<WordList>>
 
     @Query("SELECT  * FROM word_lists WHERE id= :id")
     fun getWordListById(id: Int): Flowable<WordList>
