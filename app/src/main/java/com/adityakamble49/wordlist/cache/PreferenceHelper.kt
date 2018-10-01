@@ -19,10 +19,6 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
     companion object {
         private const val PREF_WORDLIST_PACKAGE_NAME = BuildConfig.APPLICATION_ID
         private const val PREF_WORDLIST_SETTINGS = "${BuildConfig.APPLICATION_ID}_preferences"
-        private const val PREF_KEY_CURRENT_LIST_ID = "current_list_type"
-        const val DEFAULT_CURRENT_LIST_ID = 1
-        private const val PREF_KEY_WORDS_IMPORTED = "words_imported"
-        const val DEFAULT_KEY_WORDS_IMPORTED = false
         private const val PREF_KEY_DICTATE_MODE_TYPE = "dictate_mode_type"
         val DEFAULT_DICTATE_MODE_TYPE = DictateModeType.WORD_COMPLETE_INFO.name.toLowerCase()
         private const val PREF_KEY_DICTATE_MODE_SPEED = "dictate_mode_speed"
@@ -32,26 +28,23 @@ class PreferenceHelper @Inject constructor(@ApplicationContext private val conte
     private val wordListPref: SharedPreferences
     private val wordListSettings: SharedPreferences
 
+    var dictateModeType: String
+        set(dictateModeType) = wordListSettings.edit().putString(PREF_KEY_DICTATE_MODE_TYPE,
+                dictateModeType).apply()
+        get() = wordListSettings.getString(PREF_KEY_DICTATE_MODE_TYPE, DEFAULT_DICTATE_MODE_TYPE)
+
+    var dictateModeSpeed: String
+        set(dictateModeSpeed) = wordListSettings.edit().putString(PREF_KEY_DICTATE_MODE_SPEED,
+                dictateModeSpeed).apply()
+        get() = wordListSettings.getString(PREF_KEY_DICTATE_MODE_SPEED, DEFAULT_DICTATE_MODE_SPEED)
+
     init {
         wordListPref = context.getSharedPreferences(PREF_WORDLIST_PACKAGE_NAME,
                 Context.MODE_PRIVATE)
         wordListSettings = context.getSharedPreferences(PREF_WORDLIST_SETTINGS,
                 Context.MODE_PRIVATE)
+
+        dictateModeType = DEFAULT_DICTATE_MODE_TYPE
+        dictateModeSpeed = DEFAULT_DICTATE_MODE_SPEED
     }
-
-    var currentLoadedListId: Int
-        get() = wordListPref.getInt(PREF_KEY_CURRENT_LIST_ID, DEFAULT_CURRENT_LIST_ID)
-        set(currentListType) = wordListPref.edit().putInt(PREF_KEY_CURRENT_LIST_ID,
-                currentListType).apply()
-
-    var areWordsImported: Boolean
-        get() = wordListPref.getBoolean(PREF_KEY_WORDS_IMPORTED, DEFAULT_KEY_WORDS_IMPORTED)
-        set(areWordsImported) = wordListPref.edit().putBoolean(PREF_KEY_WORDS_IMPORTED,
-                areWordsImported).apply()
-
-    var dictateModeType: String = DEFAULT_DICTATE_MODE_TYPE
-        get() = wordListSettings.getString(PREF_KEY_DICTATE_MODE_TYPE, DEFAULT_DICTATE_MODE_TYPE)
-
-    var dictateModeSpeed: String = DEFAULT_DICTATE_MODE_SPEED
-        get() = wordListSettings.getString(PREF_KEY_DICTATE_MODE_SPEED, DEFAULT_DICTATE_MODE_SPEED)
 }
