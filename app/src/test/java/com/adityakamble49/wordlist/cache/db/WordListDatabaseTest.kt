@@ -94,22 +94,42 @@ class WordListDatabaseTest {
     @Test
     fun insertWordListCompletes() {
         val wordList = WordListDataFactory.makeWordList(1)
-        val testResult = database.wordListDao().insert(wordList)
+        val testResult = wordListDao.insert(wordList)
         assertThat(testResult, not(-1L))
     }
 
     @Test
     fun insertListOfWordListCompletes() {
         val listOfWordList = WordListDataFactory.makeListOfWordList(10)
-        val testResult = database.wordListDao().insertList(listOfWordList)
+        val testResult = wordListDao.insertList(listOfWordList)
         assertThat(testResult, not(hasItem(-1L)))
+    }
+
+    @Test
+    fun updateWordListCompletes() {
+        val listOfWordList = WordListDataFactory.makeListOfWordList(10)
+        wordListDao.insertList(listOfWordList)
+        val wordListToUpdate = listOfWordList[5]
+        wordListToUpdate.name = DataFactory.randomString()
+        val testResult = wordListDao.update(wordListToUpdate)
+        assertThat(testResult, `is`(1))
+    }
+
+    @Test
+    fun deleteWordListCompletes() {
+        val listOfWordList = WordListDataFactory.makeListOfWordList(10)
+        wordListDao.insertList(listOfWordList)
+        val wordListToDelete = listOfWordList[5]
+        wordListToDelete.name = DataFactory.randomString()
+        val testResult = wordListDao.delete(wordListToDelete)
+        assertThat(testResult, `is`(1))
     }
 
     @Test
     fun getWordListReturnsData() {
         val listOfWordList = WordListDataFactory.makeListOfWordList(10)
-        database.wordListDao().insertList(listOfWordList)
-        val testObserver = database.wordListDao().getWordList().test()
+        wordListDao.insertList(listOfWordList)
+        val testObserver = wordListDao.getWordList().test()
         testObserver.assertValue(listOfWordList)
     }
 
@@ -117,8 +137,8 @@ class WordListDatabaseTest {
     fun getWordListByIdReturnsData() {
         val listOfWordList = WordListDataFactory.makeListOfWordList(10)
         val wordListToFetch = listOfWordList[5]
-        database.wordListDao().insertList(listOfWordList)
-        val testObserver = database.wordListDao().getWordListById(wordListToFetch.id).test()
+        wordListDao.insertList(listOfWordList)
+        val testObserver = wordListDao.getWordListById(wordListToFetch.id).test()
         testObserver.assertValue(wordListToFetch)
     }
 

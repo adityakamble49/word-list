@@ -20,10 +20,10 @@ interface WordListDao {
     fun insertList(listOfWordList: List<WordList>): List<Long>
 
     @Update
-    fun update(wordList: WordList)
+    fun update(wordList: WordList): Int
 
     @Delete
-    fun delete(wordList: WordList)
+    fun delete(wordList: WordList): Int
 
     @Query("SELECT * FROM word_lists")
     fun getWordList(): Flowable<List<WordList>>
