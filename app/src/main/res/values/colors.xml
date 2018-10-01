@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <color name="default_primary">#3598DB</color>
+    <color name="default_primary_dark">#2C85BF</color>
+    <color name="default_primary_light">#B1C0BE</color>
+    <color name="default_accent">#34495E</color>
+    <color name="default_primary_text">#212121</color>
+    <color name="default_opposite_text">#FFFFFF</color>
+    <color name="default_secondary_text">#727272</color>
+    <color name="default_text_icon">#FFFFFF</color>
+    <color name="default_divider">#B6B6B6</color>
+
+    <color name="bg_word_type_solid">#EEE</color>
+
+    <!--FAB Colors-->
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!--Word Info-->
+    <color name="word_info_bottom_sheet_bg">#166ea7</color>
+
+    <!--Search Fragment-->
+    <color name="add_word_alert">#2C85BF</color>
+
 </resources>
