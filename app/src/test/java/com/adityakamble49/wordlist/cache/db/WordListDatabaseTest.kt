@@ -143,20 +143,31 @@ class WordListDatabaseTest {
     }
 
     @Test
+    fun insertAndGetWordInWordList() {
+        val word = WordDataFactory.makeWord(1)
+        val wordList = WordListDataFactory.makeWordList(1)
+        val insertedWordId = wordDao.insertWord(word)
+        val insertedWordListId = wordListDao.insert(wordList)
+        val wordListWordJoin = WordListWordJoin(insertedWordListId.toInt(), insertedWordId.toInt())
+        wordListWordJoinDao.insert(wordListWordJoin)
+        val testObserver = wordListWordJoinDao.getWordsInWordList(insertedWordListId.toInt()).test()
+        testObserver.assertValue(listOf(word))
+    }
+
+    @Test
     fun insertAndGetWordsInWordList() {
         val words = WordDataFactory.makeWords(10)
         val wordList = WordListDataFactory.makeWordList(1)
-        val insertedWordIds = database.wordDao().insertWords(words)
-        val insertedWordListId = database.wordListDao().insert(wordList)
+        val insertedWordIds = wordDao.insertWords(words)
+        val insertedWordListId = wordListDao.insert(wordList)
         val listOfWordListWordJoin = mutableListOf<WordListWordJoin>()
         words.forEachIndexed { index, word ->
             listOfWordListWordJoin.add(WordListWordJoin(insertedWordListId.toInt(),
                     insertedWordIds[index].toInt()))
         }
-        database.wordListWordJoinDao().insertList(listOfWordListWordJoin)
+        wordListWordJoinDao.insertList(listOfWordListWordJoin)
 
-        val testObserver = database.wordListWordJoinDao()
-                .getWordsInWordList(insertedWordListId.toInt()).test()
+        val testObserver = wordListWordJoinDao.getWordsInWordList(insertedWordListId.toInt()).test()
         testObserver.assertValue(words)
     }
 }
