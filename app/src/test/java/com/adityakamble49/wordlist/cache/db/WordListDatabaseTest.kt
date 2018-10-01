@@ -170,4 +170,26 @@ class WordListDatabaseTest {
         val testObserver = wordListWordJoinDao.getWordsInWordList(insertedWordListId.toInt()).test()
         testObserver.assertValue(words)
     }
+
+    @Test
+    fun deleteWordFromWordList() {
+        val words = WordDataFactory.makeWords(10)
+        val wordList = WordListDataFactory.makeWordList(1)
+        val insertedWordIds = wordDao.insertWords(words)
+        val insertedWordListId = wordListDao.insert(wordList)
+        val listOfWordListWordJoin = mutableListOf<WordListWordJoin>()
+        words.forEachIndexed { index, word ->
+            listOfWordListWordJoin.add(WordListWordJoin(insertedWordListId.toInt(),
+                    insertedWordIds[index].toInt()))
+        }
+        wordListWordJoinDao.insertList(listOfWordListWordJoin)
+        val wordToDelete = words[5]
+        val deletedResult = wordListWordJoinDao.delete(
+                WordListWordJoin(insertedWordListId.toInt(), wordToDelete.id))
+        assertThat(deletedResult, `is`(1))
+
+        words.remove(wordToDelete)
+        val testObserver = wordListWordJoinDao.getWordsInWordList(insertedWordListId.toInt()).test()
+        testObserver.assertValue(words)
+    }
 }

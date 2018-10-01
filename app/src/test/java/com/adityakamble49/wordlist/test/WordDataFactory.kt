@@ -13,7 +13,7 @@ object WordDataFactory {
     fun makeWord(id: Int) = Word(id, DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString())
 
-    fun makeWords(count: Int): List<Word> {
+    fun makeWords(count: Int): MutableList<Word> {
         val words = mutableListOf<Word>()
         var counter = 1
         repeat(count) {
