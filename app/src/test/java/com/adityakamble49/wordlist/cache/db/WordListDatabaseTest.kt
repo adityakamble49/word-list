@@ -172,6 +172,40 @@ class WordListDatabaseTest {
     }
 
     @Test
+    fun insertWordsInMultipleWordList() {
+        val wordsForFirstWordList = WordDataFactory.makeWords(10)
+        val wordsForSecondWordList = wordsForFirstWordList.toMutableList()
+        wordsForSecondWordList.removeAt(0)
+        wordsForSecondWordList.removeAt(1)
+        wordsForSecondWordList.removeAt(2)
+        wordDao.insertWords(wordsForFirstWordList)
+
+        val listOfWordList = WordListDataFactory.makeListOfWordList(2)
+        val insertedWordListIds = wordListDao.insertList(listOfWordList)
+
+        val listOfWordListWordJoinFirst = mutableListOf<WordListWordJoin>()
+        val listOfWordListWordJoinSecond = mutableListOf<WordListWordJoin>()
+        wordsForFirstWordList.forEach {
+            listOfWordListWordJoinFirst.add(
+                    WordListWordJoin(insertedWordListIds[0].toInt(), it.id))
+        }
+        wordsForSecondWordList.forEach {
+            listOfWordListWordJoinSecond.add(
+                    WordListWordJoin(insertedWordListIds[1].toInt(), it.id))
+        }
+        wordListWordJoinDao.insertList(listOfWordListWordJoinFirst)
+        wordListWordJoinDao.insertList(listOfWordListWordJoinSecond)
+
+        val testObserverFirst = wordListWordJoinDao.getWordsInWordList(
+                insertedWordListIds[0].toInt()).test()
+        testObserverFirst.assertValue(wordsForFirstWordList)
+
+        val testObserverSecond = wordListWordJoinDao.getWordsInWordList(
+                insertedWordListIds[1].toInt()).test()
+        testObserverSecond.assertValue(wordsForSecondWordList)
+    }
+
+    @Test
     fun deleteWordFromWordList() {
         val words = WordDataFactory.makeWords(10)
         val wordList = WordListDataFactory.makeWordList(1)
