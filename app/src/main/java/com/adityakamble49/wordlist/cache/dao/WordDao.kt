@@ -20,10 +20,10 @@ interface WordDao {
     fun insertWords(wordList: List<Word>): List<Long>
 
     @Update
-    fun updateWord(word: Word)
+    fun updateWord(word: Word): Int
 
     @Delete
-    fun deleteWord(word: Word)
+    fun deleteWord(word: Word): Int
 
     @Query("SELECT * FROM words")
     fun getWords(): Flowable<List<Word>>

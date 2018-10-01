@@ -3,8 +3,10 @@ package com.adityakamble49.wordlist.cache.db
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.persistence.room.Room
 import com.adityakamble49.wordlist.cache.entities.WordListWordJoin
+import com.adityakamble49.wordlist.test.DataFactory
 import com.adityakamble49.wordlist.test.WordDataFactory
 import com.adityakamble49.wordlist.test.WordListDataFactory
+import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.hasItem
 import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertThat
@@ -32,18 +34,51 @@ class WordListDatabaseTest {
             .allowMainThreadQueries()
             .build()
 
+    private val wordDao = database.wordDao()
+    private val wordListDao = database.wordListDao()
+    private val wordListWordJoinDao = database.wordListWordJoinDao()
+
     @Test
     fun insertWordCompletes() {
         val words = WordDataFactory.makeWords(100)
-        val testResult = database.wordDao().insertWords(words)
+        val testResult = wordDao.insertWords(words)
         assertThat(testResult, not(hasItem(-1L)))
+    }
+
+    @Test
+    fun updateWordCompletes() {
+        val words = WordDataFactory.makeWords(100)
+        val wordToUpdate = words[20]
+        wordToUpdate.information = DataFactory.randomString()
+        wordToUpdate.mnemonics = DataFactory.randomString()
+        wordDao.insertWords(words)
+        val testResult = wordDao.updateWord(wordToUpdate)
+        assertThat(testResult, `is`(1))
+    }
+
+    @Test
+    fun deleteWordCompletes() {
+        val words = WordDataFactory.makeWords(100)
+        val wordToDelete = words[20]
+        wordDao.insertWords(words)
+        val testResult = wordDao.deleteWord(wordToDelete)
+        assertThat(testResult, `is`(1))
+    }
+
+    @Test
+    fun deleteNonExistingWordCompletes() {
+        val words = WordDataFactory.makeWords(100)
+        val wordToDelete = WordDataFactory.makeWord(125)
+        wordDao.insertWords(words)
+        val testResult = wordDao.deleteWord(wordToDelete)
+        assertThat(testResult, `is`(0))
     }
 
     @Test
     fun getWordReturnsData() {
         val words = WordDataFactory.makeWords(100)
-        database.wordDao().insertWords(words)
-        val testObserver = database.wordDao().getWords().test()
+        wordDao.insertWords(words)
+        val testObserver = wordDao.getWords().test()
         testObserver.assertValue(words)
     }
 
@@ -51,8 +86,8 @@ class WordListDatabaseTest {
     fun getWordByIdReturnsData() {
         val words = WordDataFactory.makeWords(100)
         val wordToFetch = words[45]
-        database.wordDao().insertWords(words)
-        val testObserver = database.wordDao().getWordById(wordToFetch.id).test()
+        wordDao.insertWords(words)
+        val testObserver = wordDao.getWordById(wordToFetch.id).test()
         testObserver.assertValue(wordToFetch)
     }
 
