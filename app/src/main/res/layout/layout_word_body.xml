@@ -1,0 +1,57 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/tv_word_info_label"
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/information"
+            android:textColor="@color/default_primary_text"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/tv_word_info_value"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_word_info_label"
+            android:layout_marginTop="8dp"
+            android:text="@string/word_info_value_default"
+            android:textColor="@color/default_secondary_text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_word_mnemonics_label"
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_word_info_value"
+            android:text="@string/mnemonics"
+            android:textColor="@color/default_primary_text"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/tv_word_mnemonics_value"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_word_mnemonics_label"
+            android:layout_marginTop="8dp"
+            android:text="@string/word_info_value_default"
+            android:textColor="@color/default_secondary_text"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

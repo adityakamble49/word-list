@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@drawable/bg_spectrum_gradient"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    app:layout_collapseMode="parallax"
+    app:layout_collapseParallaxMultiplier="0.7">
+
+    <TextView
+        android:id="@+id/tv_word_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_word_index"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp"
+        android:text="0/0"
+        android:textColor="@color/default_opposite_text" />
+
+    <TextView
+        android:id="@+id/tv_word_name"
+        style="@style/TextAppearance.AppCompat.Display1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_word_pronunciation"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/word_name_default"
+        android:textColor="@color/default_opposite_text"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/tv_word_pronunciation"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:text="@string/word_pronunciation_default"
+        android:textColor="@color/default_opposite_text"
+        android:textSize="22sp" />
+
+    <ImageView
+        android:id="@+id/iv_tts"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@id/tv_word_pronunciation"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/tv_word_pronunciation"
+        app:srcCompat="@drawable/ic_volume_up" />
+
+</RelativeLayout>

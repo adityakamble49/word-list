@@ -15,5 +15,14 @@
     <string name="tap_to_show">Tap to Show</string>
     <string name="label_edit">Edit</string>
     <string name="label_done">Done</string>
+    <string name="information">Information</string>
+    <string name="word_pronunciation_default">\u02c8a-l\u0259-\u02cckw\u00e4t, -kw\u0259t</string>
+    <string name="word_info_value_default">
+        type: noun\ndefinition: a portion of a larger whole, especially a sample taken for chemical
+        analysis or other treatment.\nexample: an aliquot was examined daily for the appearance of
+        cholesterol monohydrate crystals\n\n
+    </string>
+    <string name="mnemonics">Mnemonics</string>
+    <string name="word_name_default">aliquots</string>
 
 </resources>

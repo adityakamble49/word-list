@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.di.module
 
 import com.adityakamble49.wordlist.ui.main.MainActivity
+import com.adityakamble49.wordlist.ui.word.WordActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,4 +17,7 @@ abstract class UIModule {
 
     @ContributesAndroidInjector
     abstract fun contributesMainActivity(): MainActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributesWordActivity(): WordActivity
 }
