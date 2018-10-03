@@ -28,6 +28,9 @@ interface WordDao {
     @Query("SELECT * FROM words")
     fun getWords(): Flowable<List<Word>>
 
+    @Query("SELECT * FROM words")
+    fun getWordsDirect(): List<Word>
+
     @Query("SELECT * FROM words WHERE id= :id")
     fun getWordById(id: Int): Flowable<Word>
 }

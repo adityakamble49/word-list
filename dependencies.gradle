@@ -36,7 +36,7 @@ buildscript {
             'googleServicesVersion': '16.0.0',
 
             // Debug
-            'debugDb'              : '1.0.1',
+            'debugDb'              : '1.0.4',
 
             // Testing
             'junit'                : '4.12',

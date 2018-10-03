@@ -11,9 +11,13 @@ import java.util.*
  */
 object DataFactory {
 
+    private val random = Random()
+
     fun randomString() = UUID.randomUUID().toString()
 
     fun randomInteger() = Random().nextInt()
 
     fun randomLong() = Random().nextLong()
+
+    fun makeRandom(bound: Int) = random.nextInt(bound)
 }

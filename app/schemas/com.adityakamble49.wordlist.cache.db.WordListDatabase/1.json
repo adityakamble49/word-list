@@ -6,7 +6,7 @@
     "entities": [
       {
         "tableName": "words",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `information` TEXT NOT NULL, `mnemonics` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `mnemonics` TEXT NOT NULL, `information` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,14 +21,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "information",
-            "columnName": "information",
+            "fieldPath": "mnemonics",
+            "columnName": "mnemonics",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "mnemonics",
-            "columnName": "mnemonics",
+            "fieldPath": "information",
+            "columnName": "information",
             "affinity": "TEXT",
             "notNull": true
           }

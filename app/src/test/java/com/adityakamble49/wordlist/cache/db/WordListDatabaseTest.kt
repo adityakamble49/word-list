@@ -49,7 +49,7 @@ class WordListDatabaseTest {
     fun updateWordCompletes() {
         val words = WordDataFactory.makeWords(100)
         val wordToUpdate = words[20]
-        wordToUpdate.information = DataFactory.randomString()
+        wordToUpdate.information = WordDataFactory.makeWordInformation()
         wordToUpdate.mnemonics = DataFactory.randomString()
         wordDao.insertWords(words)
         val testResult = wordDao.updateWord(wordToUpdate)

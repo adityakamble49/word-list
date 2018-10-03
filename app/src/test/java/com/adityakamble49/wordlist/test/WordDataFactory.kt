@@ -1,6 +1,8 @@
 package com.adityakamble49.wordlist.test
 
 import com.adityakamble49.wordlist.cache.entities.Word
+import com.adityakamble49.wordlist.cache.entities.WordInformation
+import java.util.*
 
 /**
  * Word Data Factory
@@ -10,8 +12,18 @@ import com.adityakamble49.wordlist.cache.entities.Word
  */
 object WordDataFactory {
 
-    fun makeWord(id: Int) = Word(id, DataFactory.randomString(),
-            DataFactory.randomString(), DataFactory.randomString())
+    fun makeWord(id: Int) = Word(id, DataFactory.randomString(), DataFactory.randomString(),
+            makeWordInformation())
+
+    fun makeWordInformation(count: Int = DataFactory.makeRandom(4)): ArrayList<WordInformation> {
+        val wordInformationList = ArrayList<WordInformation>()
+        repeat(count) {
+            wordInformationList.add(
+                    WordInformation(DataFactory.randomString(), DataFactory.randomString(),
+                            DataFactory.randomString()))
+        }
+        return wordInformationList
+    }
 
     fun makeWords(count: Int): MutableList<Word> {
         val words = mutableListOf<Word>()
