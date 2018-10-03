@@ -26,5 +26,6 @@
     <string name="word_name_default">aliquots</string>
     <string name="word_of_the_day">Word of The Day!</string>
     <string name="word_list">Word Lists</string>
+    <string name="search_word">Search Word</string>
 
 </resources>

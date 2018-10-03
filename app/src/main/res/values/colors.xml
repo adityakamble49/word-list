@@ -10,6 +10,8 @@
     <color name="default_secondary_text">#727272</color>
     <color name="default_text_icon">#FFFFFF</color>
     <color name="default_divider">#B6B6B6</color>
+    <color name="default_background">#FAFAFA</color>
+
 
     <color name="bg_word_type_solid">#EEE</color>
 
