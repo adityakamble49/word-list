@@ -3,9 +3,11 @@ package com.adityakamble49.wordlist.ui.main
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.view.ViewCompat
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 /**

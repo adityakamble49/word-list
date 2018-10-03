@@ -9,92 +9,75 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
-        <android.support.v7.widget.CardView
+        <ImageButton
+            android:id="@+id/ib_add_word"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_dbaction_add"
+            android:elevation="6dp"
+            app:srcCompat="@drawable/ic_add" />
+
+        <Space
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true">
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/iv_add_word"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_dashboard_action"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_add" />
+        <ImageButton
+            android:id="@+id/ib_related_words"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_dbaction_related"
+            android:elevation="6dp"
+            app:srcCompat="@drawable/ic_related_words" />
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <Space
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true">
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/iv_related_words"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_dashboard_action"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_related_words" />
+        <ImageButton
+            android:id="@+id/ib_notifications"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_dbaction_notification"
+            android:elevation="6dp"
+            app:srcCompat="@drawable/ic_notifications" />
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <Space
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true">
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/iv_notifications"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_dashboard_action"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_notifications" />
+        <ImageButton
+            android:id="@+id/ib_practice"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_dbaction_practice"
+            android:elevation="6dp"
+            app:srcCompat="@drawable/ic_practice" />
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <Space
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true">
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/iv_practice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_dashboard_action"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_practice" />
-
-        </android.support.v7.widget.CardView>
+        <ImageButton
+            android:id="@+id/ib_search"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_dbaction_search"
+            android:elevation="6dp"
+            app:srcCompat="@drawable/ic_search" />
 
     </LinearLayout>
 
@@ -102,17 +85,18 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/default_primary_text"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_dbcard_wod"
             android:paddingStart="16dp"
             android:paddingTop="24dp"
             android:paddingEnd="16dp"
@@ -124,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/word_of_the_day"
-                android:textColor="@color/default_secondary_text" />
+                android:textColor="@color/default_opposite_text" />
 
             <TextView
                 android:id="@+id/tv_wod_word"

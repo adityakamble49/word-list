@@ -17,6 +17,12 @@
     <color name="black_semi_transparent">#B2000000</color>
     <color name="white">#FFFFFF</color>
 
+    <!--Dashboard-->
+    <color name="dba_blue">#1136FC</color>
+    <color name="dba_green">#A3BD00</color>
+    <color name="dba_red">#B60000</color>
+    <color name="dba_black">#020F0E</color>
+
     <!--Word Info-->
     <color name="word_info_bottom_sheet_bg">#166ea7</color>
 
