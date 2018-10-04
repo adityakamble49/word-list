@@ -4,13 +4,10 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.ViewCompat
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
-import com.adityakamble49.wordlist.ui.word.WordActivity
-import com.adityakamble49.wordlist.ui.wordlist.CreateWordListActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
 import javax.inject.Inject
 
 /**
@@ -32,6 +29,6 @@ class MainActivity : BaseInjectableActivity() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(
                 MainActivityViewModel::class.java)
 
-        startActivity(Intent(this, CreateWordListActivity::class.java))
+        startActivity(Intent(this, RelatedWordsActivity::class.java))
     }
 }
