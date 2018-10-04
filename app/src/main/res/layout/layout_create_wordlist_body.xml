@@ -1,0 +1,37 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/tv_create_word_list_info_label"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/features_of_word_list"
+            android:textColor="@color/default_primary_text"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_create_word_list_info_value"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_create_word_list_info_label"
+            android:layout_marginTop="16dp"
+            android:lineSpacingExtra="5dp"
+            android:text="@string/default_dummy_text"
+            android:textColor="@color/default_secondary_text"
+            android:textSize="17sp" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
