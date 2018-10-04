@@ -3,9 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="280dp"
-    android:background="@color/default_primary"
-    android:paddingStart="48dp"
-    android:paddingEnd="16dp">
+    android:background="@color/default_primary">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="4dp"
+        app:srcCompat="@drawable/ic_arrow_back" />
 
     <TextView
         android:id="@+id/tv_create_word_list_header_info"
@@ -13,6 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:text="@string/create_word_list_header_info"
         android:textColor="#EEE" />
@@ -22,6 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/tv_create_word_list_header_info"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp">
 
         <EditText
