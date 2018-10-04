@@ -1,12 +1,14 @@
 package com.adityakamble49.wordlist.ui.main
 
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.common.ItemOffsetDecoration
+import com.adityakamble49.wordlist.ui.wordlist.CreateWordListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -33,6 +35,9 @@ class MainActivity : BaseInjectableActivity() {
     private fun bindView() {
         wordListAdapter = WordListAdapter()
         wordListAdapter.listOfWordList = getWordList()
+        wordListAdapter.addWordListAction = {
+            startActivity(Intent(this, CreateWordListActivity::class.java))
+        }
         val gridLayoutManager = GridLayoutManager(this, 2)
         val itemOffsetDecoration = ItemOffsetDecoration(32)
         rv_word_list.adapter = wordListAdapter

@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.item_word_list.view.*
 class WordListAdapter : RecyclerView.Adapter<WordListAdapter.ViewHolder>() {
 
     var listOfWordList = mutableListOf<WordList>()
+    var addWordListAction: () -> Unit = {}
 
     init {
         listOfWordList.add(WordList(0, "", "", ""))
@@ -29,8 +30,11 @@ class WordListAdapter : RecyclerView.Adapter<WordListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_ADD_WORDLIST -> ViewHolder(
-                    parent.inflate(R.layout.item_word_list_add) as View)
+            VIEW_TYPE_ADD_WORDLIST -> {
+                val view = parent.inflate(R.layout.item_word_list_add) as View
+                view.setOnClickListener { addWordListAction() }
+                return ViewHolder(view)
+            }
             VIEW_TYPE_WORDLIST -> ViewHolder(parent.inflate(R.layout.item_word_list) as View)
             else -> ViewHolder(parent.inflate(R.layout.item_word_list) as View)
         }
