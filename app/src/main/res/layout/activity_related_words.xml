@@ -15,7 +15,7 @@
         android:background="@color/default_primary">
 
         <EditText
-            android:id="@+id/toolbar"
+            android:id="@+id/et_search_bar"
             style="@style/EditTextSearchView" />
 
         <android.support.design.widget.TabLayout
