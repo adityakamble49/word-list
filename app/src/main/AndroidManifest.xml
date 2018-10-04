@@ -17,7 +17,6 @@
             android:theme="@style/AppTheme.NoActionBar.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,15 +24,30 @@
         <activity
             android:name=".ui.word.WordActivity"
             android:label="@string/word"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name=".ui.word.WordActivity" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ui.wordlist.CreateWordListActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name=".ui.wordlist.CreateWordListActivity" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ui.related.RelatedWordsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name=".ui.related.RelatedWordsActivity" />
+            </intent-filter>
+        </activity>
 
     </application>
 
