@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_wordlist_item"
+    android:minHeight="130dp"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_word_list_name"
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/default_word_list_name_dummy"
+        android:textSize="20sp" />
+
+</RelativeLayout>
