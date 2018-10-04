@@ -4,10 +4,12 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.common.ItemOffsetDecoration
+import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
 import com.adityakamble49.wordlist.ui.wordlist.CreateWordListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -18,7 +20,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 30/9/2018
  */
-class MainActivity : BaseInjectableActivity() {
+class MainActivity : BaseInjectableActivity(), View.OnClickListener {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var viewModel: MainActivityViewModel
@@ -43,6 +45,14 @@ class MainActivity : BaseInjectableActivity() {
         rv_word_list.adapter = wordListAdapter
         rv_word_list.layoutManager = gridLayoutManager
         rv_word_list.addItemDecoration(itemOffsetDecoration)
+
+        ib_related_words.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.ib_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
+        }
     }
 
     private fun getWordList(): MutableList<WordList> {
