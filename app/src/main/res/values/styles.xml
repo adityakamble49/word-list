@@ -32,7 +32,7 @@
         <item name="colorButtonNormal">@color/word_info_bottom_sheet_bg</item>
     </style>
 
-    <style name="EditTextSearchView.Base">
+    <style name="EditTextSearchViewBase">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:drawableStart">@drawable/ic_search_dark</item>
@@ -51,6 +51,6 @@
         <item name="android:textColorHint">@color/default_primary_text_hint</item>
     </style>
 
-    <style name="EditTextSearchView" parent="EditTextSearchView.Base" />
+    <style name="EditTextSearchView" parent="EditTextSearchViewBase" />
 
 </resources>

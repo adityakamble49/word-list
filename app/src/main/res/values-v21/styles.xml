@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="EditTextSearchView" parent="EditTextSearchView.Base">
+    <style name="EditTextSearchView" parent="EditTextSearchViewBase">
         <item name="android:elevation">3dp</item>
     </style>
 
