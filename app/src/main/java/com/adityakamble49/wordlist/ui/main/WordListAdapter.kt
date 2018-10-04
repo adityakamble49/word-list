@@ -7,6 +7,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.utils.inflate
 import kotlinx.android.synthetic.main.item_word_list.view.*
+import timber.log.Timber
 
 /**
  * WordList Adapter
@@ -63,6 +64,9 @@ class WordListAdapter : RecyclerView.Adapter<WordListAdapter.ViewHolder>() {
         fun bind(position: Int, item: WordList) {
             with(itemView) {
                 tv_word_list_name.text = item.name
+            }
+            itemView.setOnClickListener {
+                Timber.i("$it clicked")
             }
         }
     }
