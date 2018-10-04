@@ -19,16 +19,21 @@
             style="@style/EditTextSearchView" />
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/v_tl_related_words_category"
+            android:id="@+id/tl_related_words_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:elevation="6dp"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="fixed" />
+            app:tabMode="scrollable" />
 
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_related_words_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>
