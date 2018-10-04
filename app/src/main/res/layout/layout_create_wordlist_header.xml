@@ -43,6 +43,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/word_list_name"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/default_opposite_text" />
 
     </android.support.design.widget.TextInputLayout>
