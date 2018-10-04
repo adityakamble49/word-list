@@ -21,147 +21,153 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/ib_add_word"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/ib_add_word"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_dbaction_add"
+                    android:elevation="6dp"
+                    app:srcCompat="@drawable/ic_add" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/ib_related_words"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_dbaction_related"
+                    android:elevation="6dp"
+                    app:srcCompat="@drawable/ic_related_words" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/ib_notifications"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_dbaction_notification"
+                    android:elevation="6dp"
+                    app:srcCompat="@drawable/ic_notifications" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/ib_practice"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_dbaction_practice"
+                    android:elevation="6dp"
+                    app:srcCompat="@drawable/ic_practice" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/ib_search"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_dbaction_search"
+                    android:elevation="6dp"
+                    app:srcCompat="@drawable/ic_search" />
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/bg_dbaction_add"
-                android:elevation="6dp"
-                app:srcCompat="@drawable/ic_add" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/ib_related_words"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_dbaction_related"
-                android:elevation="6dp"
-                app:srcCompat="@drawable/ic_related_words" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/ib_notifications"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_dbaction_notification"
-                android:elevation="6dp"
-                app:srcCompat="@drawable/ic_notifications" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/ib_practice"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_dbaction_practice"
-                android:elevation="6dp"
-                app:srcCompat="@drawable/ic_practice" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/ib_search"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/bg_dbaction_search"
-                android:elevation="6dp"
-                app:srcCompat="@drawable/ic_search" />
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_dbcard_wod"
+                    android:paddingStart="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="24dp">
+
+                    <TextView
+                        android:id="@+id/tv_wod_heading"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/word_of_the_day"
+                        android:textColor="@color/default_opposite_text" />
+
+                    <TextView
+                        android:id="@+id/tv_wod_word"
+                        style="@style/Base.TextAppearance.AppCompat.Display1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_wod_heading"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/word_name_default"
+                        android:textColor="@color/default_opposite_text" />
+
+                    <TextView
+                        android:id="@+id/tv_wod_pronunciation"
+                        style="@style/Base.TextAppearance.AppCompat.Subhead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_wod_word"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/word_pronunciation_default"
+                        android:textColor="@color/default_opposite_text" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_word_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:padding="8dp" />
 
         </LinearLayout>
 
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="8dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_dbcard_wod"
-                android:paddingStart="16dp"
-                android:paddingTop="24dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="24dp">
-
-                <TextView
-                    android:id="@+id/tv_wod_heading"
-                    style="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/word_of_the_day"
-                    android:textColor="@color/default_opposite_text" />
-
-                <TextView
-                    android:id="@+id/tv_wod_word"
-                    style="@style/Base.TextAppearance.AppCompat.Display1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_wod_heading"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/word_name_default"
-                    android:textColor="@color/default_opposite_text" />
-
-                <TextView
-                    android:id="@+id/tv_wod_pronunciation"
-                    style="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_wod_word"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/word_pronunciation_default"
-                    android:textColor="@color/default_opposite_text" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_word_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:padding="8dp"/>
-
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

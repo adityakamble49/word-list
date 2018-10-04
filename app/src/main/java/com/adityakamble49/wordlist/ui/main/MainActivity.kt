@@ -45,6 +45,7 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
         rv_word_list.adapter = wordListAdapter
         rv_word_list.layoutManager = gridLayoutManager
         rv_word_list.addItemDecoration(itemOffsetDecoration)
+        rv_word_list.isNestedScrollingEnabled = false
 
         ib_related_words.setOnClickListener(this)
     }
