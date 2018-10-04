@@ -8,6 +8,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
+import com.adityakamble49.wordlist.ui.wordlist.CreateWordListActivity
 import javax.inject.Inject
 
 /**
@@ -28,7 +29,5 @@ class MainActivity : BaseInjectableActivity() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(
                 MainActivityViewModel::class.java)
-
-        startActivity(Intent(this, RelatedWordsActivity::class.java))
     }
 }
