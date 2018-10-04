@@ -30,5 +30,6 @@
 
     <!--Search Fragment-->
     <color name="add_word_alert">#2C85BF</color>
+    <color name="default_primary_text_hint">#888</color>
 
 </resources>

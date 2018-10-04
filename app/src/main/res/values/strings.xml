@@ -31,5 +31,6 @@
     <string name="word_list_name">Word List Name</string>
     <string name="default_dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum varius commodo nulla, non convallis lectus. Donec molestie risus mi, nec dignissim eros malesuada vel. Nunc ac nisl eget ex feugiat tempor.</string>
     <string name="features_of_word_list">Features of Word List</string>
+    <string name="search">Search</string>
 
 </resources>

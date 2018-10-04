@@ -12,44 +12,11 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/default_background">
+        android:background="@color/default_primary">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:contentInsetEnd="0dp"
-            app:contentInsetLeft="0dp"
-            app:contentInsetRight="0dp"
-            app:contentInsetStart="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <EditText
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/bg_searchbar"
-                android:drawableStart="@drawable/ic_search_dark"
-                android:drawablePadding="4dp"
-                android:elevation="3dp"
-                android:hint="@string/search_word"
-                android:lines="1"
-                android:maxLines="1"
-                android:paddingStart="16dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="4dp"
-                android:singleLine="true"
-                android:textColor="@color/default_primary_text"
-                android:textColorHint="#888" />
-
-        </android.support.v7.widget.Toolbar>
+        <EditText
+            android:id="@+id/toolbar"
+            style="@style/EditTextSearchView" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/v_tl_related_words_category"
