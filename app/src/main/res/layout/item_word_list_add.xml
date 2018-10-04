@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_wordlist_add_item"
+    android:minHeight="160dp"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/tv_word_list_add"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/ic_add_dark" />
+
+</RelativeLayout>

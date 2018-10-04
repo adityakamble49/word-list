@@ -34,7 +34,7 @@ class MainActivity : BaseInjectableActivity() {
         wordListAdapter = WordListAdapter()
         wordListAdapter.listOfWordList = getWordList()
         val gridLayoutManager = GridLayoutManager(this, 2)
-        val itemOffsetDecoration = ItemOffsetDecoration(16)
+        val itemOffsetDecoration = ItemOffsetDecoration(32)
         rv_word_list.adapter = wordListAdapter
         rv_word_list.layoutManager = gridLayoutManager
         rv_word_list.addItemDecoration(itemOffsetDecoration)
@@ -44,8 +44,8 @@ class MainActivity : BaseInjectableActivity() {
         val list = mutableListOf<WordList>()
         list.add(WordList(1, "", "", "Biology Words"))
         list.add(WordList(2, "", "", "Very Alternatives"))
-        list.add(WordList(3, "", "", "GRE Essentials"))
-        list.add(WordList(4, "", "", "GRE Advanced"))
+        list.add(WordList(3, "", "", "Words Essentials"))
+        list.add(WordList(4, "", "", "Words Advanced"))
         list.add(WordList(5, "", "", "Common 1000"))
         return list
     }
