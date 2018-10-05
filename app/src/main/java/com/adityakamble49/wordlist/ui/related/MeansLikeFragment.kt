@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.ui.related
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.StaggeredGridLayoutManager
@@ -10,6 +11,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.entities.Word
 import kotlinx.android.synthetic.main.fragment_means_like.view.*
 import java.util.*
+
 
 /**
  * Means Like Fragment
@@ -44,7 +46,7 @@ class MeansLikeFragment : Fragment() {
         with(view) {
             relatedWordsAdapter = RelatedWordsAdapter()
             relatedWordsAdapter.listOfWord = getWords(100)
-            val staggeredGridLayoutManager = StaggeredGridLayoutManager(8,
+            val staggeredGridLayoutManager = StaggeredGridLayoutManager(getSpanCount(90),
                     StaggeredGridLayoutManager.HORIZONTAL)
             rv_means_like_words.adapter = relatedWordsAdapter
             rv_means_like_words.layoutManager = staggeredGridLayoutManager
@@ -67,5 +69,11 @@ class MeansLikeFragment : Fragment() {
             sb.append(input[random.nextInt(26)])
         }
         return sb.toString()
+    }
+
+    private fun getSpanCount(itemHeight: Int): Int {
+        val displayMetrics = (context as Context).resources.displayMetrics
+        val dpHeight = displayMetrics.heightPixels / displayMetrics.density
+        return (dpHeight / itemHeight).toInt()
     }
 }
