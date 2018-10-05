@@ -105,59 +105,12 @@
 
             </LinearLayout>
 
-
-            <android.support.v7.widget.CardView
+            <include
+                layout="@layout/layout_card_word_game"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="8dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_dbcard_wod"
-                    android:paddingStart="16dp"
-                    android:paddingTop="24dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="24dp">
-
-                    <TextView
-                        android:id="@+id/tv_wod_heading"
-                        style="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/word_of_the_day"
-                        android:textColor="@color/default_opposite_text" />
-
-                    <TextView
-                        android:id="@+id/tv_wod_word"
-                        style="@style/Base.TextAppearance.AppCompat.Display1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_wod_heading"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/word_name_default"
-                        android:textColor="@color/default_opposite_text" />
-
-                    <TextView
-                        android:id="@+id/tv_wod_pronunciation"
-                        style="@style/Base.TextAppearance.AppCompat.Subhead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_wod_word"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/word_pronunciation_default"
-                        android:textColor="@color/default_opposite_text" />
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
+                android:layout_marginEnd="16dp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_word_list"
