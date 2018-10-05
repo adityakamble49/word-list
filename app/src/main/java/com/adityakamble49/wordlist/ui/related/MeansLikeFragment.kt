@@ -46,7 +46,7 @@ class MeansLikeFragment : Fragment() {
         with(view) {
             relatedWordsAdapter = RelatedWordsAdapter()
             relatedWordsAdapter.listOfWord = getWords(100)
-            val staggeredGridLayoutManager = StaggeredGridLayoutManager(getSpanCount(90),
+            val staggeredGridLayoutManager = StaggeredGridLayoutManager(getSpanCount(85),
                     StaggeredGridLayoutManager.HORIZONTAL)
             rv_means_like_words.adapter = relatedWordsAdapter
             rv_means_like_words.layoutManager = staggeredGridLayoutManager
