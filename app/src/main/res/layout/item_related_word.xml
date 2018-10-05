@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@drawable/bg_related_word">
+
+    <TextView
+        android:id="@+id/tv_related_word"
+        style="@style/Base.TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24sp"
+        android:layout_marginBottom="12dp"
+        android:text="Lorem Ipsum"
+        android:textColor="@color/default_opposite_text"
+        android:textSize="20sp" />
+
+</LinearLayout>
