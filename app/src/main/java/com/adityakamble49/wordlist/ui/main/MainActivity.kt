@@ -3,6 +3,9 @@ package com.adityakamble49.wordlist.ui.main
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.adityakamble49.wordlist.R
@@ -11,6 +14,7 @@ import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.common.ItemOffsetDecoration
 import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
 import com.adityakamble49.wordlist.ui.wordlist.CreateWordListActivity
+import com.adityakamble49.wordlist.utils.dpToPx
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -35,6 +39,11 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
     }
 
     private fun bindView() {
+
+        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        vp_db_cards.adapter = viewPagerAdapter
+        vp_db_cards.pageMargin = dpToPx(8)
+
         wordListAdapter = WordListAdapter()
         wordListAdapter.listOfWordList = getWordList()
         wordListAdapter.addWordListAction = {
@@ -64,5 +73,23 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
         list.add(WordList(4, "", "", "Words Advanced"))
         list.add(WordList(5, "", "", "Common 1000"))
         return list
+    }
+
+    private inner class ViewPagerAdapter(fragmentManager: FragmentManager) :
+            FragmentPagerAdapter(fragmentManager) {
+
+        override fun getItem(position: Int): Fragment {
+            return when (position) {
+                0 -> WordOfDayFragment.newInstance()
+                1 -> WordGameFragment.newInstance()
+                2 -> WordOfDayFragment.newInstance()
+                3 -> WordGameFragment.newInstance()
+                else -> WordOfDayFragment.newInstance()
+            }
+        }
+
+        override fun getCount(): Int {
+            return 4
+        }
     }
 }

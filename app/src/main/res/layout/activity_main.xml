@@ -105,12 +105,13 @@
 
             </LinearLayout>
 
-            <include
-                layout="@layout/layout_card_word_game"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_db_cards"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp" />
+                android:layout_height="190dp"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_word_list"

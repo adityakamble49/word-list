@@ -1,9 +1,12 @@
 package com.adityakamble49.wordlist.utils
 
+import android.app.Activity
+import android.util.DisplayMetrics
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.util.regex.Pattern
+
 
 /**
  * Common Extensions
@@ -23,4 +26,9 @@ fun getGson(): Gson = GsonBuilder()
 fun String.hasSpecialChar(): Boolean {
     val matcher = specialCharPattern.matcher(this)
     return matcher.find()
+}
+
+fun Activity.dpToPx(dp: Int): Int {
+    val displayMetrics = resources.displayMetrics
+    return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 }
