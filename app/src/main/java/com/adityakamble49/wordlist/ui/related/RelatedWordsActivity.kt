@@ -21,6 +21,7 @@ class RelatedWordsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_related_words)
 
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        vp_related_words_container.isPagingEnabled = false
         vp_related_words_container.adapter = viewPagerAdapter
         tl_related_words_category.setupWithViewPager(vp_related_words_container)
     }
