@@ -25,5 +25,8 @@
 ##---------------End: proguard configuration for Gson  ----------
 
 -keep class android.support.v7.widget.SearchView { *; }
+-dontwarn okhttp3.**
 -dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn org.conscrypt.**
 -dontwarn retrofit2.Platform$Java8
