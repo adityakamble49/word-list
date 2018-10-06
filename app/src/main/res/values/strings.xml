@@ -5,6 +5,37 @@
 
     <!--Common-->
     <string name="word">Word</string>
+    <string name="word_list">Word Lists</string>
+    <string name="word_list_name">Word List Name</string>
+    <string name="word_name_default">aliquots</string>
+    <string name="word_pronunciation_default">\u02c8a-l\u0259-\u02cckw\u00e4t, -kw\u0259t</string>
+    <string name="word_info_value_default">
+        type: noun\ndefinition: a portion of a larger whole, especially a sample taken for chemical
+        analysis or other treatment.\nexample: an aliquot was examined daily for the appearance of
+        cholesterol monohydrate crystals\n\n
+    </string>
+    <string name="word_definition_default">
+        a portion of a larger whole, especially a sample taken for chemical analysis or other treatment
+        a portion of a larger whole, especially a sample taken for chemical analysis or other treatment
+    </string>
+    <string name="word_list_name_default">Lorem Ipsum</string>
+    <string name="text_default">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+        varius commodo nulla, non convallis lectus. Donec molestie risus mi, nec dignissim eros
+        malesuada vel. Nunc ac nisl eget ex feugiat tempor.
+    </string>
+
+
+    <!--Main Activity - Dashboard Actions -->
+    <string name="search">Search</string>
+    <string name="search_word">Search Word</string>
+
+    <!--Main Activity - Dashboard Cards -->
+    <string name="word_of_the_day">Word of The Day!</string>
+    <string name="word_game_question_start">is most similar to</string>
+
+    <!--Main Activity - Create Word List-->
+    <string name="create_word_list_header_info">Organize Words with Word Lists!</string>
+    <string name="features_of_word_list">Features of Word List</string>
 
     <!--Word Activity-->
     <string name="label_word_information">Information</string>
@@ -16,24 +47,6 @@
     <string name="label_edit">Edit</string>
     <string name="label_done">Done</string>
     <string name="information">Information</string>
-    <string name="word_pronunciation_default">\u02c8a-l\u0259-\u02cckw\u00e4t, -kw\u0259t</string>
-    <string name="word_info_value_default">
-        type: noun\ndefinition: a portion of a larger whole, especially a sample taken for chemical
-        analysis or other treatment.\nexample: an aliquot was examined daily for the appearance of
-        cholesterol monohydrate crystals\n\n
-    </string>
     <string name="mnemonics">Mnemonics</string>
-    <string name="word_name_default">aliquots</string>
-    <string name="word_of_the_day">Word of The Day!</string>
-    <string name="word_list">Word Lists</string>
-    <string name="search_word">Search Word</string>
-    <string name="create_word_list_header_info">Organize Words with Word Lists!</string>
-    <string name="word_list_name">Word List Name</string>
-    <string name="default_dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum varius commodo nulla, non convallis lectus. Donec molestie risus mi, nec dignissim eros malesuada vel. Nunc ac nisl eget ex feugiat tempor.</string>
-    <string name="features_of_word_list">Features of Word List</string>
-    <string name="search">Search</string>
-    <string name="default_word_list_name_dummy">Lorem Ipsum</string>
-    <string name="word_game_question_start">is most similar to</string>
-    <string name="word_game_question_end">which word?</string>
 
 </resources>

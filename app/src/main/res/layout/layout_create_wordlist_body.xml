@@ -28,7 +28,7 @@
             android:layout_below="@id/tv_create_word_list_info_label"
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="5dp"
-            android:text="@string/default_dummy_text"
+            android:text="@string/text_default"
             android:textColor="@color/default_secondary_text"
             android:textSize="17sp" />
 
