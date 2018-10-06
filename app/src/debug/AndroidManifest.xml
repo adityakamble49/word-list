@@ -32,15 +32,6 @@
         </activity>
 
         <activity
-            android:name=".ui.wordlist.CreateWordListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name=".ui.wordlist.CreateWordListActivity" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".ui.related.RelatedWordsActivity"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar">

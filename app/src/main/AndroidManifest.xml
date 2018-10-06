@@ -27,10 +27,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.wordlist.CreateWordListActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
             android:name=".ui.related.RelatedWordsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />

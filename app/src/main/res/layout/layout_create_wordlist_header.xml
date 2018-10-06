@@ -6,6 +6,7 @@
     android:background="@color/default_primary">
 
     <ImageView
+        android:id="@+id/iv_create_word_list_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -14,7 +15,7 @@
         android:clickable="true"
         android:focusable="true"
         android:padding="4dp"
-        app:srcCompat="@drawable/ic_arrow_back" />
+        app:srcCompat="@drawable/ic_close" />
 
     <TextView
         android:id="@+id/tv_create_word_list_header_info"
