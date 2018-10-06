@@ -56,12 +56,12 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
         rv_word_list.addItemDecoration(itemOffsetDecoration)
         rv_word_list.isNestedScrollingEnabled = false
 
-        ib_related_words.setOnClickListener(this)
+        fab_related_words.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.ib_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
+            R.id.fab_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
         }
     }
 

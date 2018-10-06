@@ -41,13 +41,12 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp">
 
-                <ImageButton
-                    android:id="@+id/ib_add_word"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_add_word"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_marginStart="16dp"
-                    android:background="@drawable/bg_dbaction_add"
-                    android:elevation="6dp"
+                    android:scaleType="center"
                     app:srcCompat="@drawable/ic_add" />
 
                 <Space
@@ -55,12 +54,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <ImageButton
-                    android:id="@+id/ib_related_words"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_related_words"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/bg_dbaction_related"
-                    android:elevation="6dp"
+                    android:scaleType="center"
                     app:srcCompat="@drawable/ic_related_words" />
 
                 <Space
@@ -68,12 +66,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <ImageButton
-                    android:id="@+id/ib_notifications"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_notifications"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/bg_dbaction_notification"
-                    android:elevation="6dp"
+                    android:scaleType="center"
                     app:srcCompat="@drawable/ic_notifications" />
 
                 <Space
@@ -81,12 +78,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <ImageButton
-                    android:id="@+id/ib_practice"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_practice"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/bg_dbaction_practice"
-                    android:elevation="6dp"
+                    android:scaleType="center"
                     app:srcCompat="@drawable/ic_practice" />
 
                 <Space
@@ -94,16 +90,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <ImageButton
-                    android:id="@+id/ib_search"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_search"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/bg_dbaction_search"
-                    android:elevation="6dp"
+                    android:scaleType="center"
                     app:srcCompat="@drawable/ic_search" />
 
             </LinearLayout>
+
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp_db_cards"
