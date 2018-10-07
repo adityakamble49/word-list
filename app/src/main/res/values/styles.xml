@@ -11,16 +11,21 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <style name="AppTheme.Base" parent="AppTheme" />
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme.Base">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.Light" parent="AppTheme">
+    <style name="AppTheme.NoActionBar.Base" parent="AppTheme.NoActionBar" />
+
+    <style name="AppTheme.NoActionBar.Light" parent="AppTheme.Base">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.Light.Base" parent="AppTheme.NoActionBar.Light" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="elevation">0dp</item>
@@ -32,7 +37,7 @@
         <item name="android:background">#554de4</item>
     </style>
 
-    <style name="EditTextSearchViewBase">
+    <style name="EditTextSearchView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:drawableStart">@drawable/ic_search_dark</item>
@@ -51,6 +56,6 @@
         <item name="android:textColorHint">@color/default_primary_text_hint</item>
     </style>
 
-    <style name="EditTextSearchView" parent="EditTextSearchViewBase" />
+    <style name="EditTextSearchView.Base" parent="EditTextSearchView" />
 
 </resources>

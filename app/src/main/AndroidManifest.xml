@@ -10,11 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme.Base"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar.Light">
+            android:theme="@style/AppTheme.NoActionBar.Light.Base">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,11 +24,11 @@
         <activity
             android:name=".ui.word.WordActivity"
             android:label="@string/word"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.Base" />
 
         <activity
             android:name=".ui.related.RelatedWordsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar.Base"
             android:windowSoftInputMode="adjustPan" />
 
     </application>

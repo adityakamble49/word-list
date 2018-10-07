@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+    <style name="AppTheme.Base" parent="AppTheme" />
+
+    <style name="AppTheme.NoActionBar.Base" parent="AppTheme.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.Light">
+    <style name="AppTheme.NoActionBar.Light.Base" parent="AppTheme.NoActionBar.Light">
         <item name="colorPrimary">@color/white</item>
         <item name="android:statusBarColor">@color/default_background</item>
         <item name="android:windowLightStatusBar">true</item>
