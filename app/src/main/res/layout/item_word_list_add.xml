@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground">
+    android:background="@drawable/bg_wordlist_add_item">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_wordlist_add_item"
+        android:background="?attr/selectableItemBackground"
         android:minHeight="160dp"
         android:padding="16dp">
 
@@ -17,7 +17,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerInParent="true"
-            app:srcCompat="@drawable/ic_add_dark" />
+            app:srcCompat="@drawable/ic_add" />
 
     </RelativeLayout>
 
