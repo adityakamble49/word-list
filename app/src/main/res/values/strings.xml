@@ -50,4 +50,14 @@
     <string name="mnemonics">Mnemonics</string>
     <string name="etymology">Etymology</string>
 
+    <!--Related Word Activity-->
+    <string-array name="related_words_types">
+        <item>Similar</item>
+        <item>Antonyms</item>
+        <item>Describe</item>
+        <item>Adjective</item>
+        <item>Trigger</item>
+        <item>Rhyming</item>
+    </string-array>
+
 </resources>

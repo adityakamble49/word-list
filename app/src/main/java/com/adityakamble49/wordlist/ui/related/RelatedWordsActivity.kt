@@ -20,25 +20,27 @@ class RelatedWordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_related_words)
 
-        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        val viewPagerAdapter = RelatedWordsViewPagerAdapter(supportFragmentManager)
         vp_related_words_container.isPagingEnabled = false
         vp_related_words_container.adapter = viewPagerAdapter
         tl_related_words_category.setupWithViewPager(vp_related_words_container)
     }
 
-    private inner class ViewPagerAdapter(fragmentManager: FragmentManager) :
+    private inner class RelatedWordsViewPagerAdapter(fragmentManager: FragmentManager) :
             FragmentPagerAdapter(fragmentManager) {
+
+        val relatedWordsTypes: Array<String> = resources.getStringArray(R.array.related_words_types)
 
         override fun getItem(position: Int): Fragment {
             return MeansLikeFragment.newInstance()
         }
 
         override fun getCount(): Int {
-            return 8
+            return relatedWordsTypes.size
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            return "Similar"
+            return relatedWordsTypes[position]
         }
     }
 }
