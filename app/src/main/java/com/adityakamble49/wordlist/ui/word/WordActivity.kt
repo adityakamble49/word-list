@@ -1,11 +1,15 @@
 package com.adityakamble49.wordlist.ui.word
 
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
+import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
 import kotlinx.android.synthetic.main.activity_word.*
+import kotlinx.android.synthetic.main.layout_word_body.*
 import javax.inject.Inject
 
 /**
@@ -14,7 +18,7 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 30/9/2018
  */
-class WordActivity : BaseInjectableActivity() {
+class WordActivity : BaseInjectableActivity(), View.OnClickListener {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -34,6 +38,7 @@ class WordActivity : BaseInjectableActivity() {
 
     private fun bindView() {
         setupToolbar()
+        setupWordActions()
     }
 
     private fun setupToolbar() {
@@ -61,6 +66,16 @@ class WordActivity : BaseInjectableActivity() {
                 collapsing_toolbar.title = ""
                 isShow = false
             }
+        }
+    }
+
+    private fun setupWordActions() {
+        fab_related_words.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.fab_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
         }
     }
 }
