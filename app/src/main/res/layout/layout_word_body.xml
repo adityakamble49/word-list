@@ -8,49 +8,147 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_word_info_label"
-            style="@style/Base.TextAppearance.AppCompat.Title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/word_actions_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/information"
-            android:textColor="@color/default_primary_text"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/tv_word_info_value"
-            style="@style/Base.TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_word_info_label"
             android:layout_marginTop="8dp"
-            android:text="@string/word_info_value_default"
-            android:textColor="@color/default_secondary_text"
-            android:textSize="18sp" />
+            android:layout_marginBottom="8dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_word_mnemonics_label"
-            style="@style/Base.TextAppearance.AppCompat.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_word_info_value"
-            android:text="@string/mnemonics"
-            android:textColor="@color/default_primary_text"
-            android:textSize="22sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tv_word_mnemonics_value"
-            style="@style/Base.TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_save_word"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_save" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Save" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_add_word"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Add" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_related_words"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_related_words" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Related" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_word_image"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_image_search" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Image" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_word_mnemonics_label"
-            android:layout_marginTop="8dp"
-            android:text="@string/word_info_value_default"
-            android:textColor="@color/default_secondary_text"
-            android:textSize="18sp" />
+            android:layout_below="@id/word_actions_layout"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/layout_word_info_card" />
+
+            <include
+                layout="@layout/layout_word_info_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+            <include
+                layout="@layout/layout_word_mnemonics_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -33,10 +33,20 @@ class WordActivity : BaseInjectableActivity() {
     }
 
     private fun bindView() {
-        showTitleOnCollapseOnly()
+        setupToolbar()
     }
 
-    private fun showTitleOnCollapseOnly() {
+    private fun setupToolbar() {
+
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.let {
+            it.title = ""
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowHomeEnabled(true)
+        }
+
+        // Enable Title only on Collapse
         collapsing_toolbar.title = resources.getString(R.string.word_name_default)
         var isShow = true
         var scrollRange = -1

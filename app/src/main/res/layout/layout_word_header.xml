@@ -26,14 +26,14 @@
         android:id="@+id/tv_word_name"
         style="@style/TextAppearance.AppCompat.Display1"
         android:layout_width="wrap_content"
-        android:transitionName="word_name"
         android:layout_height="wrap_content"
         android:layout_above="@id/tv_word_pronunciation"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="@string/word_name_default"
         android:textColor="@color/default_opposite_text"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:transitionName="word_name" />
 
     <TextView
         android:id="@+id/tv_word_pronunciation"
@@ -42,18 +42,26 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_word_pronunciation"
+        android:paddingStart="12dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="2dp"
         android:text="@string/word_pronunciation_default"
-        android:textColor="@color/default_opposite_text"
-        android:textSize="22sp" />
+        android:textColor="@color/default_primary_text"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/iv_tts"
         android:layout_width="28dp"
         android:layout_height="28dp"
+        android:layout_alignTop="@id/tv_word_pronunciation"
         android:layout_alignBottom="@id/tv_word_pronunciation"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_toEndOf="@id/tv_word_pronunciation"
+        android:background="?selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
         app:srcCompat="@drawable/ic_volume_up" />
 
 </RelativeLayout>
