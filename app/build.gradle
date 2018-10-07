@@ -14,7 +14,7 @@ android {
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.targetSdk
 
-        versionCode  buildConfig.version.code
+        versionCode buildConfig.version.code
         versionName buildConfig.version.name
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -106,6 +106,8 @@ dependencies {
     implementation deps.retrofit.retrofitAdapter
     implementation deps.okhttp.core
     implementation deps.okhttp.loggingInterceptor
+    implementation deps.glide.core
+    kapt deps.glide.compiler
     kapt deps.dagger.processor
     kapt deps.dagger.compiler
     implementation deps.android.arch.archRuntime

@@ -71,11 +71,17 @@ class WordActivity : BaseInjectableActivity(), View.OnClickListener {
 
     private fun setupWordActions() {
         fab_related_words.setOnClickListener(this)
+        fab_word_image.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.fab_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
+            R.id.fab_word_image -> {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                val wordImageFragment = WordImageFragment.newInstance()
+                wordImageFragment.show(fragmentTransaction, "word_image_dialog")
+            }
         }
     }
 }
