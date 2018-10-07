@@ -48,5 +48,6 @@
     <string name="label_done">Done</string>
     <string name="information">Information</string>
     <string name="mnemonics">Mnemonics</string>
+    <string name="etymology">Etymology</string>
 
 </resources>

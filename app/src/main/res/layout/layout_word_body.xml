@@ -139,11 +139,35 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/tv_word_info_title"
+                android:id="@+id/tv_word_etymology_title"
                 style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:background="@drawable/bg_word_pronunciation"
+                android:elevation="9dp"
+                android:paddingStart="12dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="2dp"
+                android:text="@string/etymology" />
+
+            <include
+                android:id="@+id/layout_word_etymology_card"
+                layout="@layout/layout_word_etymology_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_word_etymology_title"
+                android:layout_marginTop="-16dp" />
+
+            <TextView
+                android:id="@+id/tv_word_info_title"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_word_etymology_card"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/bg_word_pronunciation"
                 android:elevation="9dp"
                 android:paddingStart="12dp"
@@ -166,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/layout_word_info_card"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/tv_word_mnemonics_title"
@@ -175,12 +199,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_word_info_card_2"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/bg_word_pronunciation"
                 android:elevation="9dp"
                 android:paddingStart="12dp"
                 android:paddingTop="2dp"
                 android:paddingEnd="12dp"
-                android:layout_marginTop="8dp"
                 android:paddingBottom="2dp"
                 android:text="@string/mnemonics" />
 
@@ -189,8 +213,8 @@
                 layout="@layout/layout_word_mnemonics_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/layout_word_info_card_2"
-                android:layout_marginTop="24dp" />
+                android:layout_below="@id/tv_word_mnemonics_title"
+                android:layout_marginTop="-16dp" />
 
         </RelativeLayout>
 

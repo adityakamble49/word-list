@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_word_mnemonics_card"
+        android:background="@drawable/bg_word_etymology_card"
         android:paddingStart="16dp"
         android:paddingTop="24dp"
         android:paddingEnd="16dp"
