@@ -15,7 +15,9 @@
         android:background="@color/default_background"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include layout="@layout/layout_search_view" />
+        <EditText
+            android:id="@+id/et_search_bar"
+            style="@style/EditTextSearchView.Base" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -30,71 +32,119 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/word_actions_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp">
+                android:orientation="horizontal">
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_add_word"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:scaleType="center"
-                    app:srcCompat="@drawable/ic_add" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab_save_word"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_save" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Save" />
+
+                </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_related_words"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:scaleType="center"
-                    app:srcCompat="@drawable/ic_related_words" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab_add_word"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_add" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Add" />
+
+                </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_notifications"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:scaleType="center"
-                    app:srcCompat="@drawable/ic_notifications" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab_related_words"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_related_words" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Related" />
+
+                </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_practice"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:scaleType="center"
-                    app:srcCompat="@drawable/ic_practice" />
-
-                <Space
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_search"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
                     android:layout_marginEnd="16dp"
-                    android:scaleType="center"
-                    app:srcCompat="@drawable/ic_search" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab_word_image"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/ic_image_search" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Image" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
