@@ -15,9 +15,7 @@
         android:background="@color/default_background"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <EditText
-            android:id="@+id/et_search_bar"
-            style="@style/EditTextSearchView.Base" />
+        <include layout="@layout/layout_search_view" />
 
     </android.support.design.widget.AppBarLayout>
 
