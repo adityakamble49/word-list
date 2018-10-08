@@ -7,7 +7,6 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.utils.inflate
 import kotlinx.android.synthetic.main.item_word_list.view.*
-import timber.log.Timber
 
 /**
  * WordList Adapter
@@ -19,6 +18,7 @@ class WordListAdapter : RecyclerView.Adapter<WordListAdapter.ViewHolder>() {
 
     var listOfWordList = mutableListOf<WordList>()
     var addWordListAction: () -> Unit = {}
+    var wordListAction: (wordList: WordList) -> Unit = {}
 
     init {
         listOfWordList.add(WordList(0, "", "", ""))
@@ -66,7 +66,7 @@ class WordListAdapter : RecyclerView.Adapter<WordListAdapter.ViewHolder>() {
                 tv_word_list_name.text = item.name
             }
             itemView.setOnClickListener {
-                Timber.i("$it clicked")
+                wordListAction(item)
             }
         }
     }

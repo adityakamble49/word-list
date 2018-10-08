@@ -33,6 +33,10 @@
             android:theme="@style/AppTheme.NoActionBar.Base"
             android:windowSoftInputMode="adjustPan" />
 
+        <activity
+            android:name=".ui.wordlist.WordListActivity"
+            android:theme="@style/AppTheme.NoActionBar.Base" />
+
     </application>
 
 </manifest>

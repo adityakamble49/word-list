@@ -13,6 +13,7 @@ import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.common.ItemOffsetDecoration
 import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
+import com.adityakamble49.wordlist.ui.wordlist.WordListActivity
 import com.adityakamble49.wordlist.utils.dpToPx
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -49,6 +50,9 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val createWordListFragment = CreateWordListFragment.newInstance()
             createWordListFragment.show(fragmentTransaction, "create_wordlist_dialog")
+        }
+        wordListAdapter.wordListAction = { wordList ->
+            startActivity(Intent(this, WordListActivity::class.java))
         }
         val gridLayoutManager = GridLayoutManager(this, 2)
         val itemOffsetDecoration = ItemOffsetDecoration(32)
