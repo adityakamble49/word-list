@@ -17,7 +17,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerInParent="true"
-            app:srcCompat="@drawable/ic_add" />
+            app:srcCompat="@drawable/ic_add_dark" />
 
     </RelativeLayout>
 
