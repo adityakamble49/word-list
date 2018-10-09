@@ -29,7 +29,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:background="?selectableItemBackgroundBorderless"
-            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
             app:srcCompat="@drawable/ic_file_download" />
 
         <TextView

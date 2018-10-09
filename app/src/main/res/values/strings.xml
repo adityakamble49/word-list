@@ -49,7 +49,9 @@
     <string name="information">Information</string>
     <string name="mnemonics">Mnemonics</string>
     <string name="etymology">Etymology</string>
-    <string name="hint_search_word_lists">Search Word Lists</string>
+
+    <!--Marketplace Word List-->
+    <string name="hint_search_word_lists">Search Marketplace</string>
 
     <!--Related Word Activity-->
     <string-array name="related_words_types">
