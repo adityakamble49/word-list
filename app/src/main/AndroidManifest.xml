@@ -37,6 +37,10 @@
             android:name=".ui.wordlist.WordListActivity"
             android:theme="@style/AppTheme.NoActionBar.Base" />
 
+        <activity
+            android:name=".ui.marketplace.MarketplaceActivity"
+            android:theme="@style/AppTheme.NoActionBar.Base" />
+
     </application>
 
 </manifest>

@@ -12,6 +12,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.common.ItemOffsetDecoration
+import com.adityakamble49.wordlist.ui.marketplace.MarketplaceActivity
 import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
 import com.adityakamble49.wordlist.ui.wordlist.WordListActivity
 import com.adityakamble49.wordlist.utils.dpToPx
@@ -39,11 +40,23 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
     }
 
     private fun bindView() {
+        setupDashboardActions()
+        setupDashboardViewPager()
+        setupWordList()
+    }
 
+    private fun setupDashboardActions() {
+        fab_related_words.setOnClickListener(this)
+        fab_marketplace.setOnClickListener(this)
+    }
+
+    private fun setupDashboardViewPager() {
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         vp_db_cards.adapter = viewPagerAdapter
         vp_db_cards.pageMargin = dpToPx(8)
+    }
 
+    private fun setupWordList() {
         wordListAdapter = WordListAdapter()
         wordListAdapter.listOfWordList = getWordList()
         wordListAdapter.addWordListAction = {
@@ -60,13 +73,12 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
         rv_word_list.layoutManager = gridLayoutManager
         rv_word_list.addItemDecoration(itemOffsetDecoration)
         rv_word_list.isNestedScrollingEnabled = false
-
-        fab_related_words.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.fab_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
+            R.id.fab_marketplace -> startActivity(Intent(this, MarketplaceActivity::class.java))
         }
     }
 
