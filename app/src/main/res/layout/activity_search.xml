@@ -6,19 +6,21 @@
     android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".ui.marketplace.MarketplaceActivity">
+    tools:context=".ui.search.SearchActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/default_primary"
+        android:background="@color/default_background"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <EditText
             android:id="@+id/et_search_bar"
             style="@style/EditTextSearchView.Base"
-            android:drawableStart="@drawable/ic_arrow_back_dark"
-            android:hint="@string/hint_search_word_lists" />
+            android:drawableStart="@drawable/ic_arrow_back_dark">
+
+            <requestFocus />
+        </EditText>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -28,7 +30,7 @@
         android:layout_marginTop="@dimen/margin_from_search_bar">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_marketplace_word_list"
+            android:id="@+id/rv_search_results"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

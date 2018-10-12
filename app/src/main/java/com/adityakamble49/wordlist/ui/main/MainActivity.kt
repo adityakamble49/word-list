@@ -14,6 +14,7 @@ import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.common.ItemOffsetDecoration
 import com.adityakamble49.wordlist.ui.marketplace.MarketplaceActivity
 import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
+import com.adityakamble49.wordlist.ui.search.SearchActivity
 import com.adityakamble49.wordlist.ui.wordlist.WordListActivity
 import com.adityakamble49.wordlist.utils.dpToPx
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,9 +41,14 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
     }
 
     private fun bindView() {
+        setupSearchBar()
         setupDashboardActions()
         setupDashboardViewPager()
         setupWordList()
+    }
+
+    private fun setupSearchBar() {
+        et_search_bar.setOnClickListener(this)
     }
 
     private fun setupDashboardActions() {
@@ -77,6 +83,7 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.et_search_bar -> startActivity(Intent(this, SearchActivity::class.java))
             R.id.fab_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
             R.id.fab_marketplace -> startActivity(Intent(this, MarketplaceActivity::class.java))
         }

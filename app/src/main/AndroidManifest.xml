@@ -27,6 +27,10 @@
         </activity>
 
         <activity
+            android:name=".ui.search.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar.Light.Base" />
+
+        <activity
             android:name=".ui.related.RelatedWordsActivity"
             android:theme="@style/AppTheme.NoActionBar.Base"
             android:windowSoftInputMode="adjustPan">

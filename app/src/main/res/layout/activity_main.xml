@@ -17,7 +17,8 @@
 
         <EditText
             android:id="@+id/et_search_bar"
-            style="@style/EditTextSearchView.Base" />
+            style="@style/EditTextSearchView.Base"
+            android:focusable="false" />
 
     </android.support.design.widget.AppBarLayout>
 
