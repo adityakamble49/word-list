@@ -26,6 +26,9 @@
     <string name="sdm_related_words">Related Words Disabled</string>
     <string name="sll_related_words">Related Words</string>
     <string name="ssl_related_words">Related Words</string>
+    <string name="sdm_practice">Practice Disabled</string>
+    <string name="sll_practice">Practice</string>
+    <string name="ssl_practice">Practice</string>
 
 
     <!--Main Activity - Dashboard Actions -->

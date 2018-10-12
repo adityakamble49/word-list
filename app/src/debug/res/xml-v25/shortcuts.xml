@@ -16,5 +16,20 @@
             android:targetClass="com.adityakamble49.wordlist.ui.related.RelatedWordsActivity"
             android:targetPackage="com.adityakamble49.wordlist.debug" />
     </shortcut>
-
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_practice_shortcut"
+        android:shortcutDisabledMessage="@string/sdm_practice"
+        android:shortcutId="practice"
+        android:shortcutLongLabel="@string/sll_practice"
+        android:shortcutShortLabel="@string/ssl_practice">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.main.MainActivity"
+            android:targetPackage="com.adityakamble49.wordlist.debug" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.practice.PracticeActivity"
+            android:targetPackage="com.adityakamble49.wordlist.debug" />
+    </shortcut>
 </shortcuts>
