@@ -13,6 +13,7 @@ import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.common.ItemOffsetDecoration
 import com.adityakamble49.wordlist.ui.marketplace.MarketplaceActivity
+import com.adityakamble49.wordlist.ui.practice.PracticeActivity
 import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
 import com.adityakamble49.wordlist.ui.search.SearchActivity
 import com.adityakamble49.wordlist.ui.settings.SettingsActivity
@@ -54,6 +55,7 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
 
     private fun setupDashboardActions() {
         fab_related_words.setOnClickListener(this)
+        fab_practice.setOnClickListener(this)
         fab_marketplace.setOnClickListener(this)
         fab_settings.setOnClickListener(this)
     }
@@ -86,6 +88,7 @@ class MainActivity : BaseInjectableActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.et_search_bar -> startActivity(Intent(this, SearchActivity::class.java))
+            R.id.fab_practice -> startActivity(Intent(this, PracticeActivity::class.java))
             R.id.fab_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
             R.id.fab_marketplace -> startActivity(Intent(this, MarketplaceActivity::class.java))
             R.id.fab_settings -> startActivity(Intent(this, SettingsActivity::class.java))

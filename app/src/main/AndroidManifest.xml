@@ -45,7 +45,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.practice.PracticeActivity">
+        <activity
+            android:name=".ui.practice.PracticeActivity"
+            android:label="@string/practice">
             <intent-filter>
                 <action android:name=".ui.practice.PracticeActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
