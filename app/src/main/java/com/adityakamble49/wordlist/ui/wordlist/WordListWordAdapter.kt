@@ -16,6 +16,7 @@ import com.adityakamble49.wordlist.utils.inflate
 class WordListWordAdapter : RecyclerView.Adapter<WordListWordAdapter.ViewHolder>() {
 
     var listOfWords = mutableListOf<Word>()
+    var wordAction: () -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.inflate(R.layout.item_word_list_word) as View)
@@ -30,7 +31,9 @@ class WordListWordAdapter : RecyclerView.Adapter<WordListWordAdapter.ViewHolder>
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(position: Int) {
-
+            itemView?.setOnClickListener {
+                wordAction()
+            }
         }
     }
 }

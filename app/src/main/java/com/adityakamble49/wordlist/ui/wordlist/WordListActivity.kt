@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.ui.wordlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -8,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.adityakamble49.wordlist.R
+import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.activity_word_list.*
 import kotlinx.android.synthetic.main.layout_wordlist_body.*
@@ -78,6 +80,9 @@ class WordListActivity : AppCompatActivity() {
 
     private fun setupListOfWords() {
         wordListWordAdapter = WordListWordAdapter()
+        wordListWordAdapter.wordAction = {
+            startActivity(Intent(this, WordActivity::class.java))
+        }
         val linearLayoutManager = LinearLayoutManager(this)
         val dividerItemDecorator = DividerItemDecoration(this, linearLayoutManager.orientation)
         rv_word_list_words.adapter = wordListWordAdapter
