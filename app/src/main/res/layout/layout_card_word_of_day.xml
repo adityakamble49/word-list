@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cv_wod_base_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_wod_base_layout"
     android:layout_width="match_parent"
     android:layout_height="190dp"
     android:clickable="true"
@@ -27,24 +27,16 @@
             android:text="@string/word_of_the_day"
             android:textColor="@color/default_opposite_text" />
 
-        <ImageView
-            android:id="@+id/btn_wod_save_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:background="?selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_save" />
-
         <TextView
             android:id="@+id/tv_wod_word"
             style="@style/Base.TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
-            android:transitionName="word_name"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_wod_heading"
             android:layout_marginTop="4dp"
             android:text="@string/word_name_default"
-            android:textColor="@color/default_opposite_text" />
+            android:textColor="@color/default_opposite_text"
+            android:transitionName="word_name" />
 
         <TextView
             android:id="@+id/tv_wod_pronunciation"
