@@ -26,6 +26,7 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="keep">Keep</string>
+    <string name="settings">Settings</string>
 
     <!--Shortcuts-->
     <string name="sdm_related_words">Related Words Disabled</string>
@@ -77,6 +78,18 @@
     <!--Marketplace Word List-->
     <string name="hint_search_word_lists">Search Marketplace</string>
 
+    <!--Settings Activity-->
+    <string name="pref_dictate_mode_type_key">dictate_mode_type</string>
+    <string name="pref_dictate_mode_type_title">Dictate Mode</string>
+    <string name="pref_dictate_mode_type_summary">Select dictate mode type for words</string>
+    <string name="pref_dictate_mode_type_default">word_complete_info</string>
+    <string name="pref_dictate_mode_speed_key">dictate_mode_speed</string>
+    <string name="pref_dictate_mode_speed_title">Dictate Mode Speed</string>
+    <string name="pref_dictate_mode_speed_summary">Select dictate mode speed for words</string>
+    <string name="pref_dictate_mode_speed_default">normal</string>
+    <string name="dictate_mode">Dictate Mode</string>
+    <string name="about">About</string>
+
     <!--Related Word Activity-->
     <string-array name="related_words_types">
         <item>Similar</item>
@@ -85,6 +98,31 @@
         <item>Adjective</item>
         <item>Trigger</item>
         <item>Rhyming</item>
+    </string-array>
+
+    <string-array name="dictate_mode_type_entries">
+        <item>Word with Complete Info</item>
+        <item>Word with Definition</item>
+        <item>Word only</item>
+    </string-array>
+    <string-array name="dictate_mode_type_entry_values">
+        <item>word_complete_info</item>
+        <item>word_definition</item>
+        <item>word_only</item>
+    </string-array>
+    <string-array name="dictate_mode_speed_entries">
+        <item>Slower</item>
+        <item>Slow</item>
+        <item>Normal</item>
+        <item>Fast</item>
+        <item>Faster</item>
+    </string-array>
+    <string-array name="dictate_mode_speed_entry_values">
+        <item>slower</item>
+        <item>slow</item>
+        <item>normal</item>
+        <item>fast</item>
+        <item>faster</item>
     </string-array>
 
 </resources>
