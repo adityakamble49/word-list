@@ -46,16 +46,21 @@
         </activity>
 
         <activity
+            android:name=".ui.marketplace.MarketplaceActivity"
+            android:theme="@style/AppTheme.NoActionBar.Base">
+            <intent-filter>
+                <action android:name=".ui.marketplace.MarketplaceActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".ui.word.WordActivity"
             android:label="@string/word"
             android:theme="@style/AppTheme.NoActionBar.Base" />
 
         <activity
             android:name=".ui.wordlist.WordListActivity"
-            android:theme="@style/AppTheme.NoActionBar.Base" />
-
-        <activity
-            android:name=".ui.marketplace.MarketplaceActivity"
             android:theme="@style/AppTheme.NoActionBar.Base" />
 
     </application>

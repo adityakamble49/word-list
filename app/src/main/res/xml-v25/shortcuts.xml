@@ -32,4 +32,20 @@
             android:targetClass="com.adityakamble49.wordlist.ui.practice.PracticeActivity"
             android:targetPackage="com.adityakamble49.wordlist" />
     </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_marketplace_shortcut"
+        android:shortcutDisabledMessage="@string/sdm_marketplace"
+        android:shortcutId="marketplace"
+        android:shortcutLongLabel="@string/sll_marketplace"
+        android:shortcutShortLabel="@string/ssl_marketplace">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.main.MainActivity"
+            android:targetPackage="com.adityakamble49.wordlist" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.marketplace.MarketplaceActivity"
+            android:targetPackage="com.adityakamble49.wordlist" />
+    </shortcut>
 </shortcuts>
