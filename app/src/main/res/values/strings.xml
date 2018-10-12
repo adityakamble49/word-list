@@ -49,6 +49,8 @@
     <string name="information">Information</string>
     <string name="mnemonics">Mnemonics</string>
     <string name="etymology">Etymology</string>
+    <string name="next_word">Next Word</string>
+    <string name="previous_word">Previous Word</string>
 
     <!--Marketplace Word List-->
     <string name="hint_search_word_lists">Search Marketplace</string>

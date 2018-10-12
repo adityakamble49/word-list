@@ -3,6 +3,7 @@ package com.adityakamble49.wordlist.ui.word
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.adityakamble49.wordlist.R
@@ -27,6 +28,11 @@ class WordActivity : BaseInjectableActivity(), View.OnClickListener {
         setContentView(R.layout.activity_word)
 
         bindView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.word_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
