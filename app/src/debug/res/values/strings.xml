@@ -1,6 +1,6 @@
 <resources>
 
     <!--Word List App-->
-    <string name="app_name">Word List [D]</string>
+    <string name="app_name">Word List - Debug</string>
 
 </resources>

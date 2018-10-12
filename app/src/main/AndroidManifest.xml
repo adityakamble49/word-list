@@ -21,6 +21,9 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <activity
@@ -31,7 +34,14 @@
         <activity
             android:name=".ui.related.RelatedWordsActivity"
             android:theme="@style/AppTheme.NoActionBar.Base"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan">
+
+            <intent-filter>
+                <action android:name=".ui.related.RelatedWordsActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
 
         <activity
             android:name=".ui.wordlist.WordListActivity"

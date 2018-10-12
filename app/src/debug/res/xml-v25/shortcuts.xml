@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_related_words_shortcut"
+        android:shortcutDisabledMessage="@string/sdm_related_words"
+        android:shortcutId="related"
+        android:shortcutLongLabel="@string/sll_related_words"
+        android:shortcutShortLabel="@string/ssl_related_words">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.main.MainActivity"
+            android:targetPackage="com.adityakamble49.wordlist.debug" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.related.RelatedWordsActivity"
+            android:targetPackage="com.adityakamble49.wordlist.debug" />
+    </shortcut>
+
+</shortcuts>

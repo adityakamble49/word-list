@@ -23,6 +23,9 @@
         varius commodo nulla, non convallis lectus. Donec molestie risus mi, nec dignissim eros
         malesuada vel. Nunc ac nisl eget ex feugiat tempor.
     </string>
+    <string name="sdm_related_words">Related Words Disabled</string>
+    <string name="sll_related_words">Related Words</string>
+    <string name="ssl_related_words">Related Words</string>
 
 
     <!--Main Activity - Dashboard Actions -->
