@@ -34,6 +34,9 @@
     <string name="sdm_marketplace">Marketplace Disabled</string>
     <string name="sll_marketplace">Marketplace</string>
     <string name="ssl_marketplace">Marketplace</string>
+    <string name="sdm_search">Search Disabled</string>
+    <string name="sll_search">Search</string>
+    <string name="ssl_search">Search</string>
 
 
     <!--Main Activity - Dashboard Actions -->

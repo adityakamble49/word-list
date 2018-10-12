@@ -28,18 +28,21 @@
 
         <activity
             android:name=".ui.search.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar.Light.Base" />
+            android:theme="@style/AppTheme.NoActionBar.Light.Base">
+            <intent-filter>
+                <action android:name=".ui.search.SearchActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ui.related.RelatedWordsActivity"
             android:theme="@style/AppTheme.NoActionBar.Base"
             android:windowSoftInputMode="adjustPan">
-
             <intent-filter>
                 <action android:name=".ui.related.RelatedWordsActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
 
         <activity android:name=".ui.practice.PracticeActivity">

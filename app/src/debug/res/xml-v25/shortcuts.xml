@@ -48,4 +48,20 @@
             android:targetClass="com.adityakamble49.wordlist.ui.marketplace.MarketplaceActivity"
             android:targetPackage="com.adityakamble49.wordlist.debug" />
     </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_search_shortcut"
+        android:shortcutDisabledMessage="@string/sdm_search"
+        android:shortcutId="search"
+        android:shortcutLongLabel="@string/sll_search"
+        android:shortcutShortLabel="@string/ssl_search">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.main.MainActivity"
+            android:targetPackage="com.adityakamble49.wordlist.debug" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.adityakamble49.wordlist.ui.search.SearchActivity"
+            android:targetPackage="com.adityakamble49.wordlist.debug" />
+    </shortcut>
 </shortcuts>
