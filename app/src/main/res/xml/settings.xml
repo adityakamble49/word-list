@@ -21,4 +21,12 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="About">
+        <Preference
+            android:summary="Developers and Contributors behind Word List"
+            android:title="About Us">
+            <intent android:action=".ui.about.AboutUsActivity" />
+        </Preference>
+    </PreferenceCategory>
+
 </PreferenceScreen>

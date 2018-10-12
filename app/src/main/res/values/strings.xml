@@ -89,6 +89,7 @@
     <string name="pref_dictate_mode_speed_default">normal</string>
     <string name="dictate_mode">Dictate Mode</string>
     <string name="about">About</string>
+    <string name="about_us">About Us</string>
 
     <!--Related Word Activity-->
     <string-array name="related_words_types">

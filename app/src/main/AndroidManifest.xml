@@ -74,6 +74,15 @@
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/settings" />
 
+        <activity
+            android:name=".ui.about.AboutUsActivity"
+            android:label="@string/about_us">
+            <intent-filter>
+                <action android:name=".ui.about.AboutUsActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
