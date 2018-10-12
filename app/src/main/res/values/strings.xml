@@ -23,6 +23,9 @@
         varius commodo nulla, non convallis lectus. Donec molestie risus mi, nec dignissim eros
         malesuada vel. Nunc ac nisl eget ex feugiat tempor.
     </string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="keep">Keep</string>
 
     <!--Shortcuts-->
     <string name="sdm_related_words">Related Words Disabled</string>
@@ -65,6 +68,11 @@
     <string name="etymology">Etymology</string>
     <string name="next_word">Next Word</string>
     <string name="previous_word">Previous Word</string>
+
+    <!--WordList Activity-->
+    <string name="delete_word_list_title">Delete Word List?</string>
+    <string name="delete_word_list_content">All words in word list will be removed</string>
+    <string name="delete_word_list_success">Word List Deleted</string>
 
     <!--Marketplace Word List-->
     <string name="hint_search_word_lists">Search Marketplace</string>
