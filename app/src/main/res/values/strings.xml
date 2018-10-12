@@ -70,6 +70,7 @@
     <string name="etymology">Etymology</string>
     <string name="next_word">Next Word</string>
     <string name="previous_word">Previous Word</string>
+    <string name="suggest_edits">Suggest Edits</string>
 
     <!--WordList Activity-->
     <string name="delete_word_list_title">Delete Word List?</string>

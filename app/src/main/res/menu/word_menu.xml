@@ -14,5 +14,8 @@
         android:title="@string/next_word"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_suggest_edit"
+        android:title="@string/suggest_edits" />
 
 </menu>
