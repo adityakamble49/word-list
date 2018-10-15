@@ -5,9 +5,11 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import com.adityakamble49.wordlist.cache.dao.MarketplaceWordListDao
 import com.adityakamble49.wordlist.cache.dao.WordDao
 import com.adityakamble49.wordlist.cache.dao.WordListDao
 import com.adityakamble49.wordlist.cache.dao.WordListWordJoinDao
+import com.adityakamble49.wordlist.cache.entities.MarketplaceWordList
 import com.adityakamble49.wordlist.cache.entities.Word
 import com.adityakamble49.wordlist.cache.entities.WordList
 import com.adityakamble49.wordlist.cache.entities.WordListWordJoin
@@ -22,7 +24,8 @@ import com.adityakamble49.wordlist.cache.entities.WordListWordJoin
         entities = [
             (Word::class),
             (WordList::class),
-            (WordListWordJoin::class)
+            (WordListWordJoin::class),
+            (MarketplaceWordList::class)
         ],
         version = 1)
 @TypeConverters(Converter::class)
@@ -51,4 +54,6 @@ abstract class WordListDatabase : RoomDatabase() {
     abstract fun wordListDao(): WordListDao
 
     abstract fun wordListWordJoinDao(): WordListWordJoinDao
+
+    abstract fun marketplaceWordListDao(): MarketplaceWordListDao
 }
