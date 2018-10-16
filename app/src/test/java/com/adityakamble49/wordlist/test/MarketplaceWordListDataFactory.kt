@@ -16,7 +16,7 @@ object MarketplaceWordListDataFactory {
             randomInteger(), randomString(), randomString(), randomString(), randomString(),
             randomString())
 
-    fun makeListOfWordList(count: Int): List<MarketplaceWordList> {
+    fun makeListOfMarketplaceWordList(count: Int): List<MarketplaceWordList> {
         val listOfWordList = mutableListOf<MarketplaceWordList>()
         var counter = 1
         repeat(count) {
