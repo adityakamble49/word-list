@@ -5,7 +5,10 @@
 
     <!--Common-->
     <string name="word">Word</string>
-    <string name="word_list">Word Lists</string>
+    <string name="words">Words</string>
+    <string name="word_list">Word List</string>
+    <string name="word_lists">Word Lists</string>
+    <string name="marketplace">Marketplace</string>
     <string name="word_list_name">Word List Name</string>
     <string name="word_name_default">aliquots</string>
     <string name="word_pronunciation_default">\u02c8a-l\u0259-\u02cckw\u00e4t, -kw\u0259t</string>

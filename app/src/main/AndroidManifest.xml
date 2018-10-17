@@ -28,7 +28,7 @@
 
         <activity
             android:name=".ui.search.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar.Light.Base">
+            android:theme="@style/AppTheme.NoActionBar.Light">
             <intent-filter>
                 <action android:name=".ui.search.SearchActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
