@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.adityakamble49.wordlist.R
-import com.adityakamble49.wordlist.utils.replaceFragment
+import com.adityakamble49.wordlist.utils.addFragment
 
 /**
  * Settings Activity
@@ -31,6 +31,6 @@ class SettingsActivity : AppCompatActivity() {
     private fun bindView() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        replaceFragment(SettingsFragment.newInstance(), R.id.fl_settings)
+        addFragment(SettingsFragment.newInstance(), R.id.fl_settings)
     }
 }
