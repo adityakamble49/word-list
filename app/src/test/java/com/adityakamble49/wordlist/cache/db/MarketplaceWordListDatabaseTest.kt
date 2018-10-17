@@ -2,6 +2,7 @@ package com.adityakamble49.wordlist.cache.db
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.persistence.room.Room
+import android.database.sqlite.SQLiteConstraintException
 import com.adityakamble49.wordlist.test.DataFactory
 import com.adityakamble49.wordlist.test.MarketplaceWordListDataFactory
 import org.hamcrest.Matchers.`is`
@@ -46,6 +47,14 @@ class MarketplaceWordListDatabaseTest {
         val listOfWordList = MarketplaceWordListDataFactory.makeListOfMarketplaceWordList(5)
         val testResult = marketplaceWordListDao.insertList(listOfWordList)
         assertThat(testResult, not(hasItem(-1L)))
+    }
+
+    @Test(expected = SQLiteConstraintException::class)
+    fun insertDuplicateMarketplaceWordListCompletes() {
+        val marketplaceWordList = MarketplaceWordListDataFactory.makeMarketplaceWordList(1)
+        val testResult = marketplaceWordListDao.insert(marketplaceWordList)
+        assertThat(testResult, not(-1L))
+        marketplaceWordListDao.insert(marketplaceWordList)
     }
 
     @Test
