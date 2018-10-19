@@ -1,16 +1,20 @@
 package com.adityakamble49.wordlist.ui.related
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adityakamble49.wordlist.R
-import com.adityakamble49.wordlist.cache.entities.Word
+import com.adityakamble49.wordlist.model.RelatedWordBasic
+import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import kotlinx.android.synthetic.main.fragment_means_like.view.*
 import java.util.*
+import javax.inject.Inject
 
 
 /**
@@ -19,7 +23,10 @@ import java.util.*
  * @author Aditya Kamble
  * @since 4/10/2018
  */
-class MeansLikeFragment : Fragment() {
+class RelatedWordBasicFragment : BaseInjectableFragment() {
+
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject lateinit var viewModel: RelatedWordBasicViewModel
 
     private lateinit var relatedWordsAdapter: RelatedWordsAdapter
 
@@ -39,27 +46,27 @@ class MeansLikeFragment : Fragment() {
      */
 
     companion object {
-        fun newInstance() = MeansLikeFragment()
+        fun newInstance() = RelatedWordBasicFragment()
     }
 
     private fun bindView(view: View) {
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(RelatedWordBasicViewModel::class.java)
         with(view) {
             relatedWordsAdapter = RelatedWordsAdapter()
-            relatedWordsAdapter.listOfWord = getWords(100)
             val staggeredGridLayoutManager = StaggeredGridLayoutManager(getSpanCount(85),
                     StaggeredGridLayoutManager.HORIZONTAL)
             rv_means_like_words.adapter = relatedWordsAdapter
             rv_means_like_words.layoutManager = staggeredGridLayoutManager
-        }
-    }
 
-    private fun getWords(count: Int): MutableList<Word> {
-        val random = Random()
-        val list = mutableListOf<Word>()
-        repeat(count) {
-            list.add(Word(0, getWordString(random, random.nextInt(10) + 5), "", arrayListOf()))
+            viewModel.relatedWordBasicList.observe(this@RelatedWordBasicFragment,
+                    Observer<List<RelatedWordBasic>> {
+                        it?.let {
+                            relatedWordsAdapter.listOfWord = it
+                            relatedWordsAdapter.notifyDataSetChanged()
+                        }
+                    })
         }
-        return list
     }
 
     private fun getWordString(random: Random, length: Int): String {

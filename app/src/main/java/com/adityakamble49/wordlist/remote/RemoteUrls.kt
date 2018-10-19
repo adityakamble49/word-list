@@ -21,8 +21,8 @@ object RemoteUrls {
     val RELATED_WORDS_ADJECTIVE = "https://api.datamuse.com/words?rel_jja="
     val RELATED_WORDS_TRIGGERED = "https://api.datamuse.com/words?rel_trg="
 
-    fun getRelatedWordsBasicUrl(word: String) = "${RELATED_WORDS_BASIC}word"
-    fun getRelatedWordsDescribeUrl(word: String) = "${RELATED_WORDS_DESCRIBE}word"
-    fun getRelatedWordsAdjectiveUrl(word: String) = "${RELATED_WORDS_ADJECTIVE}word"
-    fun getRelatedWordsTriggeredUrl(word: String) = "${RELATED_WORDS_TRIGGERED}word"
+    fun getRelatedWordsBasicUrl(word: String) = "$RELATED_WORDS_BASIC$word"
+    fun getRelatedWordsDescribeUrl(word: String) = "$RELATED_WORDS_DESCRIBE$word"
+    fun getRelatedWordsAdjectiveUrl(word: String) = "$RELATED_WORDS_ADJECTIVE$word"
+    fun getRelatedWordsTriggeredUrl(word: String) = "$RELATED_WORDS_TRIGGERED$word"
 }

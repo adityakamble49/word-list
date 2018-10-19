@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.View
 import com.adityakamble49.wordlist.R
+import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
+import com.adityakamble49.wordlist.ui.common.WordListViewModelFactory
 import kotlinx.android.synthetic.main.activity_related_words.*
+import javax.inject.Inject
 
 /**
  * Related Words Activity
@@ -16,7 +18,9 @@ import kotlinx.android.synthetic.main.activity_related_words.*
  * @author Aditya Kamble
  * @since 4/10/2018
  */
-class RelatedWordsActivity : AppCompatActivity(), View.OnTouchListener {
+class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
+
+    @Inject lateinit var viewModelFactory: WordListViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +66,7 @@ class RelatedWordsActivity : AppCompatActivity(), View.OnTouchListener {
         val relatedWordsTypes: Array<String> = resources.getStringArray(R.array.related_words_types)
 
         override fun getItem(position: Int): Fragment {
-            return MeansLikeFragment.newInstance()
+            return RelatedWordBasicFragment.newInstance()
         }
 
         override fun getCount(): Int {

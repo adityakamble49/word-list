@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.adityakamble49.wordlist.R
-import com.adityakamble49.wordlist.cache.entities.Word
+import com.adityakamble49.wordlist.model.RelatedWordBasic
 import com.adityakamble49.wordlist.utils.inflate
 import kotlinx.android.synthetic.main.item_related_word.view.*
 
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_related_word.view.*
  */
 class RelatedWordsAdapter : RecyclerView.Adapter<RelatedWordsAdapter.ViewHolder>() {
 
-    var listOfWord = mutableListOf<Word>()
+    var listOfWord: List<RelatedWordBasic> = listOf()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,9 +32,9 @@ class RelatedWordsAdapter : RecyclerView.Adapter<RelatedWordsAdapter.ViewHolder>
             listOfWord[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(position: Int, item: Word) {
+        fun bind(position: Int, item: RelatedWordBasic) {
             with(itemView) {
-                tv_related_word.text = item.name
+                tv_related_word.text = item.word
             }
         }
     }
