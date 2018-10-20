@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.RelatedWordBasic
+import com.adityakamble49.wordlist.model.Status
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
@@ -77,11 +78,24 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
             }
         })
 
-        relatedWordBasicViewModel.relatedWordBasicList.observe(this,
-                Observer<List<RelatedWordBasic>> {
-                    it?.let {
+        relatedWordBasicViewModel.requestStatus.observe(this, Observer<Status> {
+            it?.let {
+                when (it) {
+                    Status.RUNNING -> {
+                        pb_loading.visible()
+                        rv_means_like_words.gone()
+                    }
+                    Status.SUCCESS -> {
                         pb_loading.gone()
                         rv_means_like_words.visible()
+                    }
+                }
+            }
+        })
+
+        relatedWordBasicViewModel.relatedWordList.observe(this,
+                Observer<List<RelatedWordBasic>> {
+                    it?.let {
                         relatedWordsAdapter.listOfWord = it
                         relatedWordsAdapter.notifyDataSetChanged()
                     }
