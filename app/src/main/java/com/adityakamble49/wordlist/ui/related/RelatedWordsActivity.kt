@@ -1,14 +1,17 @@
 package com.adityakamble49.wordlist.ui.related
 
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
-import com.adityakamble49.wordlist.ui.common.WordListViewModelFactory
 import kotlinx.android.synthetic.main.activity_related_words.*
 import javax.inject.Inject
 
@@ -20,19 +23,25 @@ import javax.inject.Inject
  */
 class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
 
-    @Inject lateinit var viewModelFactory: WordListViewModelFactory
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModel: RelatedWordsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_related_words)
 
+        setupViewModel()
         bindView()
     }
 
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(RelatedWordsViewModel::class.java)
+    }
+
     private fun bindView() {
-
         et_search_bar.setOnTouchListener(this)
-
+        et_search_bar.addTextChangedListener(SearchQueryListener())
         setupRelatedWordsPager()
     }
 
@@ -41,7 +50,6 @@ class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
         vp_related_words_container.isPagingEnabled = false
         vp_related_words_container.adapter = viewPagerAdapter
         tl_related_words_category.setupWithViewPager(vp_related_words_container)
-
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -58,6 +66,21 @@ class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
         }
 
         return false
+    }
+
+    private inner class SearchQueryListener : TextWatcher {
+
+        override fun afterTextChanged(s: Editable?) {
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            s?.let {
+                viewModel.searchQuery.postValue(it.toString())
+            }
+        }
     }
 
     private inner class RelatedWordsViewPagerAdapter(fragmentManager: FragmentManager) :

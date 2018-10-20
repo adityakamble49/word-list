@@ -6,6 +6,7 @@ import com.adityakamble49.wordlist.di.common.ViewModelKey
 import com.adityakamble49.wordlist.ui.common.WordListViewModelFactory
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
 import com.adityakamble49.wordlist.ui.related.RelatedWordBasicViewModel
+import com.adityakamble49.wordlist.ui.related.RelatedWordsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -24,6 +25,12 @@ abstract class PresentationModule {
     @IntoMap
     @ViewModelKey(MainActivityViewModel::class)
     abstract fun bindMainActivityViewModel(mainActivityViewModel: MainActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RelatedWordsViewModel::class)
+    abstract fun bindRelatedWordsViewModel(
+            relatedWordsViewModel: RelatedWordsViewModel): ViewModel
 
     @Binds
     @IntoMap
