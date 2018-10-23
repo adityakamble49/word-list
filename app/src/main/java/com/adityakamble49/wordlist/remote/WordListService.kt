@@ -1,11 +1,13 @@
 package com.adityakamble49.wordlist.remote
 
+import com.adityakamble49.wordlist.cache.entities.Word
 import com.adityakamble49.wordlist.model.RelatedWordAdjective
 import com.adityakamble49.wordlist.model.RelatedWordBasic
 import com.adityakamble49.wordlist.model.RelatedWordDescribe
 import com.adityakamble49.wordlist.model.RelatedWordTriggered
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 /**
@@ -15,6 +17,10 @@ import retrofit2.http.Url
  * @since 30/9/2018
  */
 interface WordListService {
+
+    @GET(RemoteUrls.WORD_INFO_BASE_URL)
+    fun getWordInfo(@Query("q") wordKeyValue: String, @Query(
+            "apiKey") apiKey: String): Single<List<Word>>
 
     @GET
     fun getRelatedWordBasic(@Url relatedWordsBasicUrl: String): Single<List<RelatedWordBasic>>

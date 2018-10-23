@@ -14,6 +14,8 @@ import com.adityakamble49.wordlist.cache.db.DBConstants
 data class Word(
         @PrimaryKey(autoGenerate = true) var id: Int,
         var name: String,
+        var etymology: String,
+        var pronunciation: String,
         var mnemonics: String,
         var information: ArrayList<WordInformation>
 )

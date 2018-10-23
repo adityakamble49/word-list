@@ -29,16 +29,19 @@ android {
     buildTypes {
         debug {
             buildConfigField 'String', "GitHubApiKey", WordList_GitHubApiKey
+            buildConfigField 'String', "MLabApiKey", WordList_MLabApiKey
             applicationIdSuffix ".debug"
         }
         staging {
             buildConfigField 'String', "GitHubApiKey", WordList_GitHubApiKey
+            buildConfigField 'String', "MLabApiKey", WordList_MLabApiKey
             applicationIdSuffix ".staging"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             buildConfigField 'String', "GitHubApiKey", WordList_GitHubApiKey
+            buildConfigField 'String', "MLabApiKey", WordList_MLabApiKey
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

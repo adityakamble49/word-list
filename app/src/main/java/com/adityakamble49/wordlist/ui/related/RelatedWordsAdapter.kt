@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_related_word.view.*
 class RelatedWordsAdapter : RecyclerView.Adapter<RelatedWordsAdapter.ViewHolder>() {
 
     var listOfWord: List<RelatedWordBasic> = listOf()
-
+    var wordOnClickAction: (relatedWordBasic: RelatedWordBasic) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.item_related_word) as View
@@ -36,6 +36,7 @@ class RelatedWordsAdapter : RecyclerView.Adapter<RelatedWordsAdapter.ViewHolder>
             with(itemView) {
                 tv_related_word.text = item.word
             }
+            itemView.setOnClickListener { wordOnClickAction(item) }
         }
     }
 }

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.StaggeredGridLayoutManager
@@ -14,6 +15,7 @@ import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.model.RelatedWordBasic
 import com.adityakamble49.wordlist.model.Status
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
+import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.fragment_related_words.*
@@ -31,8 +33,8 @@ import javax.inject.Inject
 class RelatedWordBasicFragment : BaseInjectableFragment() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject lateinit var relatedWordBasicViewModel: RelatedWordBasicViewModel
-    @Inject lateinit var relatedWordViewModel: RelatedWordsViewModel
+    lateinit var relatedWordBasicViewModel: RelatedWordBasicViewModel
+    lateinit var relatedWordViewModel: RelatedWordsViewModel
 
     private lateinit var relatedWordsAdapter: RelatedWordsAdapter
 
@@ -66,6 +68,7 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
     private fun bindView(view: View) {
         with(view) {
             relatedWordsAdapter = RelatedWordsAdapter()
+            relatedWordsAdapter.wordOnClickAction = { openRelatedWord(it) }
             val staggeredGridLayoutManager = StaggeredGridLayoutManager(getSpanCount(85),
                     StaggeredGridLayoutManager.HORIZONTAL)
             rv_means_like_words.adapter = relatedWordsAdapter
@@ -115,5 +118,11 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
         val displayMetrics = (context as Context).resources.displayMetrics
         val dpHeight = displayMetrics.heightPixels / displayMetrics.density
         return (dpHeight / itemHeight).toInt()
+    }
+
+    private fun openRelatedWord(relatedWord: RelatedWordBasic) {
+        val wordActivityIntent = Intent(activity, WordActivity::class.java)
+        wordActivityIntent.putExtra(WordActivity.WORD_NAME, relatedWord.word)
+        startActivity(wordActivityIntent)
     }
 }

@@ -13,6 +13,7 @@ import java.util.*
 object WordDataFactory {
 
     fun makeWord(id: Int) = Word(id, DataFactory.randomString(), DataFactory.randomString(),
+            DataFactory.randomString(), DataFactory.randomString(),
             makeWordInformation())
 
     fun makeWordInformation(count: Int = DataFactory.makeRandom(4)): ArrayList<WordInformation> {
