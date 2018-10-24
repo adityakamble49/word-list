@@ -92,6 +92,23 @@ class WordListDatabaseTest {
     }
 
     @Test
+    fun getWordByNameReturnsData() {
+        val words = WordDataFactory.makeWords(100)
+        val wordToFetch = words[45]
+        wordDao.insertWords(words)
+        val testObserver = wordDao.getWordByName(wordToFetch.name).test()
+        testObserver.assertValue(wordToFetch)
+    }
+
+    @Test
+    fun getWordByNameWordNotFound() {
+        val words = WordDataFactory.makeWords(100)
+        wordDao.insertWords(words)
+        val testObserver = wordDao.getWordByName(DataFactory.randomString()).test()
+        testObserver.assertEmpty()
+    }
+
+    @Test
     fun insertWordListCompletes() {
         val wordList = WordListDataFactory.makeWordList(1)
         val testResult = wordListDao.insert(wordList)

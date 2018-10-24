@@ -3,6 +3,7 @@ package com.adityakamble49.wordlist.cache.dao
 import android.arch.persistence.room.*
 import com.adityakamble49.wordlist.cache.entities.Word
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 
 /**
  * Word DAO
@@ -28,9 +29,9 @@ interface WordDao {
     @Query("SELECT * FROM words")
     fun getWords(): Flowable<List<Word>>
 
-    @Query("SELECT * FROM words")
-    fun getWordsDirect(): List<Word>
-
     @Query("SELECT * FROM words WHERE id= :id")
     fun getWordById(id: Int): Flowable<Word>
+
+    @Query("SELECT * FROM words WHERE name= :wordName")
+    fun getWordByName(wordName: String): Maybe<Word>
 }
