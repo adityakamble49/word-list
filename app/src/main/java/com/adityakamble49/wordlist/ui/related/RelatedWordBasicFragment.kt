@@ -18,6 +18,7 @@ import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
 import com.adityakamble49.wordlist.utils.gone
 import com.adityakamble49.wordlist.utils.visible
+import kotlinx.android.synthetic.main.activity_related_words.*
 import kotlinx.android.synthetic.main.fragment_related_words.*
 import kotlinx.android.synthetic.main.fragment_related_words.view.*
 import java.util.*
@@ -68,7 +69,8 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
     private fun bindView(view: View) {
         with(view) {
             relatedWordsAdapter = RelatedWordsAdapter()
-            relatedWordsAdapter.wordOnClickAction = { openRelatedWord(it) }
+            relatedWordsAdapter.wordOnClickAction = { openWordInfo(it) }
+            relatedWordsAdapter.wordLongClickAction = { searchRelatedWords(it) }
             val staggeredGridLayoutManager = StaggeredGridLayoutManager(getSpanCount(85),
                     StaggeredGridLayoutManager.HORIZONTAL)
             rv_means_like_words.adapter = relatedWordsAdapter
@@ -120,9 +122,13 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
         return (dpHeight / itemHeight).toInt()
     }
 
-    private fun openRelatedWord(relatedWord: RelatedWordBasic) {
+    private fun openWordInfo(relatedWord: RelatedWordBasic) {
         val wordActivityIntent = Intent(activity, WordActivity::class.java)
         wordActivityIntent.putExtra(WordActivity.WORD_NAME, relatedWord.word)
         startActivity(wordActivityIntent)
+    }
+
+    private fun searchRelatedWords(relatedWord: RelatedWordBasic) {
+        (activity as RelatedWordsActivity).et_search_bar.setText(relatedWord.word)
     }
 }
