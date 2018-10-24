@@ -19,7 +19,7 @@
         android:paddingBottom="24dp">
 
         <TextView
-            android:id="@+id/tv_word_mnemonics_value"
+            android:id="@+id/tv_word_etymology_value"
             style="@style/Base.TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

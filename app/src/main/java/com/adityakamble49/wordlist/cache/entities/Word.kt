@@ -16,7 +16,7 @@ data class Word(
         var name: String,
         var etymology: String,
         var pronunciation: String,
-        var mnemonics: String,
+        var mnemonic: String,
         var information: ArrayList<WordInformation>
 )
 

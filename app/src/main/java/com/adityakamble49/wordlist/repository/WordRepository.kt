@@ -1,10 +1,13 @@
 package com.adityakamble49.wordlist.repository
 
+import android.database.sqlite.SQLiteException
 import com.adityakamble49.wordlist.cache.db.WordListDatabase
 import com.adityakamble49.wordlist.cache.entities.Word
 import com.adityakamble49.wordlist.remote.RemoteUrls
 import com.adityakamble49.wordlist.remote.WordListService
+import io.reactivex.Completable
 import io.reactivex.Single
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -29,5 +32,18 @@ class WordRepository @Inject constructor(
         return wordListService.getWordInfo(RemoteUrls.getWordKeyVal(wordName),
                 RemoteUrls.WORD_INFO_API_KEY)
                 .flatMap { t -> Single.just(t[0]) }
+    }
+
+    fun saveWordInfo(word: Word): Completable {
+        return Completable.create { emitter ->
+            Timber.i("Completable Started")
+            val id = wordDao.insertWord(word)
+            Timber.i("wordDao.insertWord $id")
+            if (id != -1L) {
+                emitter.onComplete()
+            } else {
+                emitter.onError(SQLiteException())
+            }
+        }
     }
 }

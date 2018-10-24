@@ -8,15 +8,20 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.adityakamble49.wordlist.R
 import com.adityakamble49.wordlist.cache.entities.Word
 import com.adityakamble49.wordlist.ui.common.BaseInjectableActivity
 import com.adityakamble49.wordlist.ui.related.RelatedWordsActivity
+import io.reactivex.CompletableObserver
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.layout_word_body.*
 import kotlinx.android.synthetic.main.layout_word_etymology_card.*
 import kotlinx.android.synthetic.main.layout_word_header.*
 import kotlinx.android.synthetic.main.layout_word_info_card.*
+import kotlinx.android.synthetic.main.layout_word_mnemonics_card.*
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -34,6 +39,8 @@ class WordActivity : BaseInjectableActivity(), View.OnClickListener {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var wordViewModel: WordViewModel
 
+    private lateinit var currentWord: Word
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word)
@@ -44,6 +51,7 @@ class WordActivity : BaseInjectableActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.fab_save_word -> wordViewModel.saveWordInfo(currentWord, SaveWordObserver())
             R.id.fab_related_words -> startActivity(Intent(this, RelatedWordsActivity::class.java))
             R.id.fab_word_image -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -104,6 +112,9 @@ class WordActivity : BaseInjectableActivity(), View.OnClickListener {
     }
 
     private fun setupWordActions() {
+        fab_save_word.isEnabled = false
+
+        fab_save_word.setOnClickListener(this)
         fab_related_words.setOnClickListener(this)
         fab_word_image.setOnClickListener(this)
     }
@@ -116,13 +127,30 @@ class WordActivity : BaseInjectableActivity(), View.OnClickListener {
         wordViewModel.wordInfo.observe(this,
                 Observer<Word> { t ->
                     t?.let {
+                        currentWord = t
+                        fab_save_word.isEnabled = true
+
                         tv_word_name.text = it.name
                         tv_word_pronunciation.text = it.pronunciation
-                        tv_word_mnemonics_value.text = it.etymology
+                        tv_word_etymology_value.text = it.etymology
+                        tv_word_mnemonics_value.text = it.mnemonic
                         tv_word_info_type_value.text = it.information[0].type
                         tv_word_info_definition_value.text = it.information[0].definition
                         tv_word_info_example_value.text = it.information[0].example
                     }
                 })
+    }
+
+    private inner class SaveWordObserver : CompletableObserver {
+        override fun onComplete() {
+            Toast.makeText(this@WordActivity, "Word Saved", Toast.LENGTH_SHORT).show()
+            tv_save_word_label.text = "Saved"
+            fab_save_word.isEnabled = false
+        }
+
+        override fun onSubscribe(d: Disposable) {}
+        override fun onError(e: Throwable) {
+            Timber.e(e)
+        }
     }
 }
