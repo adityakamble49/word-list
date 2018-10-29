@@ -5,10 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.adityakamble49.wordlist.di.common.ViewModelKey
 import com.adityakamble49.wordlist.ui.common.WordListViewModelFactory
 import com.adityakamble49.wordlist.ui.main.MainActivityViewModel
-import com.adityakamble49.wordlist.ui.related.RelatedWordsAntonymViewModel
-import com.adityakamble49.wordlist.ui.related.RelatedWordsBasicViewModel
-import com.adityakamble49.wordlist.ui.related.RelatedWordsDescribeViewModel
-import com.adityakamble49.wordlist.ui.related.RelatedWordsViewModel
+import com.adityakamble49.wordlist.ui.related.*
 import com.adityakamble49.wordlist.ui.word.WordViewModel
 import dagger.Binds
 import dagger.Module
@@ -52,6 +49,12 @@ abstract class PresentationModule {
     @ViewModelKey(RelatedWordsDescribeViewModel::class)
     abstract fun bindRelatedWordDescribeViewModel(
             relatedWordsDescribeViewModel: RelatedWordsDescribeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RelatedWordsAdjectiveViewModel::class)
+    abstract fun bindRelatedWordAdjectiveViewModel(
+            relatedWordsAdjectiveViewModel: RelatedWordsAdjectiveViewModel): ViewModel
 
     @Binds
     @IntoMap

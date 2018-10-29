@@ -1,5 +1,6 @@
 package com.adityakamble49.wordlist.di.module
 
+import com.adityakamble49.wordlist.ui.related.RelatedWordsAdjectiveFragment
 import com.adityakamble49.wordlist.ui.related.RelatedWordsAntonymFragment
 import com.adityakamble49.wordlist.ui.related.RelatedWordsBasicFragment
 import com.adityakamble49.wordlist.ui.related.RelatedWordsDescribeFragment
@@ -24,4 +25,7 @@ abstract class RelatedWordsFragmentModule {
 
     @ContributesAndroidInjector()
     abstract fun contributesRelatedWordDescribeFragment(): RelatedWordsDescribeFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributesRelatedWordAdjectiveFragment(): RelatedWordsAdjectiveFragment
 }

@@ -89,6 +89,7 @@ class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
         private val POS_RELATED_WORD_BASIC = 0
         private val POS_RELATED_WORD_ANTONYM = 1
         private val POS_RELATED_WORD_DESCRIBE = 2
+        private val POS_RELATED_WORD_ADJECTIVE = 3
 
         val relatedWordsTypes: Array<String> = resources.getStringArray(R.array.related_words_types)
 
@@ -97,6 +98,7 @@ class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
                 POS_RELATED_WORD_BASIC -> RelatedWordsBasicFragment.newInstance()
                 POS_RELATED_WORD_ANTONYM -> RelatedWordsAntonymFragment.newInstance()
                 POS_RELATED_WORD_DESCRIBE -> RelatedWordsDescribeFragment.newInstance()
+                POS_RELATED_WORD_ADJECTIVE -> RelatedWordsAdjectiveFragment.newInstance()
                 else -> RelatedWordsBasicFragment.newInstance()
             }
         }
