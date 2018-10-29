@@ -33,4 +33,7 @@ interface WordListService {
 
     @GET
     fun getRelatedWordTriggered(@Url relatedWordsTriggeredUrl: String): Single<List<RelatedWordTriggered>>
+
+    @GET
+    fun getRelatedWordRhyming(@Url relatedWordsRhymingUrl: String): Single<List<RelatedWordRhyming>>
 }

@@ -52,3 +52,13 @@ class RelatedWordAdjective : RelatedWordCommon()
  * @since 1/10/2018
  */
 class RelatedWordTriggered : RelatedWordCommon()
+
+/**
+ * Related Words Rhyming
+ *
+ * @author Aditya Kamble
+ * @since 29/10/2018
+ */
+class RelatedWordRhyming : RelatedWordCommon() {
+    var numSyllables: Int = 0
+}

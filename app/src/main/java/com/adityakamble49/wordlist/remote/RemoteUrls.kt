@@ -23,6 +23,7 @@ object RemoteUrls {
     private const val RELATED_WORDS_DESCRIBE = "https://api.datamuse.com/words?rel_jjb="
     private const val RELATED_WORDS_ADJECTIVE = "https://api.datamuse.com/words?rel_jja="
     private const val RELATED_WORDS_TRIGGERED = "https://api.datamuse.com/words?rel_trg="
+    private const val RELATED_WORDS_RHYMING = "https://api.datamuse.com/words?rel_rhy="
 
     fun getWordKeyVal(word: String) = "{\"name\":\"$word\"}"
 
@@ -31,4 +32,5 @@ object RemoteUrls {
     fun getRelatedWordsDescribeUrl(word: String) = "$RELATED_WORDS_DESCRIBE$word"
     fun getRelatedWordsAdjectiveUrl(word: String) = "$RELATED_WORDS_ADJECTIVE$word"
     fun getRelatedWordsTriggeredUrl(word: String) = "$RELATED_WORDS_TRIGGERED$word"
+    fun getRelatedWordsRhymingUrl(word: String) = "$RELATED_WORDS_RHYMING$word"
 }

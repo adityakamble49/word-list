@@ -28,4 +28,7 @@ abstract class RelatedWordsFragmentModule {
 
     @ContributesAndroidInjector()
     abstract fun contributesRelatedWordTriggeredFragment(): RelatedWordsTriggeredFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributesRelatedWordRhymingFragment(): RelatedWordsRhymingFragment
 }

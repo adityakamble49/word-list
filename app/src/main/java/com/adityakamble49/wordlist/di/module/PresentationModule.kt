@@ -64,6 +64,12 @@ abstract class PresentationModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(RelatedWordsRhymingViewModel::class)
+    abstract fun bindRelatedWordRhymingViewModel(
+            relatedWordsRhymingViewModel: RelatedWordsRhymingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(WordViewModel::class)
     abstract fun bindWordViewModel(wordViewModel: WordViewModel): ViewModel
 
