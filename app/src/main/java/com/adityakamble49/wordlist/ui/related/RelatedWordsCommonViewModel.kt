@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * @author Aditya Kamble
  * @since 19/10/2018
  */
-abstract class RelatedWordCommonViewModel<T> : ViewModel() {
+abstract class RelatedWordsCommonViewModel<T> : ViewModel() {
 
     var searchPublishSubject: PublishSubject<String> = PublishSubject.create()
     var relatedWordList: MutableLiveData<List<T>> = MutableLiveData()

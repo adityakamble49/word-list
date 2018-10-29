@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adityakamble49.wordlist.R
-import com.adityakamble49.wordlist.model.RelatedWordBasic
 import com.adityakamble49.wordlist.model.Status
 import com.adityakamble49.wordlist.ui.common.BaseInjectableFragment
 import com.adityakamble49.wordlist.ui.word.WordActivity
@@ -25,18 +24,18 @@ import javax.inject.Inject
 
 
 /**
- * Means Like Fragment
+ * Related Word Common Fragment
  *
  * @author Aditya Kamble
- * @since 4/10/2018
+ * @since 29/10/2018
  */
-class RelatedWordBasicFragment : BaseInjectableFragment() {
+abstract class RelatedWordsCommonFragment<T> : BaseInjectableFragment() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var relatedWordBasicViewModel: RelatedWordBasicViewModel
+    lateinit var relatedWordBasicViewModel: RelatedWordsCommonViewModel<T>
     lateinit var relatedWordViewModel: RelatedWordsViewModel
 
-    private lateinit var relatedWordsAdapter: RelatedWordsAdapter
+    private lateinit var relatedWordsAdapter: RelatedWordsCommonAdapter<T>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,20 +53,15 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
      * Helper Functions
      */
 
-    companion object {
-        fun newInstance() = RelatedWordBasicFragment()
-    }
-
     private fun setupViewModel() {
         relatedWordViewModel = ViewModelProviders.of(activity as FragmentActivity, viewModelFactory)
                 .get(RelatedWordsViewModel::class.java)
-        relatedWordBasicViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(RelatedWordBasicViewModel::class.java)
+        relatedWordBasicViewModel = getRelatedWordCommonViewModel()
     }
 
     private fun bindView(view: View) {
         with(view) {
-            relatedWordsAdapter = RelatedWordsAdapter()
+            relatedWordsAdapter = getRelatedWordCommonAdapter()
             relatedWordsAdapter.wordOnClickAction = { openWordInfo(it) }
             relatedWordsAdapter.wordLongClickAction = { searchRelatedWords(it) }
             val staggeredGridLayoutManager = StaggeredGridLayoutManager(getSpanCount(85),
@@ -98,7 +92,7 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
         })
 
         relatedWordBasicViewModel.relatedWordList.observe(this,
-                Observer<List<RelatedWordBasic>> {
+                Observer<List<T>> {
                     it?.let {
                         relatedWordsAdapter.listOfWord = it
                         relatedWordsAdapter.notifyDataSetChanged()
@@ -112,13 +106,19 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
         return (dpHeight / itemHeight).toInt()
     }
 
-    private fun openWordInfo(relatedWord: RelatedWordBasic) {
+    private fun openWordInfo(relatedWord: T) {
         val wordActivityIntent = Intent(activity, WordActivity::class.java)
-        wordActivityIntent.putExtra(WordActivity.WORD_NAME, relatedWord.word)
+        wordActivityIntent.putExtra(WordActivity.WORD_NAME, getCurrentWordName(relatedWord))
         startActivity(wordActivityIntent)
     }
 
-    private fun searchRelatedWords(relatedWord: RelatedWordBasic) {
-        (activity as RelatedWordsActivity).et_search_bar.setText(relatedWord.word)
+    private fun searchRelatedWords(relatedWord: T) {
+        (activity as RelatedWordsActivity).et_search_bar.setText(getCurrentWordName(relatedWord))
     }
+
+    protected abstract fun getRelatedWordCommonViewModel(): RelatedWordsCommonViewModel<T>
+
+    protected abstract fun getRelatedWordCommonAdapter(): RelatedWordsCommonAdapter<T>
+
+    protected abstract fun getCurrentWordName(relatedWord: T): String
 }

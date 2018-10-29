@@ -89,7 +89,7 @@ class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
         val relatedWordsTypes: Array<String> = resources.getStringArray(R.array.related_words_types)
 
         override fun getItem(position: Int): Fragment {
-            return RelatedWordBasicFragment.newInstance()
+            return RelatedWordsBasicFragment.newInstance()
         }
 
         override fun getCount(): Int {

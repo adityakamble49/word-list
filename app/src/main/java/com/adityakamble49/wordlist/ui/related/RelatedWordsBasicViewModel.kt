@@ -11,9 +11,9 @@ import javax.inject.Inject
  * @author Aditya Kamble
  * @since 19/10/2018
  */
-class RelatedWordBasicViewModel @Inject constructor(
+class RelatedWordsBasicViewModel @Inject constructor(
         private val wordListService: WordListService) :
-        RelatedWordCommonViewModel<RelatedWordBasic>() {
+        RelatedWordsCommonViewModel<RelatedWordBasic>() {
 
     override fun performRelatedWordRequest(query: String) = wordListService.getRelatedWordBasic(
             RemoteUrls.getRelatedWordsBasicUrl(query))

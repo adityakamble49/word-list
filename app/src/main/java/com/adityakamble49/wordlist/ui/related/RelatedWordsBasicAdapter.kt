@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_related_word.view.*
  * @author Aditya Kamble
  * @since 5/10/2018
  */
-class RelatedWordsAdapter : RelatedWordsCommonAdapter<RelatedWordBasic>() {
+class RelatedWordsBasicAdapter : RelatedWordsCommonAdapter<RelatedWordBasic>() {
 
     override fun getViewHolder(view: View) = ViewHolder(view)
 
