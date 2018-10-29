@@ -1,16 +1,25 @@
 package com.adityakamble49.wordlist.model
 
 /**
+ * Related Words Common
+ *
+ * @author Aditya Kamble
+ * @since 1/10/2018
+ */
+abstract class RelatedWordCommon {
+    lateinit var word: String
+    var score: Int = 0
+}
+
+/**
  * Related Words Basic
  *
  * @author Aditya Kamble
  * @since 1/10/2018
  */
-data class RelatedWordBasic(
-        var word: String,
-        var score: Int,
-        var tags: List<String>
-)
+class RelatedWordBasic : RelatedWordCommon() {
+    var tags: List<String> = mutableListOf()
+}
 
 /**
  * Related Words Describe
@@ -18,10 +27,7 @@ data class RelatedWordBasic(
  * @author Aditya Kamble
  * @since 1/10/2018
  */
-data class RelatedWordDescribe(
-        var word: String,
-        var score: Int
-)
+class RelatedWordDescribe : RelatedWordCommon()
 
 /**
  * Related Words Adjective
@@ -29,10 +35,7 @@ data class RelatedWordDescribe(
  * @author Aditya Kamble
  * @since 1/10/2018
  */
-data class RelatedWordAdjective(
-        var word: String,
-        var score: Int
-)
+class RelatedWordAdjective : RelatedWordCommon()
 
 /**
  * Related Words Triggered
@@ -40,7 +43,4 @@ data class RelatedWordAdjective(
  * @author Aditya Kamble
  * @since 1/10/2018
  */
-data class RelatedWordTriggered(
-        var word: String,
-        var score: Int
-)
+class RelatedWordTriggered : RelatedWordCommon()

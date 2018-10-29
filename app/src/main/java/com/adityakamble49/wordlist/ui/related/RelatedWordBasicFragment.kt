@@ -21,7 +21,6 @@ import com.adityakamble49.wordlist.utils.visible
 import kotlinx.android.synthetic.main.activity_related_words.*
 import kotlinx.android.synthetic.main.fragment_related_words.*
 import kotlinx.android.synthetic.main.fragment_related_words.view.*
-import java.util.*
 import javax.inject.Inject
 
 
@@ -105,15 +104,6 @@ class RelatedWordBasicFragment : BaseInjectableFragment() {
                         relatedWordsAdapter.notifyDataSetChanged()
                     }
                 })
-    }
-
-    private fun getWordString(random: Random, length: Int): String {
-        val input = "abcdefghijklmnopqrstuvwxyz"
-        val sb = StringBuilder()
-        repeat(length) {
-            sb.append(input[random.nextInt(26)])
-        }
-        return sb.toString()
     }
 
     private fun getSpanCount(itemHeight: Int): Int {
