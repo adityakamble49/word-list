@@ -18,10 +18,10 @@ object RemoteUrls {
     const val GITHUB_WORDLIST = GITHUB_BASE + "repos/adityakamble49/wordlist-marketplace/contents/wordlists"
     const val IMAGE_SEARCH = "https://www.google.com/search?tbm=isch&q="
 
-    const val RELATED_WORDS_BASIC = "https://api.datamuse.com/words?ml="
-    const val RELATED_WORDS_DESCRIBE = "https://api.datamuse.com/words?rel_jjb="
-    const val RELATED_WORDS_ADJECTIVE = "https://api.datamuse.com/words?rel_jja="
-    const val RELATED_WORDS_TRIGGERED = "https://api.datamuse.com/words?rel_trg="
+    private const val RELATED_WORDS_BASIC = "https://api.datamuse.com/words?ml="
+    private const val RELATED_WORDS_DESCRIBE = "https://api.datamuse.com/words?rel_jjb="
+    private const val RELATED_WORDS_ADJECTIVE = "https://api.datamuse.com/words?rel_jja="
+    private const val RELATED_WORDS_TRIGGERED = "https://api.datamuse.com/words?rel_trg="
 
     fun getWordKeyVal(word: String) = "{\"name\":\"$word\"}"
 

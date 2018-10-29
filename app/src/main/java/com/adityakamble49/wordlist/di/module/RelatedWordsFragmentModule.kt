@@ -1,6 +1,7 @@
 package com.adityakamble49.wordlist.di.module
 
 import com.adityakamble49.wordlist.ui.related.RelatedWordsBasicFragment
+import com.adityakamble49.wordlist.ui.related.RelatedWordsDescribeFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,4 +17,7 @@ abstract class RelatedWordsFragmentModule {
 
     @ContributesAndroidInjector()
     abstract fun contributesRelatedWordBasicsFragment(): RelatedWordsBasicFragment
+
+    @ContributesAndroidInjector()
+    abstract fun contributesRelatedWordDescribeFragment(): RelatedWordsDescribeFragment
 }

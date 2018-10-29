@@ -86,10 +86,17 @@ class RelatedWordsActivity : BaseInjectableActivity(), View.OnTouchListener {
     private inner class RelatedWordsViewPagerAdapter(fragmentManager: FragmentManager) :
             FragmentPagerAdapter(fragmentManager) {
 
+        private val POS_RELATED_WORD_BASIC = 0
+        private val POS_RELATED_WORD_DESCRIBE = 2
+
         val relatedWordsTypes: Array<String> = resources.getStringArray(R.array.related_words_types)
 
         override fun getItem(position: Int): Fragment {
-            return RelatedWordsBasicFragment.newInstance()
+            return when (position) {
+                POS_RELATED_WORD_BASIC -> RelatedWordsBasicFragment.newInstance()
+                POS_RELATED_WORD_DESCRIBE -> RelatedWordsDescribeFragment.newInstance()
+                else -> RelatedWordsBasicFragment.newInstance()
+            }
         }
 
         override fun getCount(): Int {
