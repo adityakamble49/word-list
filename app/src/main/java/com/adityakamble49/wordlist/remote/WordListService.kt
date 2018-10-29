@@ -1,10 +1,7 @@
 package com.adityakamble49.wordlist.remote
 
 import com.adityakamble49.wordlist.cache.entities.Word
-import com.adityakamble49.wordlist.model.RelatedWordAdjective
-import com.adityakamble49.wordlist.model.RelatedWordBasic
-import com.adityakamble49.wordlist.model.RelatedWordDescribe
-import com.adityakamble49.wordlist.model.RelatedWordTriggered
+import com.adityakamble49.wordlist.model.*
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -24,6 +21,9 @@ interface WordListService {
 
     @GET
     fun getRelatedWordBasic(@Url relatedWordsBasicUrl: String): Single<List<RelatedWordBasic>>
+
+    @GET
+    fun getRelatedWordAntonym(@Url relatedWordsAntonymUrl: String): Single<List<RelatedWordAntonym>>
 
     @GET
     fun getRelatedWordDescribe(@Url relatedWordsDescribeUrl: String): Single<List<RelatedWordDescribe>>

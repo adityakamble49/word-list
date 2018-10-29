@@ -19,6 +19,7 @@ object RemoteUrls {
     const val IMAGE_SEARCH = "https://www.google.com/search?tbm=isch&q="
 
     private const val RELATED_WORDS_BASIC = "https://api.datamuse.com/words?ml="
+    private const val RELATED_WORDS_ANTONYM = "https://api.datamuse.com/words?rel_ant="
     private const val RELATED_WORDS_DESCRIBE = "https://api.datamuse.com/words?rel_jjb="
     private const val RELATED_WORDS_ADJECTIVE = "https://api.datamuse.com/words?rel_jja="
     private const val RELATED_WORDS_TRIGGERED = "https://api.datamuse.com/words?rel_trg="
@@ -26,6 +27,7 @@ object RemoteUrls {
     fun getWordKeyVal(word: String) = "{\"name\":\"$word\"}"
 
     fun getRelatedWordsBasicUrl(word: String) = "$RELATED_WORDS_BASIC$word"
+    fun getRelatedWordsAntonymUrl(word: String) = "$RELATED_WORDS_ANTONYM$word"
     fun getRelatedWordsDescribeUrl(word: String) = "$RELATED_WORDS_DESCRIBE$word"
     fun getRelatedWordsAdjectiveUrl(word: String) = "$RELATED_WORDS_ADJECTIVE$word"
     fun getRelatedWordsTriggeredUrl(word: String) = "$RELATED_WORDS_TRIGGERED$word"

@@ -22,6 +22,14 @@ class RelatedWordBasic : RelatedWordCommon() {
 }
 
 /**
+ * Related Words Antonym
+ *
+ * @author Aditya Kamble
+ * @since 29/10/2018
+ */
+class RelatedWordAntonym : RelatedWordCommon()
+
+/**
  * Related Words Describe
  *
  * @author Aditya Kamble
