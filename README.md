@@ -13,9 +13,7 @@ Word List with Learn and Practice Modes
 
 ## Download
 
-[<img src="https://raw.githubusercontent.com/adityakamble49/adityakamble49.com/gh-pages/images/commons/direct-apk-download.png"
-      alt="Direct apk download"
-      height="80">](https://github.com/adityakamble49/word-list/releases/download/0.9.6/wordlist-release-v0.9.6.apk)
+[<img src="art/direct-apk-download.png" alt="Direct apk download" height="80">](https://github.com/adityakamble49/word-list/releases/download/0.9.6/wordlist-release-v0.9.6.apk)
 
 ## Introduction
 
