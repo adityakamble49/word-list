@@ -4,12 +4,12 @@
 
 Word List with Learn and Practice Modes
 
-![Wordlist Banner](https://raw.githubusercontent.com/adityakamble49/adityakamble49.com/gh-pages/images/wordlist/wordlist_banner.jpg)
+![Wordlist Banner](art/wordlist_banner.jpg)
 
 
 ## Screens
 
-![Wordlist Screens](https://raw.githubusercontent.com/adityakamble49/adityakamble49.com/gh-pages/images/wordlist/wordlist_screens.png)
+![Wordlist Screens](art/wordlist_screens.png)
 
 ## Download
 
