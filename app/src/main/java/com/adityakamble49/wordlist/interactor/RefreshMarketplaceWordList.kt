@@ -29,7 +29,7 @@ class RefreshMarketplaceWordList @Inject constructor(
         return Completable.create { e ->
             deleteIncompleteMarketplaceWordList()
             wordListService.getMarketplaceWordList(RemoteUrls.GITHUB_WORDLIST,
-                    "token ${RemoteUrls.GITHUB_AUTH_TOKEN}")
+                    "")
                     .subscribe({
                         marketplaceWordListDao.insertList(updateWordListStatus(it))
                         e.onComplete()

@@ -40,7 +40,7 @@ class DownloadWordListFromMarketplace @Inject constructor(
 
                 // Start Word List Download
                 wordListService.getWordListFromMarketplace(marketplaceWordList.downloadUrl,
-                        "token ${Constants.RemoteUrls.GITHUB_AUTH_TOKEN}")
+                        "")
                         .subscribe({
                             insertWordListToDatabase(marketplaceWordList, it)
                             e.onComplete()
